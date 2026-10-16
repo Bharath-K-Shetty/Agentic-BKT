@@ -1,0 +1,29 @@
+{
+  "status": "simulation_passed",
+  "headline": "Simulation passed at the checked state",
+  "action": "No execution error was found in this unsigned simulation. Check again if the amount, addresses or network state changes.",
+  "network": "devnet",
+  "transfer_sol": "0.01",
+  "balance_sol": "0.5120009",
+  "estimated_fee_sol": "0.000005",
+  "required_sol": "0.010005",
+  "shortfall_sol": "0",
+  "simulation": {
+    "performed": true,
+    "error": null,
+    "units_consumed": 150,
+    "signature_verification": false
+  },
+  "slot": 511437243,
+  "checked_ms": 2772,
+  "broadcast": false,
+  "actual_fee_paid_sol": "0",
+  "measured_fee_savings_sol": null,
+  "measured_time_saved_seconds": null,
+  "limits": [
+    "Fee quote covers this plain transfer message; required balance may be affected by account minimums.",
+    "Simulation does not verify signatures and cannot guarantee later execution.",
+    "The historical ML model is not used for this live check.",
+    "No fee savings or retry-time savings have been measured. A failed submission may not incur the quoted fee."
+  ]
+}

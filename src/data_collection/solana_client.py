@@ -66,3 +66,19 @@ class SolanaRPCClient:
             {"encoding": "jsonParsed", "maxSupportedTransactionVersion": 0},
         ]
         return self._call("getTransaction", params)
+
+    def get_account_info(self, address: str) -> dict | None:
+        params = [address, {"encoding": "base64"}]
+        return self._call("getAccountInfo", params)
+
+    def get_block(self, slot: int) -> dict | None:
+        params = [
+            slot,
+            {
+                "encoding": "jsonParsed",
+                "maxSupportedTransactionVersion": 0,
+                "transactionDetails": "full",
+                "rewards": False,
+            },
+        ]
+        return self._call("getBlock", params)

@@ -1,0 +1,30 @@
+{
+  "status": "Locally specified after the exploratory pilot, before this confirmation run; not public preregistration",
+  "question": "Do same-transaction wallet co-participation features improve prefix-only collapse prediction across subsequent calendar periods, and do validation alert budgets transfer?",
+  "population": "MELT eventual migrants only; no all-launch or confirmed-fraud claim",
+  "source_revision": "0732bcfab54f508c27becd6d9b2b10b1b6ac2517",
+  "sample_seed": 42,
+  "exclude_first_hash_ranked_tokens": 6000,
+  "confirmation_tokens": 12000,
+  "target": "Released min_ratio < 0.3 within 20 minutes after migration",
+  "primary_horizon_seconds": 300,
+  "secondary_horizon_seconds": 60,
+  "model_seeds": [42, 73, 101],
+  "folds": [
+    {"name": "January_late", "train_end": "2025-01-01", "validation_end": "2025-01-15", "test_end": "2025-02-01"},
+    {"name": "February_early", "train_end": "2025-01-15", "validation_end": "2025-02-01", "test_end": "2025-02-15"},
+    {"name": "February_late", "train_end": "2025-02-01", "validation_end": "2025-02-15", "test_end": "2025-03-01"}
+  ],
+  "maturity": "Migration + 1 hour; training labels ready before validation start and validation labels ready before test start",
+  "models": {
+    "random_forest": {"n_estimators": 250, "min_samples_leaf": 10, "max_features": 0.8},
+    "hist_gradient_boosting": {"max_iter": 150, "max_leaf_nodes": 15, "l2_regularization": 2, "early_stopping": false},
+    "logistic": {"C": 1, "max_iter": 2000, "seeds": [42]}
+  },
+  "features": "Identical prefix activity/holdings inputs, with versus without the six pilot co-participation summaries",
+  "threshold": "Separate validation thresholds for each fitted model at an empirical 5% false-positive budget; no test adjustment",
+  "primary_comparison": "Random-forest co-participation minus base AP, averaging predictions over three seeds, then test-count-weighted within-period AP deltas",
+  "uncertainty": "500 paired calendar-day bootstrap repetitions within each test period; conditional on fixed fitted models",
+  "diagnostic": "Share of prefix wallets absent from labeled training prefixes; subgroup boundary is median validation novelty share, without using test outcomes. This is wallet overlap, not operator identity",
+  "interpretation": "A positive interval is evidence within this dataset, not automatically a novel contribution. Failed confirmation will be retained. Secondary comparisons remain exploratory"
+}

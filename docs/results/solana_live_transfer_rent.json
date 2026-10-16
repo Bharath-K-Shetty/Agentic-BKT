@@ -1,0 +1,33 @@
+{
+  "status": "needs_attention",
+  "headline": "Simulation found a problem",
+  "action": "The transfer may leave an account below its required minimum balance. Review the amount and recipient account.",
+  "network": "devnet",
+  "transfer_sol": "0.000000001",
+  "balance_sol": "0.5120009",
+  "estimated_fee_sol": "0.000005",
+  "required_sol": "0.000005001",
+  "shortfall_sol": "0",
+  "simulation": {
+    "performed": true,
+    "error": {
+      "InsufficientFundsForRent": {
+        "account_index": 1
+      }
+    },
+    "units_consumed": 150,
+    "signature_verification": false
+  },
+  "slot": 511437832,
+  "checked_ms": 1192,
+  "broadcast": false,
+  "actual_fee_paid_sol": "0",
+  "measured_fee_savings_sol": null,
+  "measured_time_saved_seconds": null,
+  "limits": [
+    "Fee quote covers this plain transfer message; required balance may be affected by account minimums.",
+    "Simulation does not verify signatures and cannot guarantee later execution.",
+    "The historical ML model is not used for this live check.",
+    "No fee savings or retry-time savings have been measured. A failed submission may not incur the quoted fee."
+  ]
+}

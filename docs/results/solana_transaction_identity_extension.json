@@ -1,0 +1,136 @@
+{
+  "cohort": "extension",
+  "settings": {
+    "status": "Post-result diagnostic fixed after pilot and confirmation primary results; not an untouched confirmation or replacement primary endpoint",
+    "hash_dimensions": 1048576,
+    "alpha": 0.0001,
+    "random_state": 42,
+    "update_interval_seconds": 600,
+    "outcome_delay_seconds": 3600,
+    "encoding": "Role-tagged declared account identities plus exact readonly template; binary tokens, L2 normalized; SGD logistic regression, one chronological pass",
+    "comparison": "Add identical prequential identity score to both strong readonly-history HGB and writable-context HGB; original HGB parameters and partitions unchanged",
+    "selection": "No hyperparameter search or test-based model selection. Both already inspected cohorts are diagnostics. Identity feedback is hourly-delay plus up to ten minutes of batching; context history has exact one-hour delay."
+  },
+  "results": [
+    {
+      "model": "identity_logistic",
+      "threshold": 0.35381264478222707,
+      "validation": {
+        "auroc": 0.9385593728202462,
+        "ap_positive": 0.8606229590831022,
+        "ap_negative": 0.978261890893476,
+        "brier": 0.07437377206755613,
+        "recall": 0.7324988731319996,
+        "fpr": 0.049995417935219784,
+        "precision": 0.8114149638961438,
+        "alert_fraction": 0.2049271940181031
+      },
+      "test": {
+        "auroc": 0.9248291187611486,
+        "ap_positive": 0.8092316661234872,
+        "ap_negative": 0.9764780812140911,
+        "brier": 0.08286809338879217,
+        "recall": 0.6648145475537596,
+        "fpr": 0.05402128519466523,
+        "precision": 0.7664725457570716,
+        "alert_fraction": 0.1826220392287941
+      },
+      "cold_payer": {
+        "auroc": 0.6430987021737148,
+        "ap_positive": 0.15297717079537862,
+        "ap_negative": 0.9647982713312375,
+        "brier": 0.0597688320934338,
+        "recall": 0.11144353029169783,
+        "fpr": 0.018384033314712306,
+        "precision": 0.29158512720156554,
+        "alert_fraction": 0.02430093209054594
+      }
+    },
+    {
+      "model": "readonly_identity_hgb",
+      "threshold": 0.44340628082562994,
+      "validation": {
+        "auroc": 0.9502756654544089,
+        "ap_positive": 0.8725945974038405,
+        "ap_negative": 0.9833484156781335,
+        "brier": 0.07028656035161393,
+        "recall": 0.7398495197808675,
+        "fpr": 0.04941502306305939,
+        "precision": 0.814707342216792,
+        "alert_fraction": 0.20614718614718613
+      },
+      "test": {
+        "auroc": 0.9454526578432387,
+        "ap_positive": 0.845867094217934,
+        "ap_negative": 0.9838107586939379,
+        "brier": 0.07121641447700267,
+        "recall": 0.6849112426035503,
+        "fpr": 0.03781682415657897,
+        "precision": 0.8284816479727666,
+        "alert_fraction": 0.17406068156611312
+      },
+      "cold_payer": {
+        "auroc": 0.774028371852982,
+        "ap_positive": 0.23360231137771806,
+        "ap_negative": 0.9802267994098692,
+        "brier": 0.05995880010527206,
+        "recall": 0.19521316379955123,
+        "fpr": 0.024732111116753847,
+        "precision": 0.34893048128342247,
+        "alert_fraction": 0.035571618793988964
+      }
+    },
+    {
+      "model": "context_identity_hgb",
+      "threshold": 0.4783263836665064,
+      "validation": {
+        "auroc": 0.9414863571921048,
+        "ap_positive": 0.8454328759493099,
+        "ap_negative": 0.9814044059647788,
+        "brier": 0.07668224065397075,
+        "recall": 0.6073645157934885,
+        "fpr": 0.04880408109236424,
+        "precision": 0.7851636037651277,
+        "alert_fraction": 0.17560015741833923
+      },
+      "test": {
+        "auroc": 0.9404751092238882,
+        "ap_positive": 0.8366544302492138,
+        "ap_negative": 0.982822425048475,
+        "brier": 0.07811966086396932,
+        "recall": 0.6857410881801126,
+        "fpr": 0.058640133946613805,
+        "precision": 0.757211155378486,
+        "alert_fraction": 0.1906744253179173
+      },
+      "cold_payer": {
+        "auroc": 0.7869866930994864,
+        "ap_positive": 0.26887926861000844,
+        "ap_negative": 0.9810135210173404,
+        "brier": 0.07396358187462042,
+        "recall": 0.2961854899027674,
+        "fpr": 0.040322990198567873,
+        "precision": 0.33277310924369746,
+        "alert_fraction": 0.05659121171770972
+      }
+    }
+  ],
+  "cold_ap_comparison": {
+    "weighted_delta": 0.03527695723229038,
+    "ci95": [
+      0.0082007534658737,
+      0.08832411690139765
+    ],
+    "valid_bootstrap_draws": 500
+  },
+  "primary_report_sha256": "2a5da4ecd49bebb8ec0159ee34f863d6afa6496e5ddc49df3df2773685389f6c",
+  "code_sha256": "94f50b96e1f67320d61cef6ca4d49271eae45187acad361f0a7ff17631ae2b04",
+  "control_protocol_sha256": "9a26de359036198f9c6bab5b707fe1d69f80f8bddfe1506a1a3738ec17572654",
+  "limitations": [
+    "Post-result diagnostic on previously inspected cohorts.",
+    "Linear hashed identity model with fixed settings; not an exhaustive identity-model search.",
+    "Identity labels delayed one hour plus up to ten minutes batching, history features exact one hour.",
+    "Identity is trained once on every matured sample including warmup; HGB fit uses original purged train partition.",
+    "Same hourly bootstrap and conditional-inclusion limitations as the primary experiment."
+  ]
+}

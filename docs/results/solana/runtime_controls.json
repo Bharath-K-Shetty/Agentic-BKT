@@ -1,0 +1,446 @@
+{
+  "schema_version": 1,
+  "executed_at": "2026-10-08T10:28:53.401858+00:00",
+  "scope": "Authored runtime controls only; no mainnet, upstream reproduction, new bug, or research accuracy estimate",
+  "environment": {
+    "python": "3.14.6",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "solders": "0.29.0"
+  },
+  "binary_sha256": "05d1440b4f16784ae9422863b418a2bd5f946538b4167b08d2d3ffad9ff3ea81",
+  "source_hashes": {
+    "research/solana/run_controls.py": "bf9df0a92781e9dddd5f73ceaef39c4fec3ed9a669ee6673895f15dd98b59b98",
+    "research/solana/runtime-controls/src/lib.rs": "930a18f76af26b69f63a69000b2ee8011f2e8f7a948e9b1ffa0bbf74407a0dd4",
+    "research/solana/runtime-controls/Cargo.lock": "4b0761a91212fe8d35d106e9b8e843c4270d9a82793640a875640f63ff4bc271",
+    "research/solana/cases/source_manifest.json": "1cbdffbe2f35ca0d6625a535ba4a11ce25f8fca7c174db3480039cdcb1aedf53"
+  },
+  "initial_state": "Fresh local LiteSVM per case; four program identities loaded from the same authored ELF; payer and victim each receive 100 million fixture lamports",
+  "cases": [
+    {
+      "id": "signature-outsider",
+      "kind": "authored_runtime_control",
+      "expected_property_observation": false,
+      "observed_property": false,
+      "check_passed": true,
+      "witness_status": "attempt_rejected",
+      "limitations": "Same transfer; actor control differs. Skipped-signature success is an intentionally invalid outsider witness.",
+      "events": [
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S",
+            "GDz12fWMJsBvg2381UmjrRG4w8b9BFXcxhgGVrD5EsAV"
+          ],
+          "transaction_sha256": "e65570eeda16fe9bac31f1c2d5101356b06a1e6e0c237b1854e409d5f494d444",
+          "transaction_base64": "AiAKk2g6HuU1TLqT7D/Z/eFZ1BC20tz1VSIFkB9nT+paMlM5egixAuEdbLb4+7x98v/xFvBOjf8XQ0n8mbqAbQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgABBENqWI1p3tkGkzkbfLgD1OOmCufJEfBgnD8NPanSdQV74jK5abAsGRkQl5/gAFQfIunhRA6qCIxMopL92/DMJDYV9lA4ifkrsk8lmLVPHjj+yUUgjtGKLvIbWzkzJcd/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAruutSnlvzC4V3ExgYbRe2bNz8mrfx5jKfS2MxYGCcY4BAwIBAgwCAAAAgIQeAAAAAAA=",
+          "signature_verification": true,
+          "success": false,
+          "error": "TransactionErrorFieldless.SignatureFailure",
+          "logs": [],
+          "compute_units": 0
+        }
+      ]
+    },
+    {
+      "id": "signature-skipped",
+      "kind": "authored_runtime_control",
+      "expected_property_observation": true,
+      "observed_property": true,
+      "check_passed": true,
+      "witness_status": "invalid_witness_signature_bypass",
+      "limitations": "Same transfer; actor control differs. Skipped-signature success is an intentionally invalid outsider witness.",
+      "events": [
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S",
+            "GDz12fWMJsBvg2381UmjrRG4w8b9BFXcxhgGVrD5EsAV"
+          ],
+          "transaction_sha256": "e65570eeda16fe9bac31f1c2d5101356b06a1e6e0c237b1854e409d5f494d444",
+          "transaction_base64": "AiAKk2g6HuU1TLqT7D/Z/eFZ1BC20tz1VSIFkB9nT+paMlM5egixAuEdbLb4+7x98v/xFvBOjf8XQ0n8mbqAbQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgABBENqWI1p3tkGkzkbfLgD1OOmCufJEfBgnD8NPanSdQV74jK5abAsGRkQl5/gAFQfIunhRA6qCIxMopL92/DMJDYV9lA4ifkrsk8lmLVPHjj+yUUgjtGKLvIbWzkzJcd/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAruutSnlvzC4V3ExgYbRe2bNz8mrfx5jKfS2MxYGCcY4BAwIBAgwCAAAAgIQeAAAAAAA=",
+          "signature_verification": false,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 11111111111111111111111111111111 invoke [1]",
+            "Program 11111111111111111111111111111111 success"
+          ],
+          "compute_units": 150
+        }
+      ]
+    },
+    {
+      "id": "signature-controlled",
+      "kind": "authored_runtime_control",
+      "expected_property_observation": true,
+      "observed_property": true,
+      "check_passed": true,
+      "witness_status": "validated_local_control",
+      "limitations": "Same transfer; actor control differs. Skipped-signature success is an intentionally invalid outsider witness.",
+      "events": [
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S",
+            "GDz12fWMJsBvg2381UmjrRG4w8b9BFXcxhgGVrD5EsAV"
+          ],
+          "transaction_sha256": "3a15bd40c6ffc4417aabc020646fded2b80530c2638d2092e74441d0865ffcfa",
+          "transaction_base64": "AiAKk2g6HuU1TLqT7D/Z/eFZ1BC20tz1VSIFkB9nT+paMlM5egixAuEdbLb4+7x98v/xFvBOjf8XQ0n8mbqAbQQA+vkQs4Xu+9zOih+sgJ1xegvfVRzggRpF65IUO/WEpQRDwwBnvOReK+89r0Gmy8742uKSfNh5QPEvvW5Fo/wOAgABBENqWI1p3tkGkzkbfLgD1OOmCufJEfBgnD8NPanSdQV74jK5abAsGRkQl5/gAFQfIunhRA6qCIxMopL92/DMJDYV9lA4ifkrsk8lmLVPHjj+yUUgjtGKLvIbWzkzJcd/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAruutSnlvzC4V3ExgYbRe2bNz8mrfx5jKfS2MxYGCcY4BAwIBAgwCAAAAgIQeAAAAAAA=",
+          "signature_verification": true,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 11111111111111111111111111111111 invoke [1]",
+            "Program 11111111111111111111111111111111 success"
+          ],
+          "compute_units": 150
+        }
+      ]
+    },
+    {
+      "id": "owner-check-missing",
+      "kind": "authored_runtime_control",
+      "expected_property_observation": true,
+      "observed_property": true,
+      "check_passed": true,
+      "witness_status": "validated_local_control",
+      "limitations": "Attacker account creation and writes use signed transactions; deployment and funding are declared fixtures. Custom record, not SPL Token or an upstream example.",
+      "events": [
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S",
+            "EYV94EXFKVM2Vf6BfJetdi6kbbWJdHJU2TowkZjb97gd"
+          ],
+          "transaction_sha256": "8ca025301a4d55c4b0d730f286733cfc401d84a3264cfc8a33bafdd227ac1cdf",
+          "transaction_base64": "AugjN1WHzvcGzyYt5IkwmA3JWJz9HbgO3IqMtFYIBK0/O2Qz8J4ZS6qPg4HygXizvSDYrIMGN0s+702TeaIP9wwviq/OFeEFgKebBmg7Bj1MmhfRMRzxem/CYzid4dpR8993X8aRBi7TQK8CF+/FH2aYY9TwhYAUQASgngs8YHIFAgACBENqWI1p3tkGkzkbfLgD1OOmCufJEfBgnD8NPanSdQV7yTjAepiwwTX373ZcArzJFHH1qNOa3meOILBw/DlEXvIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMakYGIj9gmca/y+lbXTBUedESaHp9boXl5Kp9VfrdVsruutSnlvzC4V3ExgYbRe2bNz8mrfx5jKfS2MxYGCcY4CAgIAATQAAAAAgNcRAAAAAAAoAAAAAAAAAMakYGIj9gmca/y+lbXTBUedESaHp9boXl5Kp9VfrdVsAwEBKQBDaliNad7ZBpM5G3y4A9TjpgrnyRHwYJw/DT2p0nUFe+cDAAAAAAAA",
+          "signature_verification": true,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 11111111111111111111111111111111 invoke [1]",
+            "Program 11111111111111111111111111111111 success",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT invoke [1]",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT consumed 2302 of 202850 compute units",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT success"
+          ],
+          "compute_units": 2452
+        },
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S"
+          ],
+          "transaction_sha256": "6f2014908b72be7edf4ca7a575255a86506b0d9a244a378ae6bcdfe9d98c2c4a",
+          "transaction_base64": "Ab/lqRnJBqwK7SCsXO2xo8/8vZZykE1rI/aKdZ5PbB8LgZRCBjAwKHpZ3KMQJWG1qW04B6DYeGi0iPG2WXFsOgsBAAMEQ2pYjWne2QaTORt8uAPU46YK58kR8GCcPw09qdJ1BXsepVUaV85ec8weT0qhpgpFZvNioz9Fc9ug1GKBJCiHp1V6QcnchTs5yrXSvLfRQ73u5DOPGY3ufuUqFJRkHku7yTjAepiwwTX373ZcArzJFHH1qNOa3meOILBw/DlEXvKu661KeW/MLhXcTGBhtF7Zs3Pyat/HmMp9LYzFgYJxjgEBAwMAAgEB",
+          "signature_verification": true,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S invoke [1]",
+            "Program log: CONTROL: accepted fabricated balance",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S consumed 836 of 200000 compute units",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S success"
+          ],
+          "compute_units": 836
+        }
+      ]
+    },
+    {
+      "id": "owner-check-patched",
+      "kind": "authored_runtime_control",
+      "expected_property_observation": false,
+      "observed_property": false,
+      "check_passed": true,
+      "witness_status": "attempt_rejected",
+      "limitations": "Attacker account creation and writes use signed transactions; deployment and funding are declared fixtures. Custom record, not SPL Token or an upstream example.",
+      "events": [
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S",
+            "EYV94EXFKVM2Vf6BfJetdi6kbbWJdHJU2TowkZjb97gd"
+          ],
+          "transaction_sha256": "8ca025301a4d55c4b0d730f286733cfc401d84a3264cfc8a33bafdd227ac1cdf",
+          "transaction_base64": "AugjN1WHzvcGzyYt5IkwmA3JWJz9HbgO3IqMtFYIBK0/O2Qz8J4ZS6qPg4HygXizvSDYrIMGN0s+702TeaIP9wwviq/OFeEFgKebBmg7Bj1MmhfRMRzxem/CYzid4dpR8993X8aRBi7TQK8CF+/FH2aYY9TwhYAUQASgngs8YHIFAgACBENqWI1p3tkGkzkbfLgD1OOmCufJEfBgnD8NPanSdQV7yTjAepiwwTX373ZcArzJFHH1qNOa3meOILBw/DlEXvIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMakYGIj9gmca/y+lbXTBUedESaHp9boXl5Kp9VfrdVsruutSnlvzC4V3ExgYbRe2bNz8mrfx5jKfS2MxYGCcY4CAgIAATQAAAAAgNcRAAAAAAAoAAAAAAAAAMakYGIj9gmca/y+lbXTBUedESaHp9boXl5Kp9VfrdVsAwEBKQBDaliNad7ZBpM5G3y4A9TjpgrnyRHwYJw/DT2p0nUFe+cDAAAAAAAA",
+          "signature_verification": true,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 11111111111111111111111111111111 invoke [1]",
+            "Program 11111111111111111111111111111111 success",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT invoke [1]",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT consumed 2302 of 202850 compute units",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT success"
+          ],
+          "compute_units": 2452
+        },
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S"
+          ],
+          "transaction_sha256": "8603434afd51a81212bfc0ef240b3b7742fc814ef7ede36ea00d2998914d5ecd",
+          "transaction_base64": "AVEkP/Xax5Gc+b6wX6hwL0gtqvSGMEs6JqEIbvupgJTtEi+GkFNpZJ+qJNWp5cpUPJGlbx1yCGcjUI2BFYGblgUBAAMEQ2pYjWne2QaTORt8uAPU46YK58kR8GCcPw09qdJ1BXsepVUaV85ec8weT0qhpgpFZvNioz9Fc9ug1GKBJCiHp1V6QcnchTs5yrXSvLfRQ73u5DOPGY3ufuUqFJRkHku7yTjAepiwwTX373ZcArzJFHH1qNOa3meOILBw/DlEXvKu661KeW/MLhXcTGBhtF7Zs3Pyat/HmMp9LYzFgYJxjgEBAwMAAgEC",
+          "signature_verification": true,
+          "success": false,
+          "error": "TransactionErrorInstructionError((0, Fieldless(IllegalOwner)))",
+          "logs": [
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S invoke [1]",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S consumed 725 of 200000 compute units",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S failed: Provided owner is not allowed"
+          ],
+          "compute_units": 725
+        }
+      ]
+    },
+    {
+      "id": "owner-check-trusted-positive",
+      "kind": "authored_runtime_control",
+      "expected_property_observation": true,
+      "observed_property": true,
+      "check_passed": true,
+      "witness_status": "positive_control",
+      "limitations": "The checked consumer accepts a correctly owned record; this guards against an always-rejecting patch. Not an exploit.",
+      "events": [
+        {
+          "phase": "fixture",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S",
+            "EYV94EXFKVM2Vf6BfJetdi6kbbWJdHJU2TowkZjb97gd",
+            "GDz12fWMJsBvg2381UmjrRG4w8b9BFXcxhgGVrD5EsAV"
+          ],
+          "transaction_sha256": "bb28b4616c770edd35bff13eb3bd8703c03fb24e55cb92aced41eec27701ed23",
+          "transaction_base64": "A/L35HBOORO5HGs5xg2XC+wV1S6jETQ/vooGgcCosGMb7EM/EUhaJfgW9ZSkHHTMRdpyR5gJeFfu4brEfELqeAEQEWEQTBa4pEMBzYVojiEebwI9ye18a4nOgKARP+u0kLogUEWbmBinXPd5NQdzrAdmR1/00mdMgx6wIcy/if4EXQsss1H/wGw2XZ8oUpwZxqFIKOg2d909fvKwJdtP5O0V3jHz5X1xfnAZU4bwVG41hMlPDZWJ2lcoM5frp76EBgMBAgVDaliNad7ZBpM5G3y4A9TjpgrnyRHwYJw/DT2p0nUFe8k4wHqYsME19+92XAK8yRRx9ajTmt5njiCwcPw5RF7y4jK5abAsGRkQl5/gAFQfIunhRA6qCIxMopL92/DMJDYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFV6QcnchTs5yrXSvLfRQ73u5DOPGY3ufuUqFJRkHku7ruutSnlvzC4V3ExgYbRe2bNz8mrfx5jKfS2MxYGCcY4CAwIAATQAAAAAgNcRAAAAAAAoAAAAAAAAAFV6QcnchTs5yrXSvLfRQ73u5DOPGY3ufuUqFJRkHku7BAIBAikAQ2pYjWne2QaTORt8uAPU46YK58kR8GCcPw09qdJ1BXvnAwAAAAAAAA==",
+          "signature_verification": true,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 11111111111111111111111111111111 invoke [1]",
+            "Program 11111111111111111111111111111111 success",
+            "Program 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 invoke [1]",
+            "Program 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 consumed 4376 of 202850 compute units",
+            "Program 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 success"
+          ],
+          "compute_units": 4526
+        },
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S"
+          ],
+          "transaction_sha256": "8603434afd51a81212bfc0ef240b3b7742fc814ef7ede36ea00d2998914d5ecd",
+          "transaction_base64": "AVEkP/Xax5Gc+b6wX6hwL0gtqvSGMEs6JqEIbvupgJTtEi+GkFNpZJ+qJNWp5cpUPJGlbx1yCGcjUI2BFYGblgUBAAMEQ2pYjWne2QaTORt8uAPU46YK58kR8GCcPw09qdJ1BXsepVUaV85ec8weT0qhpgpFZvNioz9Fc9ug1GKBJCiHp1V6QcnchTs5yrXSvLfRQ73u5DOPGY3ufuUqFJRkHku7yTjAepiwwTX373ZcArzJFHH1qNOa3meOILBw/DlEXvKu661KeW/MLhXcTGBhtF7Zs3Pyat/HmMp9LYzFgYJxjgEBAwMAAgEC",
+          "signature_verification": true,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S invoke [1]",
+            "Program log: CONTROL: accepted fabricated balance",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S consumed 863 of 200000 compute units",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S success"
+          ],
+          "compute_units": 863
+        }
+      ]
+    },
+    {
+      "id": "protected-record-legal-attempt",
+      "kind": "authored_runtime_control",
+      "expected_property_observation": false,
+      "observed_property": false,
+      "check_passed": true,
+      "witness_status": "attempt_rejected",
+      "limitations": "Only this writer attempt is tested; rejection is not a proof that every possible exploit chain is impossible.",
+      "events": [
+        {
+          "phase": "fixture",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S",
+            "9bXk2i1VuZntyhpXFFiZqcsPtCybvF8kcSXR9EGxtf7r"
+          ],
+          "transaction_sha256": "6b6271a319742302b263f7e04f3e7fb418f685f8ae8a9ce0377b231f6887d14c",
+          "transaction_base64": "AmfyBV9IeG0EiRWUhJzwycwGZhxi/Mle35kJkJ+3JMuwlwfaSCL4kFbQ3bAvRMt7xNMJgzNggYoJE+xQsda93AKJ2eTzPbrkFf9bJzYF+yF1uzeZcv2nRBJY+S1NFTVhV63GPYVRure+w4UyKuYZ9ulotKQfHae/sRlhjumn8wANAgACBENqWI1p3tkGkzkbfLgD1OOmCufJEfBgnD8NPanSdQV7f7YAvNg8/yObTTB8nXrkesLR8XZ6oW30Esvh2EAUUu0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMakYGIj9gmca/y+lbXTBUedESaHp9boXl5Kp9VfrdVsruutSnlvzC4V3ExgYbRe2bNz8mrfx5jKfS2MxYGCcY4CAgIAATQAAAAAgNcRAAAAAAAoAAAAAAAAAMakYGIj9gmca/y+lbXTBUedESaHp9boXl5Kp9VfrdVsAwEBKQBDaliNad7ZBpM5G3y4A9TjpgrnyRHwYJw/DT2p0nUFewcAAAAAAAAA",
+          "signature_verification": true,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 11111111111111111111111111111111 invoke [1]",
+            "Program 11111111111111111111111111111111 success",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT invoke [1]",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT consumed 2302 of 202850 compute units",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT success"
+          ],
+          "compute_units": 2452
+        },
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S"
+          ],
+          "transaction_sha256": "24851ace16342daacab11e2ffb64eba7f272d536c4ba4fff59b415de7d796cb7",
+          "transaction_base64": "ASBuT7k5scoPiM7laUeEA4K2PrFu+7tHqLHW266J45pkCAVHIhr7txrWQAwB3b85EUn4QEv/F4KjKtqZ2yRSXAwBAAEDQ2pYjWne2QaTORt8uAPU46YK58kR8GCcPw09qdJ1BXt/tgC82Dz/I5tNMHydeuR6wtHxdnqhbfQSy+HYQBRS7cakYGIj9gmca/y+lbXTBUedESaHp9boXl5Kp9VfrdVsruutSnlvzC4V3ExgYbRe2bNz8mrfx5jKfS2MxYGCcY4BAgEBKQBDaliNad7ZBpM5G3y4A9TjpgrnyRHwYJw/DT2p0nUFe+cDAAAAAAAA",
+          "signature_verification": true,
+          "success": false,
+          "error": "TransactionErrorInstructionError((0, Fieldless(MissingRequiredSignature)))",
+          "logs": [
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT invoke [1]",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT consumed 372 of 200000 compute units",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT failed: missing required signature for instruction"
+          ],
+          "compute_units": 372
+        },
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S"
+          ],
+          "transaction_sha256": "f20abc8efabd19c92556d176dd171d1646484b8f80517afc150c4438f9f65733",
+          "transaction_base64": "AZczXeZPKaoOTXcIrrslfD3kyMNgOd8i98B9VRcbY5JCprp+wUbAkbaGfasdpQmg5d+9M/aH6PvqBAKF91BvbAcBAAMEQ2pYjWne2QaTORt8uAPU46YK58kR8GCcPw09qdJ1BXsepVUaV85ec8weT0qhpgpFZvNioz9Fc9ug1GKBJCiHp1V6QcnchTs5yrXSvLfRQ73u5DOPGY3ufuUqFJRkHku7f7YAvNg8/yObTTB8nXrkesLR8XZ6oW30Esvh2EAUUu2u661KeW/MLhXcTGBhtF7Zs3Pyat/HmMp9LYzFgYJxjgEBAwMAAgEB",
+          "signature_verification": true,
+          "success": false,
+          "error": "TransactionErrorInstructionError((0, Fieldless(InvalidAccountData)))",
+          "logs": [
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S invoke [1]",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S consumed 765 of 200000 compute units",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S failed: invalid account data for instruction"
+          ],
+          "compute_units": 765
+        }
+      ]
+    },
+    {
+      "id": "protected-record-injected",
+      "kind": "authored_runtime_control",
+      "expected_property_observation": true,
+      "observed_property": true,
+      "check_passed": true,
+      "witness_status": "invalid_witness_harness_mutation",
+      "limitations": "Only this writer attempt is tested; rejection is not a proof that every possible exploit chain is impossible.",
+      "events": [
+        {
+          "phase": "fixture",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S",
+            "9bXk2i1VuZntyhpXFFiZqcsPtCybvF8kcSXR9EGxtf7r"
+          ],
+          "transaction_sha256": "6b6271a319742302b263f7e04f3e7fb418f685f8ae8a9ce0377b231f6887d14c",
+          "transaction_base64": "AmfyBV9IeG0EiRWUhJzwycwGZhxi/Mle35kJkJ+3JMuwlwfaSCL4kFbQ3bAvRMt7xNMJgzNggYoJE+xQsda93AKJ2eTzPbrkFf9bJzYF+yF1uzeZcv2nRBJY+S1NFTVhV63GPYVRure+w4UyKuYZ9ulotKQfHae/sRlhjumn8wANAgACBENqWI1p3tkGkzkbfLgD1OOmCufJEfBgnD8NPanSdQV7f7YAvNg8/yObTTB8nXrkesLR8XZ6oW30Esvh2EAUUu0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMakYGIj9gmca/y+lbXTBUedESaHp9boXl5Kp9VfrdVsruutSnlvzC4V3ExgYbRe2bNz8mrfx5jKfS2MxYGCcY4CAgIAATQAAAAAgNcRAAAAAAAoAAAAAAAAAMakYGIj9gmca/y+lbXTBUedESaHp9boXl5Kp9VfrdVsAwEBKQBDaliNad7ZBpM5G3y4A9TjpgrnyRHwYJw/DT2p0nUFewcAAAAAAAAA",
+          "signature_verification": true,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 11111111111111111111111111111111 invoke [1]",
+            "Program 11111111111111111111111111111111 success",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT invoke [1]",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT consumed 2302 of 202850 compute units",
+            "Program ENR6mwDDaAPAc1A9DZx4GfayKT6kNdJo7QybKkznRxpT success"
+          ],
+          "compute_units": 2452
+        },
+        {
+          "phase": "attack",
+          "operation": "set_account",
+          "harness_only": true,
+          "address": "9bXk2i1VuZntyhpXFFiZqcsPtCybvF8kcSXR9EGxtf7r",
+          "reason": "Intentional invalid witness control; actor lacks target signing key"
+        },
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S"
+          ],
+          "transaction_sha256": "f20abc8efabd19c92556d176dd171d1646484b8f80517afc150c4438f9f65733",
+          "transaction_base64": "AZczXeZPKaoOTXcIrrslfD3kyMNgOd8i98B9VRcbY5JCprp+wUbAkbaGfasdpQmg5d+9M/aH6PvqBAKF91BvbAcBAAMEQ2pYjWne2QaTORt8uAPU46YK58kR8GCcPw09qdJ1BXsepVUaV85ec8weT0qhpgpFZvNioz9Fc9ug1GKBJCiHp1V6QcnchTs5yrXSvLfRQ73u5DOPGY3ufuUqFJRkHku7f7YAvNg8/yObTTB8nXrkesLR8XZ6oW30Esvh2EAUUu2u661KeW/MLhXcTGBhtF7Zs3Pyat/HmMp9LYzFgYJxjgEBAwMAAgEB",
+          "signature_verification": true,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S invoke [1]",
+            "Program log: CONTROL: accepted fabricated balance",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S consumed 836 of 200000 compute units",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S success"
+          ],
+          "compute_units": 836
+        }
+      ]
+    },
+    {
+      "id": "return-producer-unchecked",
+      "kind": "authored_runtime_control",
+      "expected_property_observation": true,
+      "observed_property": true,
+      "check_passed": true,
+      "witness_status": "validated_local_control",
+      "limitations": "Native model of return-data producer validation; both CPI targets are fixture-loaded. Does not execute the Anchor patch or establish application reachability.",
+      "events": [
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S"
+          ],
+          "transaction_sha256": "9805724a04ef808b0e9f3cde9f934b08e38a5dd247316b850fcb7961a6019f5a",
+          "transaction_base64": "Ae7qC5/aBWRMDyX3GB3Ot2SMnfYAVpatEBwHxCjqtR+Uez/aJFy31m5dAOuoSKhEgkyRSWyG1+JlBpe6E3Tq7wsBAAMEQ2pYjWne2QaTORt8uAPU46YK58kR8GCcPw09qdJ1BXsepVUaV85ec8weT0qhpgpFZvNioz9Fc9ug1GKBJCiHp1V6QcnchTs5yrXSvLfRQ73u5DOPGY3ufuUqFJRkHku7u8LJhC6W8ZzvAtu5K8PPBNH5kNFsLgXrh8Qk4iqH1LSu661KeW/MLhXcTGBhtF7Zs3Pyat/HmMp9LYzFgYJxjgEBAgIDAQU=",
+          "signature_verification": true,
+          "success": true,
+          "error": null,
+          "logs": [
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S invoke [1]",
+            "Program 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 invoke [2]",
+            "Program 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 consumed 247 of 198312 compute units",
+            "Program return: 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 BwAAAAAAAAA=",
+            "Program 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 success",
+            "Program DdwWbTsuJx3b62juvseroX6MAenK2VujRbuy8tv2gAq9 invoke [2]",
+            "Program DdwWbTsuJx3b62juvseroX6MAenK2VujRbuy8tv2gAq9 consumed 249 of 196765 compute units",
+            "Program return: DdwWbTsuJx3b62juvseroX6MAenK2VujRbuy8tv2gAq9 5wMAAAAAAAA=",
+            "Program DdwWbTsuJx3b62juvseroX6MAenK2VujRbuy8tv2gAq9 success",
+            "Program log: CONTROL: accepted substituted return data",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S consumed 3930 of 200000 compute units",
+            "Program return: 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S 5wMAAAAAAAA=",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S success"
+          ],
+          "compute_units": 3930
+        }
+      ]
+    },
+    {
+      "id": "return-producer-checked",
+      "kind": "authored_runtime_control",
+      "expected_property_observation": false,
+      "observed_property": false,
+      "check_passed": true,
+      "witness_status": "attempt_rejected",
+      "limitations": "Native model of return-data producer validation; both CPI targets are fixture-loaded. Does not execute the Anchor patch or establish application reachability.",
+      "events": [
+        {
+          "phase": "attack",
+          "signer_keys": [
+            "5YANP1EFBuH29ZqBh9TFtz2AScT945nMC5JiSDdzvu2S"
+          ],
+          "transaction_sha256": "c33bdf63bf6ffbace3b087a9ec5670893c2817d474d72df62b5cfa742c6506be",
+          "transaction_base64": "AWMNAzpOXupOfOhV5iH+bPqV1lzs7PsBmpSr6kyfzocV5iKyIasU+NHT7FD0g0nbTyhikaYQPIDX+LQk8ug3wQ8BAAMEQ2pYjWne2QaTORt8uAPU46YK58kR8GCcPw09qdJ1BXsepVUaV85ec8weT0qhpgpFZvNioz9Fc9ug1GKBJCiHp1V6QcnchTs5yrXSvLfRQ73u5DOPGY3ufuUqFJRkHku7u8LJhC6W8ZzvAtu5K8PPBNH5kNFsLgXrh8Qk4iqH1LSu661KeW/MLhXcTGBhtF7Zs3Pyat/HmMp9LYzFgYJxjgEBAgIDAQY=",
+          "signature_verification": true,
+          "success": false,
+          "error": "TransactionErrorInstructionError((0, Fieldless(IncorrectProgramId)))",
+          "logs": [
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S invoke [1]",
+            "Program 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 invoke [2]",
+            "Program 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 consumed 247 of 198312 compute units",
+            "Program return: 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 BwAAAAAAAAA=",
+            "Program 6kfnBaroMT6L4YwBdFotwuuK3c7AaWCiwWzJDyeJNNi6 success",
+            "Program DdwWbTsuJx3b62juvseroX6MAenK2VujRbuy8tv2gAq9 invoke [2]",
+            "Program DdwWbTsuJx3b62juvseroX6MAenK2VujRbuy8tv2gAq9 consumed 249 of 196765 compute units",
+            "Program return: DdwWbTsuJx3b62juvseroX6MAenK2VujRbuy8tv2gAq9 5wMAAAAAAAA=",
+            "Program DdwWbTsuJx3b62juvseroX6MAenK2VujRbuy8tv2gAq9 success",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S consumed 3878 of 200000 compute units",
+            "Program return: 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S 5wMAAAAAAAA=",
+            "Program 34dTCmhtKyHfcs4RJUNB6RUo6aGPRMZJVttYHE4iWT4S failed: incorrect program id for instruction"
+          ],
+          "compute_units": 3878
+        }
+      ]
+    }
+  ],
+  "checks_passed": 10,
+  "checks_total": 10
+}

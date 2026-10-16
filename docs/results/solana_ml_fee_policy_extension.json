@@ -1,0 +1,229 @@
+{
+  "created_at_utc": "2026-10-15T18:47:43.677294+00:00",
+  "protocol": {
+    "status": "Post-result diagnostic; historical test outcomes have previously been inspected. No new confirmatory claim.",
+    "cohort": "fresh",
+    "population": "All cold_payer rows in the existing held-out December 5 sample, not handpicked examples",
+    "models": [
+      "payer_readonly_hgb",
+      "context_hgb"
+    ],
+    "threshold": "Use existing exported validation-only isotonic calibrator and threshold, unchanged",
+    "primary": "Report failure warnings, missed failures and warnings on successful transactions at the deployed thresholds",
+    "sensitivity": "Hypothetical equal fee F per failed attempt and opportunity cost C per blocked success; report TP-(C/F)*FP for C/F in [0,1,5,10]. These are dimensionless scenarios, not measured fees saved.",
+    "comparison": "Context model minus payer/read-only baseline under the same fixed recipe; paired one-hour cluster bootstrap, seed 1729, 1000 draws",
+    "preflight": "Unavailable in source: incremental benefit beyond preflight cannot be identified. Zero incremental benefit remains consistent with these data.",
+    "no_tuning": "Do not change existing deployed thresholds, models, calibration, population or cost ratios based on this result",
+    "cost_threshold_followup": "Exploratory fixed decision rule: for each predeclared positive ratio r in [1,5,10], warn when calibrated p >= r/(1+r), the expected-cost threshold under equal failure fee F and blocked-success cost C=rF. Report all ratios, including abstention. These assumptions are unverified; do not select a winning ratio from test outcomes."
+  },
+  "protocol_sha256": "33896db33f2d17db21749231acfee2de9b4075b14e585c276323b572225745f6",
+  "cohort": "extension",
+  "model_sha256": null,
+  "test_features_sha256": "6ba6b5a1801fedc4b2a706a2f6e496d10e92ab82d071a04dfe4c0c2aa590d5f2",
+  "source_schema": [
+    "block_slot",
+    "block_timestamp",
+    "status",
+    "accounts",
+    "signature"
+  ],
+  "source_sha256": "5f2c905bf55bf77265691f7c6b7c6a63a5d653a86ea2eb07fd98749be8a101cf",
+  "test_date": "2025-11-24",
+  "rows": 21028,
+  "failures": 1337,
+  "successes": 19691,
+  "models": {
+    "payer_readonly_hgb": {
+      "threshold": 0.2160762545229588,
+      "flagged_failures": 247,
+      "flagged_successes": 646,
+      "missed_failures": 1090,
+      "unflagged_successes": 19045,
+      "warnings": 893,
+      "precision": 0.2765957446808511,
+      "failure_recall": 0.18474195961106957,
+      "false_positive_rate": 0.03280686608095069,
+      "break_even_blocked_success_cost_over_failed_fee": 0.38235294117647056,
+      "hypothetical_net_units": {
+        "0": 247,
+        "1": -399,
+        "5": -2983,
+        "10": -6213
+      }
+    },
+    "context_hgb": {
+      "threshold": 0.23883783439113243,
+      "flagged_failures": 320,
+      "flagged_successes": 808,
+      "missed_failures": 1017,
+      "unflagged_successes": 18883,
+      "warnings": 1128,
+      "precision": 0.28368794326241137,
+      "failure_recall": 0.2393418100224383,
+      "false_positive_rate": 0.04103397491239653,
+      "break_even_blocked_success_cost_over_failed_fee": 0.39603960396039606,
+      "hypothetical_net_units": {
+        "0": 320,
+        "1": -488,
+        "5": -3720,
+        "10": -7760
+      }
+    }
+  },
+  "exploratory_cost_based_thresholds": {
+    "payer_readonly_hgb": {
+      "1": {
+        "threshold": 0.5,
+        "flagged_failures": 68,
+        "flagged_successes": 44,
+        "missed_failures": 1269,
+        "unflagged_successes": 19647,
+        "warnings": 112,
+        "precision": 0.6071428571428571,
+        "failure_recall": 0.050860134629768135,
+        "false_positive_rate": 0.002234523386318623,
+        "break_even_blocked_success_cost_over_failed_fee": 1.5454545454545454,
+        "hypothetical_net_units": {
+          "0": 68,
+          "1": 24,
+          "5": -152,
+          "10": -372
+        }
+      },
+      "5": {
+        "threshold": 0.8333333333333334,
+        "flagged_failures": 0,
+        "flagged_successes": 2,
+        "missed_failures": 1337,
+        "unflagged_successes": 19689,
+        "warnings": 2,
+        "precision": 0.0,
+        "failure_recall": 0.0,
+        "false_positive_rate": 0.00010156924483266467,
+        "break_even_blocked_success_cost_over_failed_fee": 0.0,
+        "hypothetical_net_units": {
+          "0": 0,
+          "1": -2,
+          "5": -10,
+          "10": -20
+        }
+      },
+      "10": {
+        "threshold": 0.9090909090909091,
+        "flagged_failures": 0,
+        "flagged_successes": 1,
+        "missed_failures": 1337,
+        "unflagged_successes": 19690,
+        "warnings": 1,
+        "precision": 0.0,
+        "failure_recall": 0.0,
+        "false_positive_rate": 5.0784622416332335e-05,
+        "break_even_blocked_success_cost_over_failed_fee": 0.0,
+        "hypothetical_net_units": {
+          "0": 0,
+          "1": -1,
+          "5": -5,
+          "10": -10
+        }
+      }
+    },
+    "context_hgb": {
+      "1": {
+        "threshold": 0.5,
+        "flagged_failures": 42,
+        "flagged_successes": 36,
+        "missed_failures": 1295,
+        "unflagged_successes": 19655,
+        "warnings": 78,
+        "precision": 0.5384615384615384,
+        "failure_recall": 0.031413612565445025,
+        "false_positive_rate": 0.0018282464069879641,
+        "break_even_blocked_success_cost_over_failed_fee": 1.1666666666666667,
+        "hypothetical_net_units": {
+          "0": 42,
+          "1": 6,
+          "5": -138,
+          "10": -318
+        }
+      },
+      "5": {
+        "threshold": 0.8333333333333334,
+        "flagged_failures": 3,
+        "flagged_successes": 5,
+        "missed_failures": 1334,
+        "unflagged_successes": 19686,
+        "warnings": 8,
+        "precision": 0.375,
+        "failure_recall": 0.002243829468960359,
+        "false_positive_rate": 0.0002539231120816617,
+        "break_even_blocked_success_cost_over_failed_fee": 0.6,
+        "hypothetical_net_units": {
+          "0": 3,
+          "1": -2,
+          "5": -22,
+          "10": -47
+        }
+      },
+      "10": {
+        "threshold": 0.9090909090909091,
+        "flagged_failures": 2,
+        "flagged_successes": 3,
+        "missed_failures": 1335,
+        "unflagged_successes": 19688,
+        "warnings": 5,
+        "precision": 0.4,
+        "failure_recall": 0.0014958863126402393,
+        "false_positive_rate": 0.000152353867248997,
+        "break_even_blocked_success_cost_over_failed_fee": 0.6666666666666666,
+        "hypothetical_net_units": {
+          "0": 2,
+          "1": -1,
+          "5": -13,
+          "10": -28
+        }
+      }
+    }
+  },
+  "context_minus_baseline": {
+    "0": {
+      "delta_net_units": 73,
+      "paired_hour_bootstrap_ci95": [
+        34.0,
+        132.02499999999998
+      ]
+    },
+    "1": {
+      "delta_net_units": -89,
+      "paired_hour_bootstrap_ci95": [
+        -179.025,
+        2.0249999999999773
+      ]
+    },
+    "5": {
+      "delta_net_units": -737,
+      "paired_hour_bootstrap_ci95": [
+        -1095.025,
+        -413.92500000000007
+      ]
+    },
+    "10": {
+      "delta_net_units": -1547,
+      "paired_hour_bootstrap_ci95": [
+        -2241.2,
+        -908.95
+      ]
+    }
+  },
+  "actual_fee_savings_proven": false,
+  "incremental_benefit_over_preflight_proven": false,
+  "measured_fee_savings_lamports": null,
+  "missing_evidence": [
+    "Per-candidate preflight result at real decision time",
+    "Signed-message identity and simulation/submission timestamps",
+    "Paid fee from confirmed receipt and contemporaneous balances",
+    "ML prediction using only available live history",
+    "Outcomes and costs for warned successful transactions",
+    "Prospective comparison against standard preflight alone"
+  ],
+  "interpretation": "These are observed historical warnings and counterfactual cost scenarios. Warnings do not establish prevented transactions or saved fees. All warned failures might also be caught by preflight."
+}

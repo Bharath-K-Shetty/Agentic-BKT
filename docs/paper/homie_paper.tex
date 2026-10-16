@@ -1,0 +1,444 @@
+\documentclass[conference]{IEEEtran}
+
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{cite}
+\usepackage{balance}
+
+\begin{document}
+
+\title{HOMIE: A Conversational Risk-Aware DeFi Companion on Solana}
+
+\author{
+\IEEEauthorblockN{Bharath Kumar Shetty, Deepthi P. Salian, Shreya Shetty, Swaroop Nellitheertha}
+\IEEEauthorblockA{
+Department of Artificial Intelligence and Machine Learning\\
+Mangalore Institute of Technology and Engineering, Moodabidri, India\\
+2026--27
+}
+}
+
+\maketitle
+
+\begin{abstract}
+Decentralized finance (DeFi) applications on the Solana blockchain provide users with access to token markets, staking, liquidity pools, governance, and other decentralized services. However, users often need to continuously monitor blockchain activity and manually interpret complex financial information before taking action. Existing blockchain agents and automated trading systems commonly focus on transaction execution or developer-oriented automation, while providing limited beginner-oriented education, personalized risk assessment, and transparent explanations. This paper presents HOMIE, a conversational risk-aware DeFi companion designed for the Solana ecosystem. The proposed system combines a conversational AI interface with real-time Solana data monitoring, personalized risk profiling, AI-based opportunity and risk analysis, explainable recommendations, educational guidance, behavioral adaptation, and condition-based smart-contract execution. The architecture integrates the user interaction layer, educational and explainability components, risk-profiling module, AI decision and analytics engine, real-time blockchain monitoring layer, smart-contract interaction layer, and Solana blockchain layer. A working prototype of the risk-analysis core has been implemented and validated against live Solana mainnet transaction data, and this manuscript reports its architecture, functional workflow, and initial empirical results alongside the evaluation framework for the complete deployable Solana-based AI agent.
+\end{abstract}
+
+\begin{IEEEkeywords}
+DeFi, Solana, AI agents, conversational AI, risk profiling, explainable AI, blockchain automation, personalized recommendation.
+\end{IEEEkeywords}
+
+\section{Introduction}
+
+Blockchain technology enables decentralized applications without requiring traditional intermediaries. Through a distributed ledger, blockchain systems provide transparency, immutability, and security for digital transactions. Solana is particularly suitable for applications requiring high transaction throughput, low transaction costs, and rapid finality. These characteristics make it a suitable environment for decentralized finance applications that require responsive interaction with on-chain data.
+
+Despite these capabilities, decentralized applications still depend substantially on manual user interaction. Users may need to monitor token prices, staking opportunities, liquidity-pool activity, governance proposals, and transaction conditions before deciding whether to perform an action. This dependence on continuous human monitoring can introduce delays, reduce efficiency, and make it difficult for non-technical users to respond appropriately to changing blockchain conditions.
+
+HOMIE addresses this problem by introducing a conversational AI agent designed for the Solana DeFi ecosystem. The proposed agent receives natural-language requests from users, obtains relevant real-time blockchain information through Solana RPC APIs, analyzes opportunities and risks, considers the user's goals and risk tolerance, explains the reasoning behind its recommendations, and can execute smart-contract operations when predefined conditions are satisfied.
+
+A major objective of HOMIE is to make DeFi more accessible to beginner users. Rather than presenting only a recommendation, the system provides educational explanations of DeFi concepts before suggesting an action. The system also incorporates behavioral information so that recommendations can adapt according to user interaction history.
+
+The problem addressed by this work is therefore the absence of an integrated DeFi assistance framework that combines conversational interaction, real-time Solana awareness, personalized risk profiling, explainability, educational support, behavioral adaptation, and blockchain execution within a single system.
+
+The primary objectives of HOMIE are:
+\begin{enumerate}
+    \item To develop an AI-powered conversational assistant tailored for the Solana DeFi ecosystem.
+    \item To integrate real-time blockchain monitoring for staking, token analytics, and liquidity insights.
+    \item To design a personalized risk profile based on user goals and risk tolerance.
+    \item To incorporate explainable AI techniques for transparent recommendations.
+    \item To adapt recommendations using user interaction patterns.
+    \item To provide beginner-friendly educational guidance before suggesting DeFi actions.
+    \item To develop a deployable prototype integrating AI intelligence with Solana network interaction.
+\end{enumerate}
+
+\section{Literature Survey}
+
+Research related to HOMIE spans blockchain AI agents, DeFi analytics, automated trading, explainable financial AI, and decentralized multi-agent systems. Existing research demonstrates the feasibility of individual components, but the reviewed works indicate that these capabilities are commonly addressed separately.
+
+Table~\ref{tab:literature} summarizes the literature identified in the HOMIE project document.
+
+\begin{table*}[t]
+\caption{Literature Survey and Identified Research Gaps}
+\label{tab:literature}
+\centering
+\small
+\begin{tabularx}{\textwidth}{c X X X c}
+\toprule
+\textbf{No.} & \textbf{Paper / Work} & \textbf{Methodology / Strength} & \textbf{Limitation / Research Gap} & \textbf{Year}\\
+\midrule
+
+1 & DeFi TrustBoost: Blockchain and AI for Trustworthy Decentralized Financial Decisions &
+Blockchain with on/off-chain hashing, explainable AI, and human-in-the-loop learning for trustworthy financial decisions &
+Scalability, latency, storage cost, and need for broader validation and stronger robustness &
+2025\\
+
+2 & When Blockchain Meets Crawlers: Real-Time Market Analytics in Solana NFT Markets &
+Selenium and Scrapy for Solana NFT data with time-weighted return and mean-variance portfolio analysis &
+Historical-market dependence, crawler/API limitations, and limited adaptive real-time analysis &
+2025\\
+
+3 & BotDetect: A Decentralized Federated Learning Framework for Detecting Financial Bots on EVM Blockchains &
+Decentralized federated learning with local neural-network training and on-chain aggregation &
+Small labeled dataset, cooperative-client assumption, blockchain aggregation overhead, and scalability concerns &
+2025\\
+
+4 & SolPhishHunter: Towards Detecting and Understanding Phishing on Solana &
+Transaction-level detection of Solana-specific phishing types, validated on a purpose-built phishing dataset &
+Limited phishing coverage and need for real-time wallet integration and broader automated analysis &
+2025\\
+
+5 & Promise of AI in DeFi: A Systematic Review &
+Systematic review of AI applications in DeFi &
+Limited empirical validation and need for standardized evaluation, security, and risk-assessment frameworks &
+2022\\
+
+6 & Leveraging Explainable AI to Support Cryptocurrency Investors &
+SHAP-based visual analytics for explaining AI-driven cryptocurrency trading signals to domain experts &
+Explanation tool is analyst-facing rather than integrated into an end-user conversational assistant &
+2022\\
+
+7 & A Comprehensive Review on Financial Explainable AI &
+Survey of XAI techniques applied across financial-AI tasks &
+Limited coverage of real-time, blockchain-native advisory settings &
+2023\\
+
+8 & Investigating Risk Assessment in Post-Pandemic Household Cryptocurrency Investments: An Explainable ML Approach &
+Explainable ML model of household-level cryptocurrency investment risk determinants &
+Survey-based, static risk factors; no on-chain behavioral or wallet-level signal &
+2023\\
+
+9 & Enabling Personalized Long-term Interactions in LLM-based Agents through Persistent Memory and User Profiles &
+Persistent-memory architecture for LLM agents to personalize long-term interactions &
+Not evaluated in a blockchain or financial-risk context &
+2025\\
+
+10 & Detecting Rug Pulls in Decentralized Exchanges: Machine Learning Evidence from the TON Blockchain &
+Gradient-boosted early rug-pull detection from liquidity-withdrawal and trading-cessation signals &
+Validated on TON, not Solana; methodology adapted rather than directly reused in this work &
+2025\\
+
+11 & Quantifying the Threat of Sandwiching MEV on Jito: A Measurement of Solana's Leading Validator Client &
+Large-scale measurement of sandwich-attack victims on Solana's Jito validator client &
+Measurement study of attacker/victim prevalence, not a per-wallet predictive risk model &
+2025\\
+
+12 & SolRPDS: A Dataset for Analyzing Rug Pulls in Solana Decentralized Finance &
+Large-scale labeled Solana rug-pull dataset (62{,}895 suspicious liquidity pools) &
+Dataset not yet used to independently validate this work's rug-pull heuristic &
+2025\\
+
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\subsection{Existing Systems and Their Limitations}
+
+The project identifies several representative system types and their limitations.
+
+\begin{table}[t]
+\caption{Existing Systems and Their Limitations}
+\label{tab:existing}
+\centering
+\small
+\begin{tabularx}{\columnwidth}{l l X}
+\toprule
+\textbf{System} & \textbf{Focus} & \textbf{Limitation}\\
+\midrule
+ELSA AI & Crypto Q\&A & No deep Solana data and no personalization.\\
+Solana Agent Kit & On-chain automation & Developer-focused and lacks an education layer.\\
+Fetch.ai Agents & Autonomous agents & Complex and not beginner-friendly.\\
+SingularityNET & AI marketplace & Not DeFi-focused and provides no investment guidance.\\
+AI Trading Bots & Automated trading & Often black-box, high-risk, and lacking explanation.\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Prior Art Search}
+
+The prior-art analysis in the HOMIE project considered research published after 2023 across IEEE, Springer, arXiv, and blockchain-AI conferences. The review focused on AI agents in decentralized finance, blockchain automation frameworks, cryptocurrency trading bots, token risk assessment, explainable AI in financial systems, and adaptive intelligent advisory systems.
+
+Research on AI agents in blockchain ecosystems demonstrates autonomous execution of actions such as token transfers, staking, and smart-contract interaction. However, such systems are commonly oriented toward technical users and do not necessarily provide beginner-oriented education or personalized investment guidance.
+
+Research on DeFi risk assessment and token analytics provides quantitative methods for evaluating volatility, liquidity, and yield opportunities. These approaches, however, do not consistently integrate structured user risk profiles or human-centered explanations.
+
+AI-powered trading systems employ reinforcement learning and deep learning for automated trading decisions, but their black-box behavior can reduce transparency and user trust. Explainable AI methods such as SHAP and feature attribution can improve interpretability, although their integration into real-time blockchain-based DeFi advisory systems remains limited.
+
+\subsection{Research Gaps}
+
+The literature and prior-art review identify six main gaps:
+\begin{enumerate}
+    \item Lack of beginner-centric DeFi guidance.
+    \item Absence of an integrated education and execution framework.
+    \item Limited personalized risk-profiling mechanisms.
+    \item Limited explainability in AI-driven trading and advisory systems.
+    \item Lack of behavioral adaptation based on user interaction.
+    \item Limited real-time awareness of Solana-specific ecosystem information.
+\end{enumerate}
+
+These gaps motivate the integrated architecture proposed in HOMIE.
+
+\section{Proposed Methodology}
+
+\subsection{System Overview}
+
+HOMIE is designed as a modular AI-driven DeFi companion operating over the Solana blockchain. The system combines a conversational interface, educational guidance, explainable AI, personalized risk profiling, an AI decision and analytics engine, real-time blockchain monitoring, smart-contract interaction, and the underlying Solana blockchain.
+
+Figure~\ref{fig:architecture} presents the architecture of the proposed system.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.94\textwidth]{homie_architecture.png}
+\caption{System architecture of HOMIE: A conversational risk-aware DeFi companion on Solana.}
+\label{fig:architecture}
+\end{figure*}
+
+\subsection{Conversational AI Interface}
+
+The user interacts with HOMIE through a conversational AI chatbot using natural-language input. The interface is intended to support beginner, intermediate, and advanced users. The natural-language request is interpreted before the system retrieves relevant information and generates a response.
+
+\subsection{Educational Guidance and Explainable AI}
+
+HOMIE incorporates an educational layer that explains relevant DeFi concepts before recommending actions. The explainability component provides simple reasons behind recommendations. The project identifies SHAP/XAI-style explanation mechanisms as part of this layer.
+
+This design is intended to address the limitation of black-box financial AI systems by giving users an interpretable basis for recommendations.
+
+\subsection{Personalized Risk Profiling}
+
+The system creates a personalized risk profile using user goals, preferences, risk tolerance, and behavioral information. The profile is used by the decision engine when evaluating available DeFi opportunities.
+
+The intended behavior is that recommendations should depend not only on the properties of an asset or opportunity but also on the characteristics of the user requesting the recommendation.
+
+\subsection{AI Decision and Analytics Engine}
+
+The decision and analytics engine analyzes multiple classes of DeFi information, including:
+\begin{itemize}
+    \item token information,
+    \item yield and staking opportunities,
+    \item liquidity-pool activity,
+    \item governance activity,
+    \item market trends, and
+    \item other AI-model-derived signals.
+\end{itemize}
+
+The engine combines these signals with the user's risk profile to generate an opportunity or risk assessment.
+
+\subsection{Real-Time Blockchain Monitoring}
+
+HOMIE collects real-time information from Solana RPC APIs. The monitored information includes token prices, staking pools, liquidity-pool activity, DAO governance activity, and on-chain transactions.
+
+This layer provides the decision engine with current blockchain information rather than relying solely on static model knowledge.
+
+\subsection{Smart-Contract Interaction}
+
+When predefined conditions are satisfied, HOMIE can construct and execute smart-contract transactions. The proposed interaction layer includes wallet connection, transaction construction, transaction signing, condition-based automation, and execution of operations such as staking, swaps, and transfers.
+
+Security constraints associated with wallet and transaction handling are treated as an implementation requirement of the system.
+
+\subsection{Behavioral Adaptation}
+
+HOMIE is designed to learn from user interaction history and use this information to improve future recommendations. The project identifies behavioral adaptation as a research gap in current blockchain AI agents.
+
+The behavioral component therefore maintains interaction information that can contribute to the dynamic user risk profile and subsequent recommendations.
+
+\subsection{Cross-Cutting Components}
+
+The architecture contains several cross-cutting components:
+\begin{itemize}
+    \item Security layer for authentication, authorization, and data encryption.
+    \item Database layer for user profiles, risk profiles, interaction history, and analytics data.
+    \item AI model storage for trained models, model updates, and performance logs.
+    \item Logging and monitoring for system logs, performance monitoring, and alerts.
+    \item API gateway for secure APIs, rate limiting, and request routing.
+\end{itemize}
+
+\subsection{End-to-End Workflow}
+
+The end-to-end workflow is:
+\begin{enumerate}
+    \item The user submits a natural-language request through the conversational interface.
+    \item HOMIE interprets the request and identifies the relevant DeFi context.
+    \item Real-time Solana data is collected through RPC APIs.
+    \item The system analyzes tokens, staking, liquidity, governance, transactions, and market information.
+    \item The user's goals, preferences, risk tolerance, and behavioral information are considered.
+    \item The system generates a personalized recommendation.
+    \item Explainable AI provides the reasoning behind the recommendation.
+    \item Educational guidance is presented before a DeFi action when required.
+    \item If predefined execution conditions are satisfied, the system constructs, signs, and executes the transaction.
+    \item The interaction is stored and can contribute to future behavioral adaptation.
+\end{enumerate}
+
+\begin{algorithm}[t]
+\caption{HOMIE Conversational DeFi Decision Workflow}
+\label{alg:homie}
+\begin{algorithmic}[1]
+\Require User query $q$, user profile $P$, interaction history $H$
+\Ensure Response $R$ and optional blockchain action $A$
+\State Interpret $q$ using the conversational AI layer
+\State Retrieve relevant Solana data $D$ through RPC APIs
+\State Analyze token, staking, liquidity, governance, and market signals
+\State Update personalized risk profile $P$ using preferences and $H$
+\State Evaluate opportunities and risks using $D$ and $P$
+\State Generate recommendation $r$
+\State Generate explanation $e$ for $r$
+\State Generate educational guidance $g$ when required
+\If{predefined execution conditions are satisfied}
+    \State Build and sign transaction $A$
+    \State Execute $A$ through the smart-contract interaction layer
+\Else
+    \State Set $A \gets \varnothing$
+\EndIf
+\State Update interaction history $H$
+\State \Return $R=(r,e,g,A)$
+\end{algorithmic}
+\end{algorithm}
+
+\section{Experimental Setup}
+
+A prototype of the risk-analysis core (the AI Decision and Analytics Engine's rug-pull, sandwich-attack, and slippage detection, and the underlying real-time Solana data collection layer) has been implemented and evaluated against live Solana mainnet data, rather than existing only as a specification. Rug-pull detection follows the general weak-labeling approach demonstrated for DEX rug-pulls on the TON blockchain \cite{ref10} and is intended to be benchmarked in future work against the Solana-native SolRPDS dataset \cite{ref12}; sandwich-attack detection follows the frontrun/victim/backrun block-position pattern established by large-scale measurement of Solana's Jito validator client \cite{ref11}, adapted here to a per-wallet, on-demand setting rather than a full-network measurement. As of this writing, 127 real wallets were collected via public Solana RPC, yielding 1{,}434 detected swap transactions and 31 realized rug-pull-dump events. A gradient-boosted baseline risk classifier was trained on wallet-level features derived from this data; at the current sample size the model does not yet achieve a statistically reliable predictive result (area under the ROC curve of approximately 0.47--0.49, and an early promising result at a smaller sample size did not replicate as the sample grew), which is expected and consistent with the sample-size risk identified for this class of system and is treated here as a preliminary finding rather than a validated result. Two data-quality issues were identified and corrected during this process: false candidate wallets arising from validator vote transactions, and false-positive swap detection arising from wrapped-SOL/native-SOL balance accounting, both corrected in the current pipeline.
+
+The remaining system components -- the conversational interface, personalized risk profiling beyond the base risk score, behavioral adaptation, and condition-based execution -- are specified at the architecture and workflow level in this manuscript and are the subject of ongoing implementation. For a full research evaluation, the complete system should be assessed using real or reproducible Solana ecosystem data and controlled user profiles, covering recommendation quality, risk-profile consistency, explanation quality, behavioral adaptation, blockchain monitoring latency, transaction execution reliability, and system response time, at a substantially larger sample size than reported above.
+
+\subsection{Software Environment}
+
+Table~\ref{tab:software} specifies the software environment of the implemented risk-analysis prototype evaluated in this section, rather than a separate, unimplemented target stack.
+
+\begin{table}[t]
+\caption{Software Environment (Implemented Prototype)}
+\label{tab:software}
+\centering
+\small
+\begin{tabularx}{\columnwidth}{l X}
+\toprule
+\textbf{Component} & \textbf{Specification}\\
+\midrule
+Operating System & Any OS with Python 3.14+ and a modern browser (developed on macOS)\\
+Blockchain Access & Solana JSON-RPC API, via a custom Python client (no SDK/Web3.js dependency)\\
+Backend & Python, FastAPI, Uvicorn\\
+Frontend & HTML5 and vanilla JavaScript (no framework)\\
+Data Storage & Flat JSON files (no database)\\
+ML / Analytics & scikit-learn (gradient-boosted classifier), PyTorch (LSTM-based DKT baseline)\\
+Testing & pytest (39 automated tests)\\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Hardware Requirements}
+
+The project specifies a minimum dual-core processor, 4 GB RAM, 10 GB free storage, and Internet connectivity. The recommended configuration is a quad-core or higher processor, 8 GB or more RAM, 20 GB SSD storage, and high-speed broadband connectivity.
+
+\subsection{Functional Requirements}
+
+The system is expected to provide:
+\begin{enumerate}
+    \item natural-language user interaction,
+    \item continuous blockchain-data monitoring,
+    \item personalized risk profiling,
+    \item AI-based blockchain analysis,
+    \item automated execution under predefined conditions,
+    \item explainable recommendations,
+    \item educational support, and
+    \item behavioral adaptation.
+\end{enumerate}
+
+\subsection{Non-Functional Requirements}
+
+The main non-functional requirements are real-time performance, scalability, security, reliability, usability, transparency, and cross-platform portability.
+
+\section{System Requirements and Design Constraints}
+
+HOMIE depends on Solana network availability and blockchain API accuracy. Security is particularly important because the system can interact with wallets and transactions. AI-model performance depends on the quality of the underlying training or inference data, while smart-contract execution must comply with blockchain rules.
+
+The system assumes Internet connectivity, accessible Solana nodes and RPC APIs, availability of user wallets, required software libraries, and optimized AI models.
+
+\section{Discussion}
+
+HOMIE brings together capabilities that are commonly separated across existing DeFi and blockchain-AI systems. The conversational layer reduces the interaction barrier for users, while real-time blockchain monitoring supplies current ecosystem information. Personalized risk profiling allows the system to consider user-specific characteristics, and educational guidance addresses the knowledge barrier faced by beginners.
+
+The combination of behavioral adaptation and risk profiling is particularly important because the intended system does not treat the initial user profile as completely static. User interactions can provide additional information that may be incorporated into future recommendations.
+
+The architecture also separates analysis from execution. HOMIE can first explain a concept, evaluate an opportunity, and provide a recommendation before an action is executed. Condition-based automation then allows predefined operations to be performed when execution criteria are satisfied.
+
+The risk-analysis prototype's initial result is itself informative: an apparently promising baseline score obtained at a smaller sample size (area under the ROC curve of 0.667 at 83 wallets) did not hold up when re-evaluated at a larger sample size (127 wallets), converging instead toward a chance-level result. This is reported directly rather than treated as a negative outcome, because it is a concrete illustration of why small-sample evaluation of this class of model should be treated as provisional, and it motivates the sample-size and cross-validation requirements in Section~\ref{sec:limitations}. Beyond this core result, the remaining components of HOMIE do not yet have quantitative evidence demonstrating their effectiveness at the full-system level, and the present manuscript should be read accordingly: a system-design paper with an initial, honestly-reported empirical result for its core risk-analysis component, rather than a fully validated end-to-end system.
+
+\section{Limitations and Future Work}
+\label{sec:limitations}
+
+The current system has several limitations. First, the risk-analysis prototype's sample size (127 wallets, 31 realized rug-pull events) is below the threshold needed for a statistically reliable result, and its current evaluation uses a single random train/test split rather than cross-validation. Second, the rug-pull and sandwich-attack detection heuristics have not been validated against an independently labeled ground-truth dataset. Third, wallet discovery currently samples generically active wallets rather than wallets pre-selected for risk exposure, which likely understates the achievable positive rate. Fourth, sandwich-attack detection has been validated only on a small number of individually checked wallets and not yet run at the full collected sample size. Fifth, behavioral adaptation is described as a system capability, but the exact learning algorithm for updating the user profile is not yet formally defined, and personalized risk profiling beyond the base risk score is not yet implemented. Sixth, condition-based execution has not been implemented against either a devnet or mainnet environment.
+
+Future work should therefore focus on:
+\begin{itemize}
+    \item substantially increasing the wallet sample size, which is currently bottlenecked by public Solana RPC rate limits rather than by the discovery or detection methodology;
+    \item cross-validating the risk classifier once sample size supports it, rather than relying on a single random split;
+    \item validating the rug-pull and sandwich-attack heuristics against an independently labeled dataset;
+    \item running sandwich-attack detection across the full collected wallet sample rather than a spot-checked subset;
+    \item implementing a formal, reproducible dynamic risk-scoring algorithm for personalized risk profiling;
+    \item defining and implementing measurable behavioral-adaptation mechanisms;
+    \item implementing condition-based execution against a Solana devnet environment before considering mainnet execution;
+    \item evaluating recommendations against suitable baseline strategies;
+    \item evaluating recommendation latency and transaction-execution reliability;
+    \item improving explainability evaluation;
+    \item testing security against malicious prompts and transaction manipulation;
+    \item evaluating scalability for multiple concurrent users; and
+    \item conducting real-world validation of the complete agent.
+\end{itemize}
+
+\section{Conclusion}
+
+This paper presented HOMIE, a conversational risk-aware DeFi companion designed for the Solana ecosystem. The proposed architecture integrates conversational AI, real-time blockchain monitoring, personalized risk profiling, explainable recommendations, educational guidance, behavioral adaptation, and smart-contract interaction.
+
+The central objective is to reduce the complexity of DeFi interaction by combining natural-language assistance with current blockchain information and user-specific risk considerations. The system architecture establishes a complete flow from user interaction and blockchain monitoring to AI analysis, recommendation, explanation, and condition-based execution.
+
+The current work provides the architectural and methodological foundation for a deployable HOMIE prototype, together with a working, live-data-validated implementation of its risk-analysis core and an initial, honestly-reported empirical result. A complete research contribution will require scaling this evaluation to a statistically reliable sample size, together with formalization and experimental validation of the risk-profiling and behavioral-adaptation mechanisms, and quantitative comparisons against appropriate baseline systems.
+
+\begin{thebibliography}{00}
+
+\bibitem{ref1}
+S. Sachan and D. S. Fickett, ``DeFi TrustBoost: Blockchain and AI for Trustworthy Decentralized Financial Decisions,'' \emph{arXiv:2512.00142}, Nov. 2025.
+
+\bibitem{ref2}
+C. Shen, Z. Li, X. Li, and Z. Li, ``When Blockchain Meets Crawlers: Real-Time Market Analytics in Solana NFT Markets,'' \emph{arXiv:2506.02892}, Jun. 2025.
+
+\bibitem{ref3}
+A. M. R. Bendada, A. Amara Korba, M. A. Bouchiha, and Y. Ghamri-Doudane, ``BotDetect: A Decentralized Federated Learning Framework for Detecting Financial Bots on the EVM Blockchains,'' \emph{arXiv:2501.12112}, Jan. 2025.
+
+\bibitem{ref4}
+Z. Li, Z. Jiang, M. Fang, J. Chen, Z. Wu, J. Wu, L. Zhang, and Z. Zheng, ``SolPhishHunter: Towards Detecting and Understanding Phishing on Solana,'' \emph{arXiv:2505.04094}, May 2025.
+
+\bibitem{ref5}
+N. Sadman, A. Rahman, and K. D. Gupta, ``Promise of AI in DeFi, a Systematic Review,'' \emph{Digital (MDPI)}, vol. 2, pp. 88--103, 2022.
+
+\bibitem{ref6}
+J. Fior, L. Cagliero, and P. Garza, ``Leveraging Explainable AI to Support Cryptocurrency Investors,'' \emph{Future Internet}, vol. 14, no. 9, p. 251, Aug. 2022, doi: 10.3390/fi14090251.
+
+\bibitem{ref7}
+W. J. Yeo, W. van der Heever, R. Mao, E. Cambria, R. Satapathy, and G. Mengaldo, ``A Comprehensive Review on Financial Explainable AI,'' \emph{arXiv:2309.11960}, Sep. 2023.
+
+\bibitem{ref8}
+L. Li, ``Investigating Risk Assessment in Post-Pandemic Household Cryptocurrency Investments: An Explainable Machine Learning Approach,'' \emph{J. Asset Manag.}, vol. 24, pp. 255--267, Jan. 2023, doi: 10.1057/s41260-022-00302-z.
+
+\bibitem{ref9}
+R. Westh\"au{\ss}er, W. Minker, and S. Zepf, ``Enabling Personalized Long-term Interactions in LLM-based Agents through Persistent Memory and User Profiles,'' \emph{arXiv:2510.07925}, Oct. 2025.
+
+\bibitem{ref10}
+D. Yaremus, J. Li, A. Kalacheva, I. Vodolazov, and Y. Yanovich, ``Detecting Rug Pulls in Decentralized Exchanges: Machine Learning Evidence from the TON Blockchain,'' \emph{arXiv:2509.01168}, Sep. 2025.
+
+\bibitem{ref11}
+N. Gerzon, B. Weintraub, J. In, A. Mislove, and C. Nita-Rotaru, ``Quantifying the Threat of Sandwiching MEV on Jito: A Measurement of Solana's Leading Validator Client,'' in \emph{Proc. 2025 ACM Internet Measurement Conf. (IMC '25)}, Madison, WI, USA, Oct. 2025, doi: 10.1145/3730567.3764493.
+
+\bibitem{ref12}
+A. Alhaidari, B. Kalal, B. Palanisamy, and S. Sural, ``SolRPDS: A Dataset for Analyzing Rug Pulls in Solana Decentralized Finance,'' in \emph{Proc. 15th ACM Conf. Data and Application Security and Privacy (CODASPY '25)}, Pittsburgh, PA, USA, Jun. 2025, doi: 10.1145/3714393.3726487.
+
+\end{thebibliography}
+
+\balance
+
+\end{document}
+experimental setup 

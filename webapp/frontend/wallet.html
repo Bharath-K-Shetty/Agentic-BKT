@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HOMIE — Solana Risk Assistant</title>
+<style>
+  :root {
+    --bg: #0b0e14;
+    --panel: #131722;
+    --panel-2: #1a1f2e;
+    --border: #262d40;
+    --text: #e8ebf5;
+    --muted: #8b93a8;
+    --accent: #7c5cff;
+    --accent-2: #3ee6b0;
+    --danger: #ff5c7a;
+    --warn: #ffb454;
+    --ok: #3ee6b0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    padding: 18px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo {
+    width: 34px; height: 34px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 15px; color: #0b0e14;
+  }
+  header h1 { font-size: 17px; margin: 0; }
+  header p { margin: 0; color: var(--muted); font-size: 12.5px; }
+  .badge {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    min-height: 0;
+  }
+  .sidebar {
+    width: 260px;
+    border-right: 1px solid var(--border);
+    padding: 18px;
+    overflow-y: auto;
+  }
+  .sidebar h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 12px; }
+  .demo-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .demo-btn:hover { border-color: var(--accent); }
+  .demo-btn small { display: block; color: var(--muted); margin-top: 2px; }
+  .chat-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .msg { max-width: 640px; line-height: 1.5; font-size: 14px; }
+  .msg.user { align-self: flex-end; background: var(--accent); color: #0b0e14; padding: 10px 14px; border-radius: 14px 14px 2px 14px; }
+  .msg.bot { align-self: flex-start; background: var(--panel); border: 1px solid var(--border); padding: 12px 16px; border-radius: 14px 14px 14px 2px; }
+  .msg.bot.loading { color: var(--muted); font-style: italic; }
+
+  .card { margin-top: 10px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; }
+  .card-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .risk-pill { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: .04em; }
+  .risk-high { background: rgba(255,92,122,.15); color: var(--danger); }
+  .risk-medium { background: rgba(255,180,84,.15); color: var(--warn); }
+  .risk-low { background: rgba(62,230,176,.15); color: var(--ok); }
+  .score { font-size: 22px; font-weight: 700; }
+  .score-label { color: var(--muted); font-size: 12px; }
+  .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0; }
+  .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+  .stat .n { font-size: 16px; font-weight: 700; }
+  .stat .l { font-size: 10.5px; color: var(--muted); text-transform: uppercase; }
+  .reasons { margin: 10px 0 0; padding-left: 18px; font-size: 13px; color: var(--text); }
+  .reasons li { margin-bottom: 4px; }
+  .wallet-addr { font-family: ui-monospace, monospace; font-size: 11.5px; color: var(--muted); word-break: break-all; }
+
+  .composer {
+    border-top: 1px solid var(--border);
+    padding: 16px 24px;
+    display: flex;
+    gap: 10px;
+  }
+  .composer input {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    outline: none;
+  }
+  .composer input:focus { border-color: var(--accent); }
+  .composer button {
+    background: var(--accent);
+    color: #0b0e14;
+    border: none;
+    padding: 0 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .composer button:disabled { opacity: .5; cursor: default; }
+  .disclaimer { font-size: 11px; color: var(--muted); padding: 0 24px 10px; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">H</div>
+    <div>
+      <h1>HOMIE — Solana Risk Assistant</h1>
+      <p>Real on-chain analysis, not a simulation</p>
+    </div>
+    <div class="badge">research preview</div>
+  </header>
+  <main>
+    <div class="sidebar">
+      <h2>Try a real wallet</h2>
+      <div id="demo-list">Loading…</div>
+      <h2 style="margin-top:20px">What this checks</h2>
+      <p style="font-size:12.5px;color:var(--muted);line-height:1.5">
+        Real swap history, realized rug-pull losses, sandwich-attack
+        victimhood, and slippage vs. this wallet's own trading history —
+        computed live from Solana transaction data.
+      </p>
+    </div>
+    <div class="chat-col">
+      <div class="messages" id="messages">
+        <div class="msg bot">
+          Hi, I'm HOMIE. Paste any Solana wallet address, or click a wallet on the left,
+          and I'll analyze its real on-chain risk history.
+        </div>
+      </div>
+      <div class="disclaimer">
+        Risk score is derived from concretely-detected on-chain events (rug-pull dumps, sandwich attacks, slippage), not a black-box prediction.
+      </div>
+      <div class="composer">
+        <input id="input" type="text" placeholder="Paste a Solana wallet address…" />
+        <button id="send">Analyze</button>
+      </div>
+    </div>
+  </main>
+
+<script>
+const messagesEl = document.getElementById('messages');
+const inputEl = document.getElementById('input');
+const sendBtn = document.getElementById('send');
+const demoListEl = document.getElementById('demo-list');
+
+function addMsg(text, cls) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + cls;
+  div.textContent = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return div;
+}
+
+function renderCard(analysis) {
+  const f = analysis.features;
+  const s = analysis.summary;
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="card-row">
+      <div>
+        <div class="score">${analysis.risk_score}<span class="score-label">/100</span></div>
+      </div>
+      <span class="risk-pill risk-${analysis.risk_level}">${analysis.risk_level} risk</span>
+    </div>
+    <div class="wallet-addr">${analysis.wallet}</div>
+    <div class="stat-grid">
+      <div class="stat"><div class="n">${Math.round(f.tx_count)}</div><div class="l">Transactions</div></div>
+      <div class="stat"><div class="n">${Math.round(f.swap_count)}</div><div class="l">Swaps</div></div>
+      <div class="stat"><div class="n">${s.n_rugpull_realized_dump}</div><div class="l">Rug-pull dumps</div></div>
+    </div>
+    <ul class="reasons">${analysis.explanations.map(e => `<li>${e}</li>`).join('')}</ul>
+  `;
+  return card;
+}
+
+async function analyzeWallet(wallet) {
+  const loading = addMsg('Analyzing ' + wallet + '…', 'bot loading');
+  try {
+    const res = await fetch('/api/analyze', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({wallet})
+    });
+    const data = await res.json();
+    loading.remove();
+    if (!res.ok) {
+      addMsg(data.detail || 'Something went wrong.', 'bot');
+      return;
+    }
+    const bot = document.createElement('div');
+    bot.className = 'msg bot';
+    bot.textContent = 'Here\'s what I found:';
+    bot.appendChild(renderCard(data));
+    messagesEl.appendChild(bot);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  } catch (e) {
+    loading.remove();
+    addMsg('Could not reach the analysis backend.', 'bot');
+  }
+}
+
+async function sendChat() {
+  const text = inputEl.value.trim();
+  if (!text) return;
+  addMsg(text, 'user');
+  inputEl.value = '';
+  const walletLike = /\b[1-9A-HJ-NP-Za-km-z]{32,44}\b/.test(text);
+  if (walletLike) {
+    await analyzeWallet(text.match(/\b[1-9A-HJ-NP-Za-km-z]{32,44}\b/)[0]);
+    return;
+  }
+  const loading = addMsg('…', 'bot loading');
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({message: text})
+    });
+    const data = await res.json();
+    loading.remove();
+    addMsg(data.reply, 'bot');
+  } catch (e) {
+    loading.remove();
+    addMsg('Could not reach the chat backend.', 'bot');
+  }
+}
+
+sendBtn.addEventListener('click', sendChat);
+inputEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendChat(); });
+
+async function loadDemoWallets() {
+  try {
+    const res = await fetch('/api/demo-wallets');
+    const wallets = await res.json();
+    demoListEl.innerHTML = '';
+    wallets.forEach(w => {
+      const btn = document.createElement('button');
+      btn.className = 'demo-btn';
+      btn.innerHTML = `${w.label}<small>${w.address.slice(0,8)}… · ${w.risk_level} risk</small>`;
+      btn.addEventListener('click', () => analyzeWallet(w.address));
+      demoListEl.appendChild(btn);
+    });
+  } catch (e) {
+    demoListEl.textContent = 'Backend not reachable.';
+  }
+}
+loadDemoWallets();
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+{
+  "date": "2026-10-08",
+  "scope": "Read-only GitHub metadata/tree search; file paths are search leads, not verified capabilities. No upstream code executed.",
+  "sources": [
+    {
+      "repository": "asymmetric-research/crucible",
+      "branch": "main",
+      "source_tree_sha": "d8d9d963c7f3a3c2d14426e182b4d365399cbd7c",
+      "truncated": false,
+      "candidate_paths": [
+        "crates/crucible-fuzz-runtime/src/mutators/bench_tests.rs",
+        "crates/crucible-fuzz-runtime/src/mutators/crossover.rs",
+        "crates/crucible-fuzz-runtime/src/mutators/mod.rs",
+        "crates/crucible-fuzz-runtime/src/mutators/params.rs",
+        "crates/crucible-fuzz-runtime/src/mutators/primitives.rs",
+        "crates/crucible-fuzz-runtime/src/mutators/sequence.rs",
+        "crates/crucible-fuzz-runtime/src/mutators/trim.rs",
+        "crates/crucible-fuzzer/tests/account_mutations_e2e.rs",
+        "crates/crucible-macro-utils/src/max_len_constraint.rs",
+        "crates/crucible-macro-utils/src/range_constraint.rs",
+        "crates/crucible-test-context/src/account_mutation.rs",
+        "docs/constraint-check-engine.md",
+        "examples/account-mutations-examples/Anchor.toml",
+        "examples/account-mutations-examples/Cargo.lock",
+        "examples/account-mutations-examples/Cargo.toml",
+        "examples/account-mutations-examples/fuzz/account-mutations-examples/.gitignore",
+        "examples/account-mutations-examples/fuzz/account-mutations-examples/Cargo.toml",
+        "examples/account-mutations-examples/fuzz/account-mutations-examples/idls/account_mutations_examples.json",
+        "examples/account-mutations-examples/fuzz/account-mutations-examples/rust-toolchain.toml",
+        "examples/account-mutations-examples/fuzz/account-mutations-examples/src/main.rs",
+        "examples/account-mutations-examples/programs/account-mutations-examples/Cargo.toml",
+        "examples/account-mutations-examples/programs/account-mutations-examples/src/lib.rs"
+      ]
+    },
+    {
+      "repository": "Ackee-Blockchain/trident",
+      "branch": "master",
+      "source_tree_sha": "053656638bfcbbd7951799f3a6b81f85cf55fac0",
+      "truncated": false,
+      "candidate_paths": []
+    },
+    {
+      "repository": "orca-so/whirlpools",
+      "branch": "main",
+      "source_tree_sha": "f2a3d13fa04eb15cf5b5a309ef9b226fd5d34e36",
+      "truncated": false,
+      "candidate_paths": [
+        "legacy-sdk/whirlpool/tests/integration/token-extensions/non-confidential-transfer+transfer-fee.test.ts",
+        "legacy-sdk/whirlpool/tests/integration/token-extensions/transfer-fee.test.ts",
+        "legacy-sdk/whirlpool/tests/utils/v2/transfer-fee.ts"
+      ]
+    },
+    {
+      "repository": "solana-program/token-2022",
+      "branch": "main",
+      "source_tree_sha": "d9ffb9787187b6bc29adda1a6b389b9931377e03",
+      "truncated": false,
+      "candidate_paths": [
+        "clients/rust-legacy/src/zk_proofs/confidential_transfer_fee.rs",
+        "clients/rust-legacy/tests/confidential_transfer_fee.rs",
+        "clients/rust-legacy/tests/transfer_fee.rs",
+        "interface/src/extension/confidential_transfer_fee/instruction.rs",
+        "interface/src/extension/confidential_transfer_fee/mod.rs",
+        "interface/src/extension/transfer_fee/instruction.rs",
+        "interface/src/extension/transfer_fee/mod.rs",
+        "program/src/extension/confidential_transfer_fee/instruction.rs",
+        "program/src/extension/confidential_transfer_fee/mod.rs",
+        "program/src/extension/confidential_transfer_fee/processor.rs",
+        "program/src/extension/transfer_fee/instruction.rs",
+        "program/src/extension/transfer_fee/mod.rs",
+        "program/src/extension/transfer_fee/processor.rs"
+      ]
+    },
+    {
+      "repository": "caliperforge/cf-invariants",
+      "branch": "main",
+      "source_tree_sha": "895fc9be6b76973870dbe77bbf16e028d63a3fd9",
+      "truncated": false,
+      "candidate_paths": []
+    }
+  ],
+  "read_files": [
+    {
+      "repository": "asymmetric-research/crucible",
+      "path": "docs/constraint-check-engine.md",
+      "url": "https://raw.githubusercontent.com/asymmetric-research/crucible/main/docs/constraint-check-engine.md",
+      "sha256": "b9511d1fcdec980223a2810ee729b3791a01a1a65b1a1a8428e2df79f31a1f58",
+      "bytes": 11012,
+      "local_cache": "/tmp/homie_gap_review/asymmetric-research__crucible__constraint-check-engine.md"
+    },
+    {
+      "repository": "asymmetric-research/crucible",
+      "path": "crates/crucible-fuzz-runtime/src/mutators/sequence.rs",
+      "url": "https://raw.githubusercontent.com/asymmetric-research/crucible/main/crates/crucible-fuzz-runtime/src/mutators/sequence.rs",
+      "sha256": "b00dec4145348ad915e6a9b77a931e1db19678eb17bd86e4e5bb65197daa18bb",
+      "bytes": 6104,
+      "local_cache": "/tmp/homie_gap_review/asymmetric-research__crucible__sequence.rs"
+    },
+    {
+      "repository": "orca-so/whirlpools",
+      "path": "legacy-sdk/whirlpool/tests/integration/token-extensions/transfer-fee.test.ts",
+      "url": "https://raw.githubusercontent.com/orca-so/whirlpools/main/legacy-sdk/whirlpool/tests/integration/token-extensions/transfer-fee.test.ts",
+      "sha256": "ae0271ead28f26337ac3deefdcdcaf8d866407c1eeb1c39a417b2637a019e5ba",
+      "bytes": 477976,
+      "local_cache": "/tmp/homie_gap_review/orca-so__whirlpools__transfer-fee.test.ts"
+    },
+    {
+      "repository": "solana-program/token-2022",
+      "path": "clients/rust-legacy/tests/transfer_fee.rs",
+      "url": "https://raw.githubusercontent.com/solana-program/token-2022/main/clients/rust-legacy/tests/transfer_fee.rs",
+      "sha256": "95a70a5d1ba7d6e40c97f47bd055b4869297090a95ec7cc893fa2d25c0f402da",
+      "bytes": 55463,
+      "local_cache": "/tmp/homie_gap_review/solana-program__token-2022__transfer_fee.rs"
+    }
+  ]
+}

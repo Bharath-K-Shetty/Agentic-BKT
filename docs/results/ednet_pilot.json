@@ -1,0 +1,494 @@
+{
+  "dataset": "EdNet-KT2",
+  "evaluation_date": "2026-10-08",
+  "protocol_document": "docs/EDNET_PILOT.md",
+  "preprocessing": {
+    "dataset": "EdNet-KT2",
+    "data_source": "public_real_learner_logs",
+    "publisher": "https://github.com/riiid/ednet",
+    "license": "CC BY-NC 4.0",
+    "seed": 42,
+    "n_skills": 7,
+    "skill_definition": "TOEIC part minus one; coarse task category, not atomic skill",
+    "skill_mapping": {
+      "0": "TOEIC part 1",
+      "1": "TOEIC part 2",
+      "2": "TOEIC part 3",
+      "3": "TOEIC part 4",
+      "4": "TOEIC part 5",
+      "5": "TOEIC part 6",
+      "6": "TOEIC part 7"
+    },
+    "selection": "SHA256(seed:learner_id) ascending; first eligible learners; earliest responses truncated",
+    "bundle_policy": "One final answer per submitted bundle, selected by SHA256(seed:question_id); other answers excluded",
+    "ordering": "Submission order; timestamp is ordinal; original shifted timestamp retained as source_timestamp_ms",
+    "behavior": {
+      "revision_count": "Changed choices for selected question before bundle submission; identical repeats excluded",
+      "duration_ms": "Bundle enter-to-submit wall time; includes inactivity; not per-question active time"
+    },
+    "requested_learners": 1000,
+    "min_responses": 20,
+    "max_responses": 100,
+    "learners": 1000,
+    "responses": 65158,
+    "correct_rate": 0.6284569814911446,
+    "learners_scanned": 4067,
+    "archive_learner_files": 297444,
+    "scanned_file_counts": {
+      "submitted_bundles": 228656,
+      "other_answers_excluded": 28761,
+      "learners_below_minimum": 3067,
+      "unmatched_or_empty_submit": 12883,
+      "responses_truncated": 140575,
+      "ignored_response": 1272
+    },
+    "part_counts": {
+      "5": 36506,
+      "2": 14794,
+      "1": 8529,
+      "3": 1916,
+      "6": 1721,
+      "4": 1108,
+      "7": 584
+    },
+    "input_sha256": {
+      "kt2": "bb5dec5708b6af913d8b99997e1a74699fced4555288862a80925bab3b5abff5",
+      "contents": "aa910a0436d9dbac0ba232f55e27b37ad8d39da285fcf15f1c1eb5d064be98e7"
+    },
+    "output_sha256": "2410f4cbd344e454a835513b7950108e6b161c13407b94af495215c3b4c26d10",
+    "limitations": [
+      "English/TOEIC data; no DeFi learning-effect evidence",
+      "Pilot selects learners with >= minimum submissions",
+      "One question per bundle discards data",
+      "Seven task categories simplify the original multi-tag skill structure",
+      "No hint or inspection features are inferred or fabricated"
+    ]
+  },
+  "environment": {
+    "python": "3.14.6",
+    "platform": "macOS-26.5.2-arm64-arm-64bit-Mach-O",
+    "pandas": "3.0.5",
+    "numpy": "2.5.2",
+    "scikit_learn": "1.9.0",
+    "torch": "2.13.0",
+    "device": "cpu",
+    "command": "OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 .venv/bin/python -m src.eval.run_learning --input data/processed/ednet/pilot/interactions.csv --dataset-manifest data/processed/ednet/pilot/manifest.json --n-skills 7 --epochs 10 --output data/processed/ednet/benchmark"
+  },
+  "model_configuration": {
+    "epochs": 10,
+    "seed": 42,
+    "hidden_dim": 32,
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "device": "cpu",
+    "checkpoint_selection": "fixed epoch budget; no tuning"
+  },
+  "split_learner_counts": {
+    "train": 600,
+    "validation": 200,
+    "test": 200
+  },
+  "validation_metrics": {
+    "prior": {
+      "roc_auc": 0.5648754597695166,
+      "accuracy": 0.628357089272318,
+      "log_loss": 0.6526924597473742,
+      "brier_score": 0.23021647674326504,
+      "n_predictions": 13330
+    },
+    "history": {
+      "roc_auc": 0.5912007108184216,
+      "accuracy": 0.6165791447861966,
+      "log_loss": 0.6648119651644941,
+      "brier_score": 0.23436600898254198,
+      "n_predictions": 13330
+    },
+    "bkt": {
+      "roc_auc": 0.6033201249007585,
+      "accuracy": 0.6250562640660166,
+      "log_loss": 0.6609780479748851,
+      "brier_score": 0.23290284009603043,
+      "n_predictions": 13330
+    },
+    "logistic": {
+      "roc_auc": 0.6110488340873572,
+      "accuracy": 0.6367591897974494,
+      "log_loss": 0.6422393764614365,
+      "brier_score": 0.22531728511153892,
+      "n_predictions": 13330
+    },
+    "dkt": {
+      "roc_auc": 0.6132846013312928,
+      "accuracy": 0.6324831207801951,
+      "log_loss": 0.6431253498262869,
+      "brier_score": 0.22555251678883134,
+      "n_predictions": 13330
+    }
+  },
+  "test_metrics": {
+    "prior": {
+      "roc_auc": 0.5772352328136305,
+      "accuracy": 0.6423763306199123,
+      "log_loss": 0.6426149665846921,
+      "brier_score": 0.2254376192687265,
+      "n_predictions": 12776
+    },
+    "history": {
+      "roc_auc": 0.5851227391230036,
+      "accuracy": 0.6210081402629931,
+      "log_loss": 0.6591052149119178,
+      "brier_score": 0.23189177060195967,
+      "n_predictions": 12776
+    },
+    "bkt": {
+      "roc_auc": 0.5881860402253648,
+      "accuracy": 0.6292266750156543,
+      "log_loss": 0.6602094067519293,
+      "brier_score": 0.23239198774649217,
+      "n_predictions": 12776
+    },
+    "logistic": {
+      "roc_auc": 0.6069707507774527,
+      "accuracy": 0.6458985597996243,
+      "log_loss": 0.6362348033152002,
+      "brier_score": 0.2225618289056463,
+      "n_predictions": 12776
+    },
+    "dkt": {
+      "roc_auc": 0.6070357279522365,
+      "accuracy": 0.6455072010018785,
+      "log_loss": 0.6361739868361529,
+      "brier_score": 0.22249692974195193,
+      "n_predictions": 12776
+    }
+  },
+  "test_auc_95pct_learner_bootstrap": {
+    "prior": {
+      "interval": [
+        0.5669819970739072,
+        0.5896842823663494
+      ],
+      "valid_resamples": 200,
+      "warning": "Small learner counts can yield unstable intervals."
+    },
+    "history": {
+      "interval": [
+        0.5718742998841821,
+        0.5994417746583965
+      ],
+      "valid_resamples": 200,
+      "warning": "Small learner counts can yield unstable intervals."
+    },
+    "bkt": {
+      "interval": [
+        0.5773161176129934,
+        0.6005313865137135
+      ],
+      "valid_resamples": 200,
+      "warning": "Small learner counts can yield unstable intervals."
+    },
+    "logistic": {
+      "interval": [
+        0.5918465284202216,
+        0.6181226992729112
+      ],
+      "valid_resamples": 200,
+      "warning": "Small learner counts can yield unstable intervals."
+    },
+    "dkt": {
+      "interval": [
+        0.5946157008075503,
+        0.6205886263463039
+      ],
+      "valid_resamples": 200,
+      "warning": "Small learner counts can yield unstable intervals."
+    }
+  },
+  "test_auc_difference_dkt_minus_bkt": {
+    "paired_95pct_interval": [
+      0.011972558680224819,
+      0.025987913708677774
+    ],
+    "valid_resamples": 200
+  },
+  "test_auc_difference_dkt_minus_logistic": {
+    "point_difference": 6.497717478382015e-05,
+    "paired_95pct_interval": [
+      -0.0046482206413396175,
+      0.00408233760097287
+    ],
+    "valid_resamples": 200,
+    "seed": 42
+  },
+  "test_metrics_by_toeic_part": {
+    "1": {
+      "prior": {
+        "roc_auc": 0.5,
+        "accuracy": 0.7429653679653679,
+        "log_loss": 0.570413063562318,
+        "brier_score": 0.19115560698508888,
+        "n_predictions": 1848
+      },
+      "history": {
+        "roc_auc": 0.5556369072718212,
+        "accuracy": 0.7283549783549783,
+        "log_loss": 0.58495580378942,
+        "brier_score": 0.1953238883741968,
+        "n_predictions": 1848
+      },
+      "bkt": {
+        "roc_auc": 0.5631463947560087,
+        "accuracy": 0.7418831168831169,
+        "log_loss": 0.5660956291146411,
+        "brier_score": 0.18931397907919398,
+        "n_predictions": 1848
+      },
+      "logistic": {
+        "roc_auc": 0.5707049488250853,
+        "accuracy": 0.7429653679653679,
+        "log_loss": 0.5630175208464235,
+        "brier_score": 0.1880872646038713,
+        "n_predictions": 1848
+      },
+      "dkt": {
+        "roc_auc": 0.565276191206348,
+        "accuracy": 0.7429653679653679,
+        "log_loss": 0.5662875126399669,
+        "brier_score": 0.1895280479295483,
+        "n_predictions": 1848
+      }
+    },
+    "2": {
+      "prior": {
+        "roc_auc": 0.5,
+        "accuracy": 0.7066352307174133,
+        "log_loss": 0.6083808079958909,
+        "brier_score": 0.20870893395699303,
+        "n_predictions": 2969
+      },
+      "history": {
+        "roc_auc": 0.5512433797865552,
+        "accuracy": 0.6769956214213539,
+        "log_loss": 0.6264369159100723,
+        "brier_score": 0.2157018079267292,
+        "n_predictions": 2969
+      },
+      "bkt": {
+        "roc_auc": 0.5660721653885007,
+        "accuracy": 0.6820478275513641,
+        "log_loss": 0.6120894677131065,
+        "brier_score": 0.2104498308771006,
+        "n_predictions": 2969
+      },
+      "logistic": {
+        "roc_auc": 0.5685350106547267,
+        "accuracy": 0.7083192994274167,
+        "log_loss": 0.5998088842263173,
+        "brier_score": 0.20504190667065453,
+        "n_predictions": 2969
+      },
+      "dkt": {
+        "roc_auc": 0.5708459973360447,
+        "accuracy": 0.7066352307174133,
+        "log_loss": 0.599577054406303,
+        "brier_score": 0.2049860198446362,
+        "n_predictions": 2969
+      }
+    },
+    "3": {
+      "prior": {
+        "roc_auc": 0.5,
+        "accuracy": 0.6973094170403588,
+        "log_loss": 0.6138675653145741,
+        "brier_score": 0.21137462945119131,
+        "n_predictions": 446
+      },
+      "history": {
+        "roc_auc": 0.5752292485411458,
+        "accuracy": 0.6502242152466368,
+        "log_loss": 0.6284193949520179,
+        "brier_score": 0.21674469338091973,
+        "n_predictions": 446
+      },
+      "bkt": {
+        "roc_auc": 0.534464689770156,
+        "accuracy": 0.6883408071748879,
+        "log_loss": 0.627236070684007,
+        "brier_score": 0.21683002542050026,
+        "n_predictions": 446
+      },
+      "logistic": {
+        "roc_auc": 0.6011789924973204,
+        "accuracy": 0.6973094170403588,
+        "log_loss": 0.6015404605788371,
+        "brier_score": 0.2065162540555897,
+        "n_predictions": 446
+      },
+      "dkt": {
+        "roc_auc": 0.5849708229129451,
+        "accuracy": 0.6973094170403588,
+        "log_loss": 0.6069937313440436,
+        "brier_score": 0.20873500621544505,
+        "n_predictions": 446
+      }
+    },
+    "4": {
+      "prior": {
+        "roc_auc": 0.5,
+        "accuracy": 0.7202072538860104,
+        "log_loss": 0.5947318727720088,
+        "brier_score": 0.20233605557841247,
+        "n_predictions": 193
+      },
+      "history": {
+        "roc_auc": 0.5047295496935785,
+        "accuracy": 0.6839378238341969,
+        "log_loss": 0.6311025090633708,
+        "brier_score": 0.21763409779149068,
+        "n_predictions": 193
+      },
+      "bkt": {
+        "roc_auc": 0.5873301358912869,
+        "accuracy": 0.7098445595854922,
+        "log_loss": 0.5856861437528365,
+        "brier_score": 0.19879468641473685,
+        "n_predictions": 193
+      },
+      "logistic": {
+        "roc_auc": 0.4985345057287504,
+        "accuracy": 0.7202072538860104,
+        "log_loss": 0.5964817338913302,
+        "brier_score": 0.203011145246686,
+        "n_predictions": 193
+      },
+      "dkt": {
+        "roc_auc": 0.5865973887556621,
+        "accuracy": 0.7202072538860104,
+        "log_loss": 0.5825162087948906,
+        "brier_score": 0.19740624660441836,
+        "n_predictions": 193
+      }
+    },
+    "5": {
+      "prior": {
+        "roc_auc": 0.5,
+        "accuracy": 0.5797268152408339,
+        "log_loss": 0.6804239307103077,
+        "brier_score": 0.24366507248364375,
+        "n_predictions": 6955
+      },
+      "history": {
+        "roc_auc": 0.5470268386605412,
+        "accuracy": 0.5641984184040258,
+        "log_loss": 0.695470702566566,
+        "brier_score": 0.24994194069073825,
+        "n_predictions": 6955
+      },
+      "bkt": {
+        "roc_auc": 0.5672129379605646,
+        "accuracy": 0.5692307692307692,
+        "log_loss": 0.7118846284778231,
+        "brier_score": 0.2559848995338674,
+        "n_predictions": 6955
+      },
+      "logistic": {
+        "roc_auc": 0.5623703495538939,
+        "accuracy": 0.5856218547807333,
+        "log_loss": 0.6750607234394962,
+        "brier_score": 0.24105705037115038,
+        "n_predictions": 6955
+      },
+      "dkt": {
+        "roc_auc": 0.5710011407202863,
+        "accuracy": 0.5854780733285406,
+        "log_loss": 0.6736689988365675,
+        "brier_score": 0.24036813652157368,
+        "n_predictions": 6955
+      }
+    },
+    "6": {
+      "prior": {
+        "roc_auc": 0.5,
+        "accuracy": 0.7242647058823529,
+        "log_loss": 0.6074246261493351,
+        "brier_score": 0.2079575244123994,
+        "n_predictions": 272
+      },
+      "history": {
+        "roc_auc": 0.5282571912013537,
+        "accuracy": 0.6580882352941176,
+        "log_loss": 0.6245564024499494,
+        "brier_score": 0.21617751034176463,
+        "n_predictions": 272
+      },
+      "bkt": {
+        "roc_auc": 0.5590186125211506,
+        "accuracy": 0.6727941176470589,
+        "log_loss": 0.6023125558265017,
+        "brier_score": 0.20687847565114487,
+        "n_predictions": 272
+      },
+      "logistic": {
+        "roc_auc": 0.5369881556683587,
+        "accuracy": 0.7205882352941176,
+        "log_loss": 0.6012434188454681,
+        "brier_score": 0.20530022312862836,
+        "n_predictions": 272
+      },
+      "dkt": {
+        "roc_auc": 0.5233502538071065,
+        "accuracy": 0.7242647058823529,
+        "log_loss": 0.6036161024140336,
+        "brier_score": 0.20666067099656743,
+        "n_predictions": 272
+      }
+    },
+    "7": {
+      "prior": {
+        "roc_auc": 0.5,
+        "accuracy": 0.6129032258064516,
+        "log_loss": 0.6828680720963055,
+        "brier_score": 0.24408245080336838,
+        "n_predictions": 93
+      },
+      "history": {
+        "roc_auc": 0.4298245614035087,
+        "accuracy": 0.5698924731182796,
+        "log_loss": 0.7621804812916588,
+        "brier_score": 0.27369949808569444,
+        "n_predictions": 93
+      },
+      "bkt": {
+        "roc_auc": 0.5635964912280701,
+        "accuracy": 0.6129032258064516,
+        "log_loss": 0.6841474075392036,
+        "brier_score": 0.24347061060188224,
+        "n_predictions": 93
+      },
+      "logistic": {
+        "roc_auc": 0.42958089668615984,
+        "accuracy": 0.6129032258064516,
+        "log_loss": 0.701648708129242,
+        "brier_score": 0.2517676757168632,
+        "n_predictions": 93
+      },
+      "dkt": {
+        "roc_auc": 0.4332358674463937,
+        "accuracy": 0.6129032258064516,
+        "log_loss": 0.735687727805542,
+        "brier_score": 0.26453912371284855,
+        "n_predictions": 93
+      }
+    }
+  },
+  "interpretation": "DKT and historical logistic regression perform similarly; modest advantage over fitted BKT on this selected coarse-category pilot. No novel method, telemetry audit, or learning-effect claim established.",
+  "limitations": [
+    "English/TOEIC data; no DeFi learning-effect evidence",
+    "Pilot selects learners with >= minimum submissions",
+    "One question per bundle discards data",
+    "Seven task categories simplify the original multi-tag skill structure",
+    "No hint or inspection features are inferred or fabricated",
+    "One training seed and one pilot sample; no training-seed uncertainty",
+    "No behavioral model or recommendation stability evaluation in this experiment"
+  ]
+}

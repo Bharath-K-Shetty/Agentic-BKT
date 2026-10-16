@@ -1,0 +1,39 @@
+{
+  "status": "Unchanged model/history/metric settings for a reserved later-week confirmation; specified after source checks and payer-only pilot output, before the pilot primary comparison",
+  "train_date": "2025-11-08",
+  "validation_date": "2025-11-09",
+  "test_date": "2025-11-10",
+  "warmup_hours": 6,
+  "outcome_delay_seconds": 3600,
+  "prior_strength": 20,
+  "budget": 0.05,
+  "models": [
+    "payer_history",
+    "readonly_history",
+    "template_history",
+    "structural_hgb",
+    "payer_structural_hgb",
+    "payer_readonly_hgb",
+    "context_hgb"
+  ],
+  "hgb": {
+    "max_iter": 150,
+    "max_leaf_nodes": 15,
+    "min_samples_leaf": 40,
+    "l2_regularization": 5,
+    "early_stopping": false
+  },
+  "seeds": [
+    42,
+    73,
+    101
+  ],
+  "primary": "Context versus payer-plus-structural-plus-readonly/template HGB on cold fee payers: AP improvement with 500 paired one-hour block bootstrap draws. Global and cold FPR/recall are secondary and must be disclosed.",
+  "confirmation": "Reserve 2025-11-08 through 2025-11-10 for a separate, unchanged run if pilot succeeds. Do not tune on either test day.",
+  "sample": "Row group zero of lexicographically first Parquet shard per date, selected without status. This is not the full chain, and signature-order/sampling bias must be audited.",
+  "cleaning": "Identical signature/selected-payload duplicates counted once; any conflicting duplicate or timestamp/partition mismatch aborts. Rule added after input audit found 15 repeated rows, before any models fit.",
+  "features": "Declared account identities/roles and counts, plus labeled participation from blocks at least one hour earlier. No current logs, status, error, actual compute use, balances, fee paid, inclusion slot/index or timestamp as model input.",
+  "task": "Retrospective execution-risk screening conditional on eventual block inclusion. Declared account lists presumed resolvable before execution; actual submission times and unlanded attempts absent, so not a live pre-submission performance claim.",
+  "cold_payer": "First declared signer has never occurred as first signer in sampled history whose outcome is available. Does not establish a new operator.",
+  "novelty_hypothesis": "Role-separated non-payer participation history may transfer execution-risk signal to unseen fee payers. Historical-risk aggregation is established; a new algorithm is not claimed. Need empirical success and differentiation from adjacent research."
+}

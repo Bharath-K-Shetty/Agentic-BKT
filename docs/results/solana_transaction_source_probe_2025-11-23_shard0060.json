@@ -1,0 +1,212 @@
+{
+  "source": "https://huggingface.co/datasets/solarchive/solarchive/resolve/6588cad2832e62be03972ac80d69c6af11d631c8/txs/2025-11-23/000000000060.parquet",
+  "shard_index": 60,
+  "index_expected_sha256": "da0f2f12494853c0a9af06f40304e3627579f70c1ad90578b84cc3a7a5735bf8",
+  "full_file_hash_verified": false,
+  "rows": 266594,
+  "row_groups": 3,
+  "schema": "block_slot: int64\nblock_hash: string\nblock_timestamp: timestamp[us]\nrecent_block_hash: string\nsignature: string\nindex: int64\nfee: decimal128(38, 9)\nstatus: string\nerr: string\ncompute_units_consumed: decimal128(38, 9)\naccounts: list<element: struct<pubkey: string, signer: bool, writable: bool>>\n  child 0, element: struct<pubkey: string, signer: bool, writable: bool>\n      child 0, pubkey: string\n      child 1, signer: bool\n      child 2, writable: bool\nlog_messages: list<element: string>\n  child 0, element: string\nbalance_changes: list<element: struct<account: string, before: decimal128(38, 9), after: decimal128(38, 9)>>\n  child 0, element: struct<account: string, before: decimal128(38, 9), after: decimal128(38, 9)>\n      child 0, account: string\n      child 1, before: decimal128(38, 9)\n      child 2, after: decimal128(38, 9)\npre_token_balances: list<element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: in (... 5 chars omitted)\n  child 0, element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: int64>\n      child 0, account_index: int64\n      child 1, mint: string\n      child 2, owner: string\n      child 3, amount: double\n      child 4, decimals: int64\npost_token_balances: list<element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: in (... 5 chars omitted)\n  child 0, element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: int64>\n      child 0, account_index: int64\n      child 1, mint: string\n      child 2, owner: string\n      child 3, amount: double\n      child 4, decimals: int64",
+  "first_group_n": 132474,
+  "preview": [
+    {
+      "block_slot": 382024902,
+      "block_timestamp": "2025-11-23 17:10:35",
+      "status": "Fail",
+      "accounts": [
+        {
+          "pubkey": "9c8qFNmxNLWta7YrzoYSuK7rimVCiknxWzzTJ84SXtk8",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "pubkey": "3HSYXeGc3LjEPCuzoNDjQN37F1ebsSiR4CqXVqQCdekZ",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "4DoNfFBfF7UokCC2FQzriy7yHK6DY6NVdYpuekQ5pRgg",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "4QMx5M8UiYo1v7v3BmxTWjNnuShVrEfiTQqNadQk2Anw",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "8g4Z9d6PqGkgH31tMW6FwxGhwYJrXpxZHQrkikpLJKrG",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "FFDkoQBYprF1zXGmwC5cdz1nZdTpnbe2c6BvUdNpZhco",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "7aDTsspkQNGKmrexAN7FLx9oxU3iPczSSvHNggyuqYkR",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "PhoeNiXZ8ByJGLkxNfZRnkUfjvmuYqLR89jjFHGqdXY",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "signer": false,
+          "writable": false
+        }
+      ],
+      "signature": "35B92cgvR8rC3k2cxizfvoSx48ueMdeYSnr6vMHNocXksDCZbov7f2oW8ddKtq5CgLSaaGx8a1jh5xfBtMDckcrS"
+    },
+    {
+      "block_slot": 381870113,
+      "block_timestamp": "2025-11-23 00:11:58",
+      "status": "Fail",
+      "accounts": [
+        {
+          "pubkey": "2SvvSFgzM9zEE1Y1vNXorfurtB2eRH3QHpMkpcVTXfrc",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "pubkey": "HxTk98CmBcxmtkrBWqRszYxrnDpqAsbitQBc2QjVBG3j",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "6snB9detWMx44Qx5nUAM11vB52paNaxyKLrs42wnfhiq",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "9d4demH7MHFAdmyzMChFpHz4UURs3RTMF2Sr71AZo16j",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "ComputeBudget111111111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "T1TANpTeScyeqVzzgNViGDNrkQ6qHz9KrSBS4aNXvGT",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "jitodontfronttitana111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "D8cy77BBepLMngZx6ZukaTff5hCt1HrWyKk3Hnd9oitf",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "FksffEqnBRixYGR791Qw2MgdU7zNCpHVFYBL4Fa4qVuH",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "C3FzbX9n1YD2dow2dCmEv5uNyyf22Gb3TLAEqGBhw5fY",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "3RWFAQBRkNGq7CMGcTLK3kXDgFTe9jgMeFYqk8nHwcWh",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "3nnVbsCfN1mwUk2XSLCnjzY3bDDTdzpnKjvRmd8nESS2",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "EW9diL91VgHY5i9qYScz53W3PihQPSnPoMtAKCo1Bs7J",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "FLckHLGMJy5gEoXWwcE68Nprde1D4araK4TGLw4pQq2n",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "5pVN5XZB8cYBjNLFrsBCPWkCQBan5K5Mq2dWGzwPgGJV",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "9t4P5wMwfFkyn92Z7hf463qYKEZf8ERVZsGBEPNp8uJx",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "So11111111111111111111111111111111111111112",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "SysvarC1ock11111111111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "Sysvar1nstructions1111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "9H6tua7jkLhdm3w8BvgpTn5LZNU7g4ZynDmCiNN3q6Rp",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "D5YqVMoSxnqeZAKAUUE1Dm3bmjtdxQ5DCF356ozqN9cM",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "TessVdML9pBGgG9yGks7o4HewRaXVAMuoVj4x83GLQH",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "8ekCy2jHHUbW2yeNGFWYJT9Hm9FW7SvZcZK66dSZCDiF",
+          "signer": false,
+          "writable": false
+        }
+      ],
+      "signature": "358aDQqvXtdLn4pEhTmui3Tenmp6yQBT5gALFKHNcZhGddiGfnCd3c8CU9yGNomheQNQsXUPPwupf4xmXJRdGXzB"
+    }
+  ],
+  "ranges_sha256": {
+    "510128693:510194229": "599f395de8b99acf187696897c17ac53c166f8070970abedc91a236ac29d9480",
+    "4:621935": "6806ea767236fac8788f6438de40252a941d541de39f526f387624bcb6f96f39",
+    "6798952:7669163": "db725c0c37b3097bb2b251f8c46c92e4aab56aa7e6358e5203e8a73e92bec138",
+    "26240612:26257961": "f9a03b210762c03f10f6efb0ef781a66e2b212162d4de98b8b8d5421bffab04c",
+    "27018929:94884503": "3d382a588fe520e622800d002a9afeb94dcd3a98a46599e2fc5e21c0a949a149",
+    "94884503:95599840": "6fde63d7f0d84e5885f17355cc7b3024e7533e709c8ad3de531e939e5d6aeb9d",
+    "13757373:25711577": "db59f331675d55d9e1aa0c282e6747d6ff759f5bc4a545544c82f6815eccecce"
+  }
+}

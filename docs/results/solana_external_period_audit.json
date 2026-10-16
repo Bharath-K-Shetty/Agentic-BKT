@@ -1,0 +1,93 @@
+{
+  "repository": "Slinky21/Pumpfun_Memecoin_Corpus",
+  "revision": "13bec2bf3089d56d50c35e602616d1b993bb37f5",
+  "sources": [
+    {
+      "file": "migrations.parquet",
+      "url": "https://huggingface.co/datasets/Slinky21/Pumpfun_Memecoin_Corpus/resolve/13bec2bf3089d56d50c35e602616d1b993bb37f5/migrations.parquet",
+      "revision": "13bec2bf3089d56d50c35e602616d1b993bb37f5",
+      "bytes": 480591,
+      "sha256": "ef5d5141fd94acbcd121bed50e39e525cf7777d25338fc9852a67fd8a085105d"
+    },
+    {
+      "file": "postgard_outcomes.parquet",
+      "url": "https://huggingface.co/datasets/Slinky21/Pumpfun_Memecoin_Corpus/resolve/13bec2bf3089d56d50c35e602616d1b993bb37f5/postgard_outcomes.parquet",
+      "revision": "13bec2bf3089d56d50c35e602616d1b993bb37f5",
+      "bytes": 984653,
+      "sha256": "00a9980cb97630e9ea89574742f0e134d448e5566c5d7bda461f59bb02de022b"
+    },
+    {
+      "file": "postgard_snapshots.parquet",
+      "url": "https://huggingface.co/datasets/Slinky21/Pumpfun_Memecoin_Corpus/resolve/13bec2bf3089d56d50c35e602616d1b993bb37f5/postgard_snapshots.parquet",
+      "revision": "13bec2bf3089d56d50c35e602616d1b993bb37f5",
+      "bytes": 89336038,
+      "sha256": "34a63b8333a41b3cc84d05461febe725cf37842fa0e21d6ea00472dcdcfa1e72"
+    },
+    {
+      "file": "trades-00000.parquet",
+      "url": "https://huggingface.co/datasets/Slinky21/Pumpfun_Memecoin_Corpus/resolve/13bec2bf3089d56d50c35e602616d1b993bb37f5/trades/trades-00000.parquet",
+      "revision": "13bec2bf3089d56d50c35e602616d1b993bb37f5",
+      "bytes": 309225003,
+      "sha256": "646f56bba13514a7aa2cdbaf5ac37499175d4e0a6d5bee07f7f7f96c7e481154"
+    }
+  ],
+  "pyarrow": "25.0.1",
+  "observations": {
+    "migrations": 5701,
+    "outcomes": 5669,
+    "snapshot_rows": 1392133,
+    "snapshot_mints": 5701,
+    "valid_native_prices_in_first_20_minutes": 105584,
+    "tokens_with_valid_early_prices": 5701,
+    "first_price_seconds_quantiles": {
+      "0.0": 0.33,
+      "0.25": 12.28,
+      "0.5": 21.34,
+      "0.75": 29.46,
+      "1.0": 110.12
+    },
+    "first_price_at_or_before_5s": 525,
+    "first_price_at_or_before_30s": 4389,
+    "early_start_and_late_end_observed": 1786,
+    "early_and_late_with_nonsentinel_pool": 1345,
+    "within_token_snapshot_gap_quantiles": {
+      "0.5": 62.68999999999994,
+      "0.9": 73.59999999999991,
+      "0.99": 80.02999999999997,
+      "1.0": 247.67999999999995
+    },
+    "synthetic_or_backfilled_pool_records": 1449,
+    "native_price_anchor_in_outcome_table": false,
+    "explicit_20minute_minimum_in_outcomes": false,
+    "snapshot_to_migration_elapsed_abs_error_median": 0.002499999999940883,
+    "snapshot_to_migration_elapsed_abs_error_above_5s": 0,
+    "snapshot_period_start": "2026-06-09 14:08:52.504717+01:00",
+    "snapshot_period_end": "2026-07-14 16:27:46.443891+01:00"
+  },
+  "decision": "Inspected external assets not accepted as exact validation of the MELT transaction-minimum collapse endpoint",
+  "reasons": [
+    "Periodic snapshots do not observe every transaction; negative labels can miss short collapses.",
+    "The migration-price native-unit anchor is not directly supplied in the outcome table.",
+    "Only some tokens have observations near both ends of the 20-minute window.",
+    "Collection/sentinel/unit issues require further reconciliation before feature transfer."
+  ],
+  "not_done": [
+    "No external model accuracy reported.",
+    "No missing outcomes relabeled as safe.",
+    "No complete external trade corpus or prefix feature transfer evaluated."
+  ],
+  "licensing_note": "Pinned card metadata says MIT; prose says CC BY 4.0. No raw data redistributed.",
+  "single_trade_shard_probe": {
+    "rows": 1966080,
+    "tokens": 32857,
+    "source_counts": {
+      "pumpdev": 1966080
+    },
+    "missing_price_rows": 451451,
+    "mints_matching_migration_table": 3,
+    "post_migration_first_20minute_rows": 0,
+    "event_start": "2026-06-05 10:12:28.604950+01:00",
+    "event_end": "2026-06-11 00:59:59.808596+01:00",
+    "scope": "One shard only; no inference of zero post-migration trades across uninspected shards"
+  }
+}

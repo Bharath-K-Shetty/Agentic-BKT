@@ -1,0 +1,13 @@
+{
+  "status": "Post-result diagnostic; historical test outcomes have previously been inspected. No new confirmatory claim.",
+  "cohort": "fresh",
+  "population": "All cold_payer rows in the existing held-out December 5 sample, not handpicked examples",
+  "models": ["payer_readonly_hgb", "context_hgb"],
+  "threshold": "Use existing exported validation-only isotonic calibrator and threshold, unchanged",
+  "primary": "Report failure warnings, missed failures and warnings on successful transactions at the deployed thresholds",
+  "sensitivity": "Hypothetical equal fee F per failed attempt and opportunity cost C per blocked success; report TP-(C/F)*FP for C/F in [0,1,5,10]. These are dimensionless scenarios, not measured fees saved.",
+  "comparison": "Context model minus payer/read-only baseline under the same fixed recipe; paired one-hour cluster bootstrap, seed 1729, 1000 draws",
+  "preflight": "Unavailable in source: incremental benefit beyond preflight cannot be identified. Zero incremental benefit remains consistent with these data.",
+  "no_tuning": "Do not change existing deployed thresholds, models, calibration, population or cost ratios based on this result",
+  "cost_threshold_followup": "Exploratory fixed decision rule: for each predeclared positive ratio r in [1,5,10], warn when calibrated p >= r/(1+r), the expected-cost threshold under equal failure fee F and blocked-success cost C=rF. Report all ratios, including abstention. These assumptions are unverified; do not select a winning ratio from test outcomes."
+}

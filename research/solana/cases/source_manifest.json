@@ -1,0 +1,79 @@
+{
+  "retrieved_at": "2026-10-08T10:23:37.983466+00:00",
+  "scope": "Source provenance only; no upstream program execution or independent adjudication.",
+  "licensing": "Upstream code cached locally only; review upstream licenses before redistribution.",
+  "files": [
+    {
+      "case_id": "anchor-return-data",
+      "repository": "otter-sec/anchor",
+      "revision": "6801a5742e941dbf6f5f9b4ad5db65db28869ba3",
+      "path": "lang/syn/src/codegen/program/cpi.rs",
+      "url": "https://raw.githubusercontent.com/otter-sec/anchor/6801a5742e941dbf6f5f9b4ad5db65db28869ba3/lang/syn/src/codegen/program/cpi.rs",
+      "sha256": "6e16454b39c6ba70b595406f3a96e429a3d4ddfceb92b5a8139a29f2365b87f7",
+      "bytes": 5922
+    },
+    {
+      "case_id": "anchor-return-data",
+      "repository": "otter-sec/anchor",
+      "revision": "6801a5742e941dbf6f5f9b4ad5db65db28869ba3",
+      "path": "lang/attribute/program/src/declare_program/mods/cpi.rs",
+      "url": "https://raw.githubusercontent.com/otter-sec/anchor/6801a5742e941dbf6f5f9b4ad5db65db28869ba3/lang/attribute/program/src/declare_program/mods/cpi.rs",
+      "sha256": "b0720ac63a9c0cc58d6110f76f1c5e65e18c4582f6a8eeff9d2f0f94db06224e",
+      "bytes": 3916
+    },
+    {
+      "case_id": "anchor-return-data",
+      "repository": "otter-sec/anchor",
+      "revision": "f6341296b9d909093b2fdda5072087d5157fa4e4",
+      "path": "lang/syn/src/codegen/program/cpi.rs",
+      "url": "https://raw.githubusercontent.com/otter-sec/anchor/f6341296b9d909093b2fdda5072087d5157fa4e4/lang/syn/src/codegen/program/cpi.rs",
+      "sha256": "80bff2ed1bf59608b2dbbc1e4a32b93474c16ef7db49a26ad55dd5b17e53192e",
+      "bytes": 6695
+    },
+    {
+      "case_id": "anchor-return-data",
+      "repository": "otter-sec/anchor",
+      "revision": "f6341296b9d909093b2fdda5072087d5157fa4e4",
+      "path": "lang/attribute/program/src/declare_program/mods/cpi.rs",
+      "url": "https://raw.githubusercontent.com/otter-sec/anchor/f6341296b9d909093b2fdda5072087d5157fa4e4/lang/attribute/program/src/declare_program/mods/cpi.rs",
+      "sha256": "b1f83035c943a766e273c18e4e88705cba4c805caf3922a6b98df66bec473918",
+      "bytes": 4641
+    },
+    {
+      "case_id": "anchor-return-data",
+      "repository": "otter-sec/anchor",
+      "revision": "f6341296b9d909093b2fdda5072087d5157fa4e4",
+      "path": "tests/cpi-returns/tests/cpi-return.ts",
+      "url": "https://raw.githubusercontent.com/otter-sec/anchor/f6341296b9d909093b2fdda5072087d5157fa4e4/tests/cpi-returns/tests/cpi-return.ts",
+      "sha256": "f0554967671d3851c09f7cab09aaf0933551349cc972571183e54b35dc18d43d",
+      "bytes": 10669
+    },
+    {
+      "case_id": "crucible-owner-mutation",
+      "repository": "asymmetric-research/crucible",
+      "revision": "d8d9d963c7f3a3c2d14426e182b4d365399cbd7c",
+      "path": "docs/constraint-check-engine.md",
+      "url": "https://raw.githubusercontent.com/asymmetric-research/crucible/d8d9d963c7f3a3c2d14426e182b4d365399cbd7c/docs/constraint-check-engine.md",
+      "sha256": "b9511d1fcdec980223a2810ee729b3791a01a1a65b1a1a8428e2df79f31a1f58",
+      "bytes": 11012
+    },
+    {
+      "case_id": "sealevel-owner-check",
+      "repository": "coral-xyz/sealevel-attacks",
+      "revision": "24555d044802db4022112a94d6d70e74291a4b6d",
+      "path": "programs/2-owner-checks/insecure/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/coral-xyz/sealevel-attacks/24555d044802db4022112a94d6d70e74291a4b6d/programs/2-owner-checks/insecure/src/lib.rs",
+      "sha256": "405253e49c878450266c8e89e864ff81801de1a7f2d12f51aa89d35f2f0d473d",
+      "bytes": 789
+    },
+    {
+      "case_id": "sealevel-owner-check",
+      "repository": "coral-xyz/sealevel-attacks",
+      "revision": "24555d044802db4022112a94d6d70e74291a4b6d",
+      "path": "programs/2-owner-checks/secure/src/lib.rs",
+      "url": "https://raw.githubusercontent.com/coral-xyz/sealevel-attacks/24555d044802db4022112a94d6d70e74291a4b6d/programs/2-owner-checks/secure/src/lib.rs",
+      "sha256": "25264887bff7cd4fa3ef1ba25c369d494a9f68d355889112d02e9314ddbf3e08",
+      "bytes": 911
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "23 targeted pytest cases passed",
+    "31 HTTP replay cases checked",
+    "DOM smoke: load, table, reveal and next reset",
+    "JavaScript syntax checked",
+    "Fresh evaluation displayed; all five validation calibration/threshold split boundaries checked"
+  ],
+  "visual_review": "Unavailable: browser tools have no accessible window; no claim of visual QA",
+  "files": {
+    "webapp/frontend/replay.html": "3cca10b30205e7921f9529c68604cb58fe144341d6d238e4ff84ea9276316377",
+    "webapp/backend/replay.py": "b07ab37a6f5250d49c79e75be30eb4097851a0370ecceae4763f93cafc11b83b",
+    "research/solana/ml/build_replay_demo.py": "b2d37c1e653ddbf7a731f06c692b265c696c8839f930586d4e315aefc64d18ef",
+    "research/solana/ml/transaction_fresh_protocol.json": "f8d0106784a6e14372e140c8b67306b2eb230a78bcc34812792000e5b904b3ac"
+  }
+}

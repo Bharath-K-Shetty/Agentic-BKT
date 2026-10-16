@@ -1,0 +1,2 @@
+# Additional dependency for auditing external Parquet releases.
+pyarrow==25.0.1

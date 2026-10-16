@@ -1,0 +1,1040 @@
+{
+  "created_at": "2026-10-09T07:02:37.907653+00:00",
+  "protocol": {
+    "status": "Locally specified after pilot and confirmation results; not public preregistration",
+    "sample_seed": 42,
+    "excluded_prior_hash_ranks": 18000,
+    "sample_tokens": 10000,
+    "horizon": 300,
+    "target": "Released min_ratio < 0.3 in the 20 minutes after migration",
+    "scopes": [
+      "pilot_27",
+      "enriched"
+    ],
+    "seeds": [
+      42,
+      73,
+      101
+    ],
+    "tuning": "Select configuration by validation average precision using seed 42, then average predictions from three seeds. Threshold from validation only at empirical 5% FPR budget",
+    "random_forest_grid": [
+      {
+        "n_estimators": 250,
+        "min_samples_leaf": 5,
+        "max_features": 0.8
+      },
+      {
+        "n_estimators": 250,
+        "min_samples_leaf": 10,
+        "max_features": 0.8
+      },
+      {
+        "n_estimators": 250,
+        "min_samples_leaf": 20,
+        "max_features": 0.8
+      }
+    ],
+    "hist_gradient_boosting_grid": [
+      {
+        "max_iter": 150,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 2,
+        "early_stopping": false
+      },
+      {
+        "max_iter": 150,
+        "max_leaf_nodes": 31,
+        "l2_regularization": 2,
+        "early_stopping": false
+      }
+    ],
+    "folds": [
+      {
+        "name": "January_late",
+        "train_end": "2025-01-01",
+        "validation_end": "2025-01-15",
+        "test_end": "2025-02-01"
+      },
+      {
+        "name": "February_early",
+        "train_end": "2025-01-15",
+        "validation_end": "2025-02-01",
+        "test_end": "2025-02-15"
+      },
+      {
+        "name": "February_late",
+        "train_end": "2025-02-01",
+        "validation_end": "2025-02-15",
+        "test_end": "2025-03-01"
+      }
+    ],
+    "primary": "RF enriched minus pilot-27, test-count-weighted within-period AP delta; 500 paired day-bootstrap repetitions",
+    "scope": "Eventual migrants in the same MELT historical period. A new token cohort, not an independent market period. Enriched summaries are ordinary feature engineering, not a novel method or exact reproduction of MELT's 119-feature baseline"
+  },
+  "protocol_sha256": "851d68000f49111d85247f75d99de95b109f30c8488a2291befec79de2bba8d4",
+  "sampled": 10000,
+  "eligible": 5481,
+  "skipped": {
+    "already_migrated": 4335,
+    "no positive holdings": 184
+  },
+  "prior_token_overlap": 0,
+  "feature_count": {
+    "pilot_27": 27,
+    "enriched": 120
+  },
+  "feature_names": [
+    "active_seconds_fraction",
+    "buy_count",
+    "component_count_per_wallet",
+    "component_holding_hhi",
+    "fee_max",
+    "fee_mean",
+    "holding_hhi",
+    "largest_component_fraction",
+    "log_price_range",
+    "log_price_return",
+    "multiwallet_swap_fraction",
+    "multiwallet_volume_fraction",
+    "positive_holders",
+    "price_change_std",
+    "recent_swap_fraction",
+    "rich_abs_log_price_changes",
+    "rich_bin0_log_return",
+    "rich_bin0_sell_fraction",
+    "rich_bin0_sol_volume",
+    "rich_bin0_swap_count",
+    "rich_bin1_log_return",
+    "rich_bin1_sell_fraction",
+    "rich_bin1_sol_volume",
+    "rich_bin1_swap_count",
+    "rich_bin2_log_return",
+    "rich_bin2_sell_fraction",
+    "rich_bin2_sol_volume",
+    "rich_bin2_swap_count",
+    "rich_bin3_log_return",
+    "rich_bin3_sell_fraction",
+    "rich_bin3_sol_volume",
+    "rich_bin3_swap_count",
+    "rich_bin4_log_return",
+    "rich_bin4_sell_fraction",
+    "rich_bin4_sol_volume",
+    "rich_bin4_swap_count",
+    "rich_bin5_log_return",
+    "rich_bin5_sell_fraction",
+    "rich_bin5_sol_volume",
+    "rich_bin5_swap_count",
+    "rich_buy_sell_wallet_fraction",
+    "rich_component_gini",
+    "rich_fee_q25",
+    "rich_fee_q50",
+    "rich_fee_q75",
+    "rich_fee_q95",
+    "rich_fee_q99",
+    "rich_fee_std",
+    "rich_first_0s_count",
+    "rich_first_0s_holding_share",
+    "rich_first_0s_sold_to_bought",
+    "rich_first_10_buyers_with_ties_count",
+    "rich_first_10_buyers_with_ties_holding_share",
+    "rich_first_10_buyers_with_ties_sold_to_bought",
+    "rich_first_10s_count",
+    "rich_first_10s_holding_share",
+    "rich_first_10s_sold_to_bought",
+    "rich_first_1s_count",
+    "rich_first_1s_holding_share",
+    "rich_first_1s_sold_to_bought",
+    "rich_first_20_buyers_with_ties_count",
+    "rich_first_20_buyers_with_ties_holding_share",
+    "rich_first_20_buyers_with_ties_sold_to_bought",
+    "rich_first_30s_count",
+    "rich_first_30s_holding_share",
+    "rich_first_30s_sold_to_bought",
+    "rich_first_5_buyers_with_ties_count",
+    "rich_first_5_buyers_with_ties_holding_share",
+    "rich_first_5_buyers_with_ties_sold_to_bought",
+    "rich_first_5s_count",
+    "rich_first_5s_holding_share",
+    "rich_first_5s_sold_to_bought",
+    "rich_holding_entropy",
+    "rich_holding_gini",
+    "rich_holding_q25",
+    "rich_holding_q50",
+    "rich_holding_q75",
+    "rich_holding_q95",
+    "rich_holding_q99",
+    "rich_last_swap_age_fraction",
+    "rich_log_price_to_max",
+    "rich_log_price_to_min",
+    "rich_max_swaps_per_second",
+    "rich_mint_participant_share",
+    "rich_negative_balance_fraction",
+    "rich_prefix_max_drawdown",
+    "rich_repeat_buyer_fraction",
+    "rich_repeat_seller_fraction",
+    "rich_same_second_swap_fraction",
+    "rich_sol_volume_q25",
+    "rich_sol_volume_q50",
+    "rich_sol_volume_q75",
+    "rich_sol_volume_q95",
+    "rich_sol_volume_q99",
+    "rich_sol_volume_std",
+    "rich_top10_component_share",
+    "rich_top20_component_share",
+    "rich_top20_holding_share",
+    "rich_top3_component_share",
+    "rich_top3_holding_share",
+    "rich_top50_holding_share",
+    "rich_top5_component_share",
+    "rich_top5_holding_share",
+    "rich_total_sold_to_bought",
+    "rich_unique_buyers",
+    "rich_unique_sellers",
+    "rich_unique_swap_slots",
+    "rich_volume_top5_fraction",
+    "sell_count",
+    "sell_fraction",
+    "sol_volume",
+    "swap_count",
+    "top10_share",
+    "top1_share",
+    "top_component_holding_share",
+    "transfer_count",
+    "tx_count",
+    "unique_wallets",
+    "wallet_activity_hhi",
+    "zero_type_count"
+  ],
+  "results": [
+    {
+      "period": "January_late",
+      "counts": {
+        "train": {
+          "n": 1276,
+          "prevalence": 0.5438871473354232
+        },
+        "validation": {
+          "n": 1023,
+          "prevalence": 0.5865102639296188
+        },
+        "test": {
+          "n": 1693,
+          "prevalence": 0.674542232722977
+        }
+      },
+      "models": [
+        {
+          "model": "random_forest",
+          "scope": "pilot_27",
+          "parameters": {
+            "n_estimators": 250,
+            "min_samples_leaf": 20,
+            "max_features": 0.8
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 5,
+                "max_features": 0.8
+              },
+              "ap": 0.6889106756020034
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 10,
+                "max_features": 0.8
+              },
+              "ap": 0.6916297240118348
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 20,
+                "max_features": 0.8
+              },
+              "ap": 0.6988342812036947
+            }
+          ],
+          "threshold": 0.7678165848412916,
+          "validation": {
+            "auroc": 0.634822695035461,
+            "ap_positive": 0.7003265096453024,
+            "ap_negative": 0.5294350787373228,
+            "brier": 0.23060455975853938,
+            "recall": 0.12,
+            "fpr": 0.04964539007092199,
+            "precision": 0.7741935483870968,
+            "alert_fraction": 0.09090909090909091
+          },
+          "test": {
+            "auroc": 0.6018701866690399,
+            "ap_positive": 0.7489617468117811,
+            "ap_negative": 0.4117274525269048,
+            "brier": 0.2301057698664372,
+            "recall": 0.07355516637478109,
+            "fpr": 0.041742286751361164,
+            "precision": 0.7850467289719626,
+            "alert_fraction": 0.06320141760189013
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.601879721951173,
+            0.6007704507963549,
+            0.6012058953471002
+          ]
+        },
+        {
+          "model": "random_forest",
+          "scope": "enriched",
+          "parameters": {
+            "n_estimators": 250,
+            "min_samples_leaf": 20,
+            "max_features": 0.8
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 5,
+                "max_features": 0.8
+              },
+              "ap": 0.7042227131685928
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 10,
+                "max_features": 0.8
+              },
+              "ap": 0.7147364159377025
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 20,
+                "max_features": 0.8
+              },
+              "ap": 0.7162308887162776
+            }
+          ],
+          "threshold": 0.7466693016264885,
+          "validation": {
+            "auroc": 0.6430811662726557,
+            "ap_positive": 0.7165049748518377,
+            "ap_negative": 0.5372710403477512,
+            "brier": 0.22800773356453882,
+            "recall": 0.15166666666666667,
+            "fpr": 0.04964539007092199,
+            "precision": 0.8125,
+            "alert_fraction": 0.10948191593352884
+          },
+          "test": {
+            "auroc": 0.6112974022713041,
+            "ap_positive": 0.7603998571122481,
+            "ap_negative": 0.41905372146735775,
+            "brier": 0.22815572517821717,
+            "recall": 0.11558669001751314,
+            "fpr": 0.045372050816696916,
+            "precision": 0.8407643312101911,
+            "alert_fraction": 0.09273479031305375
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.6107729617539834,
+            0.6097733463436961,
+            0.6119998347217763
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "pilot_27",
+          "parameters": {
+            "max_iter": 150,
+            "max_leaf_nodes": 15,
+            "l2_regularization": 2,
+            "early_stopping": false
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 15,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.6720774511123286
+            },
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 31,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.658105244659522
+            }
+          ],
+          "threshold": 0.8889926999798373,
+          "validation": {
+            "auroc": 0.5956382978723405,
+            "ap_positive": 0.6720774511123286,
+            "ap_negative": 0.5002950196717308,
+            "brier": 0.2582546306849382,
+            "recall": 0.105,
+            "fpr": 0.04964539007092199,
+            "precision": 0.75,
+            "alert_fraction": 0.08211143695014662
+          },
+          "test": {
+            "auroc": 0.5974426373319011,
+            "ap_positive": 0.745728658913893,
+            "ap_negative": 0.4029687049120817,
+            "brier": 0.24629251004466307,
+            "recall": 0.10070052539404553,
+            "fpr": 0.04900181488203267,
+            "precision": 0.8098591549295775,
+            "alert_fraction": 0.08387477849970466
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.5974426373319011,
+            0.5974426373319011,
+            0.5974426373319011
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "enriched",
+          "parameters": {
+            "max_iter": 150,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 2,
+            "early_stopping": false
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 15,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.6823037547069859
+            },
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 31,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.6853163701383558
+            }
+          ],
+          "threshold": 0.924367241383876,
+          "validation": {
+            "auroc": 0.6102915681639086,
+            "ap_positive": 0.6853163701383558,
+            "ap_negative": 0.49176665406980963,
+            "brier": 0.26891287131620184,
+            "recall": 0.135,
+            "fpr": 0.04964539007092199,
+            "precision": 0.7941176470588235,
+            "alert_fraction": 0.09970674486803519
+          },
+          "test": {
+            "auroc": 0.5903166031510929,
+            "ap_positive": 0.7393533235897373,
+            "ap_negative": 0.39044106579012366,
+            "brier": 0.26313505525921616,
+            "recall": 0.10770577933450087,
+            "fpr": 0.05989110707803993,
+            "precision": 0.7884615384615384,
+            "alert_fraction": 0.09214412285883047
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.5903166031510929,
+            0.5903166031510929,
+            0.5903166031510929
+          ]
+        }
+      ]
+    },
+    {
+      "period": "February_early",
+      "counts": {
+        "train": {
+          "n": 2308,
+          "prevalence": 0.561525129982669
+        },
+        "validation": {
+          "n": 1686,
+          "prevalence": 0.67497034400949
+        },
+        "test": {
+          "n": 911,
+          "prevalence": 0.6498353457738749
+        }
+      },
+      "models": [
+        {
+          "model": "random_forest",
+          "scope": "pilot_27",
+          "parameters": {
+            "n_estimators": 250,
+            "min_samples_leaf": 20,
+            "max_features": 0.8
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 5,
+                "max_features": 0.8
+              },
+              "ap": 0.7556865902168349
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 10,
+                "max_features": 0.8
+              },
+              "ap": 0.7567126427369788
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 20,
+                "max_features": 0.8
+              },
+              "ap": 0.7594388030954637
+            }
+          ],
+          "threshold": 0.7652991086215377,
+          "validation": {
+            "auroc": 0.6143060562133593,
+            "ap_positive": 0.7597149750601854,
+            "ap_negative": 0.4157221576371492,
+            "brier": 0.2252474772890328,
+            "recall": 0.12478031634446397,
+            "fpr": 0.04927007299270073,
+            "precision": 0.8402366863905325,
+            "alert_fraction": 0.10023724792408066
+          },
+          "test": {
+            "auroc": 0.5742290095738373,
+            "ap_positive": 0.701844615467087,
+            "ap_negative": 0.4025146049301708,
+            "brier": 0.2383112767267991,
+            "recall": 0.09797297297297297,
+            "fpr": 0.07210031347962383,
+            "precision": 0.7160493827160493,
+            "alert_fraction": 0.0889132821075741
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.5758758366516987,
+            0.576426544098958,
+            0.571057146488181
+          ]
+        },
+        {
+          "model": "random_forest",
+          "scope": "enriched",
+          "parameters": {
+            "n_estimators": 250,
+            "min_samples_leaf": 5,
+            "max_features": 0.8
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 5,
+                "max_features": 0.8
+              },
+              "ap": 0.7796670663299132
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 10,
+                "max_features": 0.8
+              },
+              "ap": 0.7744218633763761
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 20,
+                "max_features": 0.8
+              },
+              "ap": 0.7716206630142388
+            }
+          ],
+          "threshold": 0.7563479681767608,
+          "validation": {
+            "auroc": 0.6278462663399741,
+            "ap_positive": 0.7796586494235758,
+            "ap_negative": 0.43377281273091794,
+            "brier": 0.22247786973593484,
+            "recall": 0.1546572934973638,
+            "fpr": 0.04927007299270073,
+            "precision": 0.8669950738916257,
+            "alert_fraction": 0.12040332147093713
+          },
+          "test": {
+            "auroc": 0.5686583919342539,
+            "ap_positive": 0.7105560367228371,
+            "ap_negative": 0.3928332222283778,
+            "brier": 0.24032754339352858,
+            "recall": 0.10304054054054054,
+            "fpr": 0.05642633228840126,
+            "precision": 0.7721518987341772,
+            "alert_fraction": 0.0867178924259056
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.5672021943573667,
+            0.572089722951792,
+            0.5640726933830382
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "pilot_27",
+          "parameters": {
+            "max_iter": 150,
+            "max_leaf_nodes": 15,
+            "l2_regularization": 2,
+            "early_stopping": false
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 15,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.7526199905555255
+            },
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 31,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.743953691546132
+            }
+          ],
+          "threshold": 0.8548186548717381,
+          "validation": {
+            "auroc": 0.6041990045283696,
+            "ap_positive": 0.7526199905555255,
+            "ap_negative": 0.40061698805815515,
+            "brier": 0.2356898801297428,
+            "recall": 0.08172231985940245,
+            "fpr": 0.04927007299270073,
+            "precision": 0.775,
+            "alert_fraction": 0.0711743772241993
+          },
+          "test": {
+            "auroc": 0.5326241209861899,
+            "ap_positive": 0.6807399442826153,
+            "ap_negative": 0.37631946735828703,
+            "brier": 0.2606320331639786,
+            "recall": 0.07939189189189189,
+            "fpr": 0.050156739811912224,
+            "precision": 0.746031746031746,
+            "alert_fraction": 0.06915477497255763
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.5326241209861899,
+            0.5326241209861899,
+            0.5326241209861899
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "enriched",
+          "parameters": {
+            "max_iter": 150,
+            "max_leaf_nodes": 31,
+            "l2_regularization": 2,
+            "early_stopping": false
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 15,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.7509380726062433
+            },
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 31,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.7589915229654316
+            }
+          ],
+          "threshold": 0.9207498472708222,
+          "validation": {
+            "auroc": 0.6134577886675304,
+            "ap_positive": 0.7589915229654316,
+            "ap_negative": 0.4059068635372449,
+            "brier": 0.2431948727245479,
+            "recall": 0.09578207381370826,
+            "fpr": 0.04927007299270073,
+            "precision": 0.8014705882352942,
+            "alert_fraction": 0.08066429418742586
+          },
+          "test": {
+            "auroc": 0.5319198508853681,
+            "ap_positive": 0.6787718894955734,
+            "ap_negative": 0.36662483031219106,
+            "brier": 0.278766400039412,
+            "recall": 0.07094594594594594,
+            "fpr": 0.05329153605015674,
+            "precision": 0.711864406779661,
+            "alert_fraction": 0.06476399560922064
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.5319198508853681,
+            0.5319198508853681,
+            0.5319198508853681
+          ]
+        }
+      ]
+    },
+    {
+      "period": "February_late",
+      "counts": {
+        "train": {
+          "n": 4003,
+          "prevalence": 0.6095428428678491
+        },
+        "validation": {
+          "n": 908,
+          "prevalence": 0.6508810572687225
+        },
+        "test": {
+          "n": 560,
+          "prevalence": 0.49464285714285716
+        }
+      },
+      "models": [
+        {
+          "model": "random_forest",
+          "scope": "pilot_27",
+          "parameters": {
+            "n_estimators": 250,
+            "min_samples_leaf": 5,
+            "max_features": 0.8
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 5,
+                "max_features": 0.8
+              },
+              "ap": 0.7144348101250579
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 10,
+                "max_features": 0.8
+              },
+              "ap": 0.7100760012078458
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 20,
+                "max_features": 0.8
+              },
+              "ap": 0.7116042320236624
+            }
+          ],
+          "threshold": 0.8287613874086012,
+          "validation": {
+            "auroc": 0.5816319450004537,
+            "ap_positive": 0.7137220986881605,
+            "ap_negative": 0.41105775437367353,
+            "brier": 0.2319818801968213,
+            "recall": 0.077834179357022,
+            "fpr": 0.0473186119873817,
+            "precision": 0.7540983606557377,
+            "alert_fraction": 0.0671806167400881
+          },
+          "test": {
+            "auroc": 0.5893533696470258,
+            "ap_positive": 0.5594931092290037,
+            "ap_negative": 0.5784729720634303,
+            "brier": 0.2580428539971936,
+            "recall": 0.05776173285198556,
+            "fpr": 0.05653710247349823,
+            "precision": 0.5,
+            "alert_fraction": 0.05714285714285714
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.5919812223341965,
+            0.5828092510619841,
+            0.5915985253409193
+          ]
+        },
+        {
+          "model": "random_forest",
+          "scope": "enriched",
+          "parameters": {
+            "n_estimators": 250,
+            "min_samples_leaf": 20,
+            "max_features": 0.8
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 5,
+                "max_features": 0.8
+              },
+              "ap": 0.7191758205893493
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 10,
+                "max_features": 0.8
+              },
+              "ap": 0.7192353797058026
+            },
+            {
+              "params": {
+                "n_estimators": 250,
+                "min_samples_leaf": 20,
+                "max_features": 0.8
+              },
+              "ap": 0.7207071257490156
+            }
+          ],
+          "threshold": 0.7996378219511592,
+          "validation": {
+            "auroc": 0.5824752998446733,
+            "ap_positive": 0.7208014921466452,
+            "ap_negative": 0.4125327703580257,
+            "brier": 0.22854290608124603,
+            "recall": 0.077834179357022,
+            "fpr": 0.0473186119873817,
+            "precision": 0.7540983606557377,
+            "alert_fraction": 0.0671806167400881
+          },
+          "test": {
+            "auroc": 0.6096490668571648,
+            "ap_positive": 0.5836169045661062,
+            "ap_negative": 0.592841753602374,
+            "brier": 0.25203232052781915,
+            "recall": 0.05054151624548736,
+            "fpr": 0.03180212014134275,
+            "precision": 0.6086956521739131,
+            "alert_fraction": 0.04107142857142857
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.6085137324437755,
+            0.6102486254799658,
+            0.6080927657511704
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "pilot_27",
+          "parameters": {
+            "max_iter": 150,
+            "max_leaf_nodes": 15,
+            "l2_regularization": 2,
+            "early_stopping": false
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 15,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.7079964858610238
+            },
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 31,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.7065437927238868
+            }
+          ],
+          "threshold": 0.888575956459238,
+          "validation": {
+            "auroc": 0.5790164774455957,
+            "ap_positive": 0.7079964858610238,
+            "ap_negative": 0.4128719889902613,
+            "brier": 0.23674377252609446,
+            "recall": 0.06429780033840947,
+            "fpr": 0.0473186119873817,
+            "precision": 0.7169811320754716,
+            "alert_fraction": 0.05837004405286344
+          },
+          "test": {
+            "auroc": 0.5777193810513962,
+            "ap_positive": 0.5669352640691686,
+            "ap_negative": 0.5638750016609463,
+            "brier": 0.2690706879730034,
+            "recall": 0.07581227436823104,
+            "fpr": 0.03180212014134275,
+            "precision": 0.7,
+            "alert_fraction": 0.05357142857142857
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.5777193810513962,
+            0.5777193810513962,
+            0.5777193810513962
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "enriched",
+          "parameters": {
+            "max_iter": 150,
+            "max_leaf_nodes": 15,
+            "l2_regularization": 2,
+            "early_stopping": false
+          },
+          "validation_grid_ap": [
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 15,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.7205060792337457
+            },
+            {
+              "params": {
+                "max_iter": 150,
+                "max_leaf_nodes": 31,
+                "l2_regularization": 2,
+                "early_stopping": false
+              },
+              "ap": 0.7203859828675181
+            }
+          ],
+          "threshold": 0.8610247264617122,
+          "validation": {
+            "auroc": 0.5849786759328945,
+            "ap_positive": 0.7205060792337457,
+            "ap_negative": 0.40906415113570926,
+            "brier": 0.23499394387464867,
+            "recall": 0.1116751269035533,
+            "fpr": 0.0473186119873817,
+            "precision": 0.8148148148148148,
+            "alert_fraction": 0.08920704845814978
+          },
+          "test": {
+            "auroc": 0.5872612927504433,
+            "ap_positive": 0.5796922895804422,
+            "ap_negative": 0.5737068203065987,
+            "brier": 0.27191884146295414,
+            "recall": 0.10108303249097472,
+            "fpr": 0.05653710247349823,
+            "precision": 0.6363636363636364,
+            "alert_fraction": 0.07857142857142857
+          },
+          "fit_warnings": [],
+          "seed_test_auroc": [
+            0.5872612927504433,
+            0.5872612927504433,
+            0.5872612927504433
+          ]
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "model": "random_forest",
+      "primary": true,
+      "ap": {
+        "weighted_delta": 0.012898277778589248,
+        "ci95": [
+          0.003918238173648518,
+          0.020486628043872895
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "auroc": {
+        "weighted_delta": 0.007032564406653216,
+        "ci95": [
+          -0.0038786334665110002,
+          0.01564514770950478
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "primary": false,
+      "ap": {
+        "weighted_delta": -0.001720103137951178,
+        "ci95": [
+          -0.01418283946518239,
+          0.009927204395432591
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "auroc": {
+        "weighted_delta": -0.0023269580842258395,
+        "ci95": [
+          -0.01776670535243629,
+          0.011443479044990107
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    }
+  ],
+  "limits": [
+    "Same historical MELT data; not independent-period validation.",
+    "Price-collapse proxy on eventual migrants, not verified fraud.",
+    "New ordinary features, not a novel algorithm or exact upstream replication.",
+    "No retrospective funder/Jito links or verified creator identity.",
+    "Validation used for configuration selection and threshold selection; test untouched.",
+    "Bootstrap conditional on fitted models; secondary comparisons exploratory."
+  ],
+  "source_hashes": {
+    "data/raw/melt/label.csv": "dcfcce188fb352466b76ab8345f79633766c93e96d29729282ab114133fcc09a",
+    "data/raw/melt/pre_migration_tx.zip": "4d62d079d63fba5510bbaee7a0cb641bf93d4b0697349cce1af2c9db67e201a5",
+    "data/processed/solana_ml/prefix_price_drop_6000_42.jsonl": "27d708419282d7916abb1c0bd3b633ad32c459b60ae0b10bcc5fd8e8a361fa67",
+    "data/processed/solana_ml/strong_cohort_10000.jsonl": "51ee45a07fc4f7b0bf384cc85e59bd7d20ce60244e43576a69e8f35199312e87",
+    "research/solana/ml/rich_features.py": "274ac594b83c5d36eeafcdf4951be3ba4ea8ea7bcb6b09d6edcade895e83fd9f",
+    "research/solana/ml/strong_baselines.py": "f7bcccfb047419ff0afd779705eded1f9533159c9aa1786cf8d2c7149261c0f1",
+    "research/solana/ml/robustness.py": "5f09315bd377f5bea344a99f6b6804be9b2545590a3b3e7ce91f081edd8deb00"
+  }
+}

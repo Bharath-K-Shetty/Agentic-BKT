@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-09",
+  "sources": [
+    {
+      "path": "data/raw/novelty_search/oracle_api.json",
+      "bytes": 6049,
+      "sha256": "f0dee8d005f9c5ded60f59c8c2a78056e2e65eb78bcd63a3549e5eeeaf6fd2f8"
+    },
+    {
+      "path": "data/raw/novelty_search/arb_api.json",
+      "bytes": 6054,
+      "sha256": "72d04468cf4ec046eaf6d7e103aa88526c1b3e9174fed3bf04b423b10e96d91d"
+    },
+    {
+      "path": "data/raw/novelty_search/oracle_latest.json",
+      "bytes": 8484,
+      "sha256": "4ec62df6c1c199054b044463f9310fd7f5e302bc7c2de8810abed3e7a7a00666"
+    },
+    {
+      "path": "data/raw/novelty_search/arb_latest.json",
+      "bytes": 8245,
+      "sha256": "091cdfe5ff8f5bc5f64089443d6e730ca496ad1af48abc58fbd30a8fb4fff5ff"
+    },
+    {
+      "path": "data/raw/novelty_search/archive_info.json",
+      "bytes": 2003495,
+      "sha256": "faa8151a29f5dfd63b3bb90d3bfd9b81328dfd9382880612ae0fe38a53a52aa1"
+    },
+    {
+      "path": "data/raw/novelty_search/failed_sample.json",
+      "bytes": 18506586,
+      "sha256": "140d44ce1ed246fde51a6d10813d810c9a21f110ae347d2f556986648904359d"
+    }
+  ],
+  "decisions": [
+    {
+      "candidate": "Generic delayed-label conformal/IPW",
+      "decision": "Existing prior art, primary intervention failed success criterion."
+    },
+    {
+      "candidate": "Generic trust-calibrated oracle ML",
+      "decision": "ACon2 2023 and TOAD-ML 2026 overlap; RED v1.1 corrections supersede original descriptive findings. Not pursued as a novel method."
+    },
+    {
+      "candidate": "Transaction account-role history for cold signers",
+      "decision": "Empirical novelty candidate supported: cold-signer declared-account execution-risk benchmark. Two original time windows pass; a third original cold-history gain is uncertain; identity control is mixed. A refined first-appearance endpoint was fixed before untouched November29\u2013December1 records: identity-controlled AP gain +0.031613, CI95 +0.016816 to +0.050119, 17904 first appearances. Reserved refined gate passes. No new-algorithm, globally-first or publication-ready claim."
+    }
+  ],
+  "experiments": [
+    "docs/results/solana_transaction_risk_pilot.json",
+    "docs/results/solana_transaction_risk_confirmation.json",
+    "docs/results/solana_transaction_risk_extension.json",
+    "docs/results/solana_transaction_risk_prospective.json",
+    "docs/results/solana_transaction_identity_pilot.json",
+    "docs/results/solana_transaction_identity_confirmation.json",
+    "docs/results/solana_transaction_identity_extension.json",
+    "docs/results/solana_transaction_identity_prospective.json",
+    "docs/results/solana_transaction_audit_pilot.json",
+    "docs/results/solana_transaction_audit_confirmation.json",
+    "docs/results/solana_transaction_audit_extension.json",
+    "docs/results/solana_transaction_audit_prospective.json"
+  ],
+  "research_claim": "Delayed-feedback execution-risk ranking for sampled first-appearance Solana signers using non-signer writable participation, after structure, signer, readonly/template history and learned identity control.",
+  "literature_limit": "Exact benchmark not located among reviewed primary sources; this does not establish absence from all prior literature.",
+  "next_publication_evidence": [
+    "Broader periods and denser samples",
+    "Independent source or arrival-time collection",
+    "Validation-tuned identity models on reserved data",
+    "Matched batching and feedback-delay sensitivity",
+    "Calibration and cold-specific alert thresholds"
+  ]
+}

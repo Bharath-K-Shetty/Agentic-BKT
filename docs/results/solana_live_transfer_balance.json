@@ -1,0 +1,29 @@
+{
+  "status": "needs_attention",
+  "headline": "Balance is too low for this transfer",
+  "action": "Add at least 0.4880041 SOL or reduce the amount, then check again. Confirm the selected network.",
+  "network": "devnet",
+  "transfer_sol": "1",
+  "balance_sol": "0.5120009",
+  "estimated_fee_sol": "0.000005",
+  "required_sol": "1.000005",
+  "shortfall_sol": "0.4880041",
+  "simulation": {
+    "performed": false,
+    "error": null,
+    "units_consumed": null,
+    "signature_verification": false
+  },
+  "slot": 511437827,
+  "checked_ms": 1007,
+  "broadcast": false,
+  "actual_fee_paid_sol": "0",
+  "measured_fee_savings_sol": null,
+  "measured_time_saved_seconds": null,
+  "limits": [
+    "Fee quote covers this plain transfer message; required balance may be affected by account minimums.",
+    "Simulation does not verify signatures and cannot guarantee later execution.",
+    "The historical ML model is not used for this live check.",
+    "No fee savings or retry-time savings have been measured. A failed submission may not incur the quoted fee."
+  ]
+}

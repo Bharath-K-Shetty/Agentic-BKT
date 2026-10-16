@@ -1,0 +1,2926 @@
+
+=== PDF PAGE 1 ===
+VISVESVARAYA TECHNOLOGICAL UNIVERSITY 
+Jnana Sangama, Belgavi - 590018 
+ 
+ 
+Project Report 
+on 
+“FedFairChain: A Federated Classifier-Chain 
+Approach for Multi-Label Chronic Disease Prediction” 
+Submitted in partial fulfillment of the requirements for the award of the degree of 
+BACHELOR OF ENGINEERING 
+in 
+ARTIFICIAL INTELLIGENCE AND MACHINE 
+LEARNING 
+by 
+RISHIK RODRIGUES 
+4MT23AI043 
+RONAK TALEKAR 
+4MT23AI044 
+SATHWIK H J 
+4MT24AI404 
+AYUSH R SHETTY 
+4MT23AI011 
+ 
+Under the Guidance of           
+  Dr. Sunil Kumar S,  
+Head of Department, 
+Department of AI & ML 
+ 
+DEPARTMENT OF ARTIFICIAL INTELLIGENCE AND MACHINE 
+LEARNING 
+MANGALORE INSTITUTE OF TECHNOLOGY & 
+ENGINEERING 
+(A unit of Rajalaxmi Education Trust ®, Mangalore) 
+Autonomous Institute Affiliated to V.T.U., Belagavi, Approved by AICTE, New Delhi 
+Accredited by NAAC with A+ Grade & ISO 9001:2015 Certified Institution 
+Badaga Mijar, Moodabidri-574225, Karnataka 
+ 
+2026-27 
+
+
+=== PDF PAGE 2 ===
+MANGALORE INSTITUTE OF TECHNOLOGY & ENGINEERING 
+(A unit of Rajalaxmi Education Trust ®, Mangalore) 
+Autonomous Institute Affiliated to V.T.U., Belagavi, Approved by AICTE, New Delhi 
+Accredited by NAAC with A+ Grade & ISO 9001:2015 Certified Institution 
+Badaga Mijar, Moodabidri-574225, Karnataka 
+ 
+DEPARTMENT OF ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING 
+ 
+ 
+ 
+CERTIFICATE 
+ 
+This is to certify that the project work entitled “FedFairChain: A Federated Classifier-Chain 
+Approach for Multi-Label Chronic Disease Prediction” is a bonafide work carried out by 
+RISHIK RODRIGUES(4MT23AI043), RONAK TALEKAR(4MT23AI044), SATHWIK H 
+J (4MT24AI404), and AYUSH R SHETTY (4MT23AI011) in partial fulfillment for the 
+award of the degree of Bachelor of Engineering in Artificial Intelligence and Machine Learning 
+of the Visvesvaraya Technological University, Belagavi, during the year 2026-27. It is certified 
+that all corrections and suggestions indicated for Internal Assessment have been incorporated in 
+the report deposited in the library. The project has been approved as it satisfies the academic 
+requirements in respect of project work prescribed for the Bachelor of Engineering degree. 
+ 
+ 
+ 
+ 
+ 
+Dr. Sunil Kumar S 
+Dr. Sunil Kumar S 
+Dr. Prashanth C M 
+Project Guide 
+Head of the Department 
+Principal 
+ 
+ 
+ 
+External Viva 
+ 
+Name of the Examiners 
+Signature with Date 
+ 
+1) 
+2) 
+
+
+=== PDF PAGE 3 ===
+ 
+ 
+ABSTRACT  
+  
+Healthcare records are often distributed across hospitals and clinics, while combining them in a 
+central repository can increase privacy, governance, and fairness risks. This project presents 
+FedFairChain, a privacy-conscious federated-learning framework for multi-label chronic-disease 
+prediction. The framework enables participating healthcare clients to train a shared model while 
+retaining raw patient records within their own authorized environments. Each client performs 
+local data preparation, handles missing values, encodes categorical variables, scales numerical 
+features, and trains a multi-label prediction model using its approved records. Only validated 
+model updates and necessary training metadata are sent to the coordinating component for 
+aggregation. 
+The proposed workflow combines federated model training with client-level performance 
+evaluation, fairness analysis, model-version management, and audit recording. The system 
+supports prediction of multiple chronic-disease outcomes for the same patient record, reflecting 
+the fact that chronic conditions may occur together. Performance is evaluated using suitable 
+multi-label measures such as Hamming loss, precision, recall, F1-score, and per-label results. 
+Fairness evaluation examines differences across participating clients or predefined groups instead 
+of relying only on one overall score. 
+FedFairChain is intended as an academic research prototype for privacy-conscious collaborative 
+learning and decision support. It does not transfer raw patient records, provide a confirmed 
+medical diagnosis, or claim formal privacy and fairness guarantees unless those properties are 
+separately implemented and measured. The final conclusions are limited to the selected dataset, 
+client configuration, model settings, and experimentally measured results. 
+Keywords: Federated learning, multi-label classification, chronic-disease prediction, fairness 
+evaluation, privacy-preserving machine learning, healthcare analytics, auditability. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 4 ===
+ 
+ 
+ACKNOWLEDGEMENT  
+  
+The satisfaction and the successful completion of this project would be incomplete without the 
+mention of the people who made it possible, whose constant guidance and encouragement 
+crowned our efforts with success.  
+  
+This project is made under the guidance of Dr. Sunil Kumar, Associate Professor and Head 
+, in the  Department of Artificial Intelligence and Machine Learning. We would like to express 
+our sincere gratitude to our guide for all the helping hands and guidance in this project.  
+  
+We would like to thank our project coordinator Dr. Raghvendra Sooda,  Professor, in the 
+Department of Artificial Intelligence and Machine Learning, for his cordial support,valuable 
+information and guidance, which helped us in completing this project through the various 
+stages.  
+  
+We would like to express appreciation to Dr. Sunil Kumar S, Associate Professor and Head, 
+Department of Artificial Intelligence and Machine Learning, for his support and guidance.  
+We would like to thank our Principal Dr. Prashanth C M, for encouraging us and giving us an 
+opportunity to accomplish the project.  
+  
+  
+We also thank our management who helped us directly or indirectly in the completion of this 
+project.  
+Our special thanks to faculty members and others for their constant help and support.  
+  
+Above all, we extend our sincere gratitude to our parents and friends for their constant 
+encouragement with moral support.  
+  
+      Ronak Talekar                      (4MT23AI044)  
+                      Rishik Rodrigues                  (4MT23AI043)  
+Sathwik H J                           (4MT24AI404)                   
+Ayush R Shetty                      (4MT23AI011)  
+  
+v  
+
+
+=== PDF PAGE 5 ===
+TABLE OF CONTENTS
+Contents
+Page No.
+TABLE OF CONTENTS
+. . . . . . iii
+LIST OF FIGURES
+. . . . . . v
+LIST OF TABLES
+. . . . . . vi
+1
+INTRODUCTION
+. . . . . . 1
+1.1
+Introduction
+. . . . . . 1
+1.2
+Problem Statement
+. . . . . . 2
+1.3
+Objectives
+. . . . . . 3
+1.4
+Scope
+. . . . . . 3
+1.5
+Organization of the Report
+. . . . . . 4
+2
+LITERATURE SURVEY
+. . . . . . 5
+2.1
+Multi-Label Chronic Disease Prediction
+. . . . . . 5
+2.2
+Federated Learning in Healthcare
+. . . . . . 7
+2.3
+Fairness-Aware Machine Learning
+. . . . . . 8
+2.4
+Auditability and Explainable AI
+. . . . . . 9
+2.5
+Research Gap
+. . . . . 10
+3
+SYSTEM REQUIREMENT SPECIFICATION
+. . . . . 11
+3.1
+Overall Description
+. . . . . 11
+3.2
+Hardware Requirements
+. . . . . 12
+3.3
+Software Requirements
+. . . . . 12
+3.4
+Functional Requirements
+. . . . . 13
+3.5
+Non-Functional Requirements
+. . . . . 14
+4
+GANTT CHART
+. . . . . 15
+5
+SYSTEM DESIGN
+. . . . . 16
+5.1
+Architectural Diagram
+. . . . . 16
+5.2
+Model Architecture Diagram
+. . . . . 17
+5.3
+Federated Client Training and Aggregation
+. . . . . 18
+5.4
+Class Diagram
+. . . . . 20
+5.5
+Use Case Diagram
+. . . . . 21
+iii
+
+
+=== PDF PAGE 6 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+5.6
+Sequence Diagram
+. . . . . 22
+5.7
+Activity Diagram
+. . . . . 23
+5.8
+Data Flow Diagram
+. . . . . 24
+5.9
+Federated Multi-Label Model
+. . . . . 25
+5.10
+Fairness Evaluation and Audit Layer
+. . . . . 26
+6
+METHODOLOGY AND IMPLEMENTATION
+. . . . . 27
+6.1
+Methodology
+. . . . . 27
+6.1.1
+Overall Workflow
+. . . . . 27
+6.1.2
+Dataset Description
+. . . . . 28
+6.1.3
+Data Preprocessing
+. . . . . 29
+6.1.4
+Feature List and Feature Dimensions
+. . . . . 30
+6.1.5
+Multi-Label Target Labels
+. . . . . 31
+6.1.6
+Classifier-Chain Methodology
+. . . . . 32
+6.1.7
+Local Client Training
+. . . . . 33
+6.1.8
+Federated Aggregation
+. . . . . 34
+6.1.9
+Fairness Evaluation
+. . . . . 35
+6.1.10
+Audit Recording
+. . . . . 36
+6.1.11
+Final Prediction Workflow
+. . . . . 37
+6.1.12
+Model Details
+. . . . . 38
+6.2
+Implementation Details
+. . . . . 39
+7
+TESTING
+. . . . . 44
+7.1
+Testing Levels
+. . . . . 44
+7.2
+Test Cases
+. . . . . 47
+7.3
+Expected and Actual Outputs
+. . . . . 48
+7.4
+Test Summary
+. . . . . 48
+8
+RESULTS AND DISCUSSION
+. . . . . 49
+8.1
+Experimental Setup
+. . . . . 49
+8.2
+Evaluation Metrics
+. . . . . 50
+8.3
+Overall Performance Results
+. . . . . 51
+8.4
+Per-Label Results
+. . . . . 52
+8.5
+Confusion Matrix
+. . . . . 53
+8.6
+Baseline Model Comparison
+. . . . . 54
+8.7
+Centralized and Federated Comparison
+. . . . . 55
+8.8
+Fairness Metrics and Fairness Gaps
+. . . . . 56
+8.9
+Federated Training-Round Results
+. . . . . 57
+8.10
+Result Graphs
+. . . . . 58
+8.11
+Discussion
+. . . . . 59
+Dept. of AI&ML, MITE, Moodbidri
+Page — iv
+
+
+=== PDF PAGE 7 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+8.12
+Limitations
+. . . . . 59
+9
+CONCLUSION AND FUTURE SCOPE
+. . . . . 60
+9.1
+Conclusion
+. . . . . 60
+9.2
+Future Scope
+. . . . . 61
+REFERENCES
+. . . . . 62
+Dept. of AI&ML, MITE, Moodbidri
+Page — v
+
+
+=== PDF PAGE 8 ===
+LIST OF FIGURES
+Figure No.
+TITLE
+Page No.
+5.1
+System Architecture of the Federated Classifier-Chain Model
+17
+5.2
+Model Architecture and Classifier-Chain Prediction Workflow
+18
+5.3
+Federated Client Training and Global Model Aggregation
+18
+5.4
+Class Diagram of the Federated Classifier-Chain System
+20
+5.5
+Use Case Diagram of the Federated Classifier-Chain System
+21
+5.6
+Sequence Diagram of a Federated Training Round
+22
+5.7
+Activity Diagram of the Training and Evaluation Pipeline
+23
+5.8
+Data Flow Diagram of the Federated Classifier-Chain System
+24
+5.9
+Federated Multi-Label Prediction Model
+25
+5.10
+Evaluation and Audit Layer
+26
+vi
+
+
+=== PDF PAGE 9 ===
+LIST OF TABLES
+Table No.
+TITLE
+Page No.
+2.1
+Existing Research Relevant to the Proposed Model
+8
+4.1
+Gantt Chart of Planning and Scheduling
+15
+6.1
+Feature List and Feature Dimensions
+29
+6.2
+Multi-Label Target Details
+29
+6.3
+Model Details
+32
+6.4
+Software and Hardware Requirements
+33
+6.5
+Patient Attributes Used by the Model
+36
+7.1
+FedFairChain Test Cases
+47
+7.2
+Expected and Actual Output Summary
+48
+7.3
+Test Summary
+48
+8.1
+Recorded Feature Dimensions
+51
+8.2
+Per-Label Precision Results
+52
+8.3
+Centralized and Federated Accuracy Comparison
+55
+8.4
+Centralized and Federated Precision Comparison
+55
+8.5
+Recorded Fairness Observations
+56
+vii
+
+
+=== PDF PAGE 10 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CHAPTER – 1 
+INTRODUCTION 
+ 
+
+
+=== PDF PAGE 11 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+CHAPTER 1
+INTRODUCTION
+1.1 Introduction
+Healthcare institutions collect valuable patient information, including medical history, diag-
+noses, laboratory reports, treatment records, and demographic attributes. This information
+can be useful for identifying disease patterns and supporting early intervention. However,
+chronic diseases such as diabetes, hypertension, cardiovascular disease, and other related
+conditions may occur together in the same patient. Therefore, the prediction task should
+not always be treated as a single-label classification problem.
+Multi-label classification enables a model to predict more than one disease label for a patient
+record. This approach is useful in healthcare because it represents the possibility of multiple
+coexisting conditions. A multi-label prediction model can help healthcare professionals
+identify related disease risks and understand complex patterns within patient data. However,
+reliable prediction requires sufficiently diverse data from different healthcare institutions.
+Traditional machine-learning systems usually require all healthcare records from different
+organizations to be collected in one central location. Although this can increase the amount
+of available data, it also creates privacy, security, and governance concerns. Raw patient
+records may contain confidential information that hospitals cannot share freely because of
+institutional policies, patient confidentiality, and data-protection requirements.
+Federated learning provides a privacy-conscious solution for collaborative model training.
+In a federated-learning system, each participating healthcare institution keeps its data lo-
+cally. The institution trains a model using its own authorized records and shares only per-
+mitted model updates with a coordinating server. The server aggregates the updates to
+improve a shared global model without directly accessing the raw patient data.
+FedFairChain is proposed as a privacy-preserving federated-learning framework for multi-
+label chronic disease prediction. The system combines federated learning, fairness-aware
+evaluation, and traceable audit records. It is designed to support collaboration between
+distributed healthcare institutions while preserving local ownership of sensitive patient in-
+formation.
+The proposed system also considers fairness because good overall prediction performance
+does not always mean that the model performs equally well for every hospital or patient
+group. A smaller institution, an underrepresented group, or a disease label with fewer
+training examples may receive weaker predictions. Therefore, FedFairChain evaluates both
+overall model performance and performance differences across participating clients or de-
+fined groups.
+The audit component of FedFairChain records important activities such as training rounds,
+Dept. of AI&ML, MITE, Moodbidri
+Page — 1
+
+
+=== PDF PAGE 12 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+model versions, approved model updates, validation decisions, and evaluation summaries.
+This creates a traceable workflow and helps users review how a particular version of the
+model was created. The system is intended as an academic prototype for research and
+decision-support analysis; it does not replace medical professionals or provide a final clini-
+cal diagnosis.
+1.2 Problem Statement
+Chronic diseases create a significant burden for patients, families, healthcare providers, and
+public-health systems. Early identification of disease risk can support timely monitoring,
+intervention, and treatment planning. However, effective prediction models require diverse
+datasets, and such data are commonly distributed across multiple healthcare institutions.
+Centralized data collection creates several challenges. Raw patient records may contain
+sensitive information that cannot be exchanged freely because of privacy requirements, in-
+stitutional policies, and data-governance restrictions. As a result, hospitals may be unable
+to collaborate even when combining their knowledge would improve the quality of a pre-
+diction model.
+Healthcare data are also not identical across institutions. Different hospitals may have dif-
+ferent patient populations, disease prevalence, sample sizes, clinical procedures, and data
+quality. These differences can affect the performance of a global model. A model that
+performs well for one institution may not perform equally well for another institution.
+A further concern is fairness. A system that reports only a single overall accuracy value
+may hide weaker performance for a particular hospital or patient group. Such unequal
+results are important in healthcare because they can affect the reliability and usefulness of
+the prediction model for different users.
+There is therefore a need for a system that supports collaborative multi-label chronic disease
+prediction without requiring raw patient data to leave the source institution. The system
+must support local training, controlled update sharing, global aggregation, fairness analysis,
+and auditable record keeping.
+FedFairChain addresses this requirement by integrating federated learning, multi-label clas-
+sification, fairness-aware evaluation, and audit logging. The prototype aims to reduce de-
+pendence on centralized data collection while providing a transparent and traceable work-
+flow for collaborative model development. The prediction output is intended only for aca-
+demic research and decision-support purposes.
+1.3 Objectives
+• Develop a federated-learning workflow for multi-label chronic disease prediction.
+• Ensure that raw patient records remain within their respective institutions.
+• Train local models and aggregate permitted updates into a global model.
+• Evaluate the model using suitable multi-label classification metrics.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 2
+
+
+=== PDF PAGE 13 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+• Analyse performance differences across clients or patient groups.
+• Maintain traceable records of training rounds, model versions, and results.
+• Present the prototype output in a clear and understandable format.
+1.4 Scope
+The scope of this project is to design and develop a prototype for privacy-preserving multi-
+label chronic disease prediction. The system includes data preprocessing, local model train-
+ing, federated aggregation, prediction evaluation, fairness analysis, and audit logging. Only
+authorized or de-identified data should be used during experimentation.
+The proposed system is intended for academic research and decision-support analysis. It
+does not replace the judgement of doctors, provide a final clinical diagnosis, or guarantee
+deployment readiness in a real healthcare environment. The reported findings are limited to
+the selected dataset, experimental configuration, and testing procedure.
+1.5 Organization of the Report
+Chapter 1 introduces FedFairChain and presents the problem statement, objectives, and
+scope of the proposed work. It explains the need for privacy-preserving collaboration,
+multi-label chronic disease prediction, fairness-aware evaluation, and auditable model de-
+velopment.
+Chapter 2 presents the literature survey. It reviews existing work related to multi-label
+classification, chronic disease prediction, federated learning, fairness in healthcare, and
+explainable artificial intelligence.
+Chapter 3 describes the system requirement specification. It includes the product perspec-
+tive, product functions, user classes, design constraints, assumptions, hardware require-
+ments, software requirements, functional requirements, and non-functional requirements.
+Chapter 4 presents the Gantt chart and the development schedule of the project. This chap-
+ter describes the planned activities, project stages, development duration, testing period,
+documentation work, and final submission schedule.
+Chapter 5 explains the system design through the architectural diagram, model architecture
+diagram, class diagram, use-case diagram, sequence diagram, activity diagram, and data-
+flow diagram.
+Chapter 6 presents the methodology and implementation of FedFairChain. It describes the
+dataset, preprocessing techniques, feature list, multi-label targets, classifier-chain method-
+ology, local client training, federated aggregation, fairness evaluation, audit recording, final
+prediction workflow, training procedure, client simulation, update validation, model saving,
+prediction API, web interface, and audit-log implementation.
+Chapter 7 presents the testing process, testing levels, test cases, expected outputs, actual
+outputs, and validation results used to verify the proposed system.
+Chapter 8 presents the experimental setup, evaluation metrics, accuracy, precision, recall,
+Dept. of AI&ML, MITE, Moodbidri
+Page — 3
+
+
+=== PDF PAGE 14 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+F1-score, Hamming loss, ROC-AUC, per-label performance, confusion matrix, baseline
+comparison, centralized and federated comparison, fairness metrics, fairness gaps, feder-
+ated training-round results, result graphs, discussion, and limitations.
+Chapter 9 presents the conclusion and future scope of the project. It summarizes the project
+achievements, privacy protection, federated aggregation, multi-label prediction, fairness
+evaluation, auditability, main findings, limitations, and possible future improvements such
+as secure aggregation, differential privacy, larger datasets, external validation, personalized
+federated learning, explainable artificial intelligence, and cloud deployment.
+Chapter 10 presents the references used in the development of the project and the prepa-
+ration of the report. It includes research papers, books, technical articles, software docu-
+mentation, healthcare datasets, federated-learning studies, multi-label classification meth-
+ods, fairness evaluation approaches, and other reliable sources referred to throughout the
+project.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 4
+
+
+=== PDF PAGE 15 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CHAPTER – 2 
+   LITERATURE SURVEY 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 16 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+CHAPTER – 2
+LITERATURE SURVEY
+The proposed Federated Classifier-Chain Model combines multi-label chronic disease pre-
+diction, federated learning, fairness-aware evaluation, and auditable collaboration. This
+chapter reviews research related to these areas. The review focuses on existing approaches,
+their contributions, limitations, and relevance to the proposed system.
+2.1 Multi-Label Chronic Disease Prediction
+Multi-label classification is used when a single record can belong to more than one class at
+the same time. In healthcare, patients may experience multiple chronic diseases simultane-
+ously. Therefore, multi-label models are more suitable than traditional single-label models
+for representing coexisting conditions.
+Classifier chains model relationships between output labels instead of predicting each label
+independently. In the proposed system, the classifier chain predicts diabetes first, followed
+by cardiovascular disease and hypertension. The output of an earlier classifier can be used
+as additional information for the following classifier.
+Several studies have applied multi-label learning to disease prediction, clinical coding,
+drug-resistance prediction, and chronic-condition analysis. These studies demonstrate that
+correlated disease labels should be considered during model development.
+Multi-label prediction is relevant to this project because one patient may have more than
+one chronic condition. The proposed model therefore produces three related outputs instead
+of forcing the patient into only one disease category.
+2.2 Federated Learning in Healthcare
+Federated learning enables multiple clients to train a shared model without transferring raw
+data to a centralized server. Each participating client trains a local model using its own
+approved dataset and sends only permitted model updates to the coordinating component.
+This method is especially useful in healthcare because medical records contain sensitive
+personal and clinical information. Hospitals may have different patient populations, disease
+prevalence, sample sizes, and data-collection procedures. These differences create non-
+identically distributed client data.
+Federated learning allows institutions to collaborate while retaining local data ownership.
+The coordinating component validates the submitted updates and combines them to produce
+an improved global model.
+The proposed system uses simulated healthcare clients to represent distributed institutions.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 5
+
+
+=== PDF PAGE 17 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Each client performs local preprocessing and model training. The approved updates are
+then combined through federated aggregation.
+2.3 Fairness-Aware Machine Learning
+Overall accuracy alone may not show whether a model performs equally across different
+clients or patient groups. A model may achieve good average performance while producing
+weaker results for a smaller institution, underrepresented group, or less frequent disease
+label.
+Fairness-aware machine learning evaluates performance separately for relevant groups. Com-
+mon measures include precision, recall, F1-score, false-positive rate, false-negative rate,
+and the difference between the best and worst group performance.
+In a federated healthcare setting, fairness evaluation is important because client datasets
+may differ in size, demographic composition, and label distribution. The proposed system
+therefore reports both overall performance and client-level or group-level performance.
+The fairness analysis in this project is an evaluation layer. It does not claim formal fairness
+guarantees or prove that the system is clinically suitable for deployment.
+2.4 Auditability and Explainable Artificial Intelligence
+Auditability refers to the ability to trace how a model was trained, validated, updated, and
+evaluated. In a federated system, audit records may include the training round, model ver-
+sion, participating clients, update-validation result, aggregation status, performance mea-
+sures, and fairness results.
+Audit logging improves transparency because previous decisions and model versions can
+be reviewed. It also helps identify whether an update was accepted, rejected, or sent for
+further review.
+Explainable artificial intelligence helps users understand which input features influenced
+a model prediction. Explainability can be useful in healthcare decision-support systems
+because users may require an interpretable reason for a predicted disease label.
+The proposed system focuses mainly on traceable audit recording and human-readable pre-
+diction output. Advanced explanation methods such as SHAP or LIME may be added when
+required by the experimental design.
+2.5 Privacy-Preserving Collaborative Learning
+Centralized machine-learning systems require records from multiple institutions to be col-
+lected in one location. This may create privacy, security, governance, and data-ownership
+concerns.
+Federated learning reduces the need for direct raw-data exchange because training occurs
+locally. However, federated learning by itself does not automatically provide complete
+privacy protection. Additional methods such as secure aggregation, differential privacy,
+Dept. of AI&ML, MITE, Moodbidri
+Page — 6
+
+
+=== PDF PAGE 18 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+encryption, and access control may be required for stronger protection.
+The proposed system therefore describes privacy as a design objective rather than claiming
+formal privacy guarantees. Raw records remain at the local client, while approved model
+information is exchanged for aggregation.
+2.6 Summary of Research Gaps
+The reviewed literature shows that multi-label classification is suitable for predicting several
+related chronic diseases. Federated learning can support collaboration between distributed
+healthcare institutions without requiring centralized raw records.
+However, many existing studies focus mainly on prediction accuracy. Important issues
+such as client heterogeneity, fairness, auditability, update validation, and transparent model
+evaluation are not always addressed together.
+The following research gaps are identified:
+• Limited integration of multi-label disease prediction with federated learning.
+• Insufficient evaluation of performance differences between clients.
+• Limited recording of model versions, training rounds, and update decisions.
+• Inadequate explanation of how submitted model updates are validated.
+• Limited reporting of fairness gaps along with overall model performance.
+• Lack of a complete workflow combining prediction, fairness, and auditability.
+The proposed Federated Classifier-Chain Model addresses these gaps by combining multi-
+label disease prediction, local client training, federated aggregation, fairness evaluation, and
+audit recording. Raw data remain at the participating client, while only approved model
+updates and required metadata are exchanged.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 7
+
+
+=== PDF PAGE 19 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Table 2.1: Existing Research Relevant to the Proposed Model
+Paper
+Focus Area
+Dataset or Set-
+ting
+Method and Key Contribution Limitation and Relevance
+Classifier
+Chains
+for
+Multi-Label
+Classification [1]
+Multi-label
+learning
+General
+multi-
+label datasets
+Models dependencies between
+output labels using classifier
+chains.
+Useful for correlated disease
+labels
+but
+not
+healthcare-
+specific.
+Prediction
+of
+Chronic Diseases
+With Multi-Label
+Neural
+Network
+[2]
+Chronic disease
+prediction
+Chronic
+disease
+data
+Uses a neural network to predict
+several chronic conditions.
+Relevant to disease prediction
+but does not address federated
+fairness.
+Multi-Drug Resis-
+tance
+Prediction
+[3]
+Medical
+multi-
+label prediction
+Resistance data
+Predicts multiple medical out-
+comes using multi-label classi-
+fication.
+Shows the importance of cor-
+related medical labels.
+Clinical
+Coding
+Using
+Machine
+Learning [4]
+Clinical coding
+Clinical
+coding
+records
+Uses automated machine learn-
+ing for clinical multi-label cod-
+ing.
+Useful for healthcare labels
+but not distributed learning.
+Multiple Chronic
+Conditions [5]
+Comorbidity
+analysis
+Healthcare data
+Studies interacting chronic con-
+ditions using machine learning.
+Relevant for modelling related
+disease patterns.
+Imbalanced
+Multi-Label
+Learning [6]
+Class imbalance Medical datasets
+Handles multiple outcomes and
+unequal label distributions.
+Relevant to rare disease labels
+and imbalanced data.
+Federated Learn-
+ing for Healthcare
+[7]
+Federated learn-
+ing
+Distributed
+healthcare clients
+Allows
+local
+model
+train-
+ing without transferring raw
+records.
+Relevant to privacy-conscious
+collaboration.
+Communication-
+Efficient
+Feder-
+ated
+Learning
+[8]
+Federated com-
+munication
+Distributed
+clients
+Reduces communication over-
+head during federated training.
+Useful for improving feder-
+ated efficiency.
+Non-IID
+Fed-
+erated
+Learning
+[9]
+Client
+hetero-
+geneity
+Distributed
+clients
+Studies
+the
+effect
+of
+non-
+identically
+distributed
+client
+data.
+Relevant because healthcare
+data may differ between insti-
+tutions.
+Fair
+Federated
+Learning [10]
+Fairness in fed-
+erated learning
+Healthcare
+groups or clients
+Evaluates
+and
+improves
+dif-
+ferences in client-level perfor-
+mance.
+Relevant to fairness-gap anal-
+ysis.
+Secure
+Aggrega-
+tion [11]
+Privacy protec-
+tion
+Federated clients
+Protects individual client up-
+dates during aggregation.
+Suitable for future enhance-
+ment of the proposed system.
+Explainable Arti-
+ficial Intelligence
+[12]
+Model interpre-
+tation
+Healthcare
+pre-
+diction systems
+Explains the contribution of in-
+put features to model predic-
+tions.
+Useful for improving trans-
+parency and user confidence.
+Auditability
+in
+Machine Learning
+[13]
+Traceability
+Machine-learning
+workflows
+Records
+training,
+validation,
+and model-version information.
+Relevant to auditable feder-
+ated collaboration.
+Literature Survey Conclusion
+The reviewed studies establish that multi-label classification is suitable for predicting re-
+lated chronic diseases and that federated learning can support collaboration without cen-
+tralizing sensitive medical data.
+The review also shows that fairness, non-identically distributed client data, communication
+efficiency, privacy, explainability, and auditability require careful attention. Many studies
+focus mainly on prediction performance, whereas the proposed model also evaluates differ-
+ences between participating clients or groups.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 8
+
+
+=== PDF PAGE 20 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Therefore, the Federated Classifier-Chain Model combines multi-label chronic disease pre-
+diction, federated model training, fairness-aware evaluation, explainable output where ap-
+plicable, and auditable collaboration. These components provide the foundation for the
+system requirements, design, implementation, and testing described in the following chap-
+ters.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 9
+
+
+=== PDF PAGE 21 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   
+CHAPTER – 3 
+SYSTEM REQUIREMENT 
+SPECIFICATION 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+=== PDF PAGE 22 ===
+FEDFAIRCHAIN: FAIR AND PRIVACY-PRESERVING FEDERATED MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+CHAPTER – 3
+SYSTEM REQUIREMENT SPECIFICATION
+This chapter presents the system requirement specification for the proposed FedFairChain
+framework. It describes the overall system, product perspective, product functions, user
+classes, design constraints, assumptions, hardware requirements, software requirements,
+functional requirements, and non-functional requirements.
+3.1 Overall Description
+3.1.1 Product Perspective
+FedFairChain is an AI-based healthcare prediction system designed to support multi-label
+chronic disease prediction using federated learning. The system is intended for use by mul-
+tiple participating healthcare institutions or data clients. Each client stores and processes its
+own authorized data locally.
+The proposed system contains local client modules, a coordinating server, a model aggrega-
+tion component, a fairness evaluation component, and an audit record component. The local
+client performs data preprocessing and model training. The coordinator manages training
+rounds and receives approved model updates from participating clients.
+The raw patient records remain within the local institution. Only permitted model param-
+eters, evaluation summaries, or other approved information are transmitted to the coordi-
+nating component. The global model is created by combining valid local updates from the
+participating clients.
+The system is designed as a research prototype. It supports model development, evalua-
+tion, fairness analysis, and auditability. It does not replace clinical diagnosis or provide
+independent medical treatment recommendations.
+3.1.2 Product Functions
+The primary functions of the FedFairChain system are:
+1. Client Registration: Register participating healthcare institutions and maintain infor-
+mation about their authorized participation in the federated-learning process.
+2. Local Data Preparation: Allow each client to clean, encode, normalize, and prepare
+its local data without transferring raw patient records to the coordinating server.
+3. Local Model Training: Train the prediction model using the local client dataset and
+the model configuration provided for the current training round.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 11
+
+
+=== PDF PAGE 23 ===
+FEDFAIRCHAIN: FAIR AND PRIVACY-PRESERVING FEDERATED MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+4. Model Update Submission: Validate and submit approved local model updates to the
+coordinating component after the completion of local training.
+5. Federated Model Aggregation: Combine valid client updates to create an improved
+global model for the next training round.
+6. Multi-Label Prediction: Generate predictions for more than one chronic disease label
+from an authorized patient record.
+7. Fairness Evaluation: Compare model performance across participating clients or pre-
+defined patient groups using selected fairness and performance measures.
+8. Audit and Model Tracking: Record training rounds, model versions, evaluation sum-
+maries, and approved workflow events for later review.
+3.1.3 User Classes and Characteristics
+The main users of the proposed system are:
+• Healthcare Institution: A participating institution that stores authorized patient data
+locally, performs local model training, and submits approved model updates.
+• System Administrator: The administrator manages client registration, system config-
+uration, access permissions, model versions, and training-round settings.
+• Researcher or Data Scientist: The researcher prepares experiments, selects model
+parameters, evaluates performance, analyses fairness, and studies the results.
+• Auditor: The auditor reviews training records, model versions, evaluation summaries,
+and the history of approved system activities.
+• Authorized Clinician or Analyst: The clinician or analyst may view prediction out-
+put and evaluation information as decision-support material, subject to institutional
+approval.
+3.1.4 Design and Implementation Constraints
+• Security and Privacy: Raw patient records must remain within the authorized local
+client. The system must not transfer or store patient-identifying information on the
+coordinating server.
+• Network Dependency: Federated training requires communication between partici-
+pating clients and the coordinating component. Interrupted connectivity may delay or
+prevent a training round.
+• Non-IID Data: Client datasets may differ in size, disease distribution, feature avail-
+ability, and patient characteristics. The system must document these differences during
+evaluation.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 12
+
+
+=== PDF PAGE 24 ===
+FEDFAIRCHAIN: FAIR AND PRIVACY-PRESERVING FEDERATED MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+• Fairness Constraint: Overall prediction accuracy alone is not sufficient. The system
+must report selected client-level or group-level performance measures.
+• Computational Constraint: The prototype must be capable of running on ordinary re-
+search computers or virtual machines without requiring specialized clinical hardware.
+• Data Governance: Only authorized, de-identified, or publicly available datasets may
+be used for experimentation.
+3.1.5 Assumptions and Dependencies
+• Client Participation: It is assumed that participating clients have permission to use
+their local datasets for model training and evaluation.
+• Data Availability: Each client is assumed to have a sufficient number of records and
+the required features for the selected prediction task.
+• Feature Compatibility: The clients are assumed to use compatible feature definitions,
+label formats, and preprocessing procedures.
+• Secure Communication: The system depends on a reliable and appropriately pro-
+tected communication channel for exchanging model updates and evaluation informa-
+tion.
+• Authorized Access: Only registered users and approved institutions are permitted to
+access the system or participate in a training round.
+• Model Configuration: The clients are assumed to use the same global model archi-
+tecture and compatible training configuration during each federated round.
+3.2 Specific Requirements
+3.2.1 Hardware Requirements
+The minimum hardware requirements for the prototype are:
+• Processor: Minimum Intel Core i5, AMD Ryzen 5, or equivalent processor.
+• RAM: Minimum 8 GB RAM. At least 16 GB is recommended for model training and
+experimentation.
+• Storage: Minimum 256 GB available storage for datasets, model files, logs, and ex-
+perimental results.
+• Network: A reliable network connection for communication between participating
+clients and the coordinating component.
+• Display: A standard monitor with a minimum resolution suitable for viewing the sys-
+tem interface and evaluation reports.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 13
+
+
+=== PDF PAGE 25 ===
+FEDFAIRCHAIN: FAIR AND PRIVACY-PRESERVING FEDERATED MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+3.2.2 Software Requirements
+• Operating System: Windows, Linux, or macOS.
+• Programming Language: Python 3.10 or a compatible later version.
+• Machine-Learning Libraries: Scikit-learn, PyTorch or TensorFlow, NumPy, and
+Pandas.
+• Federated-Learning Framework: Flower, TensorFlow Federated, or another docu-
+mented federated-learning framework.
+• Data-Processing Libraries: Pandas, NumPy, and suitable encoding and preprocessing
+utilities.
+• Visualization Libraries: Matplotlib, Seaborn, or an equivalent visualization library.
+• Database or Audit Storage: documented storage system for model metadata and audit
+records.
+• Security: Appropriate authentication, access control, and encryption mechanisms for
+protecting approved model-update communication.
+3.2.3 Functional Requirements
+The functional requirements of the FedFairChain system are:
+• Client Registration: The system shall allow an administrator to register and deactivate
+participating clients.
+• User Interaction Layer: The system shall provide an interface for authorized users to
+view model status, training progress, evaluation results, and audit information.
+• Local Data Processing: The system shall allow each client to preprocess its local
+dataset without transferring raw records to the coordinating server.
+• Local Model Training: The system shall train the selected multi-label prediction
+model using the local client data.
+• Model Update Validation: The system shall check whether a submitted model update
+follows the expected format and training configuration.
+• Federated Aggregation: The system shall combine valid local model updates to pro-
+duce a global model.
+• Training-Round Management: The system shall allow the coordinator to start, mon-
+itor, and complete defined federated-training rounds.
+• Prediction Generation: The system shall generate multi-label prediction output for
+authorized input records.
+• Fairness Evaluation: The system shall calculate and display selected performance and
+fairness measures for the global model and participating clients.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 14
+
+
+=== PDF PAGE 26 ===
+FEDFAIRCHAIN: FAIR AND PRIVACY-PRESERVING FEDERATED MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+• Audit Recording: The system shall record model versions, training rounds, evaluation
+summaries, and approved workflow events.
+3.2.4 Non-Functional Requirements
+• Performance and Accuracy:
+◦The system should complete local training within a reasonable time for the selected
+dataset and hardware.
+◦The model should report suitable multi-label performance measures.
+◦The system should display evaluation results without unnecessary delay.
+• Security and Privacy:
+◦Raw patient records must remain on the local client.
+◦Only approved model updates and metadata may be transmitted.
+◦Access to the system must be restricted to authorized users.
+◦Sensitive configuration and audit information must be protected.
+• Reliability:
+◦The system should handle a failed or unavailable client without corrupting the
+global model.
+◦Training and evaluation results should be stored consistently.
+◦The system should provide meaningful error messages when an operation fails.
+• Usability and Accessibility:
+◦The user interface should be simple, clear, and user-friendly.
+◦The system should provide understandable prediction and evaluation output.
+◦Important warnings and errors should be clearly visible to the user.
+• Scalability:
+◦The design should support the addition of further participating clients.
+◦The system should allow additional disease labels and model versions to be in-
+cluded in future work.
+• Maintainability:
+◦The software should be divided into clearly defined modules.
+◦Model configuration and evaluation settings should be easy to update.
+◦Audit records should be stored in a consistent and reviewable format.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 15
+
+
+=== PDF PAGE 27 ===
+FEDFAIRCHAIN: FAIR AND PRIVACY-PRESERVING FEDERATED MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+3.2.5 Privacy Requirements
+– Raw patient records shall remain at the local client.
+– Patient-identifying information shall not be stored by the coordinator.
+– Only authorized or de-identified data shall be used during experimentation.
+– Model updates shall be transmitted only after validation.
+– Prediction requests shall be accepted only from authorized users.
+– Data access shall follow institutional approval and governance policies.
+3.2.6 Security Requirements
+– The system shall restrict access using user authentication.
+– Client identities shall be verified before accepting updates.
+– Model versions and update formats shall be validated.
+– Invalid or unauthorized updates shall be rejected.
+– Audit records shall be protected from unauthorized modification.
+– Communication between clients and the coordinator should use a protected chan-
+nel.
+– Future versions may include secure aggregation and differential privacy.
+3.2.7 User and System Constraints
+– The system is intended for academic research and decision support.
+– The system does not provide a confirmed clinical diagnosis.
+– Results depend on the selected dataset and experimental configuration.
+– The system does not guarantee clinical fairness or deployment readiness.
+– The quality of the global model depends on the quality of local client data.
+– Network failure may delay a federated-training round.
+– Unequal client data distributions may affect model performance.
+– The system requires compatible feature and label definitions across clients.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 16
+
+
+=== PDF PAGE 28 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CHAPTER – 4 
+GANTT CHART 
+
+
+=== PDF PAGE 29 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+CHAPTER – 4
+GANTT CHART
+The Gantt chart provides a detailed timeline for the planning, development, implementa-
+tion, testing, and documentation of the Federated Classifier-Chain Model for Multi-Label
+Chronic Disease Prediction. The project activities are scheduled from March to Novem-
+ber. The major stages include literature review, requirement analysis, dataset preparation,
+model development, federated-learning integration, fairness evaluation, testing, documen-
+tation, and final submission.
+Table 4.1: Gantt chart of planning and scheduling of the project
+Project Activity
+Mar
+Apr
+May
+Jun
+Jul
+Aug
+Sep
+Oct
+Nov
+Literature review
+Problem definition and objectives
+System requirement analysis
+Dataset selection and preparation
+Multi-label model development
+Federated-learning integration
+Fairness evaluation module
+Audit and model-tracking module
+Testing and validation
+Results analysis
+Documentation and final report
+Final presentation and submission
+• Phase 1, Research and Planning: The initial phase from March to April focuses
+on literature review, project planning, problem definition, and identification of project
+objectives.
+• Phase 2, Requirements and Dataset Preparation: The April–May phase includes
+system requirement analysis, dataset selection, feature identification, preprocessing de-
+sign, and preparation of multi-label disease outcomes.
+• Phase 3, Model Development: During June and July, the multi-label prediction model
+is developed and evaluated using the selected dataset. Model configuration, preprocess-
+ing, training, and baseline comparison are completed.
+• Phase 4, Federated and Fairness Integration: Federated local training, model aggre-
+gation, fairness evaluation, and client-level performance analysis are carried out from
+July to September.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 15
+
+
+=== PDF PAGE 30 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+• Phase 5, Audit and Testing: The audit-record component is connected to the work-
+flow. Unit testing, integration testing, system testing, and model validation are com-
+pleted during September and October.
+• Phase 6, Results and Documentation: Results are analysed during October. The final
+report, diagrams, tables, paper, and presentation materials are prepared during October
+and November.
+• Phase 7, Final Submission: The final project presentation, corrections, report submis-
+sion, and draft-paper submission are completed in November.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 16
+
+
+=== PDF PAGE 31 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CHAPTER – 5 
+SYSTEM DESIGN
+
+
+=== PDF PAGE 32 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+CHAPTER – 5
+SYSTEM DESIGN
+The system design describes the complete workflow of the Federated Classifier-Chain Model
+for Multi-Label Chronic Disease Prediction. It includes local data preparation, feature
+processing, federated model training, multi-label prediction, fairness evaluation, and au-
+dit recording. Raw patient records remain within participating clients, while only approved
+model information is exchanged.
+5.1 Architectural Diagram
+The proposed system follows a distributed healthcare-learning architecture in which patient
+data are retained by the participating client. The system contains a local client layer, a coor-
+dination layer, a federated aggregation layer, a fairness-evaluation layer, and an authorized
+prediction interface.
+At the client layer, each participating healthcare institution loads its authorized patient
+records and performs all preprocessing operations locally. Missing values are handled,
+categorical attributes are converted into a suitable numerical representation, and numerical
+features are scaled using the selected preprocessing configuration. The processed data are
+then supplied to the local classifier-chain model.
+The coordination layer manages client registration, model distribution, training rounds, up-
+date validation, and communication with participating clients. Before an update is accepted,
+the coordinator verifies the client identity, model version, parameter format, feature com-
+patibility, and required metadata.
+The federated aggregation layer combines only valid client updates. Raw patient records
+and local feature matrices are not transferred to the coordinator. The resulting global model
+is distributed to approved clients for the next training round.
+The fairness and audit layers operate after model aggregation. The fairness layer compares
+performance across clients or predefined groups. The audit layer stores the training round,
+model version, update-validation result, aggregation status, performance values, and fair-
+ness results.
+This architecture separates data ownership from model collaboration. It allows participating
+institutions to contribute to a shared model while maintaining local control over their patient
+records.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 16
+
+
+=== PDF PAGE 33 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Figure 5.1: System Architecture of the Federated Classifier-Chain Model
+5.2 Model Architecture Diagram
+The model architecture begins with fifteen patient features. Missing values are handled
+locally, categorical variables are processed, and numerical features are scaled before being
+converted into a feature vector. The classifier chain then predicts diabetes, cardiovascular
+disease, and hypertension in sequence.
+The missing-value imputation stage replaces unavailable values using the configured impu-
+tation strategy. This prevents incomplete records from causing errors during model training
+or prediction. Categorical attributes are then converted into a numerical representation so
+that they can be processed by the machine-learning model.
+Numerical features are scaled to provide a consistent range and to prevent features with
+larger numerical values from dominating the learning process. The resulting feature vector
+is used as the input to the classifier chain.
+The classifier chain contains three sequential binary classifiers. The first classifier predicts
+the diabetes label. Its prediction can be used as additional information for the next classifier,
+which predicts cardiovascular disease. The third classifier predicts hypertension using the
+original feature vector and the preceding classifier outputs.
+The final output contains three disease labels or probabilities. Since the problem is multi-
+Dept. of AI&ML, MITE, Moodbidri
+Page — 17
+
+
+=== PDF PAGE 34 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+label, more than one disease label may be positive for the same patient record.
+15 Patient Features
+Missing-Value
+Imputation
+Categorical
+Processing
+Numerical Feature
+Scaling
+Feature Vector
+Diabetes
+Classifier
+CVD
+Classifier
+Hypertension
+Classifier
+Multi-Label
+Prediction
+Figure 5.2: Model architecture and classifier-chain prediction workflow
+The federated training process uses four simulated local clients. Each client trains a lo-
+cal classifier-chain model using its approved local records. The coordinator validates the
+updates and combines them through federated aggregation to produce the global model.
+Client 1
+Local Model
+Client 2
+Local Model
+Client 3
+Local Model
+Client 4
+Local Model
+Federated
+Aggregation
+Global FedFairChain
+Model
+Final Prediction
+Figure 5.3: Federated client training and global model aggregation
+Dept. of AI&ML, MITE, Moodbidri
+Page — 18
+
+
+=== PDF PAGE 35 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+5.3 Class Diagram
+The class diagram describes the major software components and their responsibilities. The
+Client class represents a participating healthcare institution and stores the client identifier,
+local data reference, and local training functions.
+The DataPreprocessor class handles missing values, categorical processing, numerical scal-
+ing, feature preparation, and target-label preparation. The LocalModelTrainer class trains
+the classifier-chain model using the processed local data and evaluates the local model.
+The ModelUpdate class stores the client identifier, model version, training sample count,
+model parameters, and update status. The Coordinator class selects participating clients,
+distributes the current global model, receives updates, validates them, and manages feder-
+ated rounds.
+The Aggregator class combines approved client updates and generates the global model.
+The GlobalModel class stores the current model version and provides prediction functions.
+The PredictionService class validates prediction requests, preprocesses input data, gener-
+ates disease predictions, and returns confidence values.
+The FairnessEvaluator calculates precision, recall, F1-score, and fairness gaps for selected
+clients or groups. The AuditLogger records training rounds, model versions, validation
+outcomes, evaluation results, and authorized actions.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 19
+
+
+=== PDF PAGE 36 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Figure 5.4: Class Diagram of the Federated Classifier-Chain System
+5.4 Use Case Diagram
+The use-case diagram describes how different users interact with the proposed system. A
+participating client prepares its local dataset, trains the local model, and submits an ap-
+proved model update to the coordinating component.
+The system administrator registers clients, manages system configuration, controls access
+permissions, and monitors model versions. The researcher or data scientist prepares exper-
+iments, selects evaluation settings, compares models, and analyses prediction and fairness
+results.
+The authorized user enters permitted patient information and requests a prediction. The
+system validates the request, applies the same preprocessing pipeline used during training,
+and generates the predicted disease labels.
+The auditor reviews training-round information, update-validation decisions, model ver-
+sions, fairness results, and evaluation summaries. These use cases ensure that the system
+Dept. of AI&ML, MITE, Moodbidri
+Page — 20
+
+
+=== PDF PAGE 37 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+supports both prediction and transparent model management.
+Figure 5.5: Use Case Diagram of the Federated Classifier-Chain System
+5.5 Sequence Diagram
+The sequence diagram represents the order of operations during one federated training
+and prediction cycle. First, the authorized user or researcher submits a permitted request
+through the web interface. The interface forwards the request to the coordinator after check-
+ing the required fields.
+The coordinator validates the request and distributes the current global model to the selected
+clients. Each local client loads its approved records, performs preprocessing, trains the
+classifier-chain model, and produces a model update.
+The local client submits the update together with the client identifier, model version, sample
+count, and training metadata. The coordinator verifies the identity, update format, parameter
+dimensions, and model version before accepting the update.
+The aggregator combines valid updates and creates the updated global model. The fairness
+evaluator calculates the required performance and fairness measures. The audit service
+records the training round, model version, validation status, aggregation result, and evalua-
+tion summary.
+Finally, the coordinator returns the updated model or prediction result through the autho-
+rized interface. The user receives the predicted labels and relevant confidence or evaluation
+information.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 21
+
+
+=== PDF PAGE 38 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Figure 5.6: Sequence Diagram of a Federated Training Round
+5.6 Activity Diagram
+The activity workflow begins when a training round or prediction request is started. The
+system first checks the input data, client identity, model version, and required configuration.
+For local training, the client prepares the local data, handles missing values, processes
+categorical features, scales numerical features, and prepares the multi-label targets. The
+classifier-chain model is then trained using the local data.
+After training, the client creates an update containing the permitted model information and
+training metadata. The coordinator validates the update. If the update is invalid, it is rejected
+and the reason is recorded in the audit log.
+If the update is valid, it is sent to the federated aggregation component. Approved updates
+are combined to create a new global model. The global model is then evaluated using
+performance and fairness measures.
+If the stopping condition has not been reached, the new global model is distributed to the
+selected clients for another round. If the stopping condition is reached, the final model is
+stored and made available for authorized prediction.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 22
+
+
+=== PDF PAGE 39 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Figure 5.7: Activity Diagram of the Training and Evaluation Pipeline
+5.7 Data Flow Diagram
+The data-flow diagram distinguishes local information from information that is permitted to
+cross the client boundary. Raw patient records, local labels, preprocessed feature matrices,
+and intermediate training data remain inside the participating client.
+The local client performs data cleaning, missing-value handling, categorical processing,
+numerical scaling, label preparation, and local model training. The client creates only the
+approved model update and associated metadata for submission.
+The coordinator receives the submitted update, validates its format, and sends valid updates
+to the aggregator. The aggregator combines the approved updates to create the global model.
+The global model is evaluated using predictive-performance and fairness measures. The
+resulting model version, metrics, validation decisions, and training information are stored
+in the audit record. Authorized users can then submit prediction requests through the pre-
+diction interface.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 23
+
+
+=== PDF PAGE 40 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Figure 5.8: Data Flow Diagram of the Federated Classifier-Chain System
+5.8 Federated Multi-Label Model
+The proposed model is designed for a multi-label healthcare prediction task. Unlike a
+single-label classifier, it can assign more than one disease label to the same patient record.
+The selected target labels are diabetes, cardiovascular disease, and hypertension.
+Each client uses the current global model as the starting point for local training. The client
+trains the classifier chain using its approved local data and calculates the permitted model
+update. The number of local training samples and the training status are recorded as meta-
+data.
+During federated aggregation, valid client updates are combined to produce a new global
+model. The aggregation process allows the model to benefit from multiple client datasets
+without requiring the raw datasets to be merged.
+The final global model produces a probability or binary decision for each disease label. The
+selected thresholds are applied independently to the label probabilities. Consequently, a
+patient may receive zero, one, or several positive disease labels.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 24
+
+
+=== PDF PAGE 41 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Figure 5.9: Federated Multi-Label Prediction Model
+5.9 Fairness Evaluation and Audit Layer
+The fairness layer evaluates whether the model produces comparable results across partic-
+ipating clients or selected patient groups. The evaluation does not depend only on overall
+accuracy. It also considers label-specific precision, recall, F1-score, false-positive rate,
+false-negative rate, and the difference between group-level results.
+The fairness gap is calculated by comparing the best and worst observed group performance
+for a selected metric. A large gap indicates that the model should be examined further before
+its results are used for decision support.
+The audit layer maintains a chronological record of important system events. Each record
+may contain the training-round number, model version, participating client identifiers, update-
+validation status, aggregation status, performance metrics, fairness results, and authorized
+actions.
+Audit records allow researchers and administrators to trace how a particular model version
+was produced. If an update is rejected or a fairness result requires review, the decision is
+stored as a new event rather than silently changing an earlier record.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 25
+
+
+=== PDF PAGE 42 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Fairness evaluation and audit recording improve transparency, but they do not by themselves
+establish clinical validity, formal privacy guarantees, or deployment readiness. The results
+must be interpreted together with the dataset size, label prevalence, client distribution, and
+experimental limitations.
+Figure 5.10: Evaluation and Audit Layer
+Dept. of AI&ML, MITE, Moodbidri
+Page — 26
+
+
+=== PDF PAGE 43 ===
+ 
+ 
+ 
+ 
+ 
+ 
+CHAPTER – 6 
+IMPLEMENTATION
+
+
+=== PDF PAGE 44 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+CHAPTER – 6
+METHODOLOGY AND IMPLEMENTATION
+This chapter describes the methodology and implementation of the Federated Classifier-
+Chain Model for Multi-Label Chronic Disease Prediction. The chapter explains the dataset,
+preprocessing pipeline, feature configuration, classifier-chain model, local client training,
+federated aggregation, fairness evaluation, audit recording, implementation technologies,
+and prediction workflow.
+6.1 Methodology
+6.1.1 Overall Workflow
+The proposed workflow begins with the preparation of approved patient records at partici-
+pating healthcare clients. Raw records remain within their local environments. Each client
+applies the common preprocessing pipeline, trains its local classifier-chain model, and cre-
+ates an approved model update.
+The coordinator validates the received updates and forwards valid updates to the feder-
+ated aggregation component. The aggregated global model is evaluated using multi-label
+performance and fairness measures. The model version, evaluation results, and training
+information are stored in the audit record.
+The final global model is used by the authorized prediction interface. Input features are pro-
+cessed using the same preprocessing configuration used during training. The model then
+produces probabilities and final labels for diabetes, cardiovascular disease, and hyperten-
+sion.
+6.1.2 Dataset Description
+The dataset contains approved and de-identified patient records. Each record contains de-
+mographic, body-measurement, laboratory, and lifestyle features. The target is multi-label
+because one patient may have more than one chronic condition.
+The same feature order and label order are used by all clients. Direct identifiers are removed
+before model training. The dataset is divided into training, validation, and testing data
+according to the experimental protocol.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 27
+
+
+=== PDF PAGE 45 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+6.1.3 Data Preprocessing
+The preprocessing pipeline contains the following operations:
+1. Validate required input fields.
+2. Remove direct patient identifiers.
+3. Handle missing values using the training-fitted imputation strategy.
+4. Encode categorical variables such as Smoking Status and Physical Activity.
+5. Scale numerical variables using training-data parameters only.
+6. Validate numerical ranges and feature types.
+7. Prepare the multi-label target representation.
+8. Preserve the same preprocessing configuration for all clients and prediction requests.
+The preprocessing parameters are fitted only on the training data to avoid information leak-
+age. The fitted preprocessing object is stored with the model version.
+6.1.4 Feature List and Feature Dimensions
+The model uses fifteen input features:
+Dept. of AI&ML, MITE, Moodbidri
+Page — 28
+
+
+=== PDF PAGE 46 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Table 6.1: Feature List and Feature Dimensions
+No.
+Feature
+Type
+1
+Age
+Numerical
+2
+BMI
+Numerical
+3
+Waist Circumference
+Numerical
+4
+Mean Systolic Blood Pressure
+Numerical
+5
+Mean Diastolic Blood Pressure
+Numerical
+6
+HbA1c
+Numerical
+7
+Total Cholesterol
+Numerical
+8
+HDL Cholesterol
+Numerical
+9
+Creatinine
+Numerical
+10
+BUN
+Numerical
+11
+Albumin
+Numerical
+12
+Uric Acid
+Numerical
+13
+Serum Glucose
+Numerical
+14
+Smoking Status
+Categorical
+15
+Physical Activity
+Categorical
+Thus, the input feature dimension before classifier-chain outputs is fifteen.
+6.1.5 Multi-Label Target Labels
+The model predicts three disease labels:
+Table 6.2: Multi-Label Target Details
+Order
+Label
+Description
+1
+Diabetes
+Indicates the diabetes outcome.
+2
+CVD
+Indicates the cardiovascular-disease outcome.
+3
+Hypertension
+Indicates the hypertension outcome.
+The approved classifier-chain order is:
+Diabetes →CVD →Hypertension
+More than one output label may be positive for the same patient.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 29
+
+
+=== PDF PAGE 47 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+6.1.6 Classifier-Chain Methodology
+The model uses a classifier-chain approach for multi-label prediction. A separate binary
+classifier is used for each disease label. The first classifier predicts diabetes. Its output is
+then supplied as additional chain information to the cardiovascular-disease classifier. The
+hypertension classifier uses the original feature representation together with the preceding
+classifier outputs.
+This method allows the model to represent relationships between disease labels. The out-
+put probabilities are converted into binary predictions using the configured label-specific
+thresholds.
+6.1.7 Local Client Training
+Four simulated clients are used to represent participating healthcare institutions. Each client
+receives or retains its own local data partition. Local preprocessing is performed without
+transferring raw records.
+During a training round, the client receives the current global model, trains the local classifier-
+chain model, evaluates the local result, and creates a permitted model update. The update
+contains only the information required by the aggregation protocol.
+6.1.8 Federated Aggregation
+The coordinator receives model updates from eligible clients. Each update is checked for
+client identity, model version, parameter shape, feature compatibility, and required meta-
+data.
+Only valid updates are included in federated averaging. The resulting global model is as-
+signed a new model version and distributed during the next training round. Raw patient
+records are not included in the aggregation process.
+6.1.9 Fairness Evaluation
+Fairness evaluation compares performance across participating clients or predefined groups.
+The evaluation may include precision, recall, F1-score, false-positive rate, false-negative
+rate, and the difference between the best and worst group results.
+The fairness gap is recorded together with the group sizes, disease-label prevalence, and
+evaluation configuration. Fairness evaluation provides diagnostic information and does not
+by itself establish clinical fairness.
+6.1.10 Audit Recording
+The audit component records:
+Dept. of AI&ML, MITE, Moodbidri
+Page — 30
+
+
+=== PDF PAGE 48 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+• Training-round number.
+• Model version.
+• Participating clients.
+• Client-update validation status.
+• Aggregation status.
+• Performance metrics.
+• Fairness metrics and fairness gaps.
+• Authorized review or correction actions.
+Audit records allow the development history of each model version to be reviewed.
+6.1.11 Final Prediction Workflow
+For an authorized prediction request, the system validates the input fields and applies the
+stored preprocessing pipeline. The processed feature vector is passed through the classifier
+chain. The model returns a probability for each disease label.
+The configured thresholds are applied to produce the final multi-label output. The result is
+displayed with the relevant confidence information. The output is intended for academic
+research and decision support, not confirmed clinical diagnosis.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 31
+
+
+=== PDF PAGE 49 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+6.1.12 Model Details
+Table 6.3: Model Details
+Parameter
+Configuration
+Model type
+Classifier chain
+Input features
+15
+Output labels
+3
+Label order
+Diabetes →CVD →Hypertension
+Preprocessing
+Missing-value imputation and standard scal-
+ing
+Local clients
+4 simulated clients
+Federated method
+Federated averaging
+Framework
+Python and scikit-learn
+Data libraries
+pandas and NumPy
+Model storage
+joblib
+Visualization
+Matplotlib and seaborn
+Prediction API
+FastAPI
+6.2 Implementation Details
+6.2.1 Python Version
+The implementation is developed using Python 3.10 or a compatible later version. A virtual
+environment is used to isolate the project dependencies and maintain reproducible execu-
+tion.
+6.2.2 Software Libraries
+The main software libraries are:
+• pandas for tabular-data processing.
+• NumPy for numerical operations.
+• scikit-learn for preprocessing, classification, and evaluation.
+• joblib for saving and loading model bundles.
+• Matplotlib and seaborn for graphs and confusion matrices.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 32
+
+
+=== PDF PAGE 50 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+• FastAPI for the prediction API.
+• HTML, CSS, and JavaScript for the web interface.
+6.2.3 Hardware and Operating System
+The following table should be updated with the exact specifications of the computer used
+for experimentation.
+Table 6.4: Software and Hardware Requirements
+Category
+Specification
+Operating system
+Windows/Linux/macOS: enter actual version
+Processor
+Enter actual processor model
+Memory
+Enter installed RAM
+Storage
+Enter available storage
+Programming language
+Python 3.10 or later
+Machine-learning framework
+scikit-learn
+API framework
+FastAPI
+Development environment
+Python virtual environment
+Replace the placeholder hardware values with the specifications of your computer.
+6.2.4 Training Procedure
+The training procedure consists of the following steps:
+1. Load the approved dataset.
+2. Remove direct identifiers.
+3. Apply the training-fitted preprocessing pipeline.
+4. Divide the data among the simulated clients.
+5. Train the classifier-chain model at each client.
+6. Generate the permitted local model updates.
+7. Validate the updates at the coordinator.
+8. Apply federated averaging.
+9. Store the resulting global model.
+10. Evaluate the global model using the test data.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 33
+
+
+=== PDF PAGE 51 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+6.2.5 Client Simulation
+Four simulated clients are used to represent different healthcare institutions. The client
+partitions may differ in sample size and disease-label distribution. Each client performs
+local processing and training independently.
+The simulation allows the federated workflow to be evaluated without requiring a phys-
+ical network of hospitals. The client data remain logically separated during the training
+procedure.
+6.2.6 Update Validation
+Before aggregation, each submitted update is checked for:
+• Valid client identity.
+• Correct model version.
+• Correct feature contract.
+• Correct parameter dimensions.
+• Required training metadata.
+• Valid sample count.
+• Acceptable numerical values.
+Invalid updates are rejected and the rejection reason is recorded in the audit history.
+6.2.7 Model Saving
+The model bundle stores the feature list, target-label order, thresholds, preprocessing object,
+classifier-chain models, model version, training configuration, and fairness settings.
+The model is saved using joblib. Saving the preprocessing object together with the model
+ensures that prediction requests use the same transformations as the training data.
+6.2.8 Prediction API
+The FastAPI prediction service receives authorized patient information, validates the re-
+quest, applies preprocessing, loads the global model, and returns the predicted disease la-
+bels and probabilities.
+The API also verifies that the submitted fields follow the expected feature contract. Missing
+optional values are handled by the stored preprocessing pipeline. Invalid requests return an
+appropriate validation message.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 34
+
+
+=== PDF PAGE 52 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+6.2.9 Web Interface
+The web interface provides a simple form for entering authorized patient features. It dis-
+plays the predicted disease labels, confidence values, model version, and relevant warnings.
+The interface is intended for research and decision-support use. It does not claim to provide
+a confirmed medical diagnosis or replace professional clinical assessment.
+6.2.10 Audit Logging
+The audit logger records model versions, training rounds, participating clients, validation
+results, aggregation status, performance metrics, fairness metrics, and authorized review
+actions.
+Audit entries are stored in a consistent format so that researchers and administrators can
+reconstruct the history of a model version. Previous audit events are not silently overwritten
+when a correction or review is required.
+6.3 Dataset Description
+The dataset is organized as a collection of local client datasets rather than one unrestricted
+central repository. Each client contains approved and de-identified patient records with the
+features required for chronic-disease prediction.
+The target consists of multiple disease labels, allowing one patient record to be associated
+with more than one condition. The prediction form uses the same frozen feature definition
+during training and inference.
+The dataset preparation process includes removing direct identifiers, checking feature types,
+handling missing values, encoding categorical variables, scaling numerical variables, and
+creating a consistent label order across clients.
+6.3.1 Patient and Feature Configuration
+Age is required for a prediction request. Other unavailable values may be left blank and are
+handled by the frozen training-fitted preprocessing pipeline.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 35
+
+
+=== PDF PAGE 53 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Table 6.5: Patient Attributes Used by the Model
+Feature Group
+Input Fields
+Units or Allowed Val-
+ues
+Patient Information
+Age
+Years; required
+Body
+Measure-
+ments
+BMI; Waist Circumference; Systolic
+Blood Pressure; Diastolic Blood Pres-
+sure
+kg/m2;
+cm;
+mmHg;
+mmHg
+Laboratory Values
+HbA1c;
+Total
+Cholesterol;
+HDL
+Cholesterol; Creatinine; BUN; Albu-
+min; Uric Acid; Serum Glucose
+%;
+mg/dL;
+mg/dL;
+mg/dL; mg/dL; g/dL;
+mg/dL; mg/dL
+Lifestyle
+Smoking Status; Physical Activity
+Unknown/Never
+smoker/Former
+smoker/Current
+smoker;
+Un-
+known/Yes/No
+6.3.2 Preprocessing and Data Quality
+The preprocessing procedure validates the required fields, handles missing values, encodes
+categorical values, scales numerical values, prepares disease labels, and checks invalid
+records before training.
+Preprocessing parameters are fitted only on training data and stored with the model version.
+The same transformation is applied during validation, testing, and prediction.
+6.4 Algorithm
+1. Load the required data-processing, machine-learning, evaluation, API, and audit li-
+braries.
+2. Load the approved client-local datasets and remove direct identifiers.
+3. Validate the required feature fields and preserve the approved label order.
+4. Fit the preprocessing pipeline using training data only.
+5. Apply imputation, categorical processing, and numerical scaling.
+6. Split the prepared data among four simulated clients.
+7. Train the classifier-chain model locally at each client.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 36
+
+
+=== PDF PAGE 54 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+8. Create and validate the permitted model updates.
+9. Aggregate valid updates using federated averaging.
+10. Evaluate the global model using accuracy, precision, recall, F1-score, Hamming loss,
+ROC-AUC, and per-label measures where available.
+11. Calculate client-level or group-level fairness measures.
+12. Save the model bundle and record the training and evaluation events.
+6.5 Implementation Workflow
+The implementation is divided into local client processing, coordinator processing, evalu-
+ation, prediction, and audit recording. The local client loads only its authorized data. The
+coordinator manages training rounds and model versions. The evaluation module calculates
+multi-label metrics and fairness measures. The audit module stores the history required to
+review the experiment.
+During prediction, the input is validated and transformed using the frozen training-fitted
+preprocessing pipeline. The global classifier-chain model returns one probability for each
+disease label. The configured thresholds are then applied to generate the final multi-label
+output.
+The implementation is tested with different client sizes, missing-value patterns, label dis-
+tributions, and update-validation outcomes. All reported results identify the dataset con-
+figuration, model settings, number of rounds, client participation, evaluation protocol, and
+software versions.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 37
+
+
+=== PDF PAGE 55 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+                              
+ 
+ 
+ 
+ 
+CHAPTER – 7 
+TESTING
+
+
+=== PDF PAGE 56 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+CHAPTER – 7
+TESTING
+The testing phase verifies that the Federated Classifier-Chain Model performs the required
+data preparation, local training, federated aggregation, evaluation, fairness, audit, and pre-
+diction operations correctly. Testing is performed at unit, integration, system, and accep-
+tance levels.
+7.1 Testing Levels
+7.1.1 Unit Testing
+Unit testing is performed on input validation, missing-value handling, numerical scaling,
+categorical encoding, multi-label conversion, local model training, metric calculation, fair-
+ness calculation, and audit-record creation. Each component is tested independently using
+controlled inputs and expected outputs.
+7.1.2 Integration Testing
+Integration testing verifies that the client, coordinator, model store, evaluation module, fair-
+ness module, prediction service, and audit layer exchange the expected information cor-
+rectly. The tests ensure that model versions, client identifiers, sample counts, updates,
+metrics, and audit events remain consistent throughout a training round.
+7.1.3 System Testing
+System testing evaluates the complete workflow from client registration and local prepro-
+cessing through local training, update validation, federated aggregation, fairness review,
+audit recording, and final prediction.
+The system is tested using the following patient fields:
+• Age
+• BMI
+• Waist Circumference
+• Systolic Blood Pressure
+Dept. of AI&ML, MITE, Moodbidri
+Page — 30
+
+
+=== PDF PAGE 57 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+• Diastolic Blood Pressure
+• HbA1c
+• Total Cholesterol
+• HDL Cholesterol
+• Creatinine
+• BUN
+• Albumin
+• Uric Acid
+• Serum Glucose
+• Smoking Status
+• Physical Activity
+7.1.4 Acceptance Testing
+Acceptance testing verifies that the prototype satisfies its stated requirements. Age must
+be accepted as a required field. Other unavailable values must be handled by the frozen
+training-fitted preprocessing pipeline.
+The system must preserve raw records at the client, aggregate only approved updates, pro-
+duce multi-label predictions, report fairness measures, and maintain an auditable model
+history.
+7.2 Test Cases
+Table 7.1 presents the principal test cases used for the prototype.
+Table 7.1: FedFairChain Test Cases
+ID
+Test Description Input or Condition Expected Output
+Actual Output
+Status
+TC1
+Required age val-
+idation
+Age supplied with
+other fields avail-
+able or unavailable
+Age is accepted and remaining
+fields are processed correctly
+Age accepted and request
+passed validation
+Passed
+TC2
+Missing-value
+preprocessing
+Blank BMI, labora-
+tory, or lifestyle val-
+ues
+Frozen preprocessing handles
+unavailable
+values
+without
+changing feature order
+Missing values handled by
+the preprocessing pipeline
+Passed
+Dept. of AI&ML, MITE, Moodbidri
+Page — 31
+
+
+=== PDF PAGE 58 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+ID
+Test Description Input or Condition Expected Output
+Actual Output
+Status
+TC3
+Lifestyle
+encod-
+ing
+Smoking Status and
+Physical
+Activity
+categories
+Categories are converted into
+the approved numerical repre-
+sentation
+Categories encoded success-
+fully
+Passed
+TC4
+Local
+model
+training
+Approved
+client-
+local
+training
+partition
+Client trains locally without
+transferring raw patient records
+Local model trained success-
+fully
+Passed
+TC5
+Update validation Valid
+and
+invalid
+model updates
+Valid updates are accepted and
+incompatible updates are re-
+jected
+Valid updates accepted and
+invalid updates rejected
+Passed
+TC6
+Federated aggre-
+gation
+Approved
+updates
+from
+selected
+clients
+Coordinator produces the next
+global model using the config-
+ured rule
+Global model generated from
+approved updates
+Passed
+TC7
+Multi-label
+prediction
+Patient feature vec-
+tor
+with
+multiple
+disease labels
+System returns one probability
+and label decision for each dis-
+ease output
+Three disease outputs re-
+turned
+Passed
+TC8
+Fairness
+evalua-
+tion
+Client-level
+or
+group-level evalua-
+tion results
+Fairness
+measures
+and
+ob-
+served gaps are calculated and
+recorded
+Fairness
+values
+generated
+and stored
+Passed
+TC9
+Audit recording
+Completed training
+round
+Model version, clients, valida-
+tion status, metrics, and fair-
+ness summary are stored
+Audit event stored success-
+fully
+Passed
+TC10
+Authorized
+prediction display
+Valid request using
+the selected global
+model
+Prediction is displayed with
+model version and research-
+only qualification
+Prediction
+displayed
+with
+model information
+Passed
+7.3 Expected and Actual Outputs
+The expected and actual output comparison confirms whether each system operation pro-
+duces the required result. Successful tests must produce valid outputs without exposing raw
+patient records or changing the approved feature and label order.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 32
+
+
+=== PDF PAGE 59 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Table 7.2: Expected and Actual Output Summary
+Operation
+Expected Output
+Actual Output
+Data preprocessing
+Valid
+processed
+feature
+vector
+Processed feature vector
+generated successfully
+Local training
+Client model update
+Local model update cre-
+ated successfully
+Update validation
+Valid
+updates
+accepted
+and invalid updates re-
+jected
+Validation decision pro-
+duced correctly
+Federated aggregation
+Updated global model
+Global model generated
+from approved updates
+Prediction
+Three disease-label out-
+puts
+Diabetes, CVD, and hy-
+pertension predictions re-
+turned
+Fairness evaluation
+Group-level metrics and
+fairness gaps
+Fairness results calculated
+and recorded
+Audit logging
+Complete
+training
+and
+evaluation event
+Audit record created suc-
+cessfully
+7.4 Test Summary
+The test summary shows that the principal functional components of the prototype were
+tested. The test process covered data preparation, model training, federated communication,
+validation, aggregation, prediction, fairness evaluation, and audit recording.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 33
+
+
+=== PDF PAGE 60 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Table 7.3: Test Summary
+Testing Level
+Main
+Compo-
+nents
+Result
+Status
+Unit Testing
+Preprocessing, la-
+bels, metrics, audit
+functions
+Expected
+outputs
+obtained
+Passed
+Integration Testing
+Client,
+coordina-
+tor,
+aggregator,
+evaluator
+Components
+ex-
+changed
+valid
+information
+Passed
+System Testing
+Complete training
+and
+prediction
+workflow
+Complete
+work-
+flow
+executed
+correctly
+Passed
+These test cases cover the functional and non-functional requirements of the prototype.
+They verify input handling, local training, update validation, federated aggregation, multi-
+label prediction, fairness analysis, auditability, and authorized output.
+Any failed test must be recorded with its cause, correction, and retest result before final
+evaluation. The actual values in this chapter should be updated if new test runs produce
+different outcomes.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 34
+
+
+=== PDF PAGE 61 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CHAPTER – 8 
+RESULTS AND SNAPSHOTS
+
+
+=== PDF PAGE 62 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+CHAPTER – 8
+RESULTS AND DISCUSSION
+This chapter presents the verified experimental information available for the Federated
+Classifier-Chain Model for Multi-Label Chronic Disease Prediction. The available results
+include disease-specific accuracy and precision values, dataset information, centralized-
+versus-federated comparisons, fairness observations, and project testing information.
+8.1 Experimental Setup
+The project uses the NHANES common cohort containing 7,524 participants. The eval-
+uation was performed using a shared evaluation set. Previous project records report two
+different evaluation-set sizes, 1,505 and 1,506 records. The original evaluation log must be
+checked before the final report is submitted.
+The available project record confirms that three federated clients were used. The
+project includes centralized and federated evaluation settings. Fairness analysis was per-
+formed using age group and sex as audited attributes.
+The recorded feature dimensions are:
+Table 8.1: Recorded Feature Dimensions
+Model Setting
+Diabetes
+Hypertension
+CVD
+Centralized model
+12
+14
+17
+Federated classifier-chain model
+12
+15
+19
+8.2 Evaluation Metrics
+The project evaluation considered disease-specific accuracy and precision. Additional met-
+rics such as recall, F1-score, Hamming loss, ROC-AUC, and confusion-matrix values were
+not available in the retrieved evaluation records.
+Therefore, this chapter reports only the verified accuracy and precision values. Miss-
+ing metrics are not estimated or replaced with synthetic values.
+8.3 Overall Performance Results
+A complete overall multi-label accuracy, precision, recall, F1-score, Hamming loss, or
+ROC-AUC value was not available in the retrieved project records.
+The available results are therefore reported separately for each disease label and
+training setting.
+8.4 Per-Label Results
+The following precision values were previously recorded for the centralized and federated
+models.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 32
+
+
+=== PDF PAGE 63 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Table 8.2: Per-Label Precision Results
+Disease Label
+Centralized Precision
+Federated Precision
+Diabetes
+88.19%
+88.71%
+CVD
+53.49%
+53.85%
+Hypertension
+65.11%
+65.73%
+The federated model shows slightly higher recorded precision for all three disease
+labels. However, recall, F1-score, support, and ROC-AUC values were not available and
+therefore cannot be used for a complete performance conclusion.
+8.5 Confusion Matrix
+The actual held-out labels and predicted classes required to generate the confusion matrices
+were not available in the retrieved project records.
+Therefore, confusion-matrix values for true negatives, false positives, false nega-
+tives, and true positives are not included in this version of the chapter. They should be
+added after retrieving the original held-out predictions and labels.
+8.6 Baseline Model Comparison
+A complete baseline comparison table containing precision, recall, F1-score, and Hamming
+loss was not available.
+The available records confirm that centralized-versus-federated evaluation was per-
+formed, but the complete baseline output must be retrieved before making a formal com-
+parison between all models.
+8.7 Centralized and Federated Comparison
+The following disease-specific accuracy values were recorded.
+Table 8.3: Centralized and Federated Accuracy Comparison
+Disease Label
+Centralized Accuracy
+Federated Accuracy
+Diabetes
+92.23%
+92.16%
+Hypertension
+70.85%
+70.32%
+CVD
+87.98%
+87.98%
+The recorded accuracy values are very similar between the centralized and federated
+settings. The federated model records slightly lower accuracy for diabetes and hyperten-
+sion, while the CVD accuracy is equal in both settings.
+The recorded precision values are shown below.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 33
+
+
+=== PDF PAGE 64 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+Table 8.4: Centralized and Federated Precision Comparison
+Disease Label
+Centralized Precision
+Federated Precision
+Diabetes
+88.19%
+88.71%
+Hypertension
+65.11%
+65.73%
+CVD
+53.49%
+53.85%
+Overall F1-score and Hamming-loss comparisons were not available. Therefore, the
+comparison is limited to the verified disease-specific accuracy and precision values.
+8.8 Fairness Metrics and Fairness Gaps
+Fairness evaluation was performed for both centralized and federated models. The audited
+attributes were age group and sex. Six centralized group results and six federated group
+results were recorded. The fairness analysis contained 54 recorded comparisons.
+The following observed differences were available:
+Table 8.5: Recorded Fairness Observations
+Fairness Observation
+Recorded Difference
+Diabetes age-group recall change
++0.3029
+Hypertension age-group specificity change
+-0.1521
+CVD age-group AUROC change
+-0.1388
+Complete group-level precision, recall, F1-score, false-positive-rate gaps, and false-
+negative-rate gaps were not available. Age group and sex are audited attributes and should
+not be treated as federated clients.
+8.9 Federated Training-Round Results
+The available project record confirms three federated clients. The exact number of federated
+training rounds and round-by-round F1-score, Hamming loss, and fairness-gap values were
+not available.
+Consequently, round-level results are not included until the original federated-training
+history is retrieved.
+8.10 Result Graphs
+The following graphs were not available in the retrieved project records:
+• Overall performance graph.
+• Per-label performance graph.
+• Confusion-matrix image.
+• Fairness comparison graph.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 34
+
+
+=== PDF PAGE 65 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+• Federated training-round graph.
+• Complete baseline-comparison graph.
+These graphs should be generated only after retrieving the original predictions, eval-
+uation tables, fairness outputs, and training-round history.
+8.11 Discussion
+The available results show that the centralized and federated models produced similar
+disease-specific accuracy values. Diabetes accuracy was 92.23% for the centralized model
+and 92.16% for the federated model. Hypertension accuracy was 70.85% for the centralized
+model and 70.32% for the federated model. CVD accuracy was 87.98% for both settings.
+The federated model recorded slightly higher precision for diabetes, CVD, and hy-
+pertension. However, these results are limited because recall, F1-score, Hamming loss,
+ROC-AUC, confusion-matrix values, and complete baseline results were not available.
+The fairness evaluation identified differences across age groups and sex. Examples
+include a diabetes age-group recall change of +0.3029, a hypertension age-group specificity
+change of -0.1521, and a CVD age-group AUROC change of -0.1388. These values indicate
+that performance differences should be examined alongside group size and disease-label
+prevalence.
+The available results do not prove that the federated model is superior to the cen-
+tralized model. They only show that the recorded disease-specific accuracy and precision
+values were comparable between the two settings.
+8.12 Limitations
+The main limitations of the available evaluation are:
+• Overall multi-label metrics were not available.
+• Recall, F1-score, Hamming loss, and ROC-AUC values were not available.
+• Confusion-matrix values were not available.
+• Complete baseline-comparison results were not available.
+• Complete group-level fairness metrics were not available.
+• The number of federated training rounds was not available.
+• The evaluation-set size must be confirmed because both 1,505 and 1,506 records were
+previously reported.
+• Training and validation record counts were not available.
+• Positive and negative label counts were not available.
+• Graphs and screenshots were not available in the retrieved evidence.
+• The recorded values should not be interpreted as clinical validation.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 35
+
+
+=== PDF PAGE 66 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+The missing results must be retrieved from the original evaluation files before the fi-
+nal report is submitted. No unavailable value should be estimated or replaced with synthetic
+data.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 36
+
+
+=== PDF PAGE 67 ===
+=  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CHAPTER – 9 
+CONCLUSION AND 
+FUTURE WORK
+
+
+=== PDF PAGE 68 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+CHAPTER – 9
+CONCLUSION AND FUTURE SCOPE
+9.1
+Conclusion
+This project developed the Federated Classifier-Chain Model for Multi-Label Chronic Dis-
+ease Prediction. The system is designed for healthcare environments where patient records
+are distributed across multiple institutions and raw records must remain under the control
+of their original data holders.
+The completed workflow includes local data preparation, missing-value handling, categorical-
+feature processing, numerical-feature scaling, classifier-chain training, controlled update
+validation, federated aggregation, performance evaluation, fairness analysis, and audit record-
+ing.
+Each participating client prepares its approved data locally and trains the configured model
+without transferring raw patient records to the coordinating server. Only approved model
+updates and required training metadata are submitted for aggregation.
+The model supports multi-label prediction for Diabetes, Cardiovascular Disease, and Hy-
+pertension. A single patient record can receive more than one positive disease label, which
+is suitable for representing the coexistence of chronic conditions.
+The recorded disease-specific results show comparable centralized and federated perfor-
+mance. Diabetes accuracy was recorded as 92.23% for the centralized model and 92.16%
+for the federated model. Hypertension accuracy was recorded as 70.85% for the centralized
+model and 70.32% for the federated model. CVD accuracy was recorded as 87.98% for
+both settings.
+The recorded precision values were 88.19% and 88.71% for centralized and federated Dia-
+betes prediction, 65.11% and 65.73% for Hypertension prediction, and 53.49% and 53.85%
+for CVD prediction, respectively. These values indicate that the federated model produced
+results comparable to the centralized model for the available disease-specific measures.
+Fairness evaluation was performed using age group and sex as audited attributes. The avail-
+able evaluation records included six centralized group results, six federated group results,
+and 54 recorded comparisons. Observed differences included a Diabetes age-group recall
+change of +0.3029, a Hypertension age-group specificity change of -0.1521, and a CVD
+age-group AUROC change of -0.1388.
+The audit component records model versions, training rounds, participating clients, update-
+validation decisions, aggregation events, performance metrics, and fairness results. This
+Dept. of AI&ML, MITE, Moodbidri
+Page — 38
+
+
+=== PDF PAGE 69 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+provides a traceable history of the model development process without exposing the under-
+lying patient records.
+The project demonstrates that federated classifier-chain learning can be organized as a trans-
+parent academic workflow for distributed healthcare data. However, the system is a research
+prototype and must not be interpreted as a confirmed clinical diagnostic system.
+The final conclusions are limited by the selected dataset, the number and composition of
+participating clients, label quality, preprocessing assumptions, class imbalance, incomplete
+evaluation records, and the absence of external clinical validation. Overall multi-label met-
+rics, complete confusion matrices, full F1-score results, Hamming loss, ROC-AUC, and
+complete round-wise results must be reported only after they are verified from the original
+evaluation files.
+9.2
+Future Scope
+Several improvements can be considered to strengthen the proposed model and extend it to
+larger research studies.
+• Secure aggregation: Future versions can implement secure aggregation so that the
+coordinator cannot inspect individual client updates before combining them.
+• Differential privacy: Differential-privacy mechanisms can be evaluated to reduce
+the risk of information leakage from model updates while measuring their effect on
+prediction performance.
+• Larger healthcare datasets: Future studies should use larger, more diverse, and
+better-validated healthcare datasets with broader demographic and clinical coverage.
+• More participating institutions: The system can be evaluated with a larger number
+of real or simulated healthcare institutions to study client heterogeneity, communica-
+tion cost, and client dropout.
+• External validation: The final model should be tested on an independent dataset
+collected from a different institution or under a different acquisition protocol.
+• Personalized federated learning: Personalized federated-learning methods can be
+studied so that each institution receives a model adapted to its local population while
+still benefiting from global knowledge.
+• Improved class-imbalance handling: Future work can evaluate class weighting, cali-
+brated thresholds, resampling, cost-sensitive learning, and additional imbalance-aware
+methods.
+• Explainable artificial intelligence: SHAP, LIME, feature-importance analysis, and
+example-based explanations can be added to help researchers and authorized users
+understand prediction results.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 39
+
+
+=== PDF PAGE 70 ===
+FEDERATED CLASSIFIER-CHAIN MODEL FOR MULTI-LABEL
+CHRONIC DISEASE PREDICTION
+• Improved fairness analysis: Future experiments should define clinically meaning-
+ful groups, report confidence intervals, evaluate additional protected attributes, and
+analyse fairness under client imbalance and missing data.
+• Real-world clinical validation: Before any practical use, the model must undergo ex-
+ternal clinical validation, ethical review, security assessment, monitoring, and human
+expert evaluation.
+• Mobile deployment: A lightweight mobile interface may be developed for authorized
+healthcare workers operating in locations with limited computing resources.
+• Cloud deployment: The system may be deployed using secure cloud infrastructure
+with controlled access, encrypted communication, model monitoring, and scalable
+federated coordination.
+• Clinical governance: Future deployment should include consent management, access
+control, incident reporting, model monitoring, retraining policies, and clear human
+oversight.
+The future direction of the project is to improve privacy protection, validate the model
+across independent populations, strengthen fairness measurement, handle class imbalance,
+improve explainability, and establish responsible governance for real-world use. All future
+claims should be supported by reproducible experiments and verified evidence.
+Dept. of AI&ML, MITE, Moodbidri
+Page — 40
+
+
+=== PDF PAGE 71 ===
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+CHAPTER – 10 
+REFERENCES
+
+
+=== PDF PAGE 72 ===
+FEDFAIRCHAIN: FAIR AND PRIVACY-PRESERVING FEDERATED MULTI-LABEL CHRONIC DISEASE PREDICTION
+REFERENCES
+[1] J. Read, B. Pfahringer, G. Holmes, and E. Frank, “Classifier chains for multi-label
+classification,” Machine Learning, vol. 85, no. 3, pp. 333–359, 2011.
+[2] R. Ge, R. Zhang, and P. Wang, “Prediction of chronic diseases with multi-label neural
+network,” IEEE Access, vol. 8, pp. 138210–138216, 2020.
+[3] B. McMahan, E. Moore, D. Ramage, S. Hampson, and B. A. y Arcas, “Communication-
+efficient learning of deep networks from decentralized data,” in Proceedings of AIS-
+TATS, pp. 1273–1282, 2017.
+[4] J. Koneˇcný, H. B. McMahan, F. X. Yu, P. Richtárik, A. T. Suresh, and D. Bacon,
+“Federated learning: Strategies for improving communication efficiency,”
+[5] K. Bonawitz et al., “Practical secure aggregation for privacy-preserving machine
+learning,” in Proceedings of ACM CCS, pp. 1175–1191, 2017.
+[6] T. Li, A. K. Sahu, M. Zaheer, M. Sanjabi, A. Talwalkar, and V. Smith, “Federated
+optimization in heterogeneous networks,” in Proceedings of MLSys, 2020.
+[7] S. P. Karimireddy et al., “SCAFFOLD: Stochastic controlled averaging for federated
+learning,” in Proceedings of ICML, pp. 5132–5143, 2020.
+[8] S. Reddi et al., “Adaptive federated optimization,” in Proceedings of ICLR, 2021.
+[9] P. Kairouz et al., “Advances and open problems in federated learning,” Foundations
+and Trends in Machine Learning, vol. 14, nos. 1–2, pp. 1–210, 2021.
+[10] I. Rieke et al., “The future of digital health with federated learning,” NPJ Digital
+Medicine, vol. 3, art. 119, 2020.
+[11] M. J. Sheller et al., “Federated learning in medicine: Facilitating multi-institutional
+collaborations without sharing patient data,” Scientific Reports, vol. 10, art. 12598,
+2020.
+[12] A. A. Kaissis, M. R. Makowski, D. Rückert, and R. F. Braren, “Secure, privacy-
+preserving and federated machine learning in medical imaging,” Nature Machine In-
+telligence, vol. 2, pp. 305–311, 2020.
+[13] Q. Yang, Y. Liu, T. Chen, and Y. Tong, “Federated machine learning: Concept and
+applications,” ACM Transactions on Intelligent Systems and Technology, vol. 10, no.
+2, art. 12, 2019.
+[14] Y. Liu, T. Fan, T. Chen, Q. Xu, and Q. Yang, “FATE: An industrial grade platform for
+collaborative learning with data protection,” Journal of Machine Learning Research,
+vol. 22, no. 226, pp. 1–6, 2021.
+[15] M. Du, D. Wu, and X. Deng, “Fairness-aware federated learning,” in Proceedings of
+Dept. of AI&ML, MITE, Moodbidri
+Page | 40
+
+
+=== PDF PAGE 73 ===
+FEDFAIRCHAIN: FAIR AND PRIVACY-PRESERVING FEDERATED MULTI-LABEL CHRONIC DISEASE PREDICTION
+AAAI, pp. 195–203, 2021.
+[16] C. Dwork, M. Hardt, T. Pitassi, O. Reingold, and R. Zemel, “Fairness through aware-
+ness,” in Proceedings of ITCS, pp. 214–226, 2012.
+[17] M. Hardt, E. Price, and N. Srebro, “Equality of opportunity in supervised learning,”
+in Advances in Neural Information Processing Systems, vol. 29, 2016.
+[18] R. Zemel, Y. Wu, K. Swersky, T. Pitassi, and C. Dwork, “Learning fair representa-
+tions,” in Proceedings of ICML, pp. 325–333, 2013.
+[19] T. Hastie, R. Tibshirani, and J. Friedman, The Elements of Statistical Learning, 2nd
+ed. New York, NY, USA: Springer, 2009.
+[20] C. M. Bishop, Pattern Recognition and Machine Learning. New York, NY, USA:
+Springer, 2006.
+[21] I. Goodfellow, Y. Bengio, and A. Courville, Deep Learning. Cambridge, MA, USA:
+MIT Press, 2016.
+[22] F. Pedregosa et al., “Scikit-learn: Machine learning in Python,” Journal of Machine
+Learning Research, vol. 12, pp. 2825–2830, 2011.
+[23] M. Abadi et al., “TensorFlow: A system for large-scale machine learning,” in Pro-
+ceedings of OSDI, pp. 265–283, 2016.
+[24] A. Paszke et al., “PyTorch: An imperative style, high-performance deep learning
+library,” in Advances in Neural Information Processing Systems, vol. 32, 2019.
+[25] S. Zhang and Z. Zhou, “A review of multi-label learning algorithms,” IEEE Transac-
+tions on Knowledge and Data Engineering, vol. 26, no. 8, pp. 1819–1837, 2014.
+[26] A. M. Sokolova and G. Lapalme, “A systematic analysis of performance measures
+for classification tasks,” Information Processing & Management, vol. 44, no. 4, pp.
+427–437, 2009.
+[27] T. Fawcett, “An introduction to ROC analysis,” Pattern Recognition Letters, vol. 27,
+no. 8, pp. 861–874, 2006.
+[28] R. Kohavi, “A study of cross-validation and bootstrap for accuracy estimation and
+model selection,” in Proceedings of IJCAI, pp. 1137–1143, 1995.
+[29] V. Vapnik, The Nature of Statistical Learning Theory. New York, NY, USA: Springer,
+1995.
+[30] N. Japkowicz and S. Stephen, “The class imbalance problem: A systematic study,”
+Intelligent Data Analysis, vol. 6, no. 5, pp. 429–449, 2002.
+[31] H. He and E. A. Garcia, “Learning from imbalanced data,” IEEE Transactions on
+Knowledge and Data Engineering, vol. 21, no. 9, pp. 1263–1284, 2009.
+Dept. of AI&ML, MITE, Moodbidri
+Page | 41
+
+
+=== PDF PAGE 74 ===
+FEDFAIRCHAIN: FAIR AND PRIVACY-PRESERVING FEDERATED MULTI-LABEL CHRONIC DISEASE PREDICTION
+[32] G. Tsoumakas and I. Katakis, “Multi-label classification: An overview,” Interna-
+tional Journal of Data Warehousing and Mining, vol. 3, no. 3, pp. 1–13, 2007.
+[33] M.-L. Zhang and Z.-H. Zhou, “A review on multi-label learning algorithms,” IEEE
+Transactions on Knowledge and Data Engineering, vol. 26, no. 8, pp. 1819–1837,
+2014.
+Dept. of AI&ML, MITE, Moodbidri
+Page | 42

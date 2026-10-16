@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="1280" height="850" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1280 850" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="1280" height="850"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-850)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="1280" height="850" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(96%,96%,94%); fill-rule: evenodd;"/>
+			<text x="40" y="800" style="font-family: Helvetica-Bold; font-size: 28px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,1600) scale(1,-1)">Solana transaction study architecture</text>
+			<text x="40" y="772" style="font-family: Helvetica; font-size: 15px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,1544) scale(1,-1)">Historical ranking research, experimental live inference and independently verified fee evidence</text>
+			<text x="40" y="726" style="font-family: Helvetica-Bold; font-size: 13px;fill: rgb(20%,33%,24%); stroke:none;" transform="translate(0,1452) scale(1,-1)">HISTORICAL RESEARCH</text>
+			<text x="680" y="726" style="font-family: Helvetica-Bold; font-size: 13px;fill: rgb(20%,33%,24%); stroke:none;" transform="translate(0,1452) scale(1,-1)">INTEGRATED LIVE PROTOTYPE</text>
+			<rect x="40" y="620" width="550" height="84" rx="4" ry="4" style="stroke: rgb(77%,80%,75%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="58" y="679" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,1358) scale(1,-1)">Public transaction archive</text>
+			<text x="58" y="657" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,1314) scale(1,-1)">SolArchive records, declared roles and execution outcomes</text>
+			<rect x="680" y="620" width="550" height="84" rx="4" ry="4" style="stroke: rgb(77%,80%,75%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="698" y="679" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,1358) scale(1,-1)">Proposed plain SOL transfer</text>
+			<text x="698" y="657" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,1314) scale(1,-1)">Sender, recipient, amount and selected network</text>
+			<path d="M 315,620 L 315,594 Z" style="stroke: rgb(20%,33%,24%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="315 594, 311 602, 319 602" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,33%,24%); fill-rule: evenodd;"/>
+			<path d="M 955,620 L 955,594 Z" style="stroke: rgb(20%,33%,24%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="955 594, 951 602, 959 602" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,33%,24%); fill-rule: evenodd;"/>
+			<rect x="40" y="510" width="550" height="84" rx="4" ry="4" style="stroke: rgb(77%,80%,75%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="58" y="569" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,1138) scale(1,-1)">Chronological account histories</text>
+			<text x="58" y="547" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,1094) scale(1,-1)">One-hour outcome delay; no current receipt features</text>
+			<rect x="680" y="510" width="550" height="84" rx="4" ry="4" style="stroke: rgb(77%,80%,75%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="698" y="569" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,1138) scale(1,-1)">Current network checks</text>
+			<text x="698" y="547" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,1094) scale(1,-1)">Balance, fee quote and unsigned simulation; no submission</text>
+			<path d="M 315,510 L 315,484 Z" style="stroke: rgb(20%,33%,24%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="315 484, 311 492, 319 492" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,33%,24%); fill-rule: evenodd;"/>
+			<path d="M 955,510 L 955,484 Z" style="stroke: rgb(20%,33%,24%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="955 484, 951 492, 959 492" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,33%,24%); fill-rule: evenodd;"/>
+			<rect x="40" y="400" width="550" height="84" rx="4" ry="4" style="stroke: rgb(77%,80%,75%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="58" y="459" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,918) scale(1,-1)">Matched trained models</text>
+			<text x="58" y="437" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,874) scale(1,-1)">Histogram gradient boosting with and without writable history</text>
+			<rect x="680" y="400" width="550" height="84" rx="4" ry="4" style="stroke: rgb(77%,80%,75%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="698" y="459" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,918) scale(1,-1)">Fresh history and actual ML inference</text>
+			<text x="698" y="437" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,874) scale(1,-1)">Sample mature RPC blocks; reuse the research extractor</text>
+			<text x="698" y="419" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,838) scale(1,-1)">Experimental scores, freshness and input-range diagnostics</text>
+			<path d="M 315,400 L 315,374 Z" style="stroke: rgb(20%,33%,24%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="315 374, 311 382, 319 382" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,33%,24%); fill-rule: evenodd;"/>
+			<path d="M 955,400 L 955,374 Z" style="stroke: rgb(20%,33%,24%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="955 374, 951 382, 959 382" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,33%,24%); fill-rule: evenodd;"/>
+			<rect x="40" y="290" width="550" height="84" rx="4" ry="4" style="stroke: rgb(77%,80%,75%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="58" y="349" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,698) scale(1,-1)">Held-out evaluation</text>
+			<text x="58" y="327" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,654) scale(1,-1)">Ranking, calibration, false alarms and cost sensitivity</text>
+			<rect x="680" y="290" width="550" height="84" rx="4" ry="4" style="stroke: rgb(77%,80%,75%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="698" y="349" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,698) scale(1,-1)">Combined result and recorded decision</text>
+			<text x="698" y="327" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,654) scale(1,-1)">Show network result and ML limits; never block using ML</text>
+			<path d="M 590,442 L 680,442 Z" style="stroke: rgb(20%,33%,24%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="680 442, 672 438, 672 446" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,33%,24%); fill-rule: evenodd;"/>
+			<text x="605" y="459" style="font-family: Helvetica; font-size: 11px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,918) scale(1,-1)">models</text>
+			<rect x="40" y="102" width="550" height="84" rx="4" ry="4" style="stroke: rgb(77%,80%,75%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="58" y="161" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,322) scale(1,-1)">Controlled local fee experiment</text>
+			<text x="58" y="139" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,278) scale(1,-1)">Signed test transactions and confirmed balance/fee receipts</text>
+			<text x="58" y="121" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,242) scale(1,-1)">Proves fee mechanism; does not prove an ML advantage</text>
+			<rect x="680" y="102" width="550" height="84" rx="4" ry="4" style="stroke: rgb(77%,80%,75%); stroke-linecap: butt; stroke-width: 1; fill: rgb(100%,100%,100%); fill-rule: evenodd;"/>
+			<text x="698" y="161" style="font-family: Helvetica-Bold; font-size: 17px;fill: rgb(15%,17%,15%); stroke:none;" transform="translate(0,322) scale(1,-1)">Prospective study and receipt verification</text>
+			<text x="698" y="139" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,278) scale(1,-1)">Save message, feature, history and model hashes before outcome</text>
+			<text x="698" y="121" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,242) scale(1,-1)">Accept only a matching later receipt; missing outcomes stay unknown</text>
+			<path d="M 955,290 L 955,186 Z" style="stroke: rgb(20%,33%,24%); stroke-linecap: butt; stroke-width: 1.4;"/>
+			<polygon points="955 186, 951 194, 959 194" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(20%,33%,24%); fill-rule: evenodd;"/>
+			<text x="40" y="53" style="font-family: Helvetica; font-size: 13px;fill: rgb(41%,44%,40%); stroke:none;" transform="translate(0,106) scale(1,-1)">Implemented now: real inference and checks. Still unproven: live predictive validity, added benefit over preflight, fee and time savings.</text>
+		</g>
+	</g>
+</svg>

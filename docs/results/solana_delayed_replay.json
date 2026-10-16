@@ -1,0 +1,453 @@
+{
+  "created_at": "2026-10-09T08:43:48.708747+00:00",
+  "protocol": {
+    "status": "Local protocol fixed before evaluating hash ranks 28000:36000; not public preregistration",
+    "sample_seed": 42,
+    "excluded_prior_hash_ranks": 28000,
+    "sample_tokens": 8000,
+    "horizon": 300,
+    "seeds": [
+      42,
+      73,
+      101
+    ],
+    "budget": 0.05,
+    "window_hours": 48,
+    "buffer_hours": 36,
+    "min_calibration_negatives": 20,
+    "arrival_count": 128,
+    "propensity_floor": 0.1,
+    "delay_score_bins": 3,
+    "model": "RF120 trained only on previous strong-cohort training rows, reusing previous validation-selected parameters. Three-seed mean. No new tuning.",
+    "primary": "Delay-weighted recent negative tail versus identical unweighted recent pool: paired day-bootstrap recall and FPR deltas. Success requires positive recall interval with no FPR increase and observed FPR <=5% in every fold.",
+    "controls": [
+      "frozen_empirical",
+      "static_negative_tail",
+      "recent_negative_tail",
+      "arrival_negative_tail",
+      "buffered_negative_tail",
+      "delay_weighted_tail",
+      "oracle_immediate_tail"
+    ],
+    "availability": "Label revealed at migration+3600, a conservative operational assumption rather than verified data-publication time. Current-token and equal-decision-time labels are never used. Oracle violates maturity and is explicitly invalid for deployment.",
+    "scope": "Same historical MELT period, disjoint eventual migrants; price-collapse proxy, not fraud. Estimated weighting has no conformal guarantee; fixed 36h buffer is audited, not assumed universally complete. No global novelty claim."
+  },
+  "protocol_sha256": "f03d4ce426460542a5798724a2bf766e404afa2b23e27cdff7cc6c947d042276",
+  "eligible": 4295,
+  "skipped": {
+    "already_migrated": 3549,
+    "no positive holdings": 156
+  },
+  "prior_token_overlap": 0,
+  "results": [
+    {
+      "period": "January_late",
+      "test_n": 1363,
+      "negative_n": 413,
+      "positive_n": 950,
+      "reference_n": 371,
+      "parameters": {
+        "n_estimators": 250,
+        "min_samples_leaf": 20,
+        "max_features": 0.8
+      },
+      "auroc": 0.593628138141965,
+      "ap": 0.7697556649851003,
+      "methods": {
+        "frozen_empirical": {
+          "recall": 0.09578947368421052,
+          "fpr": 0.04116222760290557,
+          "alert_fraction": 0.07923697725605282,
+          "diagnostics": {
+            "decisions": 1363
+          }
+        },
+        "static_negative_tail": {
+          "recall": 0.07789473684210527,
+          "fpr": 0.031476997578692496,
+          "alert_fraction": 0.06382978723404255,
+          "diagnostics": {
+            "decisions": 1363
+          }
+        },
+        "recent_negative_tail": {
+          "recall": 0.08947368421052632,
+          "fpr": 0.03631961259079903,
+          "alert_fraction": 0.07336757153338225,
+          "diagnostics": {
+            "pool_size_sum": 63798,
+            "decisions": 1363
+          }
+        },
+        "arrival_negative_tail": {
+          "recall": 0.10631578947368421,
+          "fpr": 0.04600484261501211,
+          "alert_fraction": 0.0880410858400587,
+          "diagnostics": {
+            "pool_size_sum": 174464,
+            "decisions": 1363
+          }
+        },
+        "buffered_negative_tail": {
+          "recall": 0.1031578947368421,
+          "fpr": 0.048426150121065374,
+          "alert_fraction": 0.08657373440939105,
+          "diagnostics": {
+            "pool_size_sum": 68959,
+            "decisions": 1363
+          }
+        },
+        "delay_weighted_tail": {
+          "recall": 0.09894736842105263,
+          "fpr": 0.04116222760290557,
+          "alert_fraction": 0.08143800440205429,
+          "diagnostics": {
+            "pool_size_sum": 63798,
+            "effective_sample_size_sum": 61510.92537944687,
+            "clipped_weight_count": 7,
+            "decisions": 1363
+          }
+        },
+        "oracle_immediate_tail": {
+          "recall": 0.09789473684210526,
+          "fpr": 0.03631961259079903,
+          "alert_fraction": 0.07923697725605282,
+          "diagnostics": {
+            "pool_size_sum": 68121,
+            "decisions": 1363
+          }
+        }
+      }
+    },
+    {
+      "period": "February_early",
+      "test_n": 711,
+      "negative_n": 251,
+      "positive_n": 460,
+      "reference_n": 507,
+      "parameters": {
+        "n_estimators": 250,
+        "min_samples_leaf": 5,
+        "max_features": 0.8
+      },
+      "auroc": 0.6261649055950114,
+      "ap": 0.7238042707952679,
+      "methods": {
+        "frozen_empirical": {
+          "recall": 0.08260869565217391,
+          "fpr": 0.06772908366533864,
+          "alert_fraction": 0.07735583684950774,
+          "diagnostics": {
+            "decisions": 711
+          }
+        },
+        "static_negative_tail": {
+          "recall": 0.08260869565217391,
+          "fpr": 0.06772908366533864,
+          "alert_fraction": 0.07735583684950774,
+          "diagnostics": {
+            "decisions": 711
+          }
+        },
+        "recent_negative_tail": {
+          "recall": 0.03260869565217391,
+          "fpr": 0.05179282868525897,
+          "alert_fraction": 0.03938115330520394,
+          "diagnostics": {
+            "pool_size_sum": 24074,
+            "decisions": 711,
+            "fallback_count": 26
+          }
+        },
+        "arrival_negative_tail": {
+          "recall": 0.06956521739130435,
+          "fpr": 0.05976095617529881,
+          "alert_fraction": 0.06610407876230662,
+          "diagnostics": {
+            "pool_size_sum": 91008,
+            "decisions": 711
+          }
+        },
+        "buffered_negative_tail": {
+          "recall": 0.05434782608695652,
+          "fpr": 0.043824701195219126,
+          "alert_fraction": 0.05063291139240506,
+          "diagnostics": {
+            "pool_size_sum": 25692,
+            "decisions": 711,
+            "fallback_count": 2
+          }
+        },
+        "delay_weighted_tail": {
+          "recall": 0.041304347826086954,
+          "fpr": 0.05179282868525897,
+          "alert_fraction": 0.0450070323488045,
+          "diagnostics": {
+            "pool_size_sum": 24074,
+            "effective_sample_size_sum": 22965.001876160084,
+            "clipped_weight_count": 1,
+            "decisions": 711,
+            "fallback_count": 26
+          }
+        },
+        "oracle_immediate_tail": {
+          "recall": 0.05,
+          "fpr": 0.055776892430278883,
+          "alert_fraction": 0.052039381153305204,
+          "diagnostics": {
+            "pool_size_sum": 26212,
+            "decisions": 711,
+            "fallback_count": 4
+          }
+        }
+      }
+    },
+    {
+      "period": "February_late",
+      "test_n": 422,
+      "negative_n": 217,
+      "positive_n": 205,
+      "reference_n": 283,
+      "parameters": {
+        "n_estimators": 250,
+        "min_samples_leaf": 20,
+        "max_features": 0.8
+      },
+      "auroc": 0.6546026750590086,
+      "ap": 0.6199268865363483,
+      "methods": {
+        "frozen_empirical": {
+          "recall": 0.05853658536585366,
+          "fpr": 0.03225806451612903,
+          "alert_fraction": 0.045023696682464455,
+          "diagnostics": {
+            "decisions": 422
+          }
+        },
+        "static_negative_tail": {
+          "recall": 0.05853658536585366,
+          "fpr": 0.027649769585253458,
+          "alert_fraction": 0.04265402843601896,
+          "diagnostics": {
+            "decisions": 422
+          }
+        },
+        "recent_negative_tail": {
+          "recall": 0.08780487804878048,
+          "fpr": 0.027649769585253458,
+          "alert_fraction": 0.05687203791469194,
+          "diagnostics": {
+            "pool_size_sum": 13159,
+            "decisions": 422,
+            "fallback_count": 5
+          }
+        },
+        "arrival_negative_tail": {
+          "recall": 0.06341463414634146,
+          "fpr": 0.03686635944700461,
+          "alert_fraction": 0.04976303317535545,
+          "diagnostics": {
+            "pool_size_sum": 54016,
+            "decisions": 422
+          }
+        },
+        "buffered_negative_tail": {
+          "recall": 0.07317073170731707,
+          "fpr": 0.018433179723502304,
+          "alert_fraction": 0.045023696682464455,
+          "diagnostics": {
+            "pool_size_sum": 15275,
+            "decisions": 422
+          }
+        },
+        "delay_weighted_tail": {
+          "recall": 0.08780487804878048,
+          "fpr": 0.027649769585253458,
+          "alert_fraction": 0.05687203791469194,
+          "diagnostics": {
+            "pool_size_sum": 13159,
+            "effective_sample_size_sum": 12811.345408665175,
+            "clipped_weight_count": 0,
+            "decisions": 422,
+            "fallback_count": 5
+          }
+        },
+        "oracle_immediate_tail": {
+          "recall": 0.08780487804878048,
+          "fpr": 0.027649769585253458,
+          "alert_fraction": 0.05687203791469194,
+          "diagnostics": {
+            "pool_size_sum": 14208,
+            "decisions": 422,
+            "fallback_count": 3
+          }
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "candidate": "frozen_empirical",
+      "reference": "recent_negative_tail",
+      "primary": false,
+      "recall_delta": {
+        "weighted_delta": 0.012743269847931268,
+        "ci95": [
+          -0.005222578362948403,
+          0.028725246035464086
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "fpr_delta": {
+        "weighted_delta": 0.007963085742454868,
+        "ci95": [
+          -0.0019435002617040344,
+          0.017511206972605397
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "candidate": "static_negative_tail",
+      "reference": "recent_negative_tail",
+      "primary": false,
+      "recall_delta": {
+        "weighted_delta": 0.0029714243688489525,
+        "ci95": [
+          -0.01645460655347722,
+          0.018377461108297084
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "fpr_delta": {
+        "weighted_delta": 0.0018951093867529824,
+        "ci95": [
+          -0.007388624137295873,
+          0.010526343226139804
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "candidate": "arrival_negative_tail",
+      "reference": "recent_negative_tail",
+      "primary": false,
+      "recall_delta": {
+        "weighted_delta": 0.015600638422827193,
+        "ci95": [
+          0.0028707737158298486,
+          0.03128876370608077
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "fpr_delta": {
+        "weighted_delta": 0.009116870228397331,
+        "ci95": [
+          -0.00019036126391859087,
+          0.018566323509671353
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "candidate": "buffered_negative_tail",
+      "reference": "recent_negative_tail",
+      "primary": false,
+      "recall_delta": {
+        "weighted_delta": 0.01119090181506462,
+        "ci95": [
+          -0.008421901229857288,
+          0.02980632736478385
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "fpr_delta": {
+        "weighted_delta": 0.002783041300751489,
+        "ci95": [
+          -0.008767573159401867,
+          0.014703607921621752
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "candidate": "delay_weighted_tail",
+      "reference": "recent_negative_tail",
+      "primary": true,
+      "recall_delta": {
+        "weighted_delta": 0.00765033664847738,
+        "ci95": [
+          0.002616653621635781,
+          0.013159336054481713
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "fpr_delta": {
+        "weighted_delta": 0.0026444247842552938,
+        "ci95": [
+          0.0,
+          0.006700712166589922
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "candidate": "oracle_immediate_tail",
+      "reference": "recent_negative_tail",
+      "primary": false,
+      "recall_delta": {
+        "weighted_delta": 0.00955252889749457,
+        "ci95": [
+          0.0028271109861689853,
+          0.018846129361934447
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "fpr_delta": {
+        "weighted_delta": 0.0011348835427520676,
+        "ci95": [
+          0.0,
+          0.003546719172163063
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    }
+  ],
+  "delay_by_outcome": {
+    "0": {
+      "n": 1680,
+      "median_hours": 1.635,
+      "available_at_6h": 0.8398809523809524,
+      "available_at_24h": 0.9958333333333333,
+      "exceeds_buffer": 0
+    },
+    "1": {
+      "n": 2615,
+      "median_hours": 1.2147222222222223,
+      "available_at_6h": 0.9239005736137668,
+      "available_at_24h": 0.9973231357552581,
+      "exceeds_buffer": 0
+    }
+  },
+  "limits": [
+    "Same historical period; not independent-period confirmation.",
+    "Outcome readiness is a conservative assumed schedule, not verified publication time.",
+    "Availability weighting is established prior art; this is an empirical intervention test.",
+    "Static negative-tail guarantee requires exchangeability; temporal drift may violate it.",
+    "Estimated weights and buffer have no proved coverage guarantee.",
+    "Bootstrap is conditional on models, clustered by decision day, not wallet operator."
+  ],
+  "primary_success": false,
+  "source_hashes": {
+    "data/raw/melt/label.csv": "dcfcce188fb352466b76ab8345f79633766c93e96d29729282ab114133fcc09a",
+    "data/raw/melt/pre_migration_tx.zip": "4d62d079d63fba5510bbaee7a0cb641bf93d4b0697349cce1af2c9db67e201a5",
+    "data/processed/solana_ml/prefix_price_drop_6000_42.jsonl": "27d708419282d7916abb1c0bd3b633ad32c459b60ae0b10bcc5fd8e8a361fa67",
+    "data/processed/solana_ml/strong_cohort_10000.jsonl": "51ee45a07fc4f7b0bf384cc85e59bd7d20ce60244e43576a69e8f35199312e87",
+    "research/solana/ml/rich_features.py": "274ac594b83c5d36eeafcdf4951be3ba4ea8ea7bcb6b09d6edcade895e83fd9f",
+    "research/solana/ml/strong_baselines.py": "f7bcccfb047419ff0afd779705eded1f9533159c9aa1786cf8d2c7149261c0f1",
+    "research/solana/ml/robustness.py": "5f09315bd377f5bea344a99f6b6804be9b2545590a3b3e7ce91f081edd8deb00",
+    "data/processed/solana_ml/delayed_cohort_8000.jsonl": "8afc4cbd443e35c604687691f45d758f1d817cf918a6d4a899ac106858a7c826",
+    "research/solana/ml/delayed_protocol.json": "f03d4ce426460542a5798724a2bf766e404afa2b23e27cdff7cc6c947d042276",
+    "research/solana/ml/delayed_replay.py": "40699e46a9bef4fe2edadf38c46251fce7833b90acc6d90945efc5dbf8cec5fd"
+  }
+}

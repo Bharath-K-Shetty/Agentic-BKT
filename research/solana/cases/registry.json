@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "scope": "Feasibility leads; not a representative dataset or adjudicated ground truth",
+  "cases": [
+    {
+      "id": "anchor-return-data",
+      "kind": "public_merged_fix",
+      "source": "https://github.com/otter-sec/anchor/pull/4411",
+      "revision_before": "6801a5742e941dbf6f5f9b4ad5db65db28869ba3",
+      "revision_after": "f6341296b9d909093b2fdda5072087d5157fa4e4",
+      "candidate_property": "Delayed CPI return decoding accepts data only from the expected producer",
+      "required_capabilities": ["Reachable intervening CPI to an attacker-controlled program"],
+      "status": "source_pinned_upstream_reproduction_pending",
+      "limits": "The native runtime control is a model of the mechanism, not execution of these Anchor revisions"
+    },
+    {
+      "id": "crucible-owner-mutation",
+      "kind": "documented_tool_limitation",
+      "source": "https://github.com/asymmetric-research/crucible/blob/main/docs/constraint-check-engine.md",
+      "candidate_property": "Address-pinned protected accounts cannot be replaced by arbitrary attacker-owned accounts",
+      "required_capabilities": ["Mutation must be reachable under account owner and address constraints"],
+      "status": "documentation_pinned_recorded_finding_needed",
+      "limits": "No instance counts or empirical false-positive rate inferred from documentation"
+    },
+    {
+      "id": "sealevel-owner-check",
+      "kind": "educational_example",
+      "source": "https://github.com/coral-xyz/sealevel-attacks/tree/24555d044802db4022112a94d6d70e74291a4b6d/programs/2-owner-checks",
+      "candidate_property": "A consumer verifies the account owner before trusting its data",
+      "required_capabilities": ["Create and initialize an account through a controlled owner program"],
+      "status": "source_pinned_upstream_reproduction_pending",
+      "limits": "Logging example, not theft; authored runtime control uses its own record format"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "status": "Unused-date evaluation of a fixed calibration recipe, specified before December3\u20135 transaction outcomes were loaded",
+  "code_sha256": "b2d37c1e653ddbf7a731f06c692b265c696c8839f930586d4e315aefc64d18ef",
+  "protocol": "Fixed HGB seed42; isotonic fit on cold validation first12hours; threshold on remaining purged cold validation under5%FPR; no test tuning.",
+  "model_scope": "Original structure/signer/read-only HGB versus writable-context HGB; excludes learned identity score. Not the refined identity-controlled endpoint.",
+  "limitations": [
+    "One additional unused test day; not an independent provider or broad regime validation.",
+    "One-hour labels and conditional inclusion apply.",
+    "Threshold budget is validation-only, not a test guarantee.",
+    "Isotonic calibration can create ties and alter AP.",
+    "One row group per date from one provider; no independent-source validation."
+  ],
+  "cohorts": [
+    {
+      "cohort": "fresh",
+      "results": [
+        {
+          "model": "payer_readonly_hgb",
+          "split": {
+            "calibration_rows": 12556,
+            "threshold_rows": 14004,
+            "last_calibration_ts": 1764849596,
+            "first_threshold_ts": 1764849604
+          },
+          "threshold": 0.18181818181818182,
+          "original_cold": {
+            "auroc": 0.7634979005610134,
+            "ap_positive": 0.22464293851903816,
+            "ap_negative": 0.9796868477524842,
+            "brier": 0.04832633226728347,
+            "recall": 0.08200836820083682,
+            "fpr": 0.004954380457176493,
+            "precision": 0.49246231155778897,
+            "alert_fraction": 0.009221074092952133
+          },
+          "followup_cold": {
+            "auroc": 0.7674175237990465,
+            "ap_positive": 0.19842580309417363,
+            "ap_negative": 0.977629578733264,
+            "brier": 0.04775015021455255,
+            "recall": 0.20167364016736403,
+            "fpr": 0.02383989012067105,
+            "precision": 0.3314993122420908,
+            "alert_fraction": 0.03368703952550855
+          }
+        },
+        {
+          "model": "context_hgb",
+          "split": {
+            "calibration_rows": 12556,
+            "threshold_rows": 14004,
+            "last_calibration_ts": 1764849596,
+            "first_threshold_ts": 1764849604
+          },
+          "threshold": 0.18181818181818182,
+          "original_cold": {
+            "auroc": 0.7971896990592034,
+            "ap_positive": 0.2639841055584415,
+            "ap_negative": 0.984089365445333,
+            "brier": 0.04646796843097701,
+            "recall": 0.06610878661087866,
+            "fpr": 0.0031884626704601197,
+            "precision": 0.5486111111111112,
+            "alert_fraction": 0.00667253602706084
+          },
+          "followup_cold": {
+            "auroc": 0.7961451927588339,
+            "ap_positive": 0.2387756486079861,
+            "ap_negative": 0.9825254964622797,
+            "brier": 0.04620496262890879,
+            "recall": 0.298744769874477,
+            "fpr": 0.03183557343274796,
+            "precision": 0.3548707753479125,
+            "alert_fraction": 0.04661507807793893
+          }
+        }
+      ],
+      "primary_sha256": "59dfb52dbe4a741d47218e717457d54c9d527ee92c362a26c0ba3d9832661dc3"
+    }
+  ]
+}

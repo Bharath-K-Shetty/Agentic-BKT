@@ -1,0 +1,201 @@
+{
+  "retrieved_at": "2026-10-09T02:59:47.372155+00:00",
+  "scope": "Pinned documentation/code reads and JSON schema/count probe. No model trained or upstream performance reproduced; no parquet contents or Drive archives fetched.",
+  "cache": "data/raw/solana_ml_probe",
+  "files": [
+    {
+      "repository": "git-disl/MELT",
+      "revision": "0732bcfab54f508c27becd6d9b2b10b1b6ac2517",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/git-disl/MELT/0732bcfab54f508c27becd6d9b2b10b1b6ac2517/README.md",
+      "bytes": 4695,
+      "sha256": "6e02564bc631c280fc917d325029e9d2b8956aa6366ede0b96cf375703eae8b5",
+      "download_complete": true
+    },
+    {
+      "repository": "git-disl/MELT",
+      "revision": "0732bcfab54f508c27becd6d9b2b10b1b6ac2517",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/git-disl/MELT/0732bcfab54f508c27becd6d9b2b10b1b6ac2517/LICENSE",
+      "bytes": 19376,
+      "sha256": "e4403e79d27c67b984cbb58bc03a7112e1d3bf75a80dbb126045ff25a14804de",
+      "download_complete": true
+    },
+    {
+      "repository": "git-disl/MELT",
+      "revision": "0732bcfab54f508c27becd6d9b2b10b1b6ac2517",
+      "path": "src/dataset.py",
+      "url": "https://raw.githubusercontent.com/git-disl/MELT/0732bcfab54f508c27becd6d9b2b10b1b6ac2517/src/dataset.py",
+      "bytes": 6009,
+      "sha256": "600f0940d6cbdae12d1d9c9275e579d4fe88824f59bddd82270d05c9222132c6",
+      "download_complete": true
+    },
+    {
+      "repository": "git-disl/MELT",
+      "revision": "0732bcfab54f508c27becd6d9b2b10b1b6ac2517",
+      "path": "src/feat_gen.py",
+      "url": "https://raw.githubusercontent.com/git-disl/MELT/0732bcfab54f508c27becd6d9b2b10b1b6ac2517/src/feat_gen.py",
+      "bytes": 21064,
+      "sha256": "94955c74e3c267e470372e678514e7f075b51df8a9139bca22aee86e75a176e1",
+      "download_complete": true
+    },
+    {
+      "repository": "git-disl/MELT",
+      "revision": "0732bcfab54f508c27becd6d9b2b10b1b6ac2517",
+      "path": "data/memecoin/memecoin_list.jsonl",
+      "url": "https://raw.githubusercontent.com/git-disl/MELT/0732bcfab54f508c27becd6d9b2b10b1b6ac2517/data/memecoin/memecoin_list.jsonl",
+      "bytes": 13319749,
+      "sha256": "bcafb018fb2670de7289c1a0cbdf8a0fde002c0a36ecfe38490527c1a1429524",
+      "download_complete": true,
+      "json_observations": {
+        "rows": 46139,
+        "first_record_fields": [
+          "creator",
+          "signature",
+          "time",
+          "timestamp",
+          "token_address"
+        ],
+        "distinct_creator_values": 1,
+        "creator_values_if_at_most_ten": [
+          "39azUYFWPz3VHgKCf3VChUwbpURdCHRxjWVowf5jUJjg"
+        ],
+        "timestamp_field_semantics": "Migration records per paper section 3.1, not verified original token creators or launch timestamps"
+      }
+    },
+    {
+      "repository": "Gauravpoudel7/AI_RugPull_Prediction",
+      "revision": "12c7fb5a0ab65b9fb19bc237e66790c83288103e",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/Gauravpoudel7/AI_RugPull_Prediction/12c7fb5a0ab65b9fb19bc237e66790c83288103e/README.md",
+      "bytes": 10407,
+      "sha256": "8fa5482c70850f062c12073012a2b43ee2b6009a1ba00765887ecf5a6199a8b5",
+      "download_complete": true
+    },
+    {
+      "repository": "Gauravpoudel7/AI_RugPull_Prediction",
+      "revision": "12c7fb5a0ab65b9fb19bc237e66790c83288103e",
+      "path": "PROVENANCE.md",
+      "url": "https://raw.githubusercontent.com/Gauravpoudel7/AI_RugPull_Prediction/12c7fb5a0ab65b9fb19bc237e66790c83288103e/PROVENANCE.md",
+      "bytes": 5842,
+      "sha256": "d5780c64f4516e1c60c58f9119fec3320c67212c82664f49d37f624c9b159b05",
+      "download_complete": true
+    },
+    {
+      "repository": "Gauravpoudel7/AI_RugPull_Prediction",
+      "revision": "12c7fb5a0ab65b9fb19bc237e66790c83288103e",
+      "path": "scripts/protocol.py",
+      "url": "https://raw.githubusercontent.com/Gauravpoudel7/AI_RugPull_Prediction/12c7fb5a0ab65b9fb19bc237e66790c83288103e/scripts/protocol.py",
+      "bytes": 6366,
+      "sha256": "356cd6e1b90b882c628f39920f3f249d3af8de4bae55724efa799c944f4c6228",
+      "download_complete": true
+    },
+    {
+      "repository": "Gauravpoudel7/AI_RugPull_Prediction",
+      "revision": "12c7fb5a0ab65b9fb19bc237e66790c83288103e",
+      "path": "scripts/models.py",
+      "url": "https://raw.githubusercontent.com/Gauravpoudel7/AI_RugPull_Prediction/12c7fb5a0ab65b9fb19bc237e66790c83288103e/scripts/models.py",
+      "bytes": 6075,
+      "sha256": "d06dd2814c442f759a566587b87aa1715092cb065cba3e17878ce0fdff5ffc19",
+      "download_complete": true
+    },
+    {
+      "repository": "Gauravpoudel7/AI_RugPull_Prediction",
+      "revision": "12c7fb5a0ab65b9fb19bc237e66790c83288103e",
+      "path": "scripts/uncertainty.py",
+      "url": "https://raw.githubusercontent.com/Gauravpoudel7/AI_RugPull_Prediction/12c7fb5a0ab65b9fb19bc237e66790c83288103e/scripts/uncertainty.py",
+      "bytes": 6970,
+      "sha256": "ef00bb3fd3ca2f58e724ea389db440ead4ec527b805efb6b91acbd98e6b409e0",
+      "download_complete": true
+    },
+    {
+      "repository": "Gauravpoudel7/AI_RugPull_Prediction",
+      "revision": "12c7fb5a0ab65b9fb19bc237e66790c83288103e",
+      "path": "docs/process/audit_report.md",
+      "url": "https://raw.githubusercontent.com/Gauravpoudel7/AI_RugPull_Prediction/12c7fb5a0ab65b9fb19bc237e66790c83288103e/docs/process/audit_report.md",
+      "bytes": 9192,
+      "sha256": "a14e64d6aec70ba0e2f27c9ba6fad5db77a607371494747054b0df059e517d15",
+      "download_complete": true
+    },
+    {
+      "repository": "DeFiLabX/SolRPDS",
+      "revision": "43416d75d2c82d09c6c6e9221ba730f5c8440211",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/DeFiLabX/SolRPDS/43416d75d2c82d09c6c6e9221ba730f5c8440211/README.md",
+      "bytes": 947,
+      "sha256": "2408adf2e64729c93b3225b30892c120593e3f98aae1a458823d5100693104c9",
+      "download_complete": true
+    },
+    {
+      "repository": "DeFiLabX/SolRPDS",
+      "revision": "43416d75d2c82d09c6c6e9221ba730f5c8440211",
+      "path": "dataset/json/2021.json",
+      "url": "https://raw.githubusercontent.com/DeFiLabX/SolRPDS/43416d75d2c82d09c6c6e9221ba730f5c8440211/dataset/json/2021.json",
+      "bytes": 1247572,
+      "sha256": "3fecc67599452ffcd91902c74240582ad6ca09129a68256fbedadf0fde480481",
+      "download_complete": true,
+      "json_observations": {
+        "rows": 1703,
+        "first_record_fields": [
+          "ADD_TO_REMOVE_RATIO",
+          "FIRST_POOL_ACTIVITY_TIMESTAMP",
+          "INACTIVITY_STATUS",
+          "LAST_POOL_ACTIVITY_TIMESTAMP",
+          "LAST_SWAP_TIMESTAMP",
+          "LAST_SWAP_TX_ID",
+          "LIQUIDITY_POOL_ADDRESS",
+          "MINT",
+          "NUM_LIQUIDITY_ADDS",
+          "NUM_LIQUIDITY_REMOVES",
+          "TOTAL_ADDED_LIQUIDITY",
+          "TOTAL_REMOVED_LIQUIDITY"
+        ]
+      }
+    },
+    {
+      "repository": "Slinky21/Pumpfun_Memecoin_Corpus",
+      "revision": "13bec2bf3089d56d50c35e602616d1b993bb37f5",
+      "path": "README.md",
+      "url": "https://huggingface.co/datasets/Slinky21/Pumpfun_Memecoin_Corpus/resolve/13bec2bf3089d56d50c35e602616d1b993bb37f5/README.md",
+      "bytes": 8253,
+      "sha256": "0cd64ffd8c20b6aee2ecb70c956d47fa7a24e786f44c7c84f85b4c4fffbc7639",
+      "download_complete": true
+    },
+    {
+      "repository": "Slinky21/Pumpfun_Memecoin_Corpus",
+      "revision": "13bec2bf3089d56d50c35e602616d1b993bb37f5",
+      "path": "KNOWN_ISSUES.md",
+      "url": "https://huggingface.co/datasets/Slinky21/Pumpfun_Memecoin_Corpus/resolve/13bec2bf3089d56d50c35e602616d1b993bb37f5/KNOWN_ISSUES.md",
+      "bytes": 14974,
+      "sha256": "82534ee226e1447e5ab0c0eb4b1b5453f0241aa5426d561b8f4b00314d1da299",
+      "download_complete": true
+    },
+    {
+      "repository": "Tr4m0ryp/trenches-pumpfun-forward-2026-08",
+      "revision": "0a38dff884ba41f63da325d04fc85521b1cb34fe",
+      "path": "README.md",
+      "url": "https://huggingface.co/datasets/Tr4m0ryp/trenches-pumpfun-forward-2026-08/resolve/0a38dff884ba41f63da325d04fc85521b1cb34fe/README.md",
+      "bytes": 13966,
+      "sha256": "0187759997f1e209aa28db61aa38a4d920a1ba1a262487553d16a10c0ce5b605",
+      "download_complete": true
+    },
+    {
+      "repository": "Tr4m0ryp/trenches-pumpfun-forward-2026-08",
+      "revision": "0a38dff884ba41f63da325d04fc85521b1cb34fe",
+      "path": "DATASHEET.md",
+      "url": "https://huggingface.co/datasets/Tr4m0ryp/trenches-pumpfun-forward-2026-08/resolve/0a38dff884ba41f63da325d04fc85521b1cb34fe/DATASHEET.md",
+      "bytes": 30835,
+      "sha256": "b516da81224c05a611bcba452eaf02419d5e671dda0dfe63a0737222bc473b94",
+      "download_complete": true
+    },
+    {
+      "repository": "Tr4m0ryp/trenches-pumpfun-forward-2026-08",
+      "revision": "0a38dff884ba41f63da325d04fc85521b1cb34fe",
+      "path": "MANIFEST.json",
+      "url": "https://huggingface.co/datasets/Tr4m0ryp/trenches-pumpfun-forward-2026-08/resolve/0a38dff884ba41f63da325d04fc85521b1cb34fe/MANIFEST.json",
+      "bytes": 17633,
+      "sha256": "b113689b520d5f0fdf1fa8e1109f22e14da919c76052af7f1c6c810ab71a4b34",
+      "download_complete": true
+    }
+  ]
+}

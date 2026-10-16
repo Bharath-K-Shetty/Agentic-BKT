@@ -1,0 +1,64 @@
+{
+  "status": "experimental",
+  "scores": {
+    "payer_readonly_hgb": {
+      "raw_model_score": 0.001400792846169082,
+      "validated_live_probability": null
+    },
+    "context_hgb": {
+      "raw_model_score": 0.0016009982208458867,
+      "validated_live_probability": null
+    }
+  },
+  "automatic_block": false,
+  "warning_recommendation": null,
+  "cold_history": true,
+  "feature_values": {
+    "structure_account_count": 3,
+    "structure_signer_count": 1,
+    "structure_writable_count": 2,
+    "structure_nonpayer_writable_count": 1,
+    "structure_readonly_count": 0,
+    "structure_duplicate_count": 0,
+    "payer_risk": 0.02631578947368421,
+    "payer_log_count": 0.0,
+    "template_risk": 0.021052631578947368,
+    "template_log_count": 1.791759469228055,
+    "structure_infra_0": 1,
+    "structure_infra_1": 0,
+    "structure_infra_2": 0,
+    "structure_infra_3": 0,
+    "structure_infra_4": 0,
+    "structure_infra_5": 0,
+    "structure_infra_6": 0,
+    "structure_infra_7": 0,
+    "structure_infra_8": 0,
+    "structure_infra_9": 0,
+    "readonly_seen_fraction": 0.0,
+    "readonly_log_count_mean": 0.0,
+    "readonly_log_count_max": 0.0,
+    "readonly_risk_mean": 0.02631578947368421,
+    "readonly_risk_max": 0.02631578947368421,
+    "readonly_risk_min": 0.02631578947368421,
+    "readonly_risk_std": 0.0,
+    "writable_seen_fraction": 0.0,
+    "writable_log_count_mean": 0.0,
+    "writable_log_count_max": 0.0,
+    "writable_risk_mean": 0.02631578947368421,
+    "writable_risk_max": 0.02631578947368421,
+    "writable_risk_min": 0.02631578947368421,
+    "writable_risk_std": 0.0
+  },
+  "feature_sha256": "fd62c91e07eb47bb85fbc81591080f406cb64693b3f64747d97b500f86d73d4c",
+  "history_sha256": "4964948160f6977173c53b9ffac9aa6ace620c3994e42bc758ede8aa3e1dada2",
+  "model_sha256": "d1580b1a7e2f4937ce3ebbcf38b4cedacaac73f554233508eca85cbf38b7f88d",
+  "history_records": 302,
+  "history_blocks": 16,
+  "history_completed_ts": 1792115230,
+  "out_of_range_features": [],
+  "limits": [
+    "Live sampling differs from training; economic value and calibration are unvalidated.",
+    "Devnet differs from the mainnet archive used for training."
+  ],
+  "source": "Actual fitted HGB predict_proba on freshly constructed live-history features; no current outcome used"
+}

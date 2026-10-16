@@ -1,0 +1,110 @@
+{
+  "network": "devnet",
+  "sender": "9nXDunV8eNvYSVys7JSBkm2hz9Q79Q3EYeko19srVeMC",
+  "recipient": "5SoF3RbNTMotKuWk2eCfU5bfLxpH47rpxFYgt89ruzEP",
+  "amount_sol": "0.01",
+  "check": {
+    "status": "simulation_passed",
+    "headline": "Simulation passed at the checked state",
+    "action": "No execution error was found in this unsigned simulation. Check again if the amount, addresses or network state changes.",
+    "network": "devnet",
+    "candidate_message_base64": "AQABA4KGzfrGmQEGr6PQPp454RbFFjO+YA39ZP3vMmZf8Np3QgqN1abR5c03L07Vvo6qL3HhE7/KlqUXxoXSexzl/XwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALK0v4IrQ831yZn+bya8pe/VkoWhwvR8UdVpqhvOjr2bAQICAAEMAgAAAICWmAAAAAAA",
+    "candidate_message_sha256": "758d2c70169dda1c75deefa3f3e753ca82967e5154fbb75296344ea46d65d6e7",
+    "unsigned_transaction_base64": "AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEDgobN+saZAQavo9A+njnhFsUWM75gDf1k/e8yZl/w2ndCCo3VptHlzTcvTtW+jqovceETv8qWpRfGhdJ7HOX9fAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAsrS/gitDzfXJmf5vJryl79WShaHC9HxR1WmqG86OvZsBAgIAAQwCAAAAgJaYAAAAAAA=",
+    "last_valid_block_height": 498769326,
+    "checked_at_utc": "2026-10-16T01:50:46.828171+00:00",
+    "transfer_sol": "0.01",
+    "balance_sol": "0.5120009",
+    "estimated_fee_sol": "0.000005",
+    "required_sol": "0.010005",
+    "shortfall_sol": "0",
+    "simulation": {
+      "performed": true,
+      "error": null,
+      "units_consumed": 150,
+      "signature_verification": false
+    },
+    "slot": 511550551,
+    "checked_ms": 1372,
+    "broadcast": false,
+    "actual_fee_paid_sol": "0",
+    "measured_fee_savings_sol": null,
+    "measured_time_saved_seconds": null,
+    "limits": [
+      "Fee quote covers this plain transfer message; required balance may be affected by account minimums.",
+      "Simulation does not verify signatures and cannot guarantee later execution.",
+      "The historical ML model is not used for this live check.",
+      "No fee savings or retry-time savings have been measured. A failed submission may not incur the quoted fee."
+    ]
+  },
+  "ml": {
+    "status": "experimental",
+    "scores": {
+      "payer_readonly_hgb": {
+        "raw_model_score": 0.001400792846169082,
+        "validated_live_probability": null
+      },
+      "context_hgb": {
+        "raw_model_score": 0.0016009982208458867,
+        "validated_live_probability": null
+      }
+    },
+    "automatic_block": false,
+    "warning_recommendation": null,
+    "cold_history": true,
+    "feature_values": {
+      "structure_account_count": 3,
+      "structure_signer_count": 1,
+      "structure_writable_count": 2,
+      "structure_nonpayer_writable_count": 1,
+      "structure_readonly_count": 0,
+      "structure_duplicate_count": 0,
+      "payer_risk": 0.02631578947368421,
+      "payer_log_count": 0.0,
+      "template_risk": 0.021052631578947368,
+      "template_log_count": 1.791759469228055,
+      "structure_infra_0": 1,
+      "structure_infra_1": 0,
+      "structure_infra_2": 0,
+      "structure_infra_3": 0,
+      "structure_infra_4": 0,
+      "structure_infra_5": 0,
+      "structure_infra_6": 0,
+      "structure_infra_7": 0,
+      "structure_infra_8": 0,
+      "structure_infra_9": 0,
+      "readonly_seen_fraction": 0.0,
+      "readonly_log_count_mean": 0.0,
+      "readonly_log_count_max": 0.0,
+      "readonly_risk_mean": 0.02631578947368421,
+      "readonly_risk_max": 0.02631578947368421,
+      "readonly_risk_min": 0.02631578947368421,
+      "readonly_risk_std": 0.0,
+      "writable_seen_fraction": 0.0,
+      "writable_log_count_mean": 0.0,
+      "writable_log_count_max": 0.0,
+      "writable_risk_mean": 0.02631578947368421,
+      "writable_risk_max": 0.02631578947368421,
+      "writable_risk_min": 0.02631578947368421,
+      "writable_risk_std": 0.0
+    },
+    "feature_sha256": "fd62c91e07eb47bb85fbc81591080f406cb64693b3f64747d97b500f86d73d4c",
+    "history_sha256": "4964948160f6977173c53b9ffac9aa6ace620c3994e42bc758ede8aa3e1dada2",
+    "model_sha256": "d1580b1a7e2f4937ce3ebbcf38b4cedacaac73f554233508eca85cbf38b7f88d",
+    "history_records": 302,
+    "history_blocks": 16,
+    "history_completed_ts": 1792115230,
+    "out_of_range_features": [],
+    "limits": [
+      "Live sampling differs from training; economic value and calibration are unvalidated.",
+      "Devnet differs from the mainnet archive used for training."
+    ],
+    "source": "Actual fitted HGB predict_proba on freshly constructed live-history features; no current outcome used"
+  },
+  "simulation_scope": "Unsigned simulation with sigVerify=false; not signed submission preflight.",
+  "recorded_at_utc": "2026-10-16T01:50:47.248565+00:00",
+  "decision_id": "ca134862-2c28-4db1-87ff-d953028d7514",
+  "decision_sha256": "fcb7b9fffa4b125764ca0bd8a0de7438cf00b10c9e3f4877ce1af2b0480f3613",
+  "next_action": "No execution error was found in this unsigned simulation. Check again if the amount, addresses or network state changes.",
+  "fee_savings_claim": "Unproven; quote and paid receipt fees are not savings."
+}

@@ -1,0 +1,884 @@
+Smart Meeting Platform with Real-Time Speech Summarization and Intelligent 
+Moderation Dashboard: A Design and Architecture Review 
+Adarsh A Karkera1, Ninad J Shetty2, Pranam Nagaraj Naik3, Samarth B K4, and Farha Haneef5 
+1–5 are with the Department of Computer Science and Engineering (Artificial Intelligence and Machine Learning), Mangalore Institute of Technology & 
+Engineering, 
+Moodabidri, 
+Karnataka, 
+India 
+(e-mail: 
+adarshkarkera9591@gmail.com; 
+ninadchinnu1@gmail.com; 
+naikpranam099@gmail.com; 
+bksamarth3@gmail.com; farha@mite.ac.in). Farha Haneef is Associate Professor and Head, Department of CS&E (AI & ML). 
+Abstract—Video-conferencing platforms have come a 
+long way in their capability to encode-decode and render 
+video/audio streams in real-time, but have not evolved 
+nearly so far in their ability to support the participants of 
+such a conference in capturing and retaining the decisions 
+made during the conference in such a meeting. Meeting 
+attendees are left to their own devices - taking notes or 
+asking for confirmations and re-listening to what other 
+participants said when a disagreement occurs. This paper 
+describes the design of a proposed Smart Meeting 
+Platform that aims to address this shortcoming through 
+building an event-driven dashboard that uses low-latency 
+automatic 
+speech 
+recognition 
+(ASR), 
+incremental 
+abstractive summarization, and intent-based moderation 
+of the conversation as its core features under well-defined 
+API contracts. We identify four design goals that 
+motivate and drive the proposal: < 2s glass-to-glass 
+latency, transcription word error rate (WER) < 10%, 
+ROUGE-L score of summaries > 0.45, and moderation 
+F1-score > 0.95. We describe the microservice 
+architecture of the proposed system, discuss the sliding-
+window transformer approach used by the summarizer to 
+allow incremental processing of the utterances without 
+waiting for the end of the event, analyze the self-attention 
+mechanism used as the mathematical foundation of this 
+approach, describe the security and privacy assurances 
+provided by the system, and walk through the evaluation 
+methodology based on the AMI Meeting Corpus, 
+LibriSpeech, and Jigsaw Toxic Comment datasets. In 
+each case, we highlight the specific design choices that 
+differentiate our solution in terms of lower latencies, 
+protection of privacy, and overall contextual accuracy. 
+Automatic 
+Speech 
+Recognition, 
+Natural 
+Language 
+Processing, Transformer, Real-time Summarization, Speaker 
+Diarization, Toxicity Detection, WebRTC, Microservices, 
+Data Privacy. 
+I. INTRODUCTION 
+Hybrid and remote work has turned online meetings from an 
+occasional 
+convenience 
+into 
+the 
+central 
+mode 
+of 
+communication for organizations. The audio and video parts 
+of that transition have been solved - except for the rare 
+dropped connection, the latency of the media stream itself is 
+rarely an issue. What has not kept up with the adoption of 
+online meetings is everything that has to happen after the call 
+- the tools do not really help much with organizing, 
+remembering, and acting on the contents of a call. Anybody 
+who has ever been on a ninety-minute planning call knows 
+why a break is necessary, and why trying to do notes while 
+listening is rarely effective - it does not let one do either. 
+Another symptom of similar organizational shortcomings is 
+observed at scale - when meetings grow beyond a certain size, 
+the responsibility of a single moderator to enforce civility in 
+real-time becomes too great to bear. 
+The system described in this paper is meant to be a 
+complement to conference platforms - it does not attempt to 
+replace them, but rather offers to run alongside, using the 
+audio tracks from the calls in real-time to enable speech-to-
+text conversion and post-processing. It highlights uses of 
+unprofessional language privately to the meeting host or 
+offers a summary of the call’s contents in real-time. The 
+system’s inference pipeline is based on the Sequence-to-
+Sequence and Transformer architecture [2]; the paper details 
+the necessary modifications to apply it to the streaming 
+scenario. 
+There are four main goals that the paper states for the 
+described system, most of which are related to the system’s 
+performance. First and foremost, it aims for less than two 
+seconds of end-to-end latency for any given utterance for 
+both transcription and summarization. Second, the system’s 
+transcription accuracy should be higher than 90%, or, 
+equivalently, have a lower than 10% Word Error Rate (WER) 
+[1,7,10]. It aims for ROUGE-L higher than 0.45 for 
+summaries compared to human-produced ones [6], and an 
+F1-score higher than 0.95 for the moderation system, 
+highlighting terms that should presumably be filtered in a 
+professional conversation [11]. Each of these goals is 
+discussed in detail in Sections II through IX, with each later 
+section assessing the design choices’ ability to fulfill the 
+stated promises. 
+The motivation for this work is, unsurprisingly, derived from 
+the problems that it attempts to solve. There are real 
+applications for a system that can summarize conversations 
+in video conferences because organizations now rely on them 
+for communication, and remembering what was decided in 
+which meeting is not always trivial. The most obvious 
+solutions (assigning a person to take notes or asking to review 
+the recording) are not particularly convenient - and one’s time 
+spent on note-taking is, in the case of the recording review, 
+wasted on something a machine could have done 
+automatically. A human being would take longer than a 
+machine to process the same material, despite being able to 
+understand it better at the comprehension stage - the main 
+point of taking notes by a person in the first place. The paper, 
+
+therefore, represents the authors’ motivation for seeking a 
+technology to reduce organizational overhead and bridge the 
+gap between the tools that organizations have and the 
+outcomes that they desire. 
+The rest of the paper is structured around the aforementioned 
+four goals. While the implementation takes a form of various 
+models, pipelines, and microservices, each of the four 
+performance targets described comprises a section dedicated 
+to elaborating on the design choices. Specifically, Section II 
+describes the work and research done for this paper and the 
+four areas of this system that required special attention. It is 
+followed by Section III, which narrows the scope to the 
+problem at hand and states the assumptions that the 
+implementation is based on. Then, Section IV describes the 
+system’s microservice architecture in greater detail and 
+proceeds to estimate the privacy and security implications of 
+the system in Section V, addressing them as a design choice 
+rather than an implementation detail. Section VI derives the 
+mathematical expressions that the summarization module is 
+based on, while Section VII describes the evaluation strategy. 
+Finally, Section VIII discusses the design’s risks and 
+opportunities, comparing this approach to a hypothetical 
+alternative, and Section IX describes the implementation and 
+deployment strategy. 
+II. RELATED WORK 
+Four of the approaches considered for the design of our 
+solution were inspired by existing meeting analytics 
+practices, all of which had some deficiencies in terms of real-
+time processing, on-device implementation, and/or cost-
+effectiveness. 
+A. Post-hoc Transformer Summarization 
+Typically, summarization algorithms based on large 
+pretrained language models, such as BERT or GPT, require 
+full transcripts to be delivered prior to generating a summary, 
+which does not align with the immediacy of the dashboard 
+under consideration [3,4,28]. One possible solution to this 
+problem, sliding window summarization, is based on 
+incremental processing of the input stream [29,30]. 
+B. Cloud-based Speech and Sentiment APIs 
+Using remote APIs for either automatic speech recognition 
+(ASR) or sentiment analysis introduces extra network latency 
+and potential privacy concerns, as all meeting content has to 
+be sent to third-party servers for processing [23]. The 
+dashboard under consideration seeks to avoid these 
+drawbacks by relying on on-device processing, which, 
+however, requires model quantization to effectively utilize 
+available CPU/GPU resources [1,15]. 
+C. Deep Neural Diarization 
+Deep learning approaches to meeting diarization typically 
+require significant computational resources and are used in a 
+post-hoc fashion, which rules out their utilization in real-time 
+applications, such as the dashboard under consideration 
+[8,18]. As an alternative, the design under consideration 
+employs a lightweight neural network to separate meeting 
+participants by speaker using embeddings with minimal loss 
+in performance [19]. 
+D. Rule-based Moderation 
+Although easy to implement, keyword filtering suffers from 
+a significant number of false positives due to the inability to 
+capture conversational context, thus requiring extensive 
+customization [20,21]. The dashboard under consideration 
+uses a pretrained DistilBERT classifier [5] to mitigate this 
+issue, which was further fine-tuned on the Jigsaw Toxic 
+Comment dataset to achieve an acceptable balance between 
+precision and recall [11]. 
+E. Commercial Meeting-Intelligence Products 
+The meeting intelligence literature has witnessed the 
+appearance of a number of commercial products addressing 
+similar use cases [16,17]. Typically, they take the form of 
+plugins to existing video conferencing software, offering 
+speech-to-text transcription and post-hoc summarization at 
+the level of individual utterances. Notably, they are generally 
+based on the same principles as their academic counterparts 
+described above [22]. As such, they are ill-suited for real-time 
+analytics due to their reliance on cloud infrastructure. 
+Moreover, their moderation capabilities are generally limited 
+to profanity filtering at the lexical level without consideration 
+of dialog context. By analyzing commercial products, one 
+may actually get more insights into the set of functionalities 
+that are typically considered appropriate by the target 
+audience at a given point in time. 
+TABLE I. SUMMARY OF REFERENCE LITERATURE 
+Ref. 
+Focus Area 
+Relevance to Proposed 
+System 
+[15] 
+Quantization of LLMs for 
+edge deployment 
+Motivates local/quantized 
+inference to cut latency and 
+cost 
+[16] 
+Local, private meeting 
+summarization 
+Supports the case for on-device 
+processing over cloud APIs 
+[17] 
+Real-time meeting transcript 
+summarizer 
+Prior art for live summarization 
+pipelines 
+[18] 
+Streaming speaker 
+diarization 
+Basis for real-time speaker 
+identification approach 
+[19] 
+Multilingual real-time 
+diarization 
+Informs future multilingual 
+extension of the diarization 
+node 
+[20] 
+Contextual real-time 
+toxicity detection 
+Basis for context-aware 
+moderation over keyword 
+filters 
+[21] 
+Real-time toxic comment 
+detection/rewriting 
+Prior art for moderation 
+dashboard design 
+[22] 
+NLP framework for clean 
+content extraction 
+Supports the text-cleaning 
+stage of the moderation 
+pipeline 
+ 
+
+III. PROBLEM DEFINITION AND SCOPE 
+Three problems, each with slightly different roots, motivate 
+us initially. First is an analytic one, as meetings are not 
+analyzed in the moment, requiring substantial winnowing of 
+the long recording to identify what actually took place. 
+Second, and perhaps more importantly, is the personal one, 
+in that few are adept at simultaneously both receiving and 
+recording what is being said in the meeting. Third, as 
+meetings scale, a human moderator cannot focus sufficiently 
+on all parts of the conversation, or on identifying toxic or 
+unacceptable speech; platforms currently offer little help. 
+With this said, we narrow our scope: our work is ongoing, 
+and we save most of the broader meeting analytics tasks for 
+later work. For now, our system analyzes live audio streams 
+(WebRTC) [12], identifies who is speaking via standard 
+diarization [8], and summarizes each speaker’s utterances 
+using the sliding window transformer described in Section II 
+[29,30]; moderation is implemented in the form of a 
+dashboard for the meeting host, who is charged with 
+enforcing standards. The system is optimized to minimize 
+glass-to-glass latency, rather than focus on downstream 
+analysis of hours-long recordings. 
+We will note several simplifications that we make, which are 
+justified both by practical limitations in the prototype and the 
+desire to minimize risks, including focusing on one language, 
+and only on meetings held in reasonably clean noise 
+environments. We will describe our design choices, focusing 
+on the three user roles outlined above. 
+As mentioned, we consider three user roles, all of which are 
+relevant at any given meeting. To begin with, a meeting host 
+always has the dual purpose of focusing on the conversation 
+itself, but also on ensuring that the conversation follows the 
+desired trajectory. Other members can benefit from the ability 
+to receive and digest summaries, but should not be distracted 
+from the conversation. Moderation and summarization are 
+available to everyone, but it is for the host to decide whether 
+to use them and how to configure them to achieve the desired 
+outcome. A third role is that of an IT or a compliance officer: 
+they should be able to receive reports on all meetings, with 
+audio attached if needed, without needing to be present for 
+any of them. Separating the roles is critical to enabling each 
+role’s capabilities while limiting the risks: for instance, it is 
+essential that no one role has too much power. 
+Summarization is not a weapon, but it becomes one if the 
+wrong person has administrative access. Similarly, 
+moderation needs to be available to everyone, but it is critical 
+that it cannot be used to surveil people beyond their 
+utterances in the conversation. 
+Having established this background, it is worth describing 
+what our system does not do, in order to clarify our choices. 
+In particular, we emphasize that this is a minimalist system, 
+which does not attempt to do everything, including 
+recognizing users’ emotions throughout the conversation, 
+identifying who talks the most or the least, and thus 
+potentially being employed to identify toxic or abusive 
+individuals. One could imagine such features being built, at 
+least initially, using similar ASR and summarization 
+components, but adding NLP elements, to analyze who 
+contributes the most, thus potentially being abusive. Such 
+features would turn our system into something else: a 
+monitoring and controlling instrument, rather than a 
+facilitation and coordination tool. Similarly, the moderation 
+module does not attempt to profile individuals across 
+conversations: it cannot identify toxic speakers, since it has 
+no memory of what has been said in the past, beyond the 
+current utterance. 
+IV. PROPOSED SYSTEM ARCHITECTURE 
+The platform is built with an event-driven, microservices-
+first architecture in mind [25,26]: the frontend handles data 
+ingestion and visualization, while the backend consists of a 
+set of distributed services that perform AI inferencing. 
+Specifically, each participant’s microphone input is sent to 
+the server via WebRTC [12], split into 1-second WAV files, 
+and passed to the FastAPI backend [27] via WebSockets. The 
+latter routes the data to three processing nodes: 
+ASR Node – Speech-to-Text and utterance-to-speaker 
+diarization. 
+Summarizer Node – Sliding-window algorithm for 
+summary maintenance. 
+Moderator Node – Intent classification to privately detect 
+unprofessional language for the host. 
+The three nodes are decoupled with an event bus (Kafka or 
+Redis Streams) [13], which allows scaling and replacing 
+individual elements of the pipeline with little to no downtime; 
+for instance, one could swap out the summarizer model 
+without affecting the ASR component. Storage is also 
+decentralized: audio files are stored in object storage, 
+transcripts – in a PostgreSQL database, whereas the 
+summary, logs, and moderation alerts are in MongoDB. The 
+dashboard, 
+which 
+presents 
+transcripts, 
+summaries, 
+moderation alerts, and statistics, is served as a frontend app 
+by the FastAPI backend via a REST API [27]. User auth is 
+handled separately with OAuth 2.0/JWT [24]. The main 
+advantage of the given approach is operational: individual 
+models can be scaled or replaced independently of the overall 
+pipeline, thus avoiding the downtime or complexity of 
+rewriting the entire data ingestion system when, say, a new 
+summarizer model appears. The data flow of the application, 
+from the participants’ microphones to the host’s dashboard, 
+is depicted in Fig. 1. 
+
+ 
+Fig. 1.  General data acquisition and processing workflow for the 
+Smart Meeting Platform. 
+There are two levels of description of the data flow in this 
+architecture. At Level 0, it is a process that communicates 
+audio/video streams, meeting-control data, and moderation 
+policies with the participants and hosts, writing them and 
+reading from a single logical data store. At Level 1, it is 
+decomposed into six services: ingestion of audio (raw), 
+speech-to-text, 
+speaker 
+identification, 
+NLP/summary, 
+moderation, and dashboard/notifications. Each service has its 
+storage (raw audio, text transcripts, speaker metadata, 
+summary content, moderation alerts, and meeting/user 
+metadata) and communicates with other models through their 
+APIs (ASR, diarization, summarization, toxicity detection, 
+notifications). 
+Auto-scaling is performed at the Kubernetes pod level [14] 
+(not model level). Each of the three main nodes for which the 
+system is designed to handle bursts of concurrent meetings is 
+implemented as a separate container with horizontal pod 
+autoscaling. The burst is processed by adding more pods to 
+all nodes, but the scaling policy prioritizes nodes so that the 
+node which has the largest number of concurrent speakers 
+(ASR node), the longest meeting (summarization node), or 
+the number of messages (moderation node) gets more pods 
+first and scales down last. The event bus handles the burst by 
+letting moderation alerts queue until the dashboard can 
+process them rather than dropping them outright. This is 
+critical because the three nodes have different scales: one 
+meeting has many speakers, but they speak one after another, 
+giving a moderate load to the ASR node, and a bursty load to 
+the moderation node, with summarization somewhere in 
+between. It would be wasteful to scale all nodes 
+simultaneously when, for example, ASR has headroom but 
+the moderation node cannot keep up with the number of 
+alerts. 
+The dashboard is a thin client that subscribes to the REST 
+API for the transcript, running summary, and moderation 
+alerts. It updates the UI whenever new data is available rather 
+than at fixed intervals, thus reducing the perceived latency on 
+the screen to roughly the actual latency of the backend. It has 
+logic to reconnect to the server and reload the transcript and 
+running summary if the tab with the dashboard is closed 
+during the meeting rather than losing the progress and having 
+to reload from the beginning. This is essential because users 
+frequently lose connection as their laptops move from one 
+WiFi access point to another. 
+Failures of any nodes are localized to that node by virtue of 
+being in separate processes and having separate storage. If the 
+moderation node crashes midway through the meeting, it 
+does not affect the ASR and summarization nodes, and the 
+dashboard will simply stop getting moderation alerts until it 
+is reloaded. The same goes for failures of the summarization 
+node; they are transparent to the other nodes. This is a general 
+property of the microservices architecture that is expanded 
+upon in Section VIII in contrast to a monolithic design, where 
+such a cascade of failures would be much harder to prevent. 
+The recurring, per-meeting processing pipeline that involves 
+all three nodes is depicted in Fig. 2. 
+ 
+Fig. 2.  General workflow of the event-driven processing cycle for 
+a live meeting session. 
+V. SECURITY, PRIVACY, AND DEPLOYMENT 
+CONSIDERATIONS 
+As it provides a service that listens to private conversations, 
+the product has to prioritize security at the lowest level, not 
+only on the application layer but also in the infrastructure. 
+First, the audio content is protected by being transmitted via 
+encrypted WebRTC and WebSocket, stored in the encrypted 
+object storage and database with provider-managed keys. 
+Second, the listening access, i.e. the ability to view the raw 
+audio files, is partitioned from the transcript access, which is 
+done to limit the attack surface in case of compromise of the 
+dashboard. 
+The configuration of consent and retention is done in the code 
+as a policy because, for the described product, there is no 
+other way to provide such a service – an explicit consent to 
+record and analyze the conversation has to be provided before 
+redirecting it to the ASR node, as it was explained in Section 
+III. Additionally, the retention of the raw audio files, 
+
+transcripts, and summaries can be set per organization per 
+conversation, as after the retention deadline, the objects are 
+to be deleted in accordance with the storage’s lifecycle 
+policy. 
+The moderation feed needs an extra explanation, as there is 
+no personally identifiable information of a conversation 
+participant in the moderation feed, including the transcript. 
+Firstly, only the meeting host has access to the moderation 
+feed by default, and there is no field that would allow 
+extracting the PII of the identified participant from the object 
+storage. Secondly, all actions with the objects, including raw 
+audio files and transcript objects, as well as moderation-
+related actions, are stored in a separate append-only audit log 
+database that typically has to be presented and reviewed 
+during a security or regulatory audit. 
+The topology is also designed with the same security-centric 
+approach in mind – to minimize exposure, which is why the 
+product can be deployed in the jurisdiction of a particular 
+organization if needed. For such deployment, it would be 
+required to host the ASR, summarization, and moderation 
+nodes inside the jurisdiction as well, as they do not rely on 
+any external models or services at inference time. The 
+reasoning behind it was explained in Section II – the 
+local/quantized-inference topology is the only way to ensure 
+low-latency ASR in the described product, which in turn has 
+to be prioritized due to other architectural constraints. 
+Therefore, the same topology can be used to satisfy the data 
+residency requirements of a given jurisdiction without 
+making any changes to the production models. On the other 
+hand, if the organization is open to a managed model of 
+service provisioning, the topology would be similar, but 
+divided into several physical clusters that host multiple 
+logical instances of the application with a network-level 
+isolation between them. In any case, the information security 
+controls would be similar on a per-tenant basis. 
+VI. MATHEMATICAL FOUNDATION OF THE 
+SUMMARIZATION MODULE 
+The summarizer is based on Transformer self-attention [2]. 
+Given query, key, and value matrices Q, K, V, with key 
+dimensionality dₖ, scaled dot-product attention as used to 
+construct contextual embeddings is: 
+Attention(Q, K, V) = softmax( (QKᵀ) / √dₖ ) V 
+(1) 
+which allows each token in a given sequence to compare 
+itself with every other token via their embedding 
+representations, thereby determining the relevance of each 
+for computing a contextual representation. This is the 
+fundamental mechanism that allows the summarizer to focus 
+on specific parts of a conversation in order to distill their 
+meaning, rather than, say, averaging over all tokens or using 
+early or long tokens in the utterance. However, self-attention 
+has a O(L²) complexity in the input length L, which would 
+make the naive application of Eq. 1 impossible within the 
+two-second latency budget for a meeting transcription of 
+length L. We therefore apply the sliding-window constraint 
+of Section II, which limits the attention span of each head and 
+hence reduces the effective computational complexity to 
+O(L) within the budget. 
+The summarization backbone, depicted in Fig. 1, consists of 
+multiple attention heads, each of which follows the same 
+functional form as in Eq. 1, but with different trainable 
+projections, applied in parallel to detect different patterns in 
+the data. 
+MultiHead(Q, K, V) = Concat(head₁, …, headₕ) Wᴼ 
+(2) 
+where each headᵢ = Attention(QWᵢQ, KWᵢK, VWᵢV), and 
+Concat indicates the concatenation operation over the 
+attention heads, and Wᴼ is a trainable projection matrix that 
+takes the concatenated output of all heads as input. Note that 
+the same sliding-window constraint of Section II applies to 
+each individual attention head, as a single head that violates 
+it would incur too much computational overhead. Indeed, the 
+heads’ O(L²) time complexity, as seen in Eq. 1, cannot be 
+offset by the parallel processing of Eq. 2. 
+VII. PROPOSED EVALUATION METHODOLOGY 
+The evaluation plan is based on standard corpora available to 
+the public, not a custom dataset: AMI Meeting Corpus [9] 
+and LibriSpeech ASR benchmark [10] for the ASR 
+component, and Jigsaw Toxic Comment dataset [11] for the 
+moderation. For raw audio, the resampling to 16 kHz mono 
+and voice activity detection to remove silence before feeding 
+the input to the model are examples of possible preprocessing 
+steps, while the tokenization of text with byte-pair encoding 
+would be another [1]. The model component for moderation 
+is 
+expected 
+to 
+be 
+evaluated 
+on 
+an 
+80/10/10 
+train/validation/test split, with the NLP modules fine-tuned 
+with AdamW and cross-entropy loss: learning rate 2e-5, 
+batch size 16-32, and 3-5 epochs, with the stopping criteria to 
+choose the epoch with the lowest validation loss for 
+reporting. 
+Three evaluation metrics are proposed, with the component 
+in charge of each being the one that would benefit most from 
+its optimization. First is the WER (Word Error Rate) [7,10], 
+which is a standard metric for evaluating the performance of 
+the automatic speech recognition component. Then, for the 
+summarizer, the ROUGE-N and ROUGE-L metrics [6] 
+would be used to approximate how much of human-level 
+quality the model’s summaries have in terms of n-grams 
+overlap and longest common subsequence. Finally, for the 
+moderation component, the F1 score, harmonic mean of 
+precision and recall, is suggested: 
+F1 = 2 × Precision × Recall / (Precision + Recall) 
+(3) 
+The F1 score is a better choice than accuracy as a metric to 
+report here. For binary classification, accuracy is a known 
+improper scoring function, meaning that its optimization can 
+lead to undesirable outcomes. In particular, for imbalanced 
+datasets, which are expected to be the case for most meeting 
+
+transcripts, any classifier that always predicts the negative 
+class will have very high accuracy. 
+Besides the primary evaluation metrics, an ablation study and 
+a significance check are also proposed. The reason for the 
+former is to ensure that the reported results are indeed driven 
+from the architecture choices proposed and not from a 
+particular combination of hyperparameters or training data 
+choices. It would involve removing particular design choices 
+to the extent possible, for example, using the summarizer 
+without a sliding window, diarization without low-
+dimensional embeddings and a stronger baseline, and 
+replacing DistilBERT with a keyword filter for moderation. 
+This way, the contribution of each change can be identified 
+independently from the others. The reason for the latter is that 
+the evaluation sets are coming from a public corpus with 
+known variability between subsamples, so the differences 
+between configurations should be checked for statistical 
+significance rather than reported as a point estimate. 
+Specifically, a paired significance test is suggested, and only 
+a difference between two configurations that is significant at 
+the 5% level should be labeled as such, to avoid claiming an 
+effect that was caused by chance. 
+TABLE II. TARGET PERFORMANCE BENCHMARKS 
+Metric 
+Target Value 
+Reference / Baseline 
+End-to-End Latency 
+< 2.0 seconds 
+Real-time requirement 
+for live meetings 
+Word Error Rate 
+(WER) 
+< 10% 
+Standard noise-
+environment accuracy 
+ROUGE-L Score 
+> 0.45 
+Comparison against AMI 
+Meeting Corpus 
+Moderation F1-Score 
+> 0.95 
+Jigsaw Toxic Comment 
+Dataset 
+ 
+TABLE III. TECHNOLOGY STACK 
+Component 
+Technology / Model 
+Purpose 
+ASR Engine 
+Multimodal AI Model 
+Robust speech-to-text 
+with weak supervision 
+Summarization 
+BART-large / T5-base 
+Abstractive 
+summarization via 
+sliding window 
+Moderation 
+DistilBERT (fine-
+tuned) 
+Context-aware toxicity 
+classification 
+Streaming 
+WebRTC & 
+WebSockets 
+Low-latency audio 
+ingestion and broadcast 
+Backend 
+FastAPI 
+Asynchronous request 
+orchestration 
+Acceleration 
+NVIDIA CUDA / 
+TensorRT 
+GPU-based inference 
+optimization 
+ 
+VIII. DISCUSSION: STRENGTHS AND OPEN 
+CHALLENGES 
+The main advantage of the architecture described by the 
+authors stems from the design choices that address the 
+shortcomings 
+of 
+the 
+existing 
+solutions 
+while 
+not 
+contradicting the context of the task. Rather than trying to 
+build upon the high-level ideas and scale them up, the authors 
+tried to apply Occam’s Razor and improved several 
+individual nodes in the pipeline, replacing post-hoc 
+summarization with chunk-based streaming [28,29,30], cloud 
+API with local/quantized inference [1,15], diarization with 
+lightweight embeddings [8,19], and keyword filtering with a 
+finetuned classifier [5,20]. Not less importantly, the decision 
+to make the software a non-invasive overlay to existing 
+conferencing platforms, not a replacement for them, was 
+logical and contributed to the practicality of the solution, as 
+adopting the former would be significantly easier for the 
+companies that would have to implement it. 
+Nevertheless, several design decisions made by the authors 
+had to be considered as potential problems for the time being, 
+as they may raise issues before the software is deployed. First 
+of all, the decision to process ASR, summarization, and 
+moderation on the same GPU without incurring extra latency 
+costs is not devoid of risks and complications, especially as 
+the concurrency level increases. Secondly, the choice to 
+implement the sliding-window approach and sacrifice long-
+term memory for lower latency and higher throughput comes 
+with opportunity costs, as the snippets generated by the 
+model can only represent the information contained within 
+them. Thirdly, the expectation of F1 > 0.95 seems overly 
+optimistic, given that, to the best of the authors’ knowledge, 
+most of the Jigsaw data is text-based, and there is no 
+guarantee of a considerable overlap between text and speech. 
+Fourthly, the target audience of non-conference calls with 
+English speech seems relatively narrow, which raises 
+questions about the practical applicability of the software and 
+its ability to generalize. 
+A. Comparison to Alternative Architectures 
+It is also worth discussing alternatives, both to the solutions 
+described in the paper and to the design choices made by the 
+authors. In terms of architectures, a monolithic inference 
+pipeline is an option, as opposed to the current design that 
+relies on multiple microservices. Overall, it is hard to say 
+whether this approach is better, as it sacrifices flexibility and 
+the ability to scale individual pipelines independently for 
+lower overhead and, consequently, lower glass-to-glass 
+latency. The latter, in particular, would benefit from being 
+able to move lower through the stack, bypassing the 
+unnecessary CPU/GPU cycles spent in the microservices 
+layer [25,26], but the flexibility and control afforded by the 
+current solution are unquestionable advantages, especially in 
+the early stages of development. If the initial assumptions 
+concerning the 2-second budget were relaxed in favor of sub-
+200 millisecond latency, these considerations would be even 
+more pertinent, and the reevaluation of the architectural 
+decision would be necessary. 
+Another hypothetical alternative concerns the distribution of 
+the software. Specifically, the paper describes the use of 
+
+server-side GPUs, but it is possible to imagine an edge-
+focused discovery platform where every laptop would run the 
+application locally rather than relying on the cloud. While 
+such an approach would alleviate the scheduling costs 
+described by the authors and resolve the concurrency and 
+reliability issues, it would come at the cost of reduced 
+performance, especially on machines without a discrete GPU. 
+The variance in the performance would be significantly 
+higher, which would undermine the reliability and the ability 
+to meet the constraints described in Section I. Therefore, the 
+server-side approach outlined in Section IV would be a safer 
+option in this capacity. 
+IX. CONCLUSION AND FUTURE WORK 
+This review discusses the project design of a Smart Meeting 
+Platform 
+with 
+live 
+speech 
+transcription, 
+iterative 
+summarization, and AI moderation in an event-driven 
+architecture. For each detail, the review elaborates on the 
+reasoning behind the choices based on the limitations 
+mentioned in the paper and articulates the specific goals for 
+latency, transcription quality, summary, and moderation 
+beyond which the alternative would have been unsatisfactory. 
+The next step in the project would be to implement the 
+Speech/Multimodal AI Model-based ASR and diarization 
+pipeline 
+[1,8], 
+sliding-window 
+BART/T5-based 
+summarization node [3,4,30], and DistilBERT-based fine-
+tuned 
+moderation 
+classifier 
+[5], 
+connected 
+through 
+WebRTC/WebSockets [12], with model quantization for 
+lower latency [15], benchmarked on the AMI Meeting 
+Corpus and Jigsaw Toxic Comment datasets [9,11], and 
+deployed through containers in the cloud [14]. Testing the 
+entire pipeline’s end-to-end performance and the ability to 
+keep the glass-to-glass latency within the expected limits 
+would be the primary way of validating the hypothetical ideas 
+about performance in real-life meetings. 
+If successful, the next logical step would be to port the proof-
+of-concept into the production environment, gradually 
+exposing it to more users while keeping the majority within 
+the company. First, it could be tested as a tool used by the 
+development team, which would make the most sense to 
+evaluate the accuracy and usability before moving on to a 
+limited number of external partners as suggested in Section 
+V. This way, the most pressing concerns could be addressed, 
+such as what the host-facing Moderation Dashboard would 
+be used for, and what the accuracy of the summaries and 
+moderation would be in practice. Meeting the targets set in 
+Section I would be the ultimate criterion for progressing 
+towards the next stage and eventually releasing the product 
+to the larger audience. 
+REFERENCES 
+[1] A. Radford, J. W. Kim, T. Xu, G. Brockman, C. McLeavey, and 
+I. Sutskever, "Robust Speech Recognition via Large-Scale Weak 
+Supervision," in Proc. International Conference on Machine 
+Learning (ICML), 2023, pp. 28492-28518. 
+[2] A. Vaswani, N. Shazeer, N. Parmar, J. Uszkoreit, L. Jones, A. 
+N. Gomez, L. Kaiser, and I. Polosukhin, "Attention Is All You 
+Need," in Advances in Neural Information Processing Systems 
+(NeurIPS), 2017, pp. 5998-6008. 
+[3] M. Lewis, Y. Liu, N. Goyal, M. Ghazvininejad, A. Mohamed, 
+O. Levy, V. Stoyanov, and L. Zettlemoyer, "BART: Denoising 
+Sequence-to-Sequence Pre-training for Natural Language 
+Generation, Translation, and Comprehension," in Proc. Annual 
+Meeting of the Association for Computational Linguistics 
+(ACL), 2020, pp. 7871-7880. 
+[4] C. Raffel, N. Shazeer, A. Roberts, K. Lee, S. Narang, M. Matena, 
+Y. Zhou, W. Li, and P. J. Liu, "Exploring the Limits of Transfer 
+Learning with a Unified Text-to-Text Transformer," Journal of 
+Machine Learning Research, vol. 21, no. 140, pp. 1-67, 2020. 
+[5] V. Sanh, L. Debut, J. Chaumond, and T. Wolf, "DistilBERT, a 
+Distilled Version of BERT: Smaller, Faster, Cheaper and 
+Lighter," in Proc. NeurIPS Workshop on Energy Efficient 
+Machine Learning and Cognitive Computing, 2019. 
+[6] C.-Y. Lin, "ROUGE: A Package for Automatic Evaluation of 
+Summaries," in Proc. Workshop on Text Summarization 
+Branches Out, ACL, 2004, pp. 74-81. 
+[7] Y. He, T. N. Sainath, R. Prabhavalkar, et al., "Streaming End-to-
+End Speech Recognition for Mobile Devices," in Proc. IEEE 
+International Conference on Acoustics, Speech and Signal 
+Processing (ICASSP), 2019, pp. 6381-6385. 
+[8] H. Bredin, R. Yin, J. M. Coria, G. Gelly, P. Korshunov, M. 
+Lavechin, D. Fustes, H. Titeux, W. Bouaziz, and M.-P. Gill, 
+"pyannote.audio: 
+Neural 
+Building 
+Blocks 
+for 
+Speaker 
+Diarization," in Proc. IEEE ICASSP, 2020, pp. 7124-7128. 
+[9] J. Carletta, S. Ashby, S. Bourban, et al., "The AMI Meeting 
+Corpus: A Pre-announcement," in Proc. International Workshop 
+on Machine Learning for Multimodal Interaction, 2005, pp. 28-
+39. 
+[10] V. Panayotov, G. Chen, D. Povey, and S. Khudanpur, 
+"LibriSpeech: An ASR Corpus Based on Public Domain Audio 
+Books," in Proc. IEEE ICASSP, 2015, pp. 5206-5210. 
+[11] Jigsaw and Google Counter Abuse Technology Team, "Toxic 
+Comment Classification Challenge," Kaggle Competition 
+Dataset, 2018. 
+[12] Internet Engineering Task Force, "WebRTC: Real-Time 
+Communication in Browsers," RFC 8825, 2021. 
+[13] J. Kreps, N. Narkhede, and J. Rao, "Kafka: A Distributed 
+Messaging System for Log Processing," in Proc. NetDB 
+Workshop, 2011, pp. 1-7. 
+[14] B. Burns, B. Grant, D. Oppenheimer, E. Brewer, and J. Wilkes, 
+"Borg, Omega, and Kubernetes," Communications of the ACM, 
+vol. 59, no. 5, pp. 50-57, 2016. 
+[15] L. Chen, J. Wang, and Y. Zhang, "Quantizing Large Language 
+Models for Real-time Edge Deployment," Journal of Machine 
+Learning Research, vol. 25, no. 3, pp. 112-128, 2024. 
+[16] Liquid AI, "The Future of Meeting Summarization: Local, Fast, 
+Private, and Fully Secure," Liquid AI Enterprise Case Studies, 
+LFM2-Transcript Series, 2026. 
+[17] A. Shinde, S. Patil, and N. Khan, "Real-time Meeting 
+Transcript Summarizer (Awaaz AI)," International Journal of 
+Advanced Research in Science, Communication and Technology 
+(IJARSCT), vol. 5, no. 1, pp. 204-211, 2025. 
+
+[18] I. Medennikov, T. Park, and M. Motamedi, "Identify Speakers 
+in Meetings, Calls, and Voice Apps in Real-Time with Streaming 
+Sortformer," NVIDIA Technical Developer Series, 2025. 
+[19] R. Sharma and V. Dwivedi, "Real-Time Speaker Diarization 
+for Multilingual Conversations," International Journal of 
+Computer Science and Public Topics (IJCSPUB), vol. 16, no. 2, 
+pp. 1252-1261, 2026. 
+[20] Z. Yang, N. Grenon-Godbout, and R. Rabbany, "Towards 
+Detecting Contextual Real-Time Toxicity for In-Game Chat," in 
+Findings of the Association for Computational Linguistics: 
+EMNLP, 2024, pp. 9894-9906. 
+[21] P. Kumar and M. Sathyanarayana, "‘TOXIC SHIELD AI’ — 
+A Real-Time Toxic Comment Detection and Rewriting Platform 
+Using AI & ML," International Journal of Engineering 
+Development and Research (IJEDR), vol. 14, no. 1, pp. 474-483, 
+2026. 
+[22] J. Thomas and R. Matthews, "Eliminating Toxicity in Text: An 
+NLP Framework for Clean Content Extraction," ResearchGate 
+Engineering Preprints, Article ID 387927333, 2025. 
+[23] European Parliament and Council of the European Union, 
+"General Data Protection Regulation (GDPR)," Official Journal 
+of the European Union, L119, 2016, pp. 1-88. 
+[24] D. Hardt, "The OAuth 2.0 Authorization Framework," RFC 
+6749, Internet Engineering Task Force, 2012. 
+[25] S. Newman, Building Microservices: Designing Fine-Grained 
+Systems, 2nd ed. Sebastopol, CA: O’Reilly Media, 2021. 
+[26] H. Michael and B. Fowler, "Event-Driven Architecture for 
+Scalable, Loosely Coupled Systems," IEEE Software, vol. 39, no. 
+2, pp. 45-53, 2022. 
+[27] S. Ramírez, "FastAPI: Modern, Fast Web Framework for 
+Building APIs with Python," FastAPI Project Documentation, 
+2023. 
+[28] Y. Liu and M. Lapata, "Text Summarization with Pretrained 
+Encoders," in Proc. Conference on Empirical Methods in Natural 
+Language Processing (EMNLP-IJCNLP), 2019, pp. 3730-3740. 
+[29] I. Beltagy, M. E. Peters, and A. Cohan, "Longformer: The 
+Long-Document 
+Transformer," 
+arXiv 
+preprint 
+arXiv:2004.05150, 2020. 
+[30] R. Zhang, Q. Wang, and Y. Guo, "Incremental Abstractive 
+Summarization for Streaming Text with Sliding-Window 
+Transformers," in Proc. IEEE International Conference on Big 
+Data and Smart Computing (BigComp), 2023, pp. 210-217. 
+ACKNOWLEDGMENT 
+The authors thank the Department of CS&E (Artificial 
+Intelligence & Machine Learning) at Mangalore Institute of 
+Technology & Engineering for the guidance and review that 
+shaped this design at each stage of the review. Any remaining 
+gaps in the design, particularly around the open challenges 
+raised in Section VIII, remain the authors' own responsibility 
+and are flagged deliberately rather than left implicit, in 
+keeping with the review's aim of checking the design against 
+its stated targets rather than presenting it as a finished result. 

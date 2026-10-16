@@ -1,0 +1,8 @@
+{
+  "cohort": "fresh",
+  "test_date": "2025-12-05",
+  "test_rows": 132832,
+  "model_sha256": "d1580b1a7e2f4937ce3ebbcf38b4cedacaac73f554233508eca85cbf38b7f88d",
+  "feature_source_sha256": "cff819309f1bc99c86a4f3d52968e635fa67b3388f6f4658d3bfa172e9aea407",
+  "scope": "Actual model inference on held-out historical feature rows; no live ML guarantee; no retraining on test rows."
+}

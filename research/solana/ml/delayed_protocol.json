@@ -1,0 +1,20 @@
+{
+  "status": "Local protocol fixed before evaluating hash ranks 28000:36000; not public preregistration",
+  "sample_seed": 42,
+  "excluded_prior_hash_ranks": 28000,
+  "sample_tokens": 8000,
+  "horizon": 300,
+  "seeds": [42, 73, 101],
+  "budget": 0.05,
+  "window_hours": 48,
+  "buffer_hours": 36,
+  "min_calibration_negatives": 20,
+  "arrival_count": 128,
+  "propensity_floor": 0.1,
+  "delay_score_bins": 3,
+  "model": "RF120 trained only on previous strong-cohort training rows, reusing previous validation-selected parameters. Three-seed mean. No new tuning.",
+  "primary": "Delay-weighted recent negative tail versus identical unweighted recent pool: paired day-bootstrap recall and FPR deltas. Success requires positive recall interval with no FPR increase and observed FPR <=5% in every fold.",
+  "controls": ["frozen_empirical", "static_negative_tail", "recent_negative_tail", "arrival_negative_tail", "buffered_negative_tail", "delay_weighted_tail", "oracle_immediate_tail"],
+  "availability": "Label revealed at migration+3600, a conservative operational assumption rather than verified data-publication time. Current-token and equal-decision-time labels are never used. Oracle violates maturity and is explicitly invalid for deployment.",
+  "scope": "Same historical MELT period, disjoint eventual migrants; price-collapse proxy, not fraud. Estimated weighting has no conformal guarantee; fixed 36h buffer is audited, not assumed universally complete. No global novelty claim."
+}

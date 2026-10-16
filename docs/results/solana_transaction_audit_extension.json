@@ -1,0 +1,64 @@
+{
+  "cohort": "extension",
+  "status": "Post-result diagnostic; original primary endpoint unchanged",
+  "test_n": 131638,
+  "cold_n": 21028,
+  "cold_unique_signers": 18862,
+  "cold_max_rows_one_signer": 96,
+  "first_appearance_n": 18851,
+  "first_appearance_prevalence": 0.05628348628719962,
+  "cold_signer_bootstrap": {
+    "delta": 0.01787196592429291,
+    "ci95": [
+      -0.00559557012387818,
+      0.05951445026829017
+    ],
+    "draws": 500,
+    "signer_clusters": 18862
+  },
+  "first_appearance_hour_bootstrap": {
+    "weighted_delta": 0.02391737565592965,
+    "ci95": [
+      0.015173859662826378,
+      0.035052330463862816
+    ],
+    "valid_bootstrap_draws": 500
+  },
+  "first_appearance_results": {
+    "payer_history": {
+      "auroc": 0.5332025531928419,
+      "ap_positive": 0.062344409739295344,
+      "ap_negative": 0.9487944705397471,
+      "brier": 0.07373474597155759,
+      "recall": 0.0,
+      "fpr": 0.0,
+      "precision": null,
+      "alert_fraction": 0.0
+    },
+    "payer_readonly_hgb": {
+      "auroc": 0.7216418748632464,
+      "ap_positive": 0.11390159566995654,
+      "ap_negative": 0.9778184219579276,
+      "brier": 0.0791194170780482,
+      "recall": 0.09519321394910461,
+      "fpr": 0.035919055649241145,
+      "precision": 0.13648648648648648,
+      "alert_fraction": 0.03925521192509681
+    },
+    "context_hgb": {
+      "auroc": 0.759007008671171,
+      "ap_positive": 0.1378189713258862,
+      "ap_negative": 0.9811779179674467,
+      "brier": 0.07760061809713849,
+      "recall": 0.18661639962299717,
+      "fpr": 0.06689151208544127,
+      "precision": 0.14265129682997119,
+      "alert_fraction": 0.0736300461513978
+    }
+  },
+  "limits": [
+    "First appearance is in these sampled days, not the first transaction of an operator or on the whole chain.",
+    "Signer clusters are declared addresses, not independently identified humans/operators.",
+    "First-appearance analysis is exploratory and has fewer failures than the primary cold-history group."
+  ]
+}

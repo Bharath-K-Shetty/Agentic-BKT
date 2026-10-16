@@ -1,0 +1,11 @@
+{
+  "status": "Post-result diagnostic fixed after pilot and confirmation primary results; not an untouched confirmation or replacement primary endpoint",
+  "hash_dimensions": 1048576,
+  "alpha": 0.0001,
+  "random_state": 42,
+  "update_interval_seconds": 600,
+  "outcome_delay_seconds": 3600,
+  "encoding": "Role-tagged declared account identities plus exact readonly template; binary tokens, L2 normalized; SGD logistic regression, one chronological pass",
+  "comparison": "Add identical prequential identity score to both strong readonly-history HGB and writable-context HGB; original HGB parameters and partitions unchanged",
+  "selection": "No hyperparameter search or test-based model selection. Both already inspected cohorts are diagnostics. Identity feedback is hourly-delay plus up to ten minutes of batching; context history has exact one-hour delay."
+}

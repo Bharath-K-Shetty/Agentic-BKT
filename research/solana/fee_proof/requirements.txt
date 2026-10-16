@@ -1,0 +1,4 @@
+# Optional dependencies for the local-validator experiment only.
+requests>=2.31
+solders>=0.26,<0.27
+fastapi>=0.115

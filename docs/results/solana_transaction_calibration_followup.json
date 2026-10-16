@@ -1,0 +1,278 @@
+{
+  "status": "Post-result diagnostic on previously inspected test periods, not independent confirmation",
+  "protocol": "Fixed HGB seed42; isotonic fit on cold validation first12hours; threshold on remaining purged cold validation under5%FPR; no test tuning.",
+  "model_scope": "Original structure/signer/read-only HGB versus writable-context HGB; excludes learned identity score. Not the refined identity-controlled endpoint.",
+  "limitations": [
+    "All test periods previously inspected; fresh evaluation still required.",
+    "One-hour labels and conditional inclusion apply.",
+    "Threshold budget is validation-only, not a test guarantee.",
+    "Isotonic calibration can create ties and alter AP.",
+    "One row group per date from one provider; no independent-source validation."
+  ],
+  "cohorts": [
+    {
+      "cohort": "pilot",
+      "results": [
+        {
+          "model": "payer_readonly_hgb",
+          "split": {
+            "calibration_rows": 11550,
+            "threshold_rows": 10433,
+            "last_calibration_ts": 1762084797,
+            "first_threshold_ts": 1762084802
+          },
+          "threshold": 0.393282499064354,
+          "original_cold": {
+            "auroc": 0.8121475761858314,
+            "ap_positive": 0.3193248095430429,
+            "ap_negative": 0.9799609217768133,
+            "brier": 0.053563930469806856,
+            "recall": 0.22018348623853212,
+            "fpr": 0.01774695571451974,
+            "precision": 0.4698205546492659,
+            "alert_fraction": 0.031242036593445797
+          },
+          "followup_cold": {
+            "auroc": 0.8101686090210811,
+            "ap_positive": 0.27472919419451897,
+            "ap_negative": 0.9777914558712046,
+            "brier": 0.054524513102171226,
+            "recall": 0.2706422018348624,
+            "fpr": 0.022606891279418992,
+            "precision": 0.4609375,
+            "alert_fraction": 0.03914173589521431
+          }
+        },
+        {
+          "model": "context_hgb",
+          "split": {
+            "calibration_rows": 11550,
+            "threshold_rows": 10433,
+            "last_calibration_ts": 1762084797,
+            "first_threshold_ts": 1762084802
+          },
+          "threshold": 0.18349774432450888,
+          "original_cold": {
+            "auroc": 0.8404646370929159,
+            "ap_positive": 0.37870219884065964,
+            "ap_negative": 0.9846207107349063,
+            "brier": 0.051169684678358335,
+            "recall": 0.23318042813455658,
+            "fpr": 0.01703707748593895,
+            "precision": 0.49432739059967584,
+            "alert_fraction": 0.03144589980123337
+          },
+          "followup_cold": {
+            "auroc": 0.8382608793305535,
+            "ap_positive": 0.32104699723786256,
+            "ap_negative": 0.9830099477100213,
+            "brier": 0.05439111907898631,
+            "recall": 0.41743119266055045,
+            "fpr": 0.04548681264675367,
+            "precision": 0.39593908629441626,
+            "alert_fraction": 0.07028184088476633
+          }
+        }
+      ],
+      "primary_sha256": "5d8774521cf3982e14abaee9630c686e9b73119db91ccaf5c16a5f3ae16ea7a3"
+    },
+    {
+      "cohort": "confirmation",
+      "results": [
+        {
+          "model": "payer_readonly_hgb",
+          "split": {
+            "calibration_rows": 12850,
+            "threshold_rows": 10967,
+            "last_calibration_ts": 1762689596,
+            "first_threshold_ts": 1762689600
+          },
+          "threshold": 0.6365122615803815,
+          "original_cold": {
+            "auroc": 0.7943818503029567,
+            "ap_positive": 0.2248689630438873,
+            "ap_negative": 0.9800988561639243,
+            "brier": 0.058446522518052296,
+            "recall": 0.0273972602739726,
+            "fpr": 0.0031689957919891943,
+            "precision": 0.3838383838383838,
+            "alert_fraction": 0.004797441364605544
+          },
+          "followup_cold": {
+            "auroc": 0.7913180669541425,
+            "ap_positive": 0.19905049108974632,
+            "ap_negative": 0.9768401727225513,
+            "brier": 0.07564699162119287,
+            "recall": 0.0,
+            "fpr": 0.0,
+            "precision": null,
+            "alert_fraction": 0.0
+          }
+        },
+        {
+          "model": "context_hgb",
+          "split": {
+            "calibration_rows": 12850,
+            "threshold_rows": 10967,
+            "last_calibration_ts": 1762689596,
+            "first_threshold_ts": 1762689600
+          },
+          "threshold": 0.5139949109414758,
+          "original_cold": {
+            "auroc": 0.8214217478427421,
+            "ap_positive": 0.25138395903779426,
+            "ap_negative": 0.9839148431537724,
+            "brier": 0.05739271460042281,
+            "recall": 0.05263157894736842,
+            "fpr": 0.006182139331913346,
+            "precision": 0.3802083333333333,
+            "alert_fraction": 0.009304128707113783
+          },
+          "followup_cold": {
+            "auroc": 0.8080980657877788,
+            "ap_positive": 0.19344602137527453,
+            "ap_negative": 0.9788042758864895,
+            "brier": 0.07314543585206958,
+            "recall": 0.0,
+            "fpr": 0.0,
+            "precision": null,
+            "alert_fraction": 0.0
+          }
+        }
+      ],
+      "primary_sha256": "9ccdb9ac9b4f4aac971606a0e426bb6b94ba80fcb498a963b8b627cdadc3c342"
+    },
+    {
+      "cohort": "extension",
+      "results": [
+        {
+          "model": "payer_readonly_hgb",
+          "split": {
+            "calibration_rows": 12178,
+            "threshold_rows": 11326,
+            "last_calibration_ts": 1763899188,
+            "first_threshold_ts": 1763899201
+          },
+          "threshold": 0.2160762545229588,
+          "original_cold": {
+            "auroc": 0.7613563360957458,
+            "ap_positive": 0.20519902973281834,
+            "ap_negative": 0.9782809796074665,
+            "brier": 0.0777736663899197,
+            "recall": 0.1907255048616305,
+            "fpr": 0.036564928139759284,
+            "precision": 0.26153846153846155,
+            "alert_fraction": 0.04636674909644284
+          },
+          "followup_cold": {
+            "auroc": 0.7589315697914226,
+            "ap_positive": 0.1902754099292564,
+            "ap_negative": 0.9751430183485869,
+            "brier": 0.055989889422488996,
+            "recall": 0.18474195961106957,
+            "fpr": 0.03280686608095069,
+            "precision": 0.2765957446808511,
+            "alert_fraction": 0.04246718660833175
+          }
+        },
+        {
+          "model": "context_hgb",
+          "split": {
+            "calibration_rows": 12178,
+            "threshold_rows": 11326,
+            "last_calibration_ts": 1763899188,
+            "first_threshold_ts": 1763899201
+          },
+          "threshold": 0.23883783439113243,
+          "original_cold": {
+            "auroc": 0.7899759587800554,
+            "ap_positive": 0.22307099565711125,
+            "ap_negative": 0.9814249459665966,
+            "brier": 0.0766680923417662,
+            "recall": 0.2849663425579656,
+            "fpr": 0.06444568584632573,
+            "precision": 0.2309090909090909,
+            "alert_fraction": 0.07846680616321096
+          },
+          "followup_cold": {
+            "auroc": 0.7906707433132852,
+            "ap_positive": 0.20884146503177684,
+            "ap_negative": 0.9785190118634277,
+            "brier": 0.0555486522402476,
+            "recall": 0.2393418100224383,
+            "fpr": 0.04103397491239653,
+            "precision": 0.28368794326241137,
+            "alert_fraction": 0.053642762031576946
+          }
+        }
+      ],
+      "primary_sha256": "2a5da4ecd49bebb8ec0159ee34f863d6afa6496e5ddc49df3df2773685389f6c"
+    },
+    {
+      "cohort": "prospective",
+      "results": [
+        {
+          "model": "payer_readonly_hgb",
+          "split": {
+            "calibration_rows": 11310,
+            "threshold_rows": 11165,
+            "last_calibration_ts": 1764503997,
+            "first_threshold_ts": 1764504002
+          },
+          "threshold": 0.3267816659557023,
+          "original_cold": {
+            "auroc": 0.722663340456768,
+            "ap_positive": 0.17344570999951658,
+            "ap_negative": 0.9738101215644617,
+            "brier": 0.11319587346858304,
+            "recall": 0.4970414201183432,
+            "fpr": 0.222083288028705,
+            "precision": 0.12582923175690136,
+            "alert_fraction": 0.23869847269755326
+          },
+          "followup_cold": {
+            "auroc": 0.7128389609570763,
+            "ap_positive": 0.1354224041889964,
+            "ap_negative": 0.969912716394991,
+            "brier": 0.08301244039576357,
+            "recall": 0.4268808114961961,
+            "fpr": 0.14825486571708166,
+            "precision": 0.15625,
+            "alert_fraction": 0.1650916892271543
+          }
+        },
+        {
+          "model": "context_hgb",
+          "split": {
+            "calibration_rows": 11310,
+            "threshold_rows": 11165,
+            "last_calibration_ts": 1764503997,
+            "first_threshold_ts": 1764504002
+          },
+          "threshold": 0.34375,
+          "original_cold": {
+            "auroc": 0.754699518412184,
+            "ap_positive": 0.21851541901320776,
+            "ap_negative": 0.9781157200391131,
+            "brier": 0.12388211374532992,
+            "recall": 0.588334742180896,
+            "fpr": 0.24301402631292812,
+            "precision": 0.13472706155632985,
+            "alert_fraction": 0.26388108494662105
+          },
+          "followup_cold": {
+            "auroc": 0.757477239766615,
+            "ap_positive": 0.18679091604925058,
+            "ap_negative": 0.9761135579181216,
+            "brier": 0.08032328991141174,
+            "recall": 0.4091293322062553,
+            "fpr": 0.09856474937479613,
+            "precision": 0.2107096212451023,
+            "alert_fraction": 0.11733156254788783
+          }
+        }
+      ],
+      "primary_sha256": "1c1f65f262ff7f7919dbc954c9f26003be27bbd7f66fca3dcc2c36ea74440d07"
+    }
+  ]
+}

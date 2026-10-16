@@ -1,0 +1,64 @@
+{
+  "cohort": "pilot",
+  "status": "Post-result diagnostic; original primary endpoint unchanged",
+  "test_n": 131759,
+  "cold_n": 19621,
+  "cold_unique_signers": 17920,
+  "cold_max_rows_one_signer": 39,
+  "first_appearance_n": 17912,
+  "first_appearance_prevalence": 0.05594015185350603,
+  "cold_signer_bootstrap": {
+    "delta": 0.05937738929761677,
+    "ci95": [
+      0.036264621186250456,
+      0.08380497120485705
+    ],
+    "draws": 500,
+    "signer_clusters": 17920
+  },
+  "first_appearance_hour_bootstrap": {
+    "weighted_delta": 0.04692164333751883,
+    "ci95": [
+      0.03076482118837841,
+      0.06039998222750472
+    ],
+    "valid_bootstrap_draws": 500
+  },
+  "first_appearance_results": {
+    "payer_history": {
+      "auroc": 0.5143461450841664,
+      "ap_positive": 0.05904987392714238,
+      "ap_negative": 0.946524603855665,
+      "brier": 0.06803072094921894,
+      "recall": 0.0,
+      "fpr": 0.0,
+      "precision": null,
+      "alert_fraction": 0.0
+    },
+    "payer_readonly_hgb": {
+      "auroc": 0.7921104567919158,
+      "ap_positive": 0.21699647412676373,
+      "ap_negative": 0.9825839560770413,
+      "brier": 0.049843165794205196,
+      "recall": 0.1497005988023952,
+      "fpr": 0.017563571850975755,
+      "precision": 0.33557046979865773,
+      "alert_fraction": 0.024955337204108977
+    },
+    "context_hgb": {
+      "auroc": 0.820614005578435,
+      "ap_positive": 0.26391811746428256,
+      "ap_negative": 0.9859484098500274,
+      "brier": 0.04781528997126364,
+      "recall": 0.16367265469061876,
+      "fpr": 0.01673565937315198,
+      "precision": 0.3668903803131991,
+      "alert_fraction": 0.024955337204108977
+    }
+  },
+  "limits": [
+    "First appearance is in these sampled days, not the first transaction of an operator or on the whole chain.",
+    "Signer clusters are declared addresses, not independently identified humans/operators.",
+    "First-appearance analysis is exploratory and has fewer failures than the primary cold-history group."
+  ]
+}

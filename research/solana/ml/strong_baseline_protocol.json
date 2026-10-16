@@ -1,0 +1,27 @@
+{
+  "status": "Locally specified after pilot and confirmation results; not public preregistration",
+  "sample_seed": 42,
+  "excluded_prior_hash_ranks": 18000,
+  "sample_tokens": 10000,
+  "horizon": 300,
+  "target": "Released min_ratio < 0.3 in the 20 minutes after migration",
+  "scopes": ["pilot_27", "enriched"],
+  "seeds": [42, 73, 101],
+  "tuning": "Select configuration by validation average precision using seed 42, then average predictions from three seeds. Threshold from validation only at empirical 5% FPR budget",
+  "random_forest_grid": [
+    {"n_estimators": 250, "min_samples_leaf": 5, "max_features": 0.8},
+    {"n_estimators": 250, "min_samples_leaf": 10, "max_features": 0.8},
+    {"n_estimators": 250, "min_samples_leaf": 20, "max_features": 0.8}
+  ],
+  "hist_gradient_boosting_grid": [
+    {"max_iter": 150, "max_leaf_nodes": 15, "l2_regularization": 2, "early_stopping": false},
+    {"max_iter": 150, "max_leaf_nodes": 31, "l2_regularization": 2, "early_stopping": false}
+  ],
+  "folds": [
+    {"name": "January_late", "train_end": "2025-01-01", "validation_end": "2025-01-15", "test_end": "2025-02-01"},
+    {"name": "February_early", "train_end": "2025-01-15", "validation_end": "2025-02-01", "test_end": "2025-02-15"},
+    {"name": "February_late", "train_end": "2025-02-01", "validation_end": "2025-02-15", "test_end": "2025-03-01"}
+  ],
+  "primary": "RF enriched minus pilot-27, test-count-weighted within-period AP delta; 500 paired day-bootstrap repetitions",
+  "scope": "Eventual migrants in the same MELT historical period. A new token cohort, not an independent market period. Enriched summaries are ordinary feature engineering, not a novel method or exact reproduction of MELT's 119-feature baseline"
+}

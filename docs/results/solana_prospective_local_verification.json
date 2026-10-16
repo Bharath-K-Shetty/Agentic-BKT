@@ -1,0 +1,61 @@
+{
+  "network": "local-validator",
+  "decision_id": "2dd60ec5-4899-40ab-a91a-14ce3c809333",
+  "prediction_recorded_before_submission": true,
+  "signed_simulation_verified_before_submission": true,
+  "matching_message_verified": true,
+  "decision_unchanged_after_receipt": true,
+  "receipt": {
+    "status": "verified",
+    "signature": "2ceS2ZaEAuPzu5jQAnXrYQzar5UHtFJr3enTmvGjxW35EpKvgjoRN4ybqkzjpp2KBahkuDUfsfQA4PS7nXKTKYm6",
+    "outcome": "Succeeded",
+    "fee_paid_lamports": 5000,
+    "error": null,
+    "receipt": {
+      "blockTime": 1792116124,
+      "meta": {
+        "computeUnitsConsumed": 150,
+        "costUnits": 1481,
+        "err": null,
+        "fee": 5000,
+        "innerInstructions": [],
+        "loadedAddresses": {
+          "readonly": [],
+          "writable": []
+        },
+        "logMessages": [
+          "Program 11111111111111111111111111111111 invoke [1]",
+          "Program 11111111111111111111111111111111 success"
+        ],
+        "postBalances": [
+          989995000,
+          10000000,
+          1
+        ],
+        "postTokenBalances": [],
+        "preBalances": [
+          1000000000,
+          0,
+          1
+        ],
+        "preTokenBalances": [],
+        "rewards": [],
+        "status": {
+          "Ok": null
+        }
+      },
+      "slot": 17,
+      "transaction": [
+        "AVDBlyyjwPdGfH0Z4wBA5VeZ1H41tUcsuZJtVyCz3Huxtm5g1CpoENm20net22w2bxI6foEJRITbtllhgXnltQkBAAEDic51VTfjT2KQxfKhxjPlAjOVUoNI3hnx/gVrb235uotcStwBi+v6Hp1iWtwCM+TnRDGW87OwR/nuZxSwPhLhgQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlLu6f+AnzlzJcAcBAnsaeq0uw8EVTHYjS+sKzr6/xycBAgIAAQwCAAAAgJaYAAAAAAA=",
+        "base64"
+      ],
+      "version": "legacy"
+    },
+    "receipt_sha256": "b7fb931638e9d1c28d71337597db8191c55e9d41fda02aa0e04c6e1c2cf5f37e",
+    "measured_fee_savings_lamports": null,
+    "measured_time_saved_seconds": null,
+    "elapsed_from_decision_to_block_seconds": 0.5323300361633301,
+    "timing_scope": "Observation interval includes user delay; not network latency or time saved."
+  },
+  "scope": "Functional verification only; not evidence of ML benefit."
+}

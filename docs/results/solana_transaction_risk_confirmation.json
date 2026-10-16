@@ -1,0 +1,483 @@
+{
+  "created_at": "2026-10-09T11:09:51.179574+00:00",
+  "protocol": {
+    "status": "Unchanged model/history/metric settings for a reserved later-week confirmation; specified after source checks and payer-only pilot output, before the pilot primary comparison",
+    "train_date": "2025-11-08",
+    "validation_date": "2025-11-09",
+    "test_date": "2025-11-10",
+    "warmup_hours": 6,
+    "outcome_delay_seconds": 3600,
+    "prior_strength": 20,
+    "budget": 0.05,
+    "models": [
+      "payer_history",
+      "readonly_history",
+      "template_history",
+      "structural_hgb",
+      "payer_structural_hgb",
+      "payer_readonly_hgb",
+      "context_hgb"
+    ],
+    "hgb": {
+      "max_iter": 150,
+      "max_leaf_nodes": 15,
+      "min_samples_leaf": 40,
+      "l2_regularization": 5,
+      "early_stopping": false
+    },
+    "seeds": [
+      42,
+      73,
+      101
+    ],
+    "primary": "Context versus payer-plus-structural-plus-readonly/template HGB on cold fee payers: AP improvement with 500 paired one-hour block bootstrap draws. Global and cold FPR/recall are secondary and must be disclosed.",
+    "confirmation": "Reserve 2025-11-08 through 2025-11-10 for a separate, unchanged run if pilot succeeds. Do not tune on either test day.",
+    "sample": "Row group zero of lexicographically first Parquet shard per date, selected without status. This is not the full chain, and signature-order/sampling bias must be audited.",
+    "cleaning": "Identical signature/selected-payload duplicates counted once; any conflicting duplicate or timestamp/partition mismatch aborts. Rule added after input audit found 15 repeated rows, before any models fit.",
+    "features": "Declared account identities/roles and counts, plus labeled participation from blocks at least one hour earlier. No current logs, status, error, actual compute use, balances, fee paid, inclusion slot/index or timestamp as model input.",
+    "task": "Retrospective execution-risk screening conditional on eventual block inclusion. Declared account lists presumed resolvable before execution; actual submission times and unlanded attempts absent, so not a live pre-submission performance claim.",
+    "cold_payer": "First declared signer has never occurred as first signer in sampled history whose outcome is available. Does not establish a new operator.",
+    "novelty_hypothesis": "Role-separated non-payer participation history may transfer execution-risk signal to unseen fee payers. Historical-risk aggregation is established; a new algorithm is not claimed. Need empirical success and differentiation from adjacent research."
+  },
+  "protocol_sha256": "8dae1b53c7ebe687d8522b467aa227163de624bf053bc26ab016b05bf93c197b",
+  "sources": [
+    {
+      "path": "data/raw/novelty_search/archive_preview_2025-11-08.parquet",
+      "sha256": "9883fbe95e93b17fa591b5a7d0e42ddb39551c9aba32b8120dd583f07b7c7187",
+      "n": 132484,
+      "first_ts": "2025-11-08 00:00:00",
+      "last_ts": "2025-11-08 23:59:59"
+    },
+    {
+      "path": "data/raw/novelty_search/archive_preview_2025-11-09.parquet",
+      "sha256": "d6446a6b3a9c651e7afba6f9653940230b17e24a6f5eef0c22093762f86d8e4e",
+      "n": 132708,
+      "first_ts": "2025-11-09 00:00:00",
+      "last_ts": "2025-11-09 23:59:59"
+    },
+    {
+      "path": "data/raw/novelty_search/archive_preview_2025-11-10.parquet",
+      "sha256": "32d2a2f8d633d92e5b496871eb106993baf39eb15f37a6a6c5d4977bbed7bf67",
+      "n": 133071,
+      "first_ts": "2025-11-10 00:00:01",
+      "last_ts": "2025-11-10 23:59:59"
+    }
+  ],
+  "skipped": {},
+  "partition_counts": {
+    "train": {
+      "n": 92135,
+      "prevalence": 0.1753405329136593,
+      "cold_payer_n": 22061
+    },
+    "validation": {
+      "n": 126214,
+      "prevalence": 0.18081987735116548,
+      "cold_payer_n": 23817
+    },
+    "test": {
+      "n": 133071,
+      "prevalence": 0.2056045269066889,
+      "cold_payer_n": 20636
+    }
+  },
+  "results": [
+    {
+      "model": "payer_history",
+      "threshold": 0.28467523839684267,
+      "validation": {
+        "auroc": 0.9136132393167327,
+        "ap_positive": 0.7860696344516378,
+        "ap_negative": 0.9771600428009269,
+        "brier": 0.07823185424820225,
+        "recall": 0.6265883796336867,
+        "fpr": 0.049994196843082636,
+        "precision": 0.7345010015922749,
+        "alert_fraction": 0.15425388625667516
+      },
+      "test": {
+        "auroc": 0.9071272572921838,
+        "ap_positive": 0.8008612297100692,
+        "ap_negative": 0.9698037911703065,
+        "brier": 0.08505068637523205,
+        "recall": 0.6336988304093567,
+        "fpr": 0.05475305313543529,
+        "precision": 0.7497189310732509,
+        "alert_fraction": 0.1737869257764652
+      },
+      "subgroups": {
+        "cold_payer": {
+          "n": 20636,
+          "prevalence": 0.0672126381081605,
+          "auroc": 0.5116002805115805,
+          "ap_positive": 0.07312905935261962,
+          "ap_negative": 0.9335429866694758,
+          "brier": 0.07760183102463135,
+          "recall": 0.0,
+          "fpr": 0.0,
+          "precision": null,
+          "alert_fraction": 0.0
+        },
+        "seen_payer": {
+          "n": 112435,
+          "prevalence": 0.23100458042424513,
+          "auroc": 0.9168172135859901,
+          "ap_positive": 0.8255638522582514,
+          "ap_negative": 0.9704649772270264,
+          "brier": 0.08641782809280218,
+          "recall": 0.6675393678050283,
+          "fpr": 0.06694270315283014,
+          "precision": 0.7497189310732509,
+          "alert_fraction": 0.20568328367501224
+        }
+      }
+    },
+    {
+      "model": "readonly_history",
+      "threshold": 0.3843168691038987,
+      "validation": {
+        "auroc": 0.8712924590273695,
+        "ap_positive": 0.661451455683402,
+        "ap_negative": 0.9652235012098449,
+        "brier": 0.10662238876778095,
+        "recall": 0.49307685566558584,
+        "fpr": 0.049994196843082636,
+        "precision": 0.685239313116551,
+        "alert_fraction": 0.13011234886779596
+      },
+      "test": {
+        "auroc": 0.8525024142424942,
+        "ap_positive": 0.6405612846013837,
+        "ap_negative": 0.9547425911858802,
+        "brier": 0.11984306358165767,
+        "recall": 0.41451023391812863,
+        "fpr": 0.044564898638741475,
+        "precision": 0.7065163219536507,
+        "alert_fraction": 0.12062733428019629
+      },
+      "subgroups": {
+        "cold_payer": {
+          "n": 20636,
+          "prevalence": 0.0672126381081605,
+          "auroc": 0.5869391318111901,
+          "ap_positive": 0.12363574178330998,
+          "ap_negative": 0.9494110658739847,
+          "brier": 0.08327514698070147,
+          "recall": 0.13049747656813265,
+          "fpr": 0.045820562107122445,
+          "precision": 0.1702728127939793,
+          "alert_fraction": 0.05151192091490599
+        },
+        "seen_payer": {
+          "n": 112435,
+          "prevalence": 0.23100458042424513,
+          "auroc": 0.8572474746314044,
+          "ap_positive": 0.6707165113978227,
+          "ap_negative": 0.9518813700309232,
+          "brier": 0.126554634951581,
+          "recall": 0.4296769722404035,
+          "fpr": 0.044285350789942404,
+          "precision": 0.7445460004002935,
+          "alert_fraction": 0.13331258060212567
+        }
+      }
+    },
+    {
+      "model": "template_history",
+      "threshold": 0.25695683847999073,
+      "validation": {
+        "auroc": 0.8363635450042488,
+        "ap_positive": 0.6095942567818293,
+        "ap_negative": 0.9579429839468186,
+        "brier": 0.10686995778769884,
+        "recall": 0.4152133905880291,
+        "fpr": 0.049994196843082636,
+        "precision": 0.6470467736428815,
+        "alert_fraction": 0.1160330866623354
+      },
+      "test": {
+        "auroc": 0.8155089513677946,
+        "ap_positive": 0.5918993137082917,
+        "ap_negative": 0.943496160548839,
+        "brier": 0.12470541874440425,
+        "recall": 0.5649488304093567,
+        "fpr": 0.16273613909621515,
+        "precision": 0.4732700551132884,
+        "alert_fraction": 0.24543288920951972
+      },
+      "subgroups": {
+        "cold_payer": {
+          "n": 20636,
+          "prevalence": 0.0672126381081605,
+          "auroc": 0.6893158767824079,
+          "ap_positive": 0.20754326586406957,
+          "ap_negative": 0.9647745475961655,
+          "brier": 0.06425676507278556,
+          "recall": 0.11247296322999278,
+          "fpr": 0.008571873863577328,
+          "precision": 0.48598130841121495,
+          "alert_fraction": 0.015555340182205854
+        },
+        "seen_payer": {
+          "n": 112435,
+          "prevalence": 0.23100458042424513,
+          "auroc": 0.8114441420918419,
+          "ap_positive": 0.6103269229610756,
+          "ap_negative": 0.9355259464517287,
+          "brier": 0.13579999265081708,
+          "recall": 0.5891117699149117,
+          "fpr": 0.19705766695195578,
+          "precision": 0.47314388200006186,
+          "alert_fraction": 0.2876239605105172
+        }
+      }
+    },
+    {
+      "model": "structural_hgb",
+      "threshold": 0.3258688858663074,
+      "validation": {
+        "auroc": 0.9147752067248148,
+        "ap_positive": 0.7283053257243913,
+        "ap_negative": 0.9769317214655897,
+        "brier": 0.08190633909047118,
+        "recall": 0.5833406362282009,
+        "fpr": 0.04994583720210461,
+        "precision": 0.7205174000108243,
+        "alert_fraction": 0.1463942193417529
+      },
+      "test": {
+        "auroc": 0.8930926316693958,
+        "ap_positive": 0.7028260508078776,
+        "ap_negative": 0.9663591928324479,
+        "brier": 0.0987236394712776,
+        "recall": 0.5244152046783626,
+        "fpr": 0.065054724673875,
+        "precision": 0.6759952885747939,
+        "alert_fraction": 0.1595013188448272
+      },
+      "subgroups": {
+        "cold_payer": {
+          "n": 20636,
+          "prevalence": 0.0672126381081605,
+          "auroc": 0.7499302859879461,
+          "ap_positive": 0.16811262248393893,
+          "ap_negative": 0.9740607726192143,
+          "brier": 0.06862921227563903,
+          "recall": 0.22278298485940878,
+          "fpr": 0.06021092004779469,
+          "precision": 0.21049046321525886,
+          "alert_fraction": 0.07113781740647412
+        },
+        "seen_payer": {
+          "n": 112435,
+          "prevalence": 0.23100458042424513,
+          "auroc": 0.8963720428219666,
+          "ap_positive": 0.7291314852265087,
+          "ap_negative": 0.9630263866980988,
+          "brier": 0.10424708501411745,
+          "recall": 0.5405228506526008,
+          "fpr": 0.06613309893363559,
+          "precision": 0.7105835906261072,
+          "alert_fraction": 0.17571930448703696
+        }
+      }
+    },
+    {
+      "model": "payer_structural_hgb",
+      "threshold": 0.3800256310488989,
+      "validation": {
+        "auroc": 0.9406484003703822,
+        "ap_positive": 0.8204051187140002,
+        "ap_negative": 0.9853928530777314,
+        "brier": 0.06793813331409682,
+        "recall": 0.6614670055209885,
+        "fpr": 0.04957830393067162,
+        "precision": 0.7465136979527247,
+        "alert_fraction": 0.1602199439047966
+      },
+      "test": {
+        "auroc": 0.9387695099808975,
+        "ap_positive": 0.8297135476659323,
+        "ap_negative": 0.9819967560352323,
+        "brier": 0.07335265403632008,
+        "recall": 0.7711622807017544,
+        "fpr": 0.09867468853761671,
+        "precision": 0.6691722169362512,
+        "alert_fraction": 0.2369411817751426
+      },
+      "subgroups": {
+        "cold_payer": {
+          "n": 20636,
+          "prevalence": 0.0672126381081605,
+          "auroc": 0.7480360500005188,
+          "ap_positive": 0.1911365631094845,
+          "ap_negative": 0.9742659502916087,
+          "brier": 0.05924540977466469,
+          "recall": 0.032444124008651765,
+          "fpr": 0.003117045041300847,
+          "precision": 0.42857142857142855,
+          "alert_fraction": 0.00508819538670285
+        },
+        "seen_payer": {
+          "n": 112435,
+          "prevalence": 0.23100458042424513,
+          "auroc": 0.9439687178843861,
+          "ap_positive": 0.8504678267278685,
+          "ap_negative": 0.981456180383137,
+          "brier": 0.0759418575101807,
+          "recall": 0.8106110191352558,
+          "fpr": 0.11994864796095395,
+          "precision": 0.6699761336515513,
+          "alert_fraction": 0.2794948192288878
+        }
+      }
+    },
+    {
+      "model": "payer_readonly_hgb",
+      "threshold": 0.4227320275977872,
+      "validation": {
+        "auroc": 0.9446536820026238,
+        "ap_positive": 0.8251867232103846,
+        "ap_negative": 0.9867766808350042,
+        "brier": 0.06762105359226463,
+        "recall": 0.6573481728157041,
+        "fpr": 0.04979108635097493,
+        "precision": 0.7445161290322581,
+        "alert_fraction": 0.1596494842093587
+      },
+      "test": {
+        "auroc": 0.9408477618084968,
+        "ap_positive": 0.8365765533042794,
+        "ap_negative": 0.9830677664619152,
+        "brier": 0.0725579301024172,
+        "recall": 0.7389254385964912,
+        "fpr": 0.08304717579059889,
+        "precision": 0.6972341012553456,
+        "alert_fraction": 0.21789871572318537
+      },
+      "subgroups": {
+        "cold_payer": {
+          "n": 20636,
+          "prevalence": 0.0672126381081605,
+          "auroc": 0.7943818503029567,
+          "ap_positive": 0.2248689630438873,
+          "ap_negative": 0.9800988561639243,
+          "brier": 0.058446522518052296,
+          "recall": 0.0273972602739726,
+          "fpr": 0.0031689957919891943,
+          "precision": 0.3838383838383838,
+          "alert_fraction": 0.004797441364605544
+        },
+        "seen_payer": {
+          "n": 112435,
+          "prevalence": 0.23100458042424513,
+          "auroc": 0.9449129531877409,
+          "ap_positive": 0.8564794312103281,
+          "ap_negative": 0.9822242003605786,
+          "brier": 0.07514789770068245,
+          "recall": 0.7769221884264429,
+          "fpr": 0.10083042261340242,
+          "precision": 0.6983077828148251,
+          "alert_fraction": 0.2570107173033308
+        }
+      }
+    },
+    {
+      "model": "context_hgb",
+      "threshold": 0.3668453475973113,
+      "validation": {
+        "auroc": 0.9473840092294759,
+        "ap_positive": 0.8311810563205927,
+        "ap_negative": 0.9876484091994165,
+        "brier": 0.06618451422647359,
+        "recall": 0.6629567960739637,
+        "fpr": 0.048601439182915505,
+        "precision": 0.7506822128504094,
+        "alert_fraction": 0.15968909946598633
+      },
+      "test": {
+        "auroc": 0.9456078276431257,
+        "ap_positive": 0.8456771820043479,
+        "ap_negative": 0.9847533824457861,
+        "brier": 0.0708161385588848,
+        "recall": 0.623062865497076,
+        "fpr": 0.03299562013413931,
+        "precision": 0.8301436571706842,
+        "alert_fraction": 0.15431611696011904
+      },
+      "subgroups": {
+        "cold_payer": {
+          "n": 20636,
+          "prevalence": 0.0672126381081605,
+          "auroc": 0.8214217478427421,
+          "ap_positive": 0.25138395903779426,
+          "ap_negative": 0.9839148431537724,
+          "brier": 0.05739271460042281,
+          "recall": 0.05263157894736842,
+          "fpr": 0.006182139331913346,
+          "precision": 0.3802083333333333,
+          "alert_fraction": 0.009304128707113783
+        },
+        "seen_payer": {
+          "n": 112435,
+          "prevalence": 0.23100458042424513,
+          "auroc": 0.948538035776736,
+          "ap_positive": 0.8645313792590256,
+          "ap_negative": 0.9836334599461205,
+          "brier": 0.07327983559990245,
+          "recall": 0.6535248142301621,
+          "fpr": 0.03896509449237816,
+          "precision": 0.834390207933933,
+          "alert_fraction": 0.1809312046960466
+        }
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "group": "all",
+      "primary": false,
+      "base": "payer_readonly_hgb",
+      "candidate": "context_hgb",
+      "ap": {
+        "weighted_delta": 0.009100628700068558,
+        "ci95": [
+          0.00755466152636883,
+          0.011470780411457727
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "group": "cold_payer",
+      "primary": true,
+      "base": "payer_readonly_hgb",
+      "candidate": "context_hgb",
+      "ap": {
+        "weighted_delta": 0.02651499599390697,
+        "ci95": [
+          0.004930881505412831,
+          0.049766031605483846
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    }
+  ],
+  "limitations": [
+    "One shard row group per day, not complete or verified random chain samples.",
+    "Conditional on inclusion; unlanded attempts and actual submission times absent.",
+    "Role participation is not causal attribution, ownership or account contention.",
+    "Historical outcomes assumed available after one hour; no current post-execution features.",
+    "Test-time history updates use earlier matured test labels; explicitly online, not frozen evaluation.",
+    "Cold first signer means unseen in sampled matured history, not a new operator.",
+    "Ordinary history aggregation and boosting; empirical contribution candidate, not a new algorithm."
+  ],
+  "elapsed_seconds": 127.9665922090062,
+  "code_hashes": {
+    "research/solana/ml/transaction_confirmation_protocol.json": "8dae1b53c7ebe687d8522b467aa227163de624bf053bc26ab016b05bf93c197b",
+    "research/solana/ml/transaction_risk.py": "7a232d750c31d404152c04cb5d4d1c9f22b0bc50efb1a20dda06e1a9854e03a3",
+    "research/solana/ml/archive_probe.py": "0b694f14ccd6f85d3ebaf664ad6d276eb058b9de348f6087f4c95d50f487822b",
+    "research/solana/ml/prefix_baseline.py": "e5f4df227435ec2a3bebcc7fdb22f7faa8ce810d978bc7dcec0061e78a663a33",
+    "research/solana/ml/robustness.py": "5f09315bd377f5bea344a99f6b6804be9b2545590a3b3e7ce91f081edd8deb00"
+  }
+}

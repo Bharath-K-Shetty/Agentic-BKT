@@ -1,0 +1,509 @@
+{
+  "fpr_checks": [
+    {
+      "horizon": 60,
+      "period": "January_late",
+      "model": "random_forest",
+      "scope": "base",
+      "false_positives": 48,
+      "negatives": 1100,
+      "wilson_ci95": [
+        0.033069139772352256,
+        0.05737995327708011
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "January_late",
+      "model": "random_forest",
+      "scope": "coord",
+      "false_positives": 46,
+      "negatives": 1100,
+      "wilson_ci95": [
+        0.03149684819473539,
+        0.055328536062065226
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "January_late",
+      "model": "hist_gradient_boosting",
+      "scope": "base",
+      "false_positives": 51,
+      "negatives": 1100,
+      "wilson_ci95": [
+        0.035437897427046165,
+        0.060446758811333816
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "January_late",
+      "model": "hist_gradient_boosting",
+      "scope": "coord",
+      "false_positives": 64,
+      "negatives": 1100,
+      "wilson_ci95": [
+        0.04582473912358816,
+        0.07361402426689816
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "January_late",
+      "model": "logistic",
+      "scope": "base",
+      "false_positives": 69,
+      "negatives": 1100,
+      "wilson_ci95": [
+        0.04986435064238581,
+        0.07863368472967985
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "January_late",
+      "model": "logistic",
+      "scope": "coord",
+      "false_positives": 63,
+      "negatives": 1100,
+      "wilson_ci95": [
+        0.04501952884515958,
+        0.07260738014901086
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_early",
+      "model": "random_forest",
+      "scope": "base",
+      "false_positives": 22,
+      "negatives": 657,
+      "wilson_ci95": [
+        0.02221571717940712,
+        0.05017904283772269
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_early",
+      "model": "random_forest",
+      "scope": "coord",
+      "false_positives": 23,
+      "negatives": 657,
+      "wilson_ci95": [
+        0.023438926145627238,
+        0.051982278373893666
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_early",
+      "model": "hist_gradient_boosting",
+      "scope": "base",
+      "false_positives": 19,
+      "negatives": 657,
+      "wilson_ci95": [
+        0.018590781673612493,
+        0.04472464483634404
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_early",
+      "model": "hist_gradient_boosting",
+      "scope": "coord",
+      "false_positives": 18,
+      "negatives": 657,
+      "wilson_ci95": [
+        0.017399148786076023,
+        0.042889833221489426
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_early",
+      "model": "logistic",
+      "scope": "base",
+      "false_positives": 16,
+      "negatives": 657,
+      "wilson_ci95": [
+        0.015044873304803892,
+        0.03919121969797937
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_early",
+      "model": "logistic",
+      "scope": "coord",
+      "false_positives": 14,
+      "negatives": 657,
+      "wilson_ci95": [
+        0.012735010751800393,
+        0.03544819324620068
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_late",
+      "model": "random_forest",
+      "scope": "base",
+      "false_positives": 7,
+      "negatives": 436,
+      "wilson_ci95": [
+        0.007798351342228643,
+        0.0327650345389722
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_late",
+      "model": "random_forest",
+      "scope": "coord",
+      "false_positives": 9,
+      "negatives": 436,
+      "wilson_ci95": [
+        0.010897182921883053,
+        0.03876038887513579
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_late",
+      "model": "hist_gradient_boosting",
+      "scope": "base",
+      "false_positives": 13,
+      "negatives": 436,
+      "wilson_ci95": [
+        0.01750627213645172,
+        0.050339671492203135
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_late",
+      "model": "hist_gradient_boosting",
+      "scope": "coord",
+      "false_positives": 14,
+      "negatives": 436,
+      "wilson_ci95": [
+        0.01922198053064326,
+        0.05317105605592058
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_late",
+      "model": "logistic",
+      "scope": "base",
+      "false_positives": 18,
+      "negatives": 436,
+      "wilson_ci95": [
+        0.026271458772609033,
+        0.06430994964559082
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 60,
+      "period": "February_late",
+      "model": "logistic",
+      "scope": "coord",
+      "false_positives": 17,
+      "negatives": 436,
+      "wilson_ci95": [
+        0.024484237467779994,
+        0.06155007799251085
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "January_late",
+      "model": "random_forest",
+      "scope": "base",
+      "false_positives": 33,
+      "negatives": 692,
+      "wilson_ci95": [
+        0.034155359010583794,
+        0.06621442772080872
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "January_late",
+      "model": "random_forest",
+      "scope": "coord",
+      "false_positives": 41,
+      "negatives": 692,
+      "wilson_ci95": [
+        0.04397221020023284,
+        0.07939132000128384
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "January_late",
+      "model": "hist_gradient_boosting",
+      "scope": "base",
+      "false_positives": 38,
+      "negatives": 692,
+      "wilson_ci95": [
+        0.04026650819005184,
+        0.07447436821016828
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "January_late",
+      "model": "hist_gradient_boosting",
+      "scope": "coord",
+      "false_positives": 59,
+      "negatives": 692,
+      "wilson_ci95": [
+        0.06667394895449401,
+        0.10842550405480199
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": true
+    },
+    {
+      "horizon": 300,
+      "period": "January_late",
+      "model": "logistic",
+      "scope": "base",
+      "false_positives": 42,
+      "negatives": 692,
+      "wilson_ci95": [
+        0.04521327588570702,
+        0.08102447224957517
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "January_late",
+      "model": "logistic",
+      "scope": "coord",
+      "false_positives": 41,
+      "negatives": 692,
+      "wilson_ci95": [
+        0.04397221020023284,
+        0.07939132000128384
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_early",
+      "model": "random_forest",
+      "scope": "base",
+      "false_positives": 17,
+      "negatives": 422,
+      "wilson_ci95": [
+        0.025301354816410125,
+        0.06356143211253412
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_early",
+      "model": "random_forest",
+      "scope": "coord",
+      "false_positives": 17,
+      "negatives": 422,
+      "wilson_ci95": [
+        0.025301354816410125,
+        0.06356143211253412
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_early",
+      "model": "hist_gradient_boosting",
+      "scope": "base",
+      "false_positives": 27,
+      "negatives": 422,
+      "wilson_ci95": [
+        0.04434086343279903,
+        0.09148775922145738
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_early",
+      "model": "hist_gradient_boosting",
+      "scope": "coord",
+      "false_positives": 20,
+      "negatives": 422,
+      "wilson_ci95": [
+        0.030886532053594224,
+        0.07206600559294367
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_early",
+      "model": "logistic",
+      "scope": "base",
+      "false_positives": 18,
+      "negatives": 422,
+      "wilson_ci95": [
+        0.027148458369462187,
+        0.06641091213201328
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_early",
+      "model": "logistic",
+      "scope": "coord",
+      "false_positives": 15,
+      "negatives": 422,
+      "wilson_ci95": [
+        0.021657094070918394,
+        0.057812525712963414
+      ],
+      "point_above_budget": false,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_late",
+      "model": "random_forest",
+      "scope": "base",
+      "false_positives": 22,
+      "negatives": 309,
+      "wilson_ci95": [
+        0.04748467915432761,
+        0.10544089215914265
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_late",
+      "model": "random_forest",
+      "scope": "coord",
+      "false_positives": 22,
+      "negatives": 309,
+      "wilson_ci95": [
+        0.04748467915432761,
+        0.10544089215914265
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_late",
+      "model": "hist_gradient_boosting",
+      "scope": "base",
+      "false_positives": 19,
+      "negatives": 309,
+      "wilson_ci95": [
+        0.039714423984781616,
+        0.09403210366031439
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_late",
+      "model": "hist_gradient_boosting",
+      "scope": "coord",
+      "false_positives": 19,
+      "negatives": 309,
+      "wilson_ci95": [
+        0.039714423984781616,
+        0.09403210366031439
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_late",
+      "model": "logistic",
+      "scope": "base",
+      "false_positives": 22,
+      "negatives": 309,
+      "wilson_ci95": [
+        0.04748467915432761,
+        0.10544089215914265
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    },
+    {
+      "horizon": 300,
+      "period": "February_late",
+      "model": "logistic",
+      "scope": "coord",
+      "false_positives": 22,
+      "negatives": 309,
+      "wilson_ci95": [
+        0.04748467915432761,
+        0.10544089215914265
+      ],
+      "point_above_budget": true,
+      "lower_ci_above_budget": false
+    }
+  ],
+  "interpretation": "Marginal binomial intervals, not adjusted across models or periods and not wallet-cluster aware"
+}

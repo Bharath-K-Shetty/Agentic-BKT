@@ -1,0 +1,59 @@
+{
+  "status": "Refined first-appearance hypothesis specified after three cohorts and their diagnostics; new dates reserved before outcomes. No model/history/identity settings changed.",
+  "train_date": "2025-11-29",
+  "validation_date": "2025-11-30",
+  "test_date": "2025-12-01",
+  "warmup_hours": 6,
+  "outcome_delay_seconds": 3600,
+  "prior_strength": 20,
+  "budget": 0.05,
+  "models": [
+    "payer_history",
+    "readonly_history",
+    "template_history",
+    "structural_hgb",
+    "payer_structural_hgb",
+    "payer_readonly_hgb",
+    "context_hgb"
+  ],
+  "hgb": {
+    "max_iter": 150,
+    "max_leaf_nodes": 15,
+    "min_samples_leaf": 40,
+    "l2_regularization": 5,
+    "early_stopping": false
+  },
+  "seeds": [
+    42,
+    73,
+    101
+  ],
+  "primary": "Context versus payer-plus-structural-plus-readonly/template HGB on cold fee payers: AP improvement with 500 paired one-hour block bootstrap draws. Global and cold FPR/recall are secondary and must be disclosed.",
+  "confirmation": "New first-appearance and account-identity comparison; retain failed comparisons, no test tuning.",
+  "sample": "First row group of alternate date/seed hash-ranked shard, selected using file counts without outcomes. Not complete or verified random sample.",
+  "cleaning": "Identical signature/selected-payload duplicates counted once; any conflicting duplicate or timestamp/partition mismatch aborts. Rule added after input audit found 15 repeated rows, before any models fit.",
+  "features": "Declared account identities/roles and counts, plus labeled participation from blocks at least one hour earlier. No current logs, status, error, actual compute use, balances, fee paid, inclusion slot/index or timestamp as model input.",
+  "task": "Retrospective execution-risk screening conditional on eventual block inclusion. Declared account lists presumed resolvable before execution; actual submission times and unlanded attempts absent, so not a live pre-submission performance claim.",
+  "cold_payer": "First declared signer has never occurred as first signer in sampled history whose outcome is available. Does not establish a new operator.",
+  "novelty_hypothesis": "Role-separated non-payer participation history may transfer execution-risk signal to unseen fee payers. Historical-risk aggregation is established; a new algorithm is not claimed. Need empirical success and differentiation from adjacent research.",
+  "refined_primary": "First declared signer appearance in the sampled replay, context_identity_hgb versus readonly_identity_hgb AP with paired hour bootstrap. Primary-context comparison and cold-history results also retained. Success requires positive AP gain and interval entirely above zero; does not establish a new algorithm.",
+  "source_paths": {
+    "2025-11-29": "data/raw/novelty_search/archive_preview_2025-11-29_shard0091.parquet",
+    "2025-11-30": "data/raw/novelty_search/archive_preview_2025-11-30_shard0132.parquet",
+    "2025-12-01": "data/raw/novelty_search/archive_preview_2025-12-01_shard0024.parquet"
+  },
+  "source_selection": {
+    "2025-11-29": {
+      "shard_rank": 91,
+      "shard_count": 245
+    },
+    "2025-11-30": {
+      "shard_rank": 132,
+      "shard_count": 284
+    },
+    "2025-12-01": {
+      "shard_rank": 24,
+      "shard_count": 304
+    }
+  }
+}

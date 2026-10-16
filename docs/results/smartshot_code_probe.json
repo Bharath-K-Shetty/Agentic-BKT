@@ -1,0 +1,241 @@
+{
+  "date": "2026-10-08",
+  "scope": "Read-only candidate file inspection; no upstream code executed; search hits are not an end-to-end implementation audit.",
+  "files": [
+    {
+      "path": "fuzzer/engine/analysis/execution_trace_analysis.py",
+      "url": "https://raw.githubusercontent.com/SCFuzzing/SmartShot/main/fuzzer/engine/analysis/execution_trace_analysis.py",
+      "sha256": "3a622ea4a378d21c51d6a310b6be22fb098f43c408a8da9108ed2eb815c7627d",
+      "bytes": 63284,
+      "hits": [
+        {
+          "line": 18,
+          "text": "from eth_utils import to_hex, to_int, int_to_big_endian, encode_hex, ValidationError, to_canonical_address, to_normalized_address"
+        },
+        {
+          "line": 59,
+          "text": "if individual.hash in executed_individuals and not individual.snapshot:"
+        },
+        {
+          "line": 63,
+          "text": "# snapshot-restoring individual deployment"
+        },
+        {
+          "line": 65,
+          "text": "if individual.snapshot:"
+        },
+        {
+          "line": 66,
+          "text": "self.env.instrumented_evm.create_snapshot()"
+        },
+        {
+          "line": 67,
+          "text": "if self.env.instrumented_evm.snapshot[\"storage\"].keys():"
+        },
+        {
+          "line": 68,
+          "text": "contract = list(self.env.instrumented_evm.snapshot[\"storage\"].keys())[0]"
+        },
+        {
+          "line": 70,
+          "text": "for storage_slot in individual.snapshot[\"snapshot\"][0]:"
+        },
+        {
+          "line": 72,
+          "text": "# deploy the snapshot storage"
+        },
+        {
+          "line": 73,
+          "text": "self.env.instrumented_evm.vm.state._account_db.set_storage(contract, storage_slot, individual.snapshot[\"snapshot\"][0][storage_slot])"
+        },
+        {
+          "line": 74,
+          "text": "self.env.instrumented_evm.vm.state._account_db.set_storage(contract, individual.snapshot[\"slot\"], individual.snapshot[\"value\"])"
+        },
+        {
+          "line": 76,
+          "text": "self.env.last_used_var = individual.snapshot"
+        },
+        {
+          "line": 77,
+          "text": "key = \"_\".join((\"storage\", str(individual.snapshot[\"slot\"])))"
+        },
+        {
+          "line": 83,
+          "text": "if individual.snapshot and saved_storage:"
+        },
+        {
+          "line": 87,
+          "text": "# remove the snapshot"
+        },
+        {
+          "line": 88,
+          "text": "key = \"_\".join((\"storage\", str(individual.snapshot[\"slot\"])))"
+        },
+        {
+          "line": 89,
+          "text": "self.env.snapshot_reserved[key].pop(0)"
+        },
+        {
+          "line": 98,
+          "text": "if g == -1 and self.env.onchain_status and self.env.instrumented_evm.snapshot[\"storage\"].keys():"
+        },
+        {
+          "line": 99,
+          "text": "contract = list(self.env.instrumented_evm.snapshot[\"storage\"].keys())[0]"
+        },
+        {
+          "line": 156,
+          "text": "return self.env.snapshot_reserved"
+        },
+        {
+          "line": 186,
+          "text": "def take_snapshot(self, _type, _type_key, individual, transaction_index, storage_snapshot):"
+        },
+        {
+          "line": 187,
+          "text": "self.env.instrumented_evm.create_snapshot()"
+        },
+        {
+          "line": 188,
+          "text": "for contract in self.env.instrumented_evm.snapshot[\"storage\"]:"
+        },
+        {
+          "line": 191,
+          "text": "if key not in self.env.constraint_snapshot:"
+        },
+        {
+          "line": 192,
+          "text": "self.env.constraint_snapshot[key] = []"
+        }
+      ]
+    },
+    {
+      "path": "fuzzer/engine/operators/mutation/mutation.py",
+      "url": "https://raw.githubusercontent.com/SCFuzzing/SmartShot/main/fuzzer/engine/operators/mutation/mutation.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "hits": []
+    },
+    {
+      "path": "fuzzer/engine/components/individual.py",
+      "url": "https://raw.githubusercontent.com/SCFuzzing/SmartShot/main/fuzzer/engine/components/individual.py",
+      "sha256": "ae032f15bd4ac786fe1e0f82b5b82edd7221bf5047266455b97d27168aacb32b",
+      "bytes": 5116,
+      "hits": [
+        {
+          "line": 19,
+          "text": "self.snapshot = None"
+        }
+      ]
+    },
+    {
+      "path": "fuzzer/evm/storage_emulation.py",
+      "url": "https://raw.githubusercontent.com/SCFuzzing/SmartShot/main/fuzzer/evm/storage_emulation.py",
+      "sha256": "3b482703bbdc34140544c842bef3ecaef12e889d0b5d6384d36987b02aac3c59",
+      "bytes": 26782,
+      "hits": [
+        {
+          "line": 20,
+          "text": "from eth.validation import validate_uint256, validate_canonical_address, validate_is_bytes"
+        },
+        {
+          "line": 54,
+          "text": "self.snapshot = None"
+        },
+        {
+          "line": 56,
+          "text": "def set_snapshot(self, snapshot):"
+        },
+        {
+          "line": 57,
+          "text": "self.snapshot = snapshot"
+        },
+        {
+          "line": 80,
+          "text": "validate_canonical_address(address, title=\"Storage Address\")"
+        },
+        {
+          "line": 81,
+          "text": "validate_uint256(slot, title=\"Storage Slot\")"
+        },
+        {
+          "line": 91,
+          "text": "if self.snapshot != None:"
+        },
+        {
+          "line": 92,
+          "text": "if address not in self.snapshot[\"storage\"]:"
+        },
+        {
+          "line": 93,
+          "text": "self.snapshot[\"storage\"][address] = dict()"
+        },
+        {
+          "line": 94,
+          "text": "self.snapshot[\"storage\"][address][slot] = result"
+        },
+        {
+          "line": 98,
+          "text": "validate_uint256(value, title=\"Storage Value\")"
+        },
+        {
+          "line": 99,
+          "text": "validate_uint256(slot, title=\"Storage Slot\")"
+        },
+        {
+          "line": 100,
+          "text": "validate_canonical_address(address, title=\"Storage Address\")"
+        },
+        {
+          "line": 106,
+          "text": "validate_canonical_address(address, title=\"Storage Address\")"
+        },
+        {
+          "line": 120,
+          "text": "if self.snapshot != None:"
+        },
+        {
+          "line": 121,
+          "text": "self.snapshot[\"code\"][code_hash] = code"
+        },
+        {
+          "line": 130,
+          "text": "if self.snapshot != None:"
+        },
+        {
+          "line": 131,
+          "text": "self.snapshot[\"account\"][address] = account"
+        },
+        {
+          "line": 142,
+          "text": "validate_canonical_address(address, title=\"Storage Address\")"
+        },
+        {
+          "line": 147,
+          "text": "validate_canonical_address(address, title=\"Storage Address\")"
+        },
+        {
+          "line": 148,
+          "text": "validate_uint256(nonce, title=\"Nonce\")"
+        },
+        {
+          "line": 157,
+          "text": "validate_canonical_address(address, title=\"Storage Address\")"
+        },
+        {
+          "line": 161,
+          "text": "validate_canonical_address(address, title=\"Storage Address\")"
+        },
+        {
+          "line": 162,
+          "text": "validate_uint256(balance, title=\"Account Balance\")"
+        },
+        {
+          "line": 167,
+          "text": "validate_canonical_address(address, title=\"Storage Address\")"
+        }
+      ]
+    }
+  ]
+}

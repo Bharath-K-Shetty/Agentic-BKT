@@ -1,0 +1,2615 @@
+{
+  "created_at": "2026-10-09T06:16:47.267666+00:00",
+  "protocol": {
+    "status": "Locally specified after the exploratory pilot, before this confirmation run; not public preregistration",
+    "question": "Do same-transaction wallet co-participation features improve prefix-only collapse prediction across subsequent calendar periods, and do validation alert budgets transfer?",
+    "population": "MELT eventual migrants only; no all-launch or confirmed-fraud claim",
+    "source_revision": "0732bcfab54f508c27becd6d9b2b10b1b6ac2517",
+    "sample_seed": 42,
+    "exclude_first_hash_ranked_tokens": 6000,
+    "confirmation_tokens": 12000,
+    "target": "Released min_ratio < 0.3 within 20 minutes after migration",
+    "primary_horizon_seconds": 300,
+    "secondary_horizon_seconds": 60,
+    "model_seeds": [
+      42,
+      73,
+      101
+    ],
+    "folds": [
+      {
+        "name": "January_late",
+        "train_end": "2025-01-01",
+        "validation_end": "2025-01-15",
+        "test_end": "2025-02-01"
+      },
+      {
+        "name": "February_early",
+        "train_end": "2025-01-15",
+        "validation_end": "2025-02-01",
+        "test_end": "2025-02-15"
+      },
+      {
+        "name": "February_late",
+        "train_end": "2025-02-01",
+        "validation_end": "2025-02-15",
+        "test_end": "2025-03-01"
+      }
+    ],
+    "maturity": "Migration + 1 hour; training labels ready before validation start and validation labels ready before test start",
+    "models": {
+      "random_forest": {
+        "n_estimators": 250,
+        "min_samples_leaf": 10,
+        "max_features": 0.8
+      },
+      "hist_gradient_boosting": {
+        "max_iter": 150,
+        "max_leaf_nodes": 15,
+        "l2_regularization": 2,
+        "early_stopping": false
+      },
+      "logistic": {
+        "C": 1,
+        "max_iter": 2000,
+        "seeds": [
+          42
+        ]
+      }
+    },
+    "features": "Identical prefix activity/holdings inputs, with versus without the six pilot co-participation summaries",
+    "threshold": "Separate validation thresholds for each fitted model at an empirical 5% false-positive budget; no test adjustment",
+    "primary_comparison": "Random-forest co-participation minus base AP, averaging predictions over three seeds, then test-count-weighted within-period AP deltas",
+    "uncertainty": "500 paired calendar-day bootstrap repetitions within each test period; conditional on fixed fitted models",
+    "diagnostic": "Share of prefix wallets absent from labeled training prefixes; subgroup boundary is median validation novelty share, without using test outcomes. This is wallet overlap, not operator identity",
+    "interpretation": "A positive interval is evidence within this dataset, not automatically a novel contribution. Failed confirmation will be retained. Secondary comparisons remain exploratory"
+  },
+  "protocol_sha256": "20f3316022490463fdc276c27571a00c1fdd2f4b8009a5cfe43f8ae90e64f49e",
+  "audit": {
+    "selected_tokens": 12000,
+    "selected_token_sha256": "cc584d8f1e1cc2032b03cb4a31a477fedf5066b63016b4a9e314ad0c24ec58f6",
+    "excluded_pilot_rank_count": 6000,
+    "skipped": {
+      "300:already_migrated": 5173,
+      "60:no positive holdings": 53,
+      "300:no positive holdings": 207,
+      "60:no prefix swaps": 2,
+      "60:duplicate prefix signature": 1,
+      "300:duplicate prefix signature": 1
+    }
+  },
+  "pilot_token_overlap": 0,
+  "results": [
+    {
+      "horizon": 60,
+      "period": "January_late",
+      "counts": {
+        "train": {
+          "n": 2530,
+          "prevalence": 0.6055335968379446
+        },
+        "validation": {
+          "n": 2150,
+          "prevalence": 0.6609302325581395
+        },
+        "test": {
+          "n": 4086,
+          "prevalence": 0.7307880567792462
+        }
+      },
+      "wallet_novelty_validation_median": 0.5692307692307692,
+      "models": [
+        {
+          "model": "random_forest",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8056347487058622,
+          "validation": {
+            "auroc": 0.6579863675284219,
+            "ap_positive": 0.7838418997986687,
+            "ap_negative": 0.4904425813638844,
+            "brier": 0.21240358703747397,
+            "recall": 0.1625615763546798,
+            "fpr": 0.04938271604938271,
+            "precision": 0.8651685393258427,
+            "alert_fraction": 0.1241860465116279
+          },
+          "test": {
+            "auroc": 0.6464156974974121,
+            "ap_positive": 0.8235234278097043,
+            "ap_negative": 0.41280017349932563,
+            "brier": 0.20653500085760546,
+            "recall": 0.137642330877428,
+            "fpr": 0.04363636363636364,
+            "precision": 0.8954248366013072,
+            "alert_fraction": 0.11233480176211454
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 3649,
+              "metrics": {
+                "auroc": 0.6457853315963125,
+                "ap_positive": 0.8177429283013649,
+                "ap_negative": 0.4205186260099712,
+                "brier": 0.20824525873240612,
+                "recall": 0.12944738834216502,
+                "fpr": 0.04270109235352532,
+                "precision": 0.8883116883116883,
+                "alert_fraction": 0.10550835845437107
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 437,
+              "metrics": {
+                "auroc": 0.6429107276819205,
+                "ap_positive": 0.864454961252302,
+                "ap_negative": 0.33688581235193904,
+                "brier": 0.19225415192134068,
+                "recall": 0.2005813953488372,
+                "fpr": 0.053763440860215055,
+                "precision": 0.9324324324324325,
+                "alert_fraction": 0.16933638443935928
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6473706082932473,
+            0.6458644888266456,
+            0.6446279607867016
+          ]
+        },
+        {
+          "model": "random_forest",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8211234163827319,
+          "validation": {
+            "auroc": 0.6583773285105159,
+            "ap_positive": 0.7831893237593124,
+            "ap_negative": 0.4900765935197672,
+            "brier": 0.21277826612156153,
+            "recall": 0.15270935960591134,
+            "fpr": 0.04938271604938271,
+            "precision": 0.857707509881423,
+            "alert_fraction": 0.11767441860465117
+          },
+          "test": {
+            "auroc": 0.6489647141204409,
+            "ap_positive": 0.8258398311130928,
+            "ap_negative": 0.41412738917559766,
+            "brier": 0.20764300377333994,
+            "recall": 0.13730743469524448,
+            "fpr": 0.04181818181818182,
+            "precision": 0.8991228070175439,
+            "alert_fraction": 0.11160058737151249
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 3649,
+              "metrics": {
+                "auroc": 0.6483297838672066,
+                "ap_positive": 0.8203641041182568,
+                "ap_negative": 0.42252255974651237,
+                "brier": 0.20923042124175992,
+                "recall": 0.1279333838001514,
+                "fpr": 0.041708043694141016,
+                "precision": 0.8894736842105263,
+                "alert_fraction": 0.10413812003288572
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 437,
+              "metrics": {
+                "auroc": 0.6470367591897974,
+                "ap_positive": 0.8638504031992296,
+                "ap_negative": 0.3367806388376563,
+                "brier": 0.19438788628532025,
+                "recall": 0.20930232558139536,
+                "fpr": 0.043010752688172046,
+                "precision": 0.9473684210526315,
+                "alert_fraction": 0.17391304347826086
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6496466845277964,
+            0.6495824453510322,
+            0.6460818668939902
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8579044324797572,
+          "validation": {
+            "auroc": 0.6421418290602745,
+            "ap_positive": 0.7766176636083242,
+            "ap_negative": 0.4657226517732659,
+            "brier": 0.22127909663578124,
+            "recall": 0.15763546798029557,
+            "fpr": 0.04938271604938271,
+            "precision": 0.8615384615384616,
+            "alert_fraction": 0.12093023255813953
+          },
+          "test": {
+            "auroc": 0.6401645558058819,
+            "ap_positive": 0.8185284776584871,
+            "ap_negative": 0.40870134380238843,
+            "brier": 0.2124859932764054,
+            "recall": 0.1346282652377763,
+            "fpr": 0.046363636363636364,
+            "precision": 0.8874172185430463,
+            "alert_fraction": 0.11086637298091043
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 3649,
+              "metrics": {
+                "auroc": 0.6372055340098494,
+                "ap_positive": 0.8107328362281758,
+                "ap_negative": 0.4158928582260699,
+                "brier": 0.21500674506721218,
+                "recall": 0.12755488266464798,
+                "fpr": 0.04667328699106256,
+                "precision": 0.8776041666666666,
+                "alert_fraction": 0.10523431077007399
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 437,
+              "metrics": {
+                "auroc": 0.6595398849712428,
+                "ap_positive": 0.8716631544330035,
+                "ap_negative": 0.34284192850039297,
+                "brier": 0.19143742740763203,
+                "recall": 0.18895348837209303,
+                "fpr": 0.043010752688172046,
+                "precision": 0.9420289855072463,
+                "alert_fraction": 0.15789473684210525
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6401645558058819,
+            0.6401645558058819,
+            0.6401645558058819
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8677238471045411,
+          "validation": {
+            "auroc": 0.6486052346296828,
+            "ap_positive": 0.7812480627653595,
+            "ap_negative": 0.47311619398688387,
+            "brier": 0.21999746955245877,
+            "recall": 0.16115411681914146,
+            "fpr": 0.04938271604938271,
+            "precision": 0.8641509433962264,
+            "alert_fraction": 0.12325581395348838
+          },
+          "test": {
+            "auroc": 0.6425003044510746,
+            "ap_positive": 0.8217127670430399,
+            "ap_negative": 0.40491824892952893,
+            "brier": 0.21379461315921078,
+            "recall": 0.14969859343603484,
+            "fpr": 0.05818181818181818,
+            "precision": 0.8747553816046967,
+            "alert_fraction": 0.12506118453255016
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 3649,
+              "metrics": {
+                "auroc": 0.639684960762926,
+                "ap_positive": 0.8143307394118626,
+                "ap_negative": 0.4127372387706717,
+                "brier": 0.2159484768133892,
+                "recall": 0.14155942467827404,
+                "fpr": 0.05759682224428997,
+                "precision": 0.8657407407407407,
+                "alert_fraction": 0.11838859961633325
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 437,
+              "metrics": {
+                "auroc": 0.6628063265816453,
+                "ap_positive": 0.8758409443385393,
+                "ap_negative": 0.32288701860663716,
+                "brier": 0.195809605209332,
+                "recall": 0.21220930232558138,
+                "fpr": 0.06451612903225806,
+                "precision": 0.9240506329113924,
+                "alert_fraction": 0.18077803203661327
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6425003044510746,
+            0.6425003044510746,
+            0.6425003044510746
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "base",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7529875173245083,
+          "validation": {
+            "auroc": 0.649699925379546,
+            "ap_positive": 0.7835393056800861,
+            "ap_negative": 0.4360542717808232,
+            "brier": 0.21404553948802735,
+            "recall": 0.1724137931034483,
+            "fpr": 0.04938271604938271,
+            "precision": 0.8718861209964412,
+            "alert_fraction": 0.13069767441860466
+          },
+          "test": {
+            "auroc": 0.636936613286245,
+            "ap_positive": 0.8172161122374959,
+            "ap_negative": 0.35402531096759554,
+            "brier": 0.2064329188481606,
+            "recall": 0.13831212324179504,
+            "fpr": 0.06272727272727273,
+            "precision": 0.8568464730290456,
+            "alert_fraction": 0.1179637787567303
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 3649,
+              "metrics": {
+                "auroc": 0.6375601673974833,
+                "ap_positive": 0.810750809582782,
+                "ap_negative": 0.36094651157440416,
+                "brier": 0.2078216035207082,
+                "recall": 0.13739591218773656,
+                "fpr": 0.06554121151936444,
+                "precision": 0.8461538461538461,
+                "alert_fraction": 0.11756645656344204
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 437,
+              "metrics": {
+                "auroc": 0.6197799449862466,
+                "ap_positive": 0.8695508165631842,
+                "ap_negative": 0.28400241459313624,
+                "brier": 0.19483724294398147,
+                "recall": 0.14534883720930233,
+                "fpr": 0.03225806451612903,
+                "precision": 0.9433962264150944,
+                "alert_fraction": 0.12128146453089245
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.636936613286245
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "coord",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7807699342617888,
+          "validation": {
+            "auroc": 0.657279741753378,
+            "ap_positive": 0.7868514609321627,
+            "ap_negative": 0.46147809111970406,
+            "brier": 0.21261875837746644,
+            "recall": 0.1984517945109078,
+            "fpr": 0.04938271604938271,
+            "precision": 0.8867924528301887,
+            "alert_fraction": 0.14790697674418604
+          },
+          "test": {
+            "auroc": 0.6512065396090848,
+            "ap_positive": 0.826241329712091,
+            "ap_negative": 0.40895408706895325,
+            "brier": 0.20349886581957183,
+            "recall": 0.1681178834561286,
+            "fpr": 0.057272727272727274,
+            "precision": 0.8884955752212389,
+            "alert_fraction": 0.1382770435633872
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 3649,
+              "metrics": {
+                "auroc": 0.6514297720648872,
+                "ap_positive": 0.8197818926753163,
+                "ap_negative": 0.4175226124114906,
+                "brier": 0.2055080213363988,
+                "recall": 0.16161998485995457,
+                "fpr": 0.05759682224428997,
+                "precision": 0.8804123711340206,
+                "alert_fraction": 0.13291312688407783
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 437,
+              "metrics": {
+                "auroc": 0.6308139534883721,
+                "ap_positive": 0.8724576418551483,
+                "ap_negative": 0.31102696448253603,
+                "brier": 0.1867221873735724,
+                "recall": 0.2180232558139535,
+                "fpr": 0.053763440860215055,
+                "precision": 0.9375,
+                "alert_fraction": 0.18306636155606407
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6512065396090848
+          ]
+        }
+      ]
+    },
+    {
+      "horizon": 60,
+      "period": "February_early",
+      "counts": {
+        "train": {
+          "n": 4687,
+          "prevalence": 0.6304672498399829
+        },
+        "validation": {
+          "n": 4065,
+          "prevalence": 0.7306273062730627
+        },
+        "test": {
+          "n": 2120,
+          "prevalence": 0.6900943396226416
+        }
+      },
+      "wallet_novelty_validation_median": 0.631578947368421,
+      "models": [
+        {
+          "model": "random_forest",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.819579946028977,
+          "validation": {
+            "auroc": 0.6652090155743124,
+            "ap_positive": 0.8327182986177994,
+            "ap_negative": 0.43390823078480406,
+            "brier": 0.19611237749115012,
+            "recall": 0.15993265993265993,
+            "fpr": 0.049315068493150684,
+            "precision": 0.8979206049149339,
+            "alert_fraction": 0.13013530135301354
+          },
+          "test": {
+            "auroc": 0.6281066926344504,
+            "ap_positive": 0.7833932526161338,
+            "ap_negative": 0.43465393805963237,
+            "brier": 0.21876612612724392,
+            "recall": 0.09979494190020506,
+            "fpr": 0.0334855403348554,
+            "precision": 0.8690476190476191,
+            "alert_fraction": 0.07924528301886792
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1740,
+              "metrics": {
+                "auroc": 0.6315075294489028,
+                "ap_positive": 0.7793970962574984,
+                "ap_negative": 0.44745415552699724,
+                "brier": 0.21878727981116147,
+                "recall": 0.0972338642078793,
+                "fpr": 0.03473491773308958,
+                "precision": 0.8592592592592593,
+                "alert_fraction": 0.07758620689655173
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 380,
+              "metrics": {
+                "auroc": 0.6107070707070708,
+                "ap_positive": 0.799774661007536,
+                "ap_negative": 0.37150352744251885,
+                "brier": 0.2186692645219371,
+                "recall": 0.1111111111111111,
+                "fpr": 0.02727272727272727,
+                "precision": 0.9090909090909091,
+                "alert_fraction": 0.0868421052631579
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6269575973973955,
+            0.626327129571542,
+            0.6293504620829784
+          ]
+        },
+        {
+          "model": "random_forest",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8253239441546009,
+          "validation": {
+            "auroc": 0.667479821041465,
+            "ap_positive": 0.8352221238725182,
+            "ap_negative": 0.43671543299470894,
+            "brier": 0.1958683894900173,
+            "recall": 0.16835016835016836,
+            "fpr": 0.049315068493150684,
+            "precision": 0.9025270758122743,
+            "alert_fraction": 0.13628536285362855
+          },
+          "test": {
+            "auroc": 0.629295322157615,
+            "ap_positive": 0.7859765337272229,
+            "ap_negative": 0.43563656706781495,
+            "brier": 0.21857832461202026,
+            "recall": 0.10252904989747096,
+            "fpr": 0.0350076103500761,
+            "precision": 0.8670520231213873,
+            "alert_fraction": 0.08160377358490566
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1740,
+              "metrics": {
+                "auroc": 0.6321733573818021,
+                "ap_positive": 0.782769758561686,
+                "ap_negative": 0.4481903969939016,
+                "brier": 0.2187871238503016,
+                "recall": 0.09555741827326068,
+                "fpr": 0.03473491773308958,
+                "precision": 0.8571428571428571,
+                "alert_fraction": 0.0764367816091954
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 380,
+              "metrics": {
+                "auroc": 0.6136700336700337,
+                "ap_positive": 0.7992348249631698,
+                "ap_negative": 0.3664388097369394,
+                "brier": 0.2176222438893637,
+                "recall": 0.13333333333333333,
+                "fpr": 0.03636363636363636,
+                "precision": 0.9,
+                "alert_fraction": 0.10526315789473684
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6297608903953533,
+            0.6265674564160505,
+            0.6305094408915606
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8633349463563104,
+          "validation": {
+            "auroc": 0.6648366465261443,
+            "ap_positive": 0.8291449377631732,
+            "ap_negative": 0.4267039580716735,
+            "brier": 0.19815035062246333,
+            "recall": 0.13400673400673402,
+            "fpr": 0.049315068493150684,
+            "precision": 0.8805309734513275,
+            "alert_fraction": 0.11119311193111932
+          },
+          "test": {
+            "auroc": 0.6239384263897603,
+            "ap_positive": 0.7809017399165136,
+            "ap_negative": 0.4316572837434518,
+            "brier": 0.22546876004084676,
+            "recall": 0.09159261790840738,
+            "fpr": 0.0289193302891933,
+            "precision": 0.8758169934640523,
+            "alert_fraction": 0.07216981132075471
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1740,
+              "metrics": {
+                "auroc": 0.6181748805877061,
+                "ap_positive": 0.7721259354223629,
+                "ap_negative": 0.43388136054282944,
+                "brier": 0.2286731392321498,
+                "recall": 0.08717518860016764,
+                "fpr": 0.027422303473491772,
+                "precision": 0.8739495798319328,
+                "alert_fraction": 0.06839080459770115
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 380,
+              "metrics": {
+                "auroc": 0.6521548821548822,
+                "ap_positive": 0.819528954341112,
+                "ap_negative": 0.4447437365479161,
+                "brier": 0.21079607637540637,
+                "recall": 0.1111111111111111,
+                "fpr": 0.03636363636363636,
+                "precision": 0.8823529411764706,
+                "alert_fraction": 0.08947368421052632
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6239384263897603,
+            0.6239384263897603,
+            0.6239384263897603
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.862921924726347,
+          "validation": {
+            "auroc": 0.6621681041772367,
+            "ap_positive": 0.8303781199607638,
+            "ap_negative": 0.42534023672636256,
+            "brier": 0.19921271135802585,
+            "recall": 0.15521885521885523,
+            "fpr": 0.049315068493150684,
+            "precision": 0.8951456310679612,
+            "alert_fraction": 0.12669126691266913
+          },
+          "test": {
+            "auroc": 0.6262095670891633,
+            "ap_positive": 0.7842312552751594,
+            "ap_negative": 0.43495181805500516,
+            "brier": 0.22446884898735717,
+            "recall": 0.1038961038961039,
+            "fpr": 0.0273972602739726,
+            "precision": 0.8941176470588236,
+            "alert_fraction": 0.08018867924528301
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1740,
+              "metrics": {
+                "auroc": 0.622005881352374,
+                "ap_positive": 0.7764508826372811,
+                "ap_negative": 0.43924816710547443,
+                "brier": 0.22728697612350485,
+                "recall": 0.10310142497904443,
+                "fpr": 0.027422303473491772,
+                "precision": 0.8913043478260869,
+                "alert_fraction": 0.07931034482758621
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 380,
+              "metrics": {
+                "auroc": 0.6452356902356903,
+                "ap_positive": 0.8179198784988484,
+                "ap_negative": 0.4316125562860804,
+                "brier": 0.21156479315341772,
+                "recall": 0.10740740740740741,
+                "fpr": 0.02727272727272727,
+                "precision": 0.90625,
+                "alert_fraction": 0.08421052631578947
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6262095670891633,
+            0.6262095670891633,
+            0.6262095670891633
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "base",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7969581774369046,
+          "validation": {
+            "auroc": 0.6394007041495626,
+            "ap_positive": 0.8198241436089967,
+            "ap_negative": 0.3630543205997076,
+            "brier": 0.19997460098078426,
+            "recall": 0.12693602693602693,
+            "fpr": 0.049315068493150684,
+            "precision": 0.8747099767981439,
+            "alert_fraction": 0.1060270602706027
+          },
+          "test": {
+            "auroc": 0.6017690552658109,
+            "ap_positive": 0.7715433597011998,
+            "ap_negative": 0.36372473791608295,
+            "brier": 0.21848917251723368,
+            "recall": 0.063568010936432,
+            "fpr": 0.0243531202435312,
+            "precision": 0.8532110091743119,
+            "alert_fraction": 0.051415094339622644
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1740,
+              "metrics": {
+                "auroc": 0.6041886629960571,
+                "ap_positive": 0.7666879790637654,
+                "ap_negative": 0.3705095908907101,
+                "brier": 0.21922814556362824,
+                "recall": 0.06538139145012574,
+                "fpr": 0.027422303473491772,
+                "precision": 0.8387096774193549,
+                "alert_fraction": 0.05344827586206897
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 380,
+              "metrics": {
+                "auroc": 0.5856902356902357,
+                "ap_positive": 0.7955910173412737,
+                "ap_negative": 0.33887383832730966,
+                "brier": 0.2151054538311113,
+                "recall": 0.05555555555555555,
+                "fpr": 0.00909090909090909,
+                "precision": 0.9375,
+                "alert_fraction": 0.042105263157894736
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6017690552658109
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "coord",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8205386049077831,
+          "validation": {
+            "auroc": 0.6536343649585659,
+            "ap_positive": 0.8259644457194579,
+            "ap_negative": 0.4114738741125599,
+            "brier": 0.19698653378838246,
+            "recall": 0.14511784511784512,
+            "fpr": 0.049315068493150684,
+            "precision": 0.8886597938144329,
+            "alert_fraction": 0.11931119311193111
+          },
+          "test": {
+            "auroc": 0.6295835062958351,
+            "ap_positive": 0.7873563869669806,
+            "ap_negative": 0.407221845235212,
+            "brier": 0.21667032635824496,
+            "recall": 0.050580997949419004,
+            "fpr": 0.0213089802130898,
+            "precision": 0.8409090909090909,
+            "alert_fraction": 0.04150943396226415
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1740,
+              "metrics": {
+                "auroc": 0.6328568079182189,
+                "ap_positive": 0.7830245128594722,
+                "ap_negative": 0.41778032694147316,
+                "brier": 0.21816805875772655,
+                "recall": 0.04861693210393965,
+                "fpr": 0.021937842778793418,
+                "precision": 0.8285714285714286,
+                "alert_fraction": 0.040229885057471264
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 380,
+              "metrics": {
+                "auroc": 0.6106060606060606,
+                "ap_positive": 0.8061745983891363,
+                "ap_negative": 0.3519619942994583,
+                "brier": 0.2098122885290399,
+                "recall": 0.05925925925925926,
+                "fpr": 0.01818181818181818,
+                "precision": 0.8888888888888888,
+                "alert_fraction": 0.04736842105263158
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6295835062958351
+          ]
+        }
+      ]
+    },
+    {
+      "horizon": 60,
+      "period": "February_late",
+      "counts": {
+        "train": {
+          "n": 8764,
+          "prevalence": 0.6767457781834778
+        },
+        "validation": {
+          "n": 2107,
+          "prevalence": 0.6905552918841955
+        },
+        "test": {
+          "n": 1039,
+          "prevalence": 0.5803657362848893
+        }
+      },
+      "wallet_novelty_validation_median": 0.5736434108527132,
+      "models": [
+        {
+          "model": "random_forest",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8148863259784352,
+          "validation": {
+            "auroc": 0.6402794467986422,
+            "ap_positive": 0.7916638477963039,
+            "ap_negative": 0.4555332582457709,
+            "brier": 0.2050371586699882,
+            "recall": 0.14432989690721648,
+            "fpr": 0.049079754601226995,
+            "precision": 0.8677685950413223,
+            "alert_fraction": 0.11485524442335074
+          },
+          "test": {
+            "auroc": 0.5997135880231867,
+            "ap_positive": 0.6717790530864913,
+            "ap_negative": 0.5156265087835998,
+            "brier": 0.23838474334121806,
+            "recall": 0.06799336650082918,
+            "fpr": 0.016055045871559634,
+            "precision": 0.8541666666666666,
+            "alert_fraction": 0.04619826756496631
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 862,
+              "metrics": {
+                "auroc": 0.6087276030055322,
+                "ap_positive": 0.6737194227996315,
+                "ap_negative": 0.5310410039345249,
+                "brier": 0.2377904381872198,
+                "recall": 0.06868686868686869,
+                "fpr": 0.013623978201634877,
+                "precision": 0.8717948717948718,
+                "alert_fraction": 0.04524361948955916
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 177,
+              "metrics": {
+                "auroc": 0.5481749865807837,
+                "ap_positive": 0.6637414128747507,
+                "ap_negative": 0.44945599430452066,
+                "brier": 0.24127904301775194,
+                "recall": 0.06481481481481481,
+                "fpr": 0.028985507246376812,
+                "precision": 0.7777777777777778,
+                "alert_fraction": 0.05084745762711865
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5949134297929314,
+            0.5989604728650325,
+            0.6026766017009753
+          ]
+        },
+        {
+          "model": "random_forest",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8201233806578889,
+          "validation": {
+            "auroc": 0.6405682752514072,
+            "ap_positive": 0.7911676306898024,
+            "ap_negative": 0.4592078334471126,
+            "brier": 0.20509753844192027,
+            "recall": 0.1415807560137457,
+            "fpr": 0.049079754601226995,
+            "precision": 0.865546218487395,
+            "alert_fraction": 0.11295681063122924
+          },
+          "test": {
+            "auroc": 0.5947612853165365,
+            "ap_positive": 0.6658290120210004,
+            "ap_negative": 0.5177376022083996,
+            "brier": 0.23894911782937092,
+            "recall": 0.05970149253731343,
+            "fpr": 0.020642201834862386,
+            "precision": 0.8,
+            "alert_fraction": 0.04331087584215592
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 862,
+              "metrics": {
+                "auroc": 0.6015495555005093,
+                "ap_positive": 0.6654400211716962,
+                "ap_negative": 0.5315709770312629,
+                "brier": 0.23863988648738063,
+                "recall": 0.05858585858585859,
+                "fpr": 0.01634877384196185,
+                "precision": 0.8285714285714286,
+                "alert_fraction": 0.04060324825986079
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 177,
+              "metrics": {
+                "auroc": 0.5563607085346216,
+                "ap_positive": 0.6686200842724428,
+                "ap_negative": 0.46093768573482913,
+                "brier": 0.24045509193556075,
+                "recall": 0.06481481481481481,
+                "fpr": 0.043478260869565216,
+                "precision": 0.7,
+                "alert_fraction": 0.05649717514124294
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5941869399181463,
+            0.5965489829141754,
+            0.5932512513883184
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8191721305965666,
+          "validation": {
+            "auroc": 0.6463970231695233,
+            "ap_positive": 0.7923459657527323,
+            "ap_negative": 0.46690061854229425,
+            "brier": 0.20318362790847283,
+            "recall": 0.1711340206185567,
+            "fpr": 0.049079754601226995,
+            "precision": 0.8861209964412812,
+            "alert_fraction": 0.13336497389653537
+          },
+          "test": {
+            "auroc": 0.6039698297503309,
+            "ap_positive": 0.686072349176703,
+            "ap_negative": 0.5109064523783352,
+            "brier": 0.23927413543299253,
+            "recall": 0.09286898839137644,
+            "fpr": 0.02981651376146789,
+            "precision": 0.8115942028985508,
+            "alert_fraction": 0.06641000962463908
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 862,
+              "metrics": {
+                "auroc": 0.6045881154872981,
+                "ap_positive": 0.6768269165670671,
+                "ap_negative": 0.5231930281543581,
+                "brier": 0.2402705855934583,
+                "recall": 0.09292929292929293,
+                "fpr": 0.035422343324250684,
+                "precision": 0.7796610169491526,
+                "alert_fraction": 0.06844547563805105
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 177,
+              "metrics": {
+                "auroc": 0.5982286634460547,
+                "ap_positive": 0.7341179942174685,
+                "ap_negative": 0.45515759615130724,
+                "brier": 0.23442136685490517,
+                "recall": 0.09259259259259259,
+                "fpr": 0.0,
+                "precision": 1.0,
+                "alert_fraction": 0.05649717514124294
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6039698297503309,
+            0.6039698297503309,
+            0.6039698297503309
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8328506051266591,
+          "validation": {
+            "auroc": 0.6482364598486285,
+            "ap_positive": 0.797832116999223,
+            "ap_negative": 0.4657462216890812,
+            "brier": 0.2038453891804745,
+            "recall": 0.16426116838487972,
+            "fpr": 0.049079754601226995,
+            "precision": 0.8819188191881919,
+            "alert_fraction": 0.12861888941623162
+          },
+          "test": {
+            "auroc": 0.5960088700229738,
+            "ap_positive": 0.683566506414069,
+            "ap_negative": 0.5035540916338346,
+            "brier": 0.24194716313883669,
+            "recall": 0.0779436152570481,
+            "fpr": 0.03211009174311927,
+            "precision": 0.7704918032786885,
+            "alert_fraction": 0.05871029836381136
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 862,
+              "metrics": {
+                "auroc": 0.5989376049321553,
+                "ap_positive": 0.6721551135925947,
+                "ap_negative": 0.5187666674191908,
+                "brier": 0.2423370322852167,
+                "recall": 0.07878787878787878,
+                "fpr": 0.03814713896457766,
+                "precision": 0.7358490566037735,
+                "alert_fraction": 0.06148491879350348
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 177,
+              "metrics": {
+                "auroc": 0.5787707997852926,
+                "ap_positive": 0.7406003659654445,
+                "ap_negative": 0.432120313986059,
+                "brier": 0.24004847836946083,
+                "recall": 0.07407407407407407,
+                "fpr": 0.0,
+                "precision": 1.0,
+                "alert_fraction": 0.04519774011299435
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5960088700229738,
+            0.5960088700229738,
+            0.5960088700229738
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "base",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8019557547115731,
+          "validation": {
+            "auroc": 0.6089531549764932,
+            "ap_positive": 0.7733807082415481,
+            "ap_negative": 0.36950916920883387,
+            "brier": 0.20941980133724034,
+            "recall": 0.12371134020618557,
+            "fpr": 0.049079754601226995,
+            "precision": 0.8490566037735849,
+            "alert_fraction": 0.1006169909824395
+          },
+          "test": {
+            "auroc": 0.5352005264198882,
+            "ap_positive": 0.623744019960224,
+            "ap_negative": 0.42449346445526315,
+            "brier": 0.25102019921083846,
+            "recall": 0.05140961857379768,
+            "fpr": 0.04128440366972477,
+            "precision": 0.6326530612244898,
+            "alert_fraction": 0.04716073147256978
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 862,
+              "metrics": {
+                "auroc": 0.5194699033936092,
+                "ap_positive": 0.6048967793028406,
+                "ap_negative": 0.4177481528395648,
+                "brier": 0.25624518476236213,
+                "recall": 0.050505050505050504,
+                "fpr": 0.04632152588555858,
+                "precision": 0.5952380952380952,
+                "alert_fraction": 0.048723897911832945
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 177,
+              "metrics": {
+                "auroc": 0.6222490606548577,
+                "ap_positive": 0.7469029254624999,
+                "ap_negative": 0.5042472941011888,
+                "brier": 0.22557422437799451,
+                "recall": 0.05555555555555555,
+                "fpr": 0.014492753623188406,
+                "precision": 0.8571428571428571,
+                "alert_fraction": 0.03954802259887006
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5352005264198882
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "coord",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.80958613757854,
+          "validation": {
+            "auroc": 0.633690679484747,
+            "ap_positive": 0.7860061732000745,
+            "ap_negative": 0.41316962797009704,
+            "brier": 0.2069821185908057,
+            "recall": 0.14776632302405499,
+            "fpr": 0.049079754601226995,
+            "precision": 0.8704453441295547,
+            "alert_fraction": 0.11722828666350261
+          },
+          "test": {
+            "auroc": 0.5567898276203083,
+            "ap_positive": 0.6353668876957651,
+            "ap_negative": 0.4517030072884282,
+            "brier": 0.24913228073844507,
+            "recall": 0.0779436152570481,
+            "fpr": 0.0389908256880734,
+            "precision": 0.734375,
+            "alert_fraction": 0.061597690086621755
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 862,
+              "metrics": {
+                "auroc": 0.5364792337544382,
+                "ap_positive": 0.6140778038095118,
+                "ap_negative": 0.44430403394450135,
+                "brier": 0.2547715348893831,
+                "recall": 0.07676767676767676,
+                "fpr": 0.043596730245231606,
+                "precision": 0.7037037037037037,
+                "alert_fraction": 0.06264501160092807
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 177,
+              "metrics": {
+                "auroc": 0.6642512077294686,
+                "ap_positive": 0.7603892910459711,
+                "ap_negative": 0.5284660896564193,
+                "brier": 0.2216687944214473,
+                "recall": 0.08333333333333333,
+                "fpr": 0.014492753623188406,
+                "precision": 0.9,
+                "alert_fraction": 0.05649717514124294
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5567898276203083
+          ]
+        }
+      ]
+    },
+    {
+      "horizon": 300,
+      "period": "January_late",
+      "counts": {
+        "train": {
+          "n": 1533,
+          "prevalence": 0.5368558382257013
+        },
+        "validation": {
+          "n": 1171,
+          "prevalence": 0.5713065755764304
+        },
+        "test": {
+          "n": 2128,
+          "prevalence": 0.674812030075188
+        }
+      },
+      "wallet_novelty_validation_median": 0.592255125284738,
+      "models": [
+        {
+          "model": "random_forest",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7162658397806182,
+          "validation": {
+            "auroc": 0.6245213466016353,
+            "ap_positive": 0.6969791899592914,
+            "ap_negative": 0.5183194358209399,
+            "brier": 0.23628547070825218,
+            "recall": 0.15097159940209268,
+            "fpr": 0.049800796812749,
+            "precision": 0.8015873015873016,
+            "alert_fraction": 0.107600341588386
+          },
+          "test": {
+            "auroc": 0.5975312766676865,
+            "ap_positive": 0.7501231511918919,
+            "ap_negative": 0.4012499773314808,
+            "brier": 0.23795105840145242,
+            "recall": 0.10306406685236769,
+            "fpr": 0.0476878612716763,
+            "precision": 0.8176795580110497,
+            "alert_fraction": 0.08505639097744361
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1976,
+              "metrics": {
+                "auroc": 0.5985439605204963,
+                "ap_positive": 0.7478557884519075,
+                "ap_negative": 0.4055032832952983,
+                "brier": 0.23802062837573337,
+                "recall": 0.10300751879699248,
+                "fpr": 0.04953560371517028,
+                "precision": 0.8106508875739645,
+                "alert_fraction": 0.08552631578947369
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 152,
+              "metrics": {
+                "auroc": 0.5836751435602953,
+                "ap_positive": 0.7804563785940888,
+                "ap_negative": 0.35449738642593215,
+                "brier": 0.23704664873579975,
+                "recall": 0.10377358490566038,
+                "fpr": 0.021739130434782608,
+                "precision": 0.9166666666666666,
+                "alert_fraction": 0.07894736842105263
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5944836129582817,
+            0.598598990451962,
+            0.5975810898932487
+          ]
+        },
+        {
+          "model": "random_forest",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7123940568393164,
+          "validation": {
+            "auroc": 0.6249620352670038,
+            "ap_positive": 0.6980895236298837,
+            "ap_negative": 0.5083911663562859,
+            "brier": 0.2365894976339809,
+            "recall": 0.15695067264573992,
+            "fpr": 0.049800796812749,
+            "precision": 0.8076923076923077,
+            "alert_fraction": 0.11101622544833475
+          },
+          "test": {
+            "auroc": 0.595604158951487,
+            "ap_positive": 0.7454699566575287,
+            "ap_negative": 0.3959717208050106,
+            "brier": 0.23866801359490167,
+            "recall": 0.100974930362117,
+            "fpr": 0.059248554913294796,
+            "precision": 0.7795698924731183,
+            "alert_fraction": 0.08740601503759399
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1976,
+              "metrics": {
+                "auroc": 0.593167904280826,
+                "ap_positive": 0.7409949520263959,
+                "ap_negative": 0.3978254839257424,
+                "brier": 0.23921350407016628,
+                "recall": 0.1,
+                "fpr": 0.06037151702786378,
+                "precision": 0.7732558139534884,
+                "alert_fraction": 0.08704453441295547
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 152,
+              "metrics": {
+                "auroc": 0.6222313371616078,
+                "ap_positive": 0.8025785099314151,
+                "ap_negative": 0.37896064202703594,
+                "brier": 0.23157663741646103,
+                "recall": 0.11320754716981132,
+                "fpr": 0.043478260869565216,
+                "precision": 0.8571428571428571,
+                "alert_fraction": 0.09210526315789473
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5941500152961824,
+            0.5982110510892492,
+            0.5932201684190188
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8263355897889723,
+          "validation": {
+            "auroc": 0.595415051304498,
+            "ap_positive": 0.6736563355282001,
+            "ap_negative": 0.49458683235079887,
+            "brier": 0.25348235667824265,
+            "recall": 0.13153961136023917,
+            "fpr": 0.049800796812749,
+            "precision": 0.7787610619469026,
+            "alert_fraction": 0.09649871904355252
+          },
+          "test": {
+            "auroc": 0.5829611597726505,
+            "ap_positive": 0.7396720196928696,
+            "ap_negative": 0.37973342969857515,
+            "brier": 0.2538972126359006,
+            "recall": 0.10584958217270195,
+            "fpr": 0.05491329479768786,
+            "precision": 0.8,
+            "alert_fraction": 0.08928571428571429
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1976,
+              "metrics": {
+                "auroc": 0.5832427430806117,
+                "ap_positive": 0.7364274522400991,
+                "ap_negative": 0.3811104358859637,
+                "brier": 0.2544480265546217,
+                "recall": 0.1037593984962406,
+                "fpr": 0.05572755417956656,
+                "precision": 0.7931034482758621,
+                "alert_fraction": 0.08805668016194332
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 152,
+              "metrics": {
+                "auroc": 0.5775225594749794,
+                "ap_positive": 0.777555777198065,
+                "ap_negative": 0.3728387453300543,
+                "brier": 0.24673663169252702,
+                "recall": 0.1320754716981132,
+                "fpr": 0.043478260869565216,
+                "precision": 0.875,
+                "alert_fraction": 0.10526315789473684
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5829611597726505,
+            0.5829611597726505,
+            0.5829611597726505
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8096143760698161,
+          "validation": {
+            "auroc": 0.6132420988690975,
+            "ap_positive": 0.6922547467632492,
+            "ap_negative": 0.5058288465219383,
+            "brier": 0.24972222845607964,
+            "recall": 0.16890881913303438,
+            "fpr": 0.049800796812749,
+            "precision": 0.8188405797101449,
+            "alert_fraction": 0.11784799316823227
+          },
+          "test": {
+            "auroc": 0.576712870529892,
+            "ap_positive": 0.7339787616518986,
+            "ap_negative": 0.3791697110110801,
+            "brier": 0.25690598172967755,
+            "recall": 0.13579387186629527,
+            "fpr": 0.08526011560693642,
+            "precision": 0.7677165354330708,
+            "alert_fraction": 0.1193609022556391
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1976,
+              "metrics": {
+                "auroc": 0.5733786866547173,
+                "ap_positive": 0.7292636393280989,
+                "ap_negative": 0.37867936704268523,
+                "brier": 0.25827881157660026,
+                "recall": 0.13533834586466165,
+                "fpr": 0.08668730650154799,
+                "precision": 0.7627118644067796,
+                "alert_fraction": 0.1194331983805668
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 152,
+              "metrics": {
+                "auroc": 0.623461853978671,
+                "ap_positive": 0.799182748794061,
+                "ap_negative": 0.4054023935209991,
+                "brier": 0.23905919371968215,
+                "recall": 0.14150943396226415,
+                "fpr": 0.06521739130434782,
+                "precision": 0.8333333333333334,
+                "alert_fraction": 0.11842105263157894
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.576712870529892,
+            0.576712870529892,
+            0.576712870529892
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "base",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.6673065456505106,
+          "validation": {
+            "auroc": 0.5987619030604042,
+            "ap_positive": 0.6788621273275119,
+            "ap_negative": 0.48023848386927365,
+            "brier": 0.24141961139194795,
+            "recall": 0.14200298953662183,
+            "fpr": 0.049800796812749,
+            "precision": 0.7916666666666666,
+            "alert_fraction": 0.10247651579846286
+          },
+          "test": {
+            "auroc": 0.5829536123142318,
+            "ap_positive": 0.7293463410699217,
+            "ap_negative": 0.3806263054239354,
+            "brier": 0.23937868399149353,
+            "recall": 0.10236768802228412,
+            "fpr": 0.06069364161849711,
+            "precision": 0.7777777777777778,
+            "alert_fraction": 0.08881578947368421
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1976,
+              "metrics": {
+                "auroc": 0.5813869037919877,
+                "ap_positive": 0.7283312196014984,
+                "ap_negative": 0.381902991849982,
+                "brier": 0.23971824966043975,
+                "recall": 0.1037593984962406,
+                "fpr": 0.06191950464396285,
+                "precision": 0.7752808988764045,
+                "alert_fraction": 0.09008097165991903
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 152,
+              "metrics": {
+                "auroc": 0.6127973748974569,
+                "ap_positive": 0.7700106149988986,
+                "ap_negative": 0.39416701027063983,
+                "brier": 0.2349643302951935,
+                "recall": 0.08490566037735849,
+                "fpr": 0.043478260869565216,
+                "precision": 0.8181818181818182,
+                "alert_fraction": 0.07236842105263158
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5829536123142318
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "coord",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.6832536381904184,
+          "validation": {
+            "auroc": 0.6097285000506196,
+            "ap_positive": 0.6906021668510338,
+            "ap_negative": 0.499122066000923,
+            "brier": 0.23838847003525035,
+            "recall": 0.13452914798206278,
+            "fpr": 0.049800796812749,
+            "precision": 0.782608695652174,
+            "alert_fraction": 0.0982066609735269
+          },
+          "test": {
+            "auroc": 0.59029980517494,
+            "ap_positive": 0.7409736645710663,
+            "ap_negative": 0.38229352265444705,
+            "brier": 0.23807793394820104,
+            "recall": 0.11002785515320335,
+            "fpr": 0.059248554913294796,
+            "precision": 0.7939698492462312,
+            "alert_fraction": 0.09351503759398497
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 1976,
+              "metrics": {
+                "auroc": 0.5881107567680812,
+                "ap_positive": 0.7378913820500035,
+                "ap_negative": 0.3819403097627263,
+                "brier": 0.2388524871453314,
+                "recall": 0.10827067669172932,
+                "fpr": 0.05727554179566564,
+                "precision": 0.7955801104972375,
+                "alert_fraction": 0.09159919028340081
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 152,
+              "metrics": {
+                "auroc": 0.6269483182936832,
+                "ap_positive": 0.7875213501271401,
+                "ap_negative": 0.4149570098616504,
+                "brier": 0.22800874238550664,
+                "recall": 0.1320754716981132,
+                "fpr": 0.08695652173913043,
+                "precision": 0.7777777777777778,
+                "alert_fraction": 0.11842105263157894
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.59029980517494
+          ]
+        }
+      ]
+    },
+    {
+      "horizon": 300,
+      "period": "February_early",
+      "counts": {
+        "train": {
+          "n": 2710,
+          "prevalence": 0.5512915129151291
+        },
+        "validation": {
+          "n": 2118,
+          "prevalence": 0.6746931067044382
+        },
+        "test": {
+          "n": 1116,
+          "prevalence": 0.6218637992831542
+        }
+      },
+      "wallet_novelty_validation_median": 0.6473207603652148,
+      "models": [
+        {
+          "model": "random_forest",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7600479097507539,
+          "validation": {
+            "auroc": 0.6201734544948563,
+            "ap_positive": 0.7600035180022955,
+            "ap_negative": 0.4147495441044776,
+            "brier": 0.22845947197033012,
+            "recall": 0.10846745976207138,
+            "fpr": 0.04934687953555878,
+            "precision": 0.8201058201058201,
+            "alert_fraction": 0.08923512747875353
+          },
+          "test": {
+            "auroc": 0.5947355122444242,
+            "ap_positive": 0.7058657461274607,
+            "ap_negative": 0.4563286174301654,
+            "brier": 0.23837997746300943,
+            "recall": 0.10086455331412104,
+            "fpr": 0.04028436018957346,
+            "precision": 0.8045977011494253,
+            "alert_fraction": 0.07795698924731183
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 942,
+              "metrics": {
+                "auroc": 0.6121468117602138,
+                "ap_positive": 0.7182418656223182,
+                "ap_negative": 0.46667471412657435,
+                "brier": 0.23464747762112065,
+                "recall": 0.1134020618556701,
+                "fpr": 0.03888888888888889,
+                "precision": 0.825,
+                "alert_fraction": 0.08492569002123142
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 174,
+              "metrics": {
+                "auroc": 0.5066244239631337,
+                "ap_positive": 0.6411717320370632,
+                "ap_negative": 0.42619269155784545,
+                "brier": 0.2585869593656489,
+                "recall": 0.03571428571428571,
+                "fpr": 0.04838709677419355,
+                "precision": 0.5714285714285714,
+                "alert_fraction": 0.040229885057471264
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5940355381946816,
+            0.5919629321059316,
+            0.5967295846593004
+          ]
+        },
+        {
+          "model": "random_forest",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7634730678576935,
+          "validation": {
+            "auroc": 0.6185443351029525,
+            "ap_positive": 0.7605611117426074,
+            "ap_negative": 0.4115310146290587,
+            "brier": 0.22876317047313227,
+            "recall": 0.11196641007697691,
+            "fpr": 0.04934687953555878,
+            "precision": 0.8247422680412371,
+            "alert_fraction": 0.09159584513692162
+          },
+          "test": {
+            "auroc": 0.5945374708059603,
+            "ap_positive": 0.705046998840154,
+            "ap_negative": 0.4583173175406451,
+            "brier": 0.2384135386240391,
+            "recall": 0.0893371757925072,
+            "fpr": 0.04028436018957346,
+            "precision": 0.7848101265822784,
+            "alert_fraction": 0.07078853046594982
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 942,
+              "metrics": {
+                "auroc": 0.6133877434135167,
+                "ap_positive": 0.718993268289099,
+                "ap_negative": 0.4686033952776883,
+                "brier": 0.23444881876526116,
+                "recall": 0.0979381443298969,
+                "fpr": 0.03888888888888889,
+                "precision": 0.8028169014084507,
+                "alert_fraction": 0.07537154989384288
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 174,
+              "metrics": {
+                "auroc": 0.5024481566820276,
+                "ap_positive": 0.6368404950734987,
+                "ap_negative": 0.43671379233193314,
+                "brier": 0.2598777116525957,
+                "recall": 0.044642857142857144,
+                "fpr": 0.04838709677419355,
+                "precision": 0.625,
+                "alert_fraction": 0.04597701149425287
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5977232063591789,
+            0.5903137249545871,
+            0.5929053361924144
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8071193320431848,
+          "validation": {
+            "auroc": 0.588825094126334,
+            "ap_positive": 0.7435031768759334,
+            "ap_negative": 0.384480967720361,
+            "brier": 0.23997854730358825,
+            "recall": 0.1231630510846746,
+            "fpr": 0.04934687953555878,
+            "precision": 0.8380952380952381,
+            "alert_fraction": 0.09915014164305949
+          },
+          "test": {
+            "auroc": 0.5731763115123537,
+            "ap_positive": 0.6921918317375417,
+            "ap_negative": 0.4310806654418784,
+            "brier": 0.24902108930945183,
+            "recall": 0.12103746397694524,
+            "fpr": 0.06398104265402843,
+            "precision": 0.7567567567567568,
+            "alert_fraction": 0.09946236559139784
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 942,
+              "metrics": {
+                "auroc": 0.5861302023673158,
+                "ap_positive": 0.7011533985121161,
+                "ap_negative": 0.43817785209570376,
+                "brier": 0.24549038302001402,
+                "recall": 0.13402061855670103,
+                "fpr": 0.06111111111111111,
+                "precision": 0.78,
+                "alert_fraction": 0.10615711252653928
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 174,
+              "metrics": {
+                "auroc": 0.5027361751152073,
+                "ap_positive": 0.6387964648339262,
+                "ap_negative": 0.4131545495371172,
+                "brier": 0.26813560266951186,
+                "recall": 0.05357142857142857,
+                "fpr": 0.08064516129032258,
+                "precision": 0.5454545454545454,
+                "alert_fraction": 0.06321839080459771
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5731763115123537,
+            0.5731763115123537,
+            0.5731763115123537
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8212860743799394,
+          "validation": {
+            "auroc": 0.5917024602343535,
+            "ap_positive": 0.747673903122372,
+            "ap_negative": 0.3869558038540848,
+            "brier": 0.23968181758996956,
+            "recall": 0.12036389083275018,
+            "fpr": 0.04934687953555878,
+            "precision": 0.8349514563106796,
+            "alert_fraction": 0.09726156751652502
+          },
+          "test": {
+            "auroc": 0.5741631041971127,
+            "ap_positive": 0.6931544628384465,
+            "ap_negative": 0.42223712397110813,
+            "brier": 0.25130524624492767,
+            "recall": 0.10662824207492795,
+            "fpr": 0.04739336492890995,
+            "precision": 0.7872340425531915,
+            "alert_fraction": 0.08422939068100359
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 942,
+              "metrics": {
+                "auroc": 0.5825505918289424,
+                "ap_positive": 0.7024614931064053,
+                "ap_negative": 0.42575311503577085,
+                "brier": 0.24844910600555176,
+                "recall": 0.11512027491408934,
+                "fpr": 0.041666666666666664,
+                "precision": 0.8170731707317073,
+                "alert_fraction": 0.0870488322717622
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 174,
+              "metrics": {
+                "auroc": 0.5210253456221198,
+                "ap_positive": 0.6431953245192019,
+                "ap_negative": 0.4142081847549002,
+                "brier": 0.2667677985753417,
+                "recall": 0.0625,
+                "fpr": 0.08064516129032258,
+                "precision": 0.5833333333333334,
+                "alert_fraction": 0.06896551724137931
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5741631041971127,
+            0.5741631041971127,
+            0.5741631041971127
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "base",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7005620871406684,
+          "validation": {
+            "auroc": 0.5928684384524991,
+            "ap_positive": 0.7430040445545782,
+            "ap_negative": 0.3900089622400347,
+            "brier": 0.23120597328400055,
+            "recall": 0.1000699790062981,
+            "fpr": 0.04934687953555878,
+            "precision": 0.807909604519774,
+            "alert_fraction": 0.08356940509915015
+          },
+          "test": {
+            "auroc": 0.579008290424355,
+            "ap_positive": 0.6940524925436714,
+            "ap_negative": 0.4279436190513519,
+            "brier": 0.23851260184214773,
+            "recall": 0.09221902017291066,
+            "fpr": 0.04265402843601896,
+            "precision": 0.7804878048780488,
+            "alert_fraction": 0.07347670250896057
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 942,
+              "metrics": {
+                "auroc": 0.5965253913707522,
+                "ap_positive": 0.7073828024069226,
+                "ap_negative": 0.4432437952235405,
+                "brier": 0.23543311422152582,
+                "recall": 0.10309278350515463,
+                "fpr": 0.03888888888888889,
+                "precision": 0.8108108108108109,
+                "alert_fraction": 0.07855626326963906
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 174,
+              "metrics": {
+                "auroc": 0.4910714285714286,
+                "ap_positive": 0.6336175451997268,
+                "ap_negative": 0.3752383595377977,
+                "brier": 0.2551843106848248,
+                "recall": 0.03571428571428571,
+                "fpr": 0.06451612903225806,
+                "precision": 0.5,
+                "alert_fraction": 0.04597701149425287
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.579008290424355
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "coord",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7074882936063079,
+          "validation": {
+            "auroc": 0.6031987210803378,
+            "ap_positive": 0.7520005942910055,
+            "ap_negative": 0.3982690978977973,
+            "brier": 0.23018233384690176,
+            "recall": 0.1224632610216935,
+            "fpr": 0.04934687953555878,
+            "precision": 0.8373205741626795,
+            "alert_fraction": 0.09867799811142587
+          },
+          "test": {
+            "auroc": 0.5743167570373001,
+            "ap_positive": 0.6933359219033987,
+            "ap_negative": 0.4260788713427129,
+            "brier": 0.24057363438838303,
+            "recall": 0.08357348703170028,
+            "fpr": 0.035545023696682464,
+            "precision": 0.7945205479452054,
+            "alert_fraction": 0.06541218637992832
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 942,
+              "metrics": {
+                "auroc": 0.5884068346697213,
+                "ap_positive": 0.7017125783276207,
+                "ap_negative": 0.43843689389934865,
+                "brier": 0.23834229987302835,
+                "recall": 0.09278350515463918,
+                "fpr": 0.03333333333333333,
+                "precision": 0.8181818181818182,
+                "alert_fraction": 0.07006369426751592
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 174,
+              "metrics": {
+                "auroc": 0.5113767281105991,
+                "ap_positive": 0.6534953941151534,
+                "ap_negative": 0.3994540015781357,
+                "brier": 0.25265361779909673,
+                "recall": 0.03571428571428571,
+                "fpr": 0.04838709677419355,
+                "precision": 0.5714285714285714,
+                "alert_fraction": 0.040229885057471264
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5743167570373001
+          ]
+        }
+      ]
+    },
+    {
+      "horizon": 300,
+      "period": "February_late",
+      "counts": {
+        "train": {
+          "n": 4838,
+          "prevalence": 0.6052087639520463
+        },
+        "validation": {
+          "n": 1108,
+          "prevalence": 0.6236462093862816
+        },
+        "test": {
+          "n": 655,
+          "prevalence": 0.5282442748091603
+        }
+      },
+      "wallet_novelty_validation_median": 0.5714285714285714,
+      "models": [
+        {
+          "model": "random_forest",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7641208578418461,
+          "validation": {
+            "auroc": 0.6007697459977026,
+            "ap_positive": 0.720017908341994,
+            "ap_negative": 0.4540027378652404,
+            "brier": 0.23076115457538954,
+            "recall": 0.14327062228654125,
+            "fpr": 0.047961630695443645,
+            "precision": 0.8319327731092437,
+            "alert_fraction": 0.10740072202166065
+          },
+          "test": {
+            "auroc": 0.6335278822230952,
+            "ap_positive": 0.6363315437115236,
+            "ap_negative": 0.6005536007282855,
+            "brier": 0.23942380781193195,
+            "recall": 0.12427745664739884,
+            "fpr": 0.07119741100323625,
+            "precision": 0.6615384615384615,
+            "alert_fraction": 0.09923664122137404
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 556,
+              "metrics": {
+                "auroc": 0.6317296305453978,
+                "ap_positive": 0.6396355844249695,
+                "ap_negative": 0.5939887943595347,
+                "brier": 0.2388167316069642,
+                "recall": 0.12374581939799331,
+                "fpr": 0.07782101167315175,
+                "precision": 0.6491228070175439,
+                "alert_fraction": 0.10251798561151079
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 99,
+              "metrics": {
+                "auroc": 0.636252045826514,
+                "ap_positive": 0.6352538770545471,
+                "ap_negative": 0.6303623444953821,
+                "brier": 0.24283324589235708,
+                "recall": 0.1276595744680851,
+                "fpr": 0.038461538461538464,
+                "precision": 0.75,
+                "alert_fraction": 0.08080808080808081
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.633106983182745,
+            0.6338271882073442,
+            0.6306377088126907
+          ]
+        },
+        {
+          "model": "random_forest",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7605605969486494,
+          "validation": {
+            "auroc": 0.5998778401302113,
+            "ap_positive": 0.7213903899803907,
+            "ap_negative": 0.4530267562664056,
+            "brier": 0.23086990689399467,
+            "recall": 0.1389290882778582,
+            "fpr": 0.047961630695443645,
+            "precision": 0.8275862068965517,
+            "alert_fraction": 0.10469314079422383
+          },
+          "test": {
+            "auroc": 0.6352863048805582,
+            "ap_positive": 0.6389745154713065,
+            "ap_negative": 0.5932616844833005,
+            "brier": 0.23953830790902753,
+            "recall": 0.13005780346820808,
+            "fpr": 0.07119741100323625,
+            "precision": 0.6716417910447762,
+            "alert_fraction": 0.10229007633587786
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 556,
+              "metrics": {
+                "auroc": 0.6322501724294991,
+                "ap_positive": 0.6395008053353615,
+                "ap_negative": 0.5849702599691529,
+                "brier": 0.2394030591414848,
+                "recall": 0.12709030100334448,
+                "fpr": 0.07782101167315175,
+                "precision": 0.6551724137931034,
+                "alert_fraction": 0.10431654676258993
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 99,
+              "metrics": {
+                "auroc": 0.6456628477905074,
+                "ap_positive": 0.6639478386143168,
+                "ap_negative": 0.6316723850254132,
+                "brier": 0.2402978868459339,
+                "recall": 0.14893617021276595,
+                "fpr": 0.038461538461538464,
+                "precision": 0.7777777777777778,
+                "alert_fraction": 0.09090909090909091
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.6324054847821614,
+            0.6356043174888228,
+            0.6345567465439512
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "base",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8310553076597652,
+          "validation": {
+            "auroc": 0.5780729974631005,
+            "ap_positive": 0.7058608915382742,
+            "ap_negative": 0.4231109142845932,
+            "brier": 0.2409293223700928,
+            "recall": 0.11577424023154848,
+            "fpr": 0.047961630695443645,
+            "precision": 0.8,
+            "alert_fraction": 0.09025270758122744
+          },
+          "test": {
+            "auroc": 0.615606936416185,
+            "ap_positive": 0.6353028420977747,
+            "ap_negative": 0.5633024999204307,
+            "brier": 0.24881948711139087,
+            "recall": 0.13872832369942195,
+            "fpr": 0.061488673139158574,
+            "precision": 0.7164179104477612,
+            "alert_fraction": 0.10229007633587786
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 556,
+              "metrics": {
+                "auroc": 0.6107517926161133,
+                "ap_positive": 0.6350469489262408,
+                "ap_negative": 0.5594420468731356,
+                "brier": 0.24912194113919925,
+                "recall": 0.14381270903010032,
+                "fpr": 0.07003891050583658,
+                "precision": 0.7049180327868853,
+                "alert_fraction": 0.10971223021582734
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 99,
+              "metrics": {
+                "auroc": 0.6378887070376432,
+                "ap_positive": 0.6743581323918671,
+                "ap_negative": 0.604406381495346,
+                "brier": 0.24712085640976017,
+                "recall": 0.10638297872340426,
+                "fpr": 0.019230769230769232,
+                "precision": 0.8333333333333334,
+                "alert_fraction": 0.06060606060606061
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.615606936416185,
+            0.615606936416185,
+            0.615606936416185
+          ]
+        },
+        {
+          "model": "hist_gradient_boosting",
+          "scope": "coord",
+          "seeds": [
+            42,
+            73,
+            101
+          ],
+          "fit_warnings": [],
+          "threshold": 0.8246753183982473,
+          "validation": {
+            "auroc": 0.5836743051289793,
+            "ap_positive": 0.707987083374931,
+            "ap_negative": 0.42131780579886957,
+            "brier": 0.23953659058114712,
+            "recall": 0.14182344428364688,
+            "fpr": 0.047961630695443645,
+            "precision": 0.8305084745762712,
+            "alert_fraction": 0.10649819494584838
+          },
+          "test": {
+            "auroc": 0.612557756701648,
+            "ap_positive": 0.6365948118141371,
+            "ap_negative": 0.5729342589673123,
+            "brier": 0.2489214901941827,
+            "recall": 0.13872832369942195,
+            "fpr": 0.061488673139158574,
+            "precision": 0.7164179104477612,
+            "alert_fraction": 0.10229007633587786
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 556,
+              "metrics": {
+                "auroc": 0.6025792850357222,
+                "ap_positive": 0.6291649170040876,
+                "ap_negative": 0.5702409338702403,
+                "brier": 0.2502990323667475,
+                "recall": 0.13712374581939799,
+                "fpr": 0.07003891050583658,
+                "precision": 0.6949152542372882,
+                "alert_fraction": 0.10611510791366907
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 99,
+              "metrics": {
+                "auroc": 0.6591653027823239,
+                "ap_positive": 0.6854719155817279,
+                "ap_negative": 0.627952384277327,
+                "brier": 0.2411849907199804,
+                "recall": 0.14893617021276595,
+                "fpr": 0.019230769230769232,
+                "precision": 0.875,
+                "alert_fraction": 0.08080808080808081
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.612557756701648,
+            0.612557756701648,
+            0.612557756701648
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "base",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.7318747042871463,
+          "validation": {
+            "auroc": 0.5823069474955491,
+            "ap_positive": 0.7062739568419174,
+            "ap_negative": 0.43078353650051177,
+            "brier": 0.2307223071168834,
+            "recall": 0.11432706222865413,
+            "fpr": 0.047961630695443645,
+            "precision": 0.797979797979798,
+            "alert_fraction": 0.08935018050541517
+          },
+          "test": {
+            "auroc": 0.5654077108704192,
+            "ap_positive": 0.6003049193486604,
+            "ap_negative": 0.513570066212636,
+            "brier": 0.2524006536401185,
+            "recall": 0.14739884393063585,
+            "fpr": 0.07119741100323625,
+            "precision": 0.6986301369863014,
+            "alert_fraction": 0.11145038167938931
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 556,
+              "metrics": {
+                "auroc": 0.5511887875278165,
+                "ap_positive": 0.5975961123077969,
+                "ap_negative": 0.49605306949183653,
+                "brier": 0.25402896679372944,
+                "recall": 0.1605351170568562,
+                "fpr": 0.08560311284046693,
+                "precision": 0.6857142857142857,
+                "alert_fraction": 0.12589928057553956
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 99,
+              "metrics": {
+                "auroc": 0.635024549918167,
+                "ap_positive": 0.6767679998414259,
+                "ap_negative": 0.6297961310228058,
+                "brier": 0.24325578380771765,
+                "recall": 0.06382978723404255,
+                "fpr": 0.0,
+                "precision": 1.0,
+                "alert_fraction": 0.030303030303030304
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5654077108704192
+          ]
+        },
+        {
+          "model": "logistic",
+          "scope": "coord",
+          "seeds": [
+            42
+          ],
+          "fit_warnings": [],
+          "threshold": 0.730155237280862,
+          "validation": {
+            "auroc": 0.5820050182719237,
+            "ap_positive": 0.7111099254981061,
+            "ap_negative": 0.4273702102190704,
+            "brier": 0.23180112212672754,
+            "recall": 0.14905933429811866,
+            "fpr": 0.047961630695443645,
+            "precision": 0.8373983739837398,
+            "alert_fraction": 0.11101083032490974
+          },
+          "test": {
+            "auroc": 0.5606655816824737,
+            "ap_positive": 0.5999460252649709,
+            "ap_negative": 0.5066821540006106,
+            "brier": 0.25357806141271194,
+            "recall": 0.16184971098265896,
+            "fpr": 0.07119741100323625,
+            "precision": 0.717948717948718,
+            "alert_fraction": 0.11908396946564885
+          },
+          "subgroups": {
+            "high_wallet_novelty": {
+              "n": 556,
+              "metrics": {
+                "auroc": 0.5480395091290032,
+                "ap_positive": 0.5962601615993119,
+                "ap_negative": 0.4877890671165408,
+                "brier": 0.25583018636459426,
+                "recall": 0.16722408026755853,
+                "fpr": 0.08171206225680934,
+                "precision": 0.704225352112676,
+                "alert_fraction": 0.12769784172661872
+              }
+            },
+            "low_wallet_novelty": {
+              "n": 99,
+              "metrics": {
+                "auroc": 0.6166121112929623,
+                "ap_positive": 0.645588786172765,
+                "ap_negative": 0.6302646013705032,
+                "brier": 0.24092976370315045,
+                "recall": 0.1276595744680851,
+                "fpr": 0.019230769230769232,
+                "precision": 0.8571428571428571,
+                "alert_fraction": 0.0707070707070707
+              }
+            }
+          },
+          "seed_test_auroc": [
+            0.5606655816824737
+          ]
+        }
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "horizon": 60,
+      "model": "random_forest",
+      "primary": false,
+      "ap": {
+        "weighted_delta": 0.001209011343838369,
+        "ci95": [
+          -0.0020020618323915006,
+          0.004110769295893654
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "auroc": {
+        "weighted_delta": 0.0010751875774457902,
+        "ci95": [
+          -0.002369388048454314,
+          0.0039282339456248455
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "horizon": 60,
+      "model": "hist_gradient_boosting",
+      "primary": false,
+      "ap": {
+        "weighted_delta": 0.002410767198790173,
+        "ci95": [
+          -0.0014226130961202074,
+          0.006027534223136448
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "auroc": {
+        "weighted_delta": 0.0008402001504855482,
+        "ci95": [
+          -0.004323704905932304,
+          0.006329103952321039
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "horizon": 60,
+      "model": "logistic",
+      "primary": false,
+      "ap": {
+        "weighted_delta": 0.011383963558575289,
+        "ci95": [
+          0.0059914241235858,
+          0.017047245826105947
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "auroc": {
+        "weighted_delta": 0.019282931550864236,
+        "ci95": [
+          0.01111687424775796,
+          0.027029071853344827
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "horizon": 300,
+      "model": "random_forest",
+      "primary": true,
+      "ap": {
+        "weighted_delta": -0.0023299752344450725,
+        "ci95": [
+          -0.007711628645828479,
+          0.002326386008030693
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "auroc": {
+        "weighted_delta": -0.0008130684546704179,
+        "ci95": [
+          -0.006091834372960041,
+          0.004891427627481063
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "horizon": 300,
+      "model": "hist_gradient_boosting",
+      "primary": false,
+      "ap": {
+        "weighted_delta": -0.002614700343257015,
+        "ci95": [
+          -0.013207574775307152,
+          0.006886203884841206
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "auroc": {
+        "weighted_delta": -0.0036399875828214694,
+        "ci95": [
+          -0.014231945750831412,
+          0.0069462787414658915
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    },
+    {
+      "horizon": 300,
+      "model": "logistic",
+      "primary": false,
+      "ap": {
+        "weighted_delta": 0.006080578597351804,
+        "ci95": [
+          -0.0016932674483835196,
+          0.014959255349241467
+        ],
+        "valid_bootstrap_draws": 500
+      },
+      "auroc": {
+        "weighted_delta": 0.0018699288354781806,
+        "ci95": [
+          -0.007285597555620029,
+          0.010276345000728772
+        ],
+        "valid_bootstrap_draws": 500
+      }
+    }
+  ],
+  "environment": {
+    "python": "3.14.6",
+    "sklearn": "1.9.0"
+  },
+  "limits": [
+    "Same historical MELT source period; token-disjoint confirmation is not an external dataset.",
+    "Only eventual migrants; price collapse is not confirmed fraud.",
+    "Wallet overlap diagnostic does not identify creators or operators.",
+    "Different horizon cohorts; scores cannot quantify benefit of waiting.",
+    "Bootstrap is conditional on fitted models; secondary comparisons are exploratory.",
+    "Protocol specified after pilot exploration, not a public preregistration.",
+    "These fixed models do not exhaust tuned 119-feature coordination or graph baselines."
+  ],
+  "source_hashes": {
+    "data/raw/melt/label.csv": "dcfcce188fb352466b76ab8345f79633766c93e96d29729282ab114133fcc09a",
+    "data/raw/melt/pre_migration_tx.zip": "4d62d079d63fba5510bbaee7a0cb641bf93d4b0697349cce1af2c9db67e201a5",
+    "data/processed/solana_ml/prefix_price_drop_6000_42.jsonl": "27d708419282d7916abb1c0bd3b633ad32c459b60ae0b10bcc5fd8e8a361fa67",
+    "data/processed/solana_ml/confirmation_12000.jsonl": "4203732f2bda5760ff4a9338406a67e546e8b06b1592cf76f8cd65c5c4519bf2",
+    "research/solana/ml/robustness.py": "5f09315bd377f5bea344a99f6b6804be9b2545590a3b3e7ce91f081edd8deb00",
+    "research/solana/ml/prefix_baseline.py": "c6e0c8bd1dbf2221f8e2c2ebcee77b29b8b4512ce3abdf8d911e623c56aed097"
+  }
+}
