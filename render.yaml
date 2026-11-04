@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: homie-demo
+    runtime: docker
+    plan: 1c-2g
+    region: singapore
+    healthCheckPath: /healthz
+    disk:
+      name: homie-state
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: HOMIE_DEMO_USER
+        value: homie
+      - key: HOMIE_DEMO_PASSWORD
+        generateValue: true
+      - key: HOMIE_STATE_DIR
+        value: /var/data/homie

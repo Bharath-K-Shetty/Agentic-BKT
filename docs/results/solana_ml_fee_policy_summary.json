@@ -1,0 +1,913 @@
+{
+  "status": "Additional retrospective diagnostic; not independent prospective evidence",
+  "sources": [
+    {
+      "path": "docs/results/solana_ml_fee_policy_pilot.json",
+      "sha256": "2f3c67de5ce6a7e07284682ae357d1bf865bc7c882254cf53c15cd9c23edbd56"
+    },
+    {
+      "path": "docs/results/solana_ml_fee_policy_confirmation.json",
+      "sha256": "e8db0ce3f2d3c1780c9270b620531d95278cff105a00b20dd10fe677cea016a3"
+    },
+    {
+      "path": "docs/results/solana_ml_fee_policy_extension.json",
+      "sha256": "b3a06912803acaa8eba6743c1e9f8d3b7f130ac2ef6b853888f738276d68b81c"
+    },
+    {
+      "path": "docs/results/solana_ml_fee_policy_prospective.json",
+      "sha256": "25a57c766b629fd6dc736b213d288fdc0643ac17940c13838701bae4d4208452"
+    },
+    {
+      "path": "docs/results/solana_ml_fee_policy.json",
+      "sha256": "9d02adb269d4a8528e496dc0b195805621e20f7bd29a2f2c00d4398e5e01e3cf"
+    }
+  ],
+  "rows": 102443,
+  "failures": 6410,
+  "periods": [
+    {
+      "cohort": "pilot",
+      "test_date": "2025-11-03",
+      "rows": 19621,
+      "failures": 1308,
+      "deployed_policy": {
+        "payer_readonly_hgb": {
+          "threshold": 0.393282499064354,
+          "flagged_failures": 354,
+          "flagged_successes": 414,
+          "missed_failures": 954,
+          "unflagged_successes": 17899,
+          "warnings": 768,
+          "precision": 0.4609375,
+          "failure_recall": 0.2706422018348624,
+          "false_positive_rate": 0.022606891279418992,
+          "break_even_blocked_success_cost_over_failed_fee": 0.855072463768116,
+          "hypothetical_net_units": {
+            "0": 354,
+            "1": -60,
+            "5": -1716,
+            "10": -3786
+          }
+        },
+        "context_hgb": {
+          "threshold": 0.18349774432450888,
+          "flagged_failures": 546,
+          "flagged_successes": 833,
+          "missed_failures": 762,
+          "unflagged_successes": 17480,
+          "warnings": 1379,
+          "precision": 0.39593908629441626,
+          "failure_recall": 0.41743119266055045,
+          "false_positive_rate": 0.04548681264675367,
+          "break_even_blocked_success_cost_over_failed_fee": 0.6554621848739496,
+          "hypothetical_net_units": {
+            "0": 546,
+            "1": -287,
+            "5": -3619,
+            "10": -7784
+          }
+        }
+      },
+      "cost_based_policies": {
+        "payer_readonly_hgb": {
+          "1": {
+            "threshold": 0.5,
+            "flagged_failures": 178,
+            "flagged_successes": 218,
+            "missed_failures": 1130,
+            "unflagged_successes": 18095,
+            "warnings": 396,
+            "precision": 0.4494949494949495,
+            "failure_recall": 0.13608562691131498,
+            "false_positive_rate": 0.011904111833124011,
+            "break_even_blocked_success_cost_over_failed_fee": 0.8165137614678899,
+            "hypothetical_net_units": {
+              "0": 178,
+              "1": -40,
+              "5": -912,
+              "10": -2002
+            }
+          },
+          "5": {
+            "threshold": 0.8333333333333334,
+            "flagged_failures": 9,
+            "flagged_successes": 0,
+            "missed_failures": 1299,
+            "unflagged_successes": 18313,
+            "warnings": 9,
+            "precision": 1.0,
+            "failure_recall": 0.006880733944954129,
+            "false_positive_rate": 0.0,
+            "break_even_blocked_success_cost_over_failed_fee": null,
+            "hypothetical_net_units": {
+              "0": 9,
+              "1": 9,
+              "5": 9,
+              "10": 9
+            }
+          },
+          "10": {
+            "threshold": 0.9090909090909091,
+            "flagged_failures": 7,
+            "flagged_successes": 0,
+            "missed_failures": 1301,
+            "unflagged_successes": 18313,
+            "warnings": 7,
+            "precision": 1.0,
+            "failure_recall": 0.005351681957186544,
+            "false_positive_rate": 0.0,
+            "break_even_blocked_success_cost_over_failed_fee": null,
+            "hypothetical_net_units": {
+              "0": 7,
+              "1": 7,
+              "5": 7,
+              "10": 7
+            }
+          }
+        },
+        "context_hgb": {
+          "1": {
+            "threshold": 0.5,
+            "flagged_failures": 316,
+            "flagged_successes": 330,
+            "missed_failures": 992,
+            "unflagged_successes": 17983,
+            "warnings": 646,
+            "precision": 0.4891640866873065,
+            "failure_recall": 0.2415902140672783,
+            "false_positive_rate": 0.01801998580243543,
+            "break_even_blocked_success_cost_over_failed_fee": 0.9575757575757575,
+            "hypothetical_net_units": {
+              "0": 316,
+              "1": -14,
+              "5": -1334,
+              "10": -2984
+            }
+          },
+          "5": {
+            "threshold": 0.8333333333333334,
+            "flagged_failures": 36,
+            "flagged_successes": 1,
+            "missed_failures": 1272,
+            "unflagged_successes": 18312,
+            "warnings": 37,
+            "precision": 0.972972972972973,
+            "failure_recall": 0.027522935779816515,
+            "false_positive_rate": 5.460601758313766e-05,
+            "break_even_blocked_success_cost_over_failed_fee": 36.0,
+            "hypothetical_net_units": {
+              "0": 36,
+              "1": 35,
+              "5": 31,
+              "10": 26
+            }
+          },
+          "10": {
+            "threshold": 0.9090909090909091,
+            "flagged_failures": 23,
+            "flagged_successes": 1,
+            "missed_failures": 1285,
+            "unflagged_successes": 18312,
+            "warnings": 24,
+            "precision": 0.9583333333333334,
+            "failure_recall": 0.017584097859327217,
+            "false_positive_rate": 5.460601758313766e-05,
+            "break_even_blocked_success_cost_over_failed_fee": 23.0,
+            "hypothetical_net_units": {
+              "0": 23,
+              "1": 22,
+              "5": 18,
+              "10": 13
+            }
+          }
+        }
+      }
+    },
+    {
+      "cohort": "confirmation",
+      "test_date": "2025-11-10",
+      "rows": 20636,
+      "failures": 1387,
+      "deployed_policy": {
+        "payer_readonly_hgb": {
+          "threshold": 0.6365122615803815,
+          "flagged_failures": 0,
+          "flagged_successes": 0,
+          "missed_failures": 1387,
+          "unflagged_successes": 19249,
+          "warnings": 0,
+          "precision": null,
+          "failure_recall": 0.0,
+          "false_positive_rate": 0.0,
+          "break_even_blocked_success_cost_over_failed_fee": null,
+          "hypothetical_net_units": {
+            "0": 0,
+            "1": 0,
+            "5": 0,
+            "10": 0
+          }
+        },
+        "context_hgb": {
+          "threshold": 0.5139949109414758,
+          "flagged_failures": 0,
+          "flagged_successes": 0,
+          "missed_failures": 1387,
+          "unflagged_successes": 19249,
+          "warnings": 0,
+          "precision": null,
+          "failure_recall": 0.0,
+          "false_positive_rate": 0.0,
+          "break_even_blocked_success_cost_over_failed_fee": null,
+          "hypothetical_net_units": {
+            "0": 0,
+            "1": 0,
+            "5": 0,
+            "10": 0
+          }
+        }
+      },
+      "cost_based_policies": {
+        "payer_readonly_hgb": {
+          "1": {
+            "threshold": 0.5,
+            "flagged_failures": 641,
+            "flagged_successes": 1877,
+            "missed_failures": 746,
+            "unflagged_successes": 17372,
+            "warnings": 2518,
+            "precision": 0.2545671167593328,
+            "failure_recall": 0.46214852198990625,
+            "false_positive_rate": 0.09751155904202816,
+            "break_even_blocked_success_cost_over_failed_fee": 0.34150239744272776,
+            "hypothetical_net_units": {
+              "0": 641,
+              "1": -1236,
+              "5": -8744,
+              "10": -18129
+            }
+          },
+          "5": {
+            "threshold": 0.8333333333333334,
+            "flagged_failures": 0,
+            "flagged_successes": 0,
+            "missed_failures": 1387,
+            "unflagged_successes": 19249,
+            "warnings": 0,
+            "precision": null,
+            "failure_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "break_even_blocked_success_cost_over_failed_fee": null,
+            "hypothetical_net_units": {
+              "0": 0,
+              "1": 0,
+              "5": 0,
+              "10": 0
+            }
+          },
+          "10": {
+            "threshold": 0.9090909090909091,
+            "flagged_failures": 0,
+            "flagged_successes": 0,
+            "missed_failures": 1387,
+            "unflagged_successes": 19249,
+            "warnings": 0,
+            "precision": null,
+            "failure_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "break_even_blocked_success_cost_over_failed_fee": null,
+            "hypothetical_net_units": {
+              "0": 0,
+              "1": 0,
+              "5": 0,
+              "10": 0
+            }
+          }
+        },
+        "context_hgb": {
+          "1": {
+            "threshold": 0.5,
+            "flagged_failures": 820,
+            "flagged_successes": 2722,
+            "missed_failures": 567,
+            "unflagged_successes": 16527,
+            "warnings": 3542,
+            "precision": 0.23150762281197063,
+            "failure_recall": 0.5912040374909877,
+            "false_positive_rate": 0.14140994337368176,
+            "break_even_blocked_success_cost_over_failed_fee": 0.30124908155767816,
+            "hypothetical_net_units": {
+              "0": 820,
+              "1": -1902,
+              "5": -12790,
+              "10": -26400
+            }
+          },
+          "5": {
+            "threshold": 0.8333333333333334,
+            "flagged_failures": 0,
+            "flagged_successes": 0,
+            "missed_failures": 1387,
+            "unflagged_successes": 19249,
+            "warnings": 0,
+            "precision": null,
+            "failure_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "break_even_blocked_success_cost_over_failed_fee": null,
+            "hypothetical_net_units": {
+              "0": 0,
+              "1": 0,
+              "5": 0,
+              "10": 0
+            }
+          },
+          "10": {
+            "threshold": 0.9090909090909091,
+            "flagged_failures": 0,
+            "flagged_successes": 0,
+            "missed_failures": 1387,
+            "unflagged_successes": 19249,
+            "warnings": 0,
+            "precision": null,
+            "failure_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "break_even_blocked_success_cost_over_failed_fee": null,
+            "hypothetical_net_units": {
+              "0": 0,
+              "1": 0,
+              "5": 0,
+              "10": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "cohort": "extension",
+      "test_date": "2025-11-24",
+      "rows": 21028,
+      "failures": 1337,
+      "deployed_policy": {
+        "payer_readonly_hgb": {
+          "threshold": 0.2160762545229588,
+          "flagged_failures": 247,
+          "flagged_successes": 646,
+          "missed_failures": 1090,
+          "unflagged_successes": 19045,
+          "warnings": 893,
+          "precision": 0.2765957446808511,
+          "failure_recall": 0.18474195961106957,
+          "false_positive_rate": 0.03280686608095069,
+          "break_even_blocked_success_cost_over_failed_fee": 0.38235294117647056,
+          "hypothetical_net_units": {
+            "0": 247,
+            "1": -399,
+            "5": -2983,
+            "10": -6213
+          }
+        },
+        "context_hgb": {
+          "threshold": 0.23883783439113243,
+          "flagged_failures": 320,
+          "flagged_successes": 808,
+          "missed_failures": 1017,
+          "unflagged_successes": 18883,
+          "warnings": 1128,
+          "precision": 0.28368794326241137,
+          "failure_recall": 0.2393418100224383,
+          "false_positive_rate": 0.04103397491239653,
+          "break_even_blocked_success_cost_over_failed_fee": 0.39603960396039606,
+          "hypothetical_net_units": {
+            "0": 320,
+            "1": -488,
+            "5": -3720,
+            "10": -7760
+          }
+        }
+      },
+      "cost_based_policies": {
+        "payer_readonly_hgb": {
+          "1": {
+            "threshold": 0.5,
+            "flagged_failures": 68,
+            "flagged_successes": 44,
+            "missed_failures": 1269,
+            "unflagged_successes": 19647,
+            "warnings": 112,
+            "precision": 0.6071428571428571,
+            "failure_recall": 0.050860134629768135,
+            "false_positive_rate": 0.002234523386318623,
+            "break_even_blocked_success_cost_over_failed_fee": 1.5454545454545454,
+            "hypothetical_net_units": {
+              "0": 68,
+              "1": 24,
+              "5": -152,
+              "10": -372
+            }
+          },
+          "5": {
+            "threshold": 0.8333333333333334,
+            "flagged_failures": 0,
+            "flagged_successes": 2,
+            "missed_failures": 1337,
+            "unflagged_successes": 19689,
+            "warnings": 2,
+            "precision": 0.0,
+            "failure_recall": 0.0,
+            "false_positive_rate": 0.00010156924483266467,
+            "break_even_blocked_success_cost_over_failed_fee": 0.0,
+            "hypothetical_net_units": {
+              "0": 0,
+              "1": -2,
+              "5": -10,
+              "10": -20
+            }
+          },
+          "10": {
+            "threshold": 0.9090909090909091,
+            "flagged_failures": 0,
+            "flagged_successes": 1,
+            "missed_failures": 1337,
+            "unflagged_successes": 19690,
+            "warnings": 1,
+            "precision": 0.0,
+            "failure_recall": 0.0,
+            "false_positive_rate": 5.0784622416332335e-05,
+            "break_even_blocked_success_cost_over_failed_fee": 0.0,
+            "hypothetical_net_units": {
+              "0": 0,
+              "1": -1,
+              "5": -5,
+              "10": -10
+            }
+          }
+        },
+        "context_hgb": {
+          "1": {
+            "threshold": 0.5,
+            "flagged_failures": 42,
+            "flagged_successes": 36,
+            "missed_failures": 1295,
+            "unflagged_successes": 19655,
+            "warnings": 78,
+            "precision": 0.5384615384615384,
+            "failure_recall": 0.031413612565445025,
+            "false_positive_rate": 0.0018282464069879641,
+            "break_even_blocked_success_cost_over_failed_fee": 1.1666666666666667,
+            "hypothetical_net_units": {
+              "0": 42,
+              "1": 6,
+              "5": -138,
+              "10": -318
+            }
+          },
+          "5": {
+            "threshold": 0.8333333333333334,
+            "flagged_failures": 3,
+            "flagged_successes": 5,
+            "missed_failures": 1334,
+            "unflagged_successes": 19686,
+            "warnings": 8,
+            "precision": 0.375,
+            "failure_recall": 0.002243829468960359,
+            "false_positive_rate": 0.0002539231120816617,
+            "break_even_blocked_success_cost_over_failed_fee": 0.6,
+            "hypothetical_net_units": {
+              "0": 3,
+              "1": -2,
+              "5": -22,
+              "10": -47
+            }
+          },
+          "10": {
+            "threshold": 0.9090909090909091,
+            "flagged_failures": 2,
+            "flagged_successes": 3,
+            "missed_failures": 1335,
+            "unflagged_successes": 19688,
+            "warnings": 5,
+            "precision": 0.4,
+            "failure_recall": 0.0014958863126402393,
+            "false_positive_rate": 0.000152353867248997,
+            "break_even_blocked_success_cost_over_failed_fee": 0.6666666666666666,
+            "hypothetical_net_units": {
+              "0": 2,
+              "1": -1,
+              "5": -13,
+              "10": -28
+            }
+          }
+        }
+      }
+    },
+    {
+      "cohort": "prospective",
+      "test_date": "2025-12-01",
+      "rows": 19577,
+      "failures": 1183,
+      "deployed_policy": {
+        "payer_readonly_hgb": {
+          "threshold": 0.3267816659557023,
+          "flagged_failures": 505,
+          "flagged_successes": 2727,
+          "missed_failures": 678,
+          "unflagged_successes": 15667,
+          "warnings": 3232,
+          "precision": 0.15625,
+          "failure_recall": 0.4268808114961961,
+          "false_positive_rate": 0.14825486571708166,
+          "break_even_blocked_success_cost_over_failed_fee": 0.18518518518518517,
+          "hypothetical_net_units": {
+            "0": 505,
+            "1": -2222,
+            "5": -13130,
+            "10": -26765
+          }
+        },
+        "context_hgb": {
+          "threshold": 0.34375,
+          "flagged_failures": 484,
+          "flagged_successes": 1813,
+          "missed_failures": 699,
+          "unflagged_successes": 16581,
+          "warnings": 2297,
+          "precision": 0.2107096212451023,
+          "failure_recall": 0.4091293322062553,
+          "false_positive_rate": 0.09856474937479613,
+          "break_even_blocked_success_cost_over_failed_fee": 0.2669608383894098,
+          "hypothetical_net_units": {
+            "0": 484,
+            "1": -1329,
+            "5": -8581,
+            "10": -17646
+          }
+        }
+      },
+      "cost_based_policies": {
+        "payer_readonly_hgb": {
+          "1": {
+            "threshold": 0.5,
+            "flagged_failures": 127,
+            "flagged_successes": 338,
+            "missed_failures": 1056,
+            "unflagged_successes": 18056,
+            "warnings": 465,
+            "precision": 0.2731182795698925,
+            "failure_recall": 0.1073541842772612,
+            "false_positive_rate": 0.018375557246928347,
+            "break_even_blocked_success_cost_over_failed_fee": 0.3757396449704142,
+            "hypothetical_net_units": {
+              "0": 127,
+              "1": -211,
+              "5": -1563,
+              "10": -3253
+            }
+          },
+          "5": {
+            "threshold": 0.8333333333333334,
+            "flagged_failures": 110,
+            "flagged_successes": 299,
+            "missed_failures": 1073,
+            "unflagged_successes": 18095,
+            "warnings": 409,
+            "precision": 0.26894865525672373,
+            "failure_recall": 0.09298393913778528,
+            "false_positive_rate": 0.016255300641513537,
+            "break_even_blocked_success_cost_over_failed_fee": 0.36789297658862874,
+            "hypothetical_net_units": {
+              "0": 110,
+              "1": -189,
+              "5": -1385,
+              "10": -2880
+            }
+          },
+          "10": {
+            "threshold": 0.9090909090909091,
+            "flagged_failures": 107,
+            "flagged_successes": 295,
+            "missed_failures": 1076,
+            "unflagged_successes": 18099,
+            "warnings": 402,
+            "precision": 0.26616915422885573,
+            "failure_recall": 0.0904480135249366,
+            "false_positive_rate": 0.016037838425573558,
+            "break_even_blocked_success_cost_over_failed_fee": 0.36271186440677966,
+            "hypothetical_net_units": {
+              "0": 107,
+              "1": -188,
+              "5": -1368,
+              "10": -2843
+            }
+          }
+        },
+        "context_hgb": {
+          "1": {
+            "threshold": 0.5,
+            "flagged_failures": 270,
+            "flagged_successes": 592,
+            "missed_failures": 913,
+            "unflagged_successes": 17802,
+            "warnings": 862,
+            "precision": 0.31322505800464034,
+            "failure_recall": 0.22823330515638207,
+            "false_positive_rate": 0.0321844079591171,
+            "break_even_blocked_success_cost_over_failed_fee": 0.4560810810810811,
+            "hypothetical_net_units": {
+              "0": 270,
+              "1": -322,
+              "5": -2690,
+              "10": -5650
+            }
+          },
+          "5": {
+            "threshold": 0.8333333333333334,
+            "flagged_failures": 53,
+            "flagged_successes": 53,
+            "missed_failures": 1130,
+            "unflagged_successes": 18341,
+            "warnings": 106,
+            "precision": 0.5,
+            "failure_recall": 0.044801352493660185,
+            "false_positive_rate": 0.0028813743612047405,
+            "break_even_blocked_success_cost_over_failed_fee": 1.0,
+            "hypothetical_net_units": {
+              "0": 53,
+              "1": 0,
+              "5": -212,
+              "10": -477
+            }
+          },
+          "10": {
+            "threshold": 0.9090909090909091,
+            "flagged_failures": 53,
+            "flagged_successes": 52,
+            "missed_failures": 1130,
+            "unflagged_successes": 18342,
+            "warnings": 105,
+            "precision": 0.5047619047619047,
+            "failure_recall": 0.044801352493660185,
+            "false_positive_rate": 0.0028270088072197457,
+            "break_even_blocked_success_cost_over_failed_fee": 1.0192307692307692,
+            "hypothetical_net_units": {
+              "0": 53,
+              "1": 1,
+              "5": -207,
+              "10": -467
+            }
+          }
+        }
+      }
+    },
+    {
+      "cohort": "fresh",
+      "test_date": "2025-12-05",
+      "rows": 21581,
+      "failures": 1195,
+      "deployed_policy": {
+        "payer_readonly_hgb": {
+          "threshold": 0.18181818181818182,
+          "flagged_failures": 241,
+          "flagged_successes": 486,
+          "missed_failures": 954,
+          "unflagged_successes": 19900,
+          "warnings": 727,
+          "precision": 0.3314993122420908,
+          "failure_recall": 0.20167364016736403,
+          "false_positive_rate": 0.02383989012067105,
+          "break_even_blocked_success_cost_over_failed_fee": 0.49588477366255146,
+          "hypothetical_net_units": {
+            "0": 241,
+            "1": -245,
+            "5": -2189,
+            "10": -4619
+          }
+        },
+        "context_hgb": {
+          "threshold": 0.18181818181818182,
+          "flagged_failures": 357,
+          "flagged_successes": 649,
+          "missed_failures": 838,
+          "unflagged_successes": 19737,
+          "warnings": 1006,
+          "precision": 0.3548707753479125,
+          "failure_recall": 0.298744769874477,
+          "false_positive_rate": 0.03183557343274796,
+          "break_even_blocked_success_cost_over_failed_fee": 0.5500770416024653,
+          "hypothetical_net_units": {
+            "0": 357,
+            "1": -292,
+            "5": -2888,
+            "10": -6133
+          }
+        }
+      },
+      "cost_based_policies": {
+        "payer_readonly_hgb": {
+          "1": {
+            "threshold": 0.5,
+            "flagged_failures": 92,
+            "flagged_successes": 87,
+            "missed_failures": 1103,
+            "unflagged_successes": 20299,
+            "warnings": 179,
+            "precision": 0.5139664804469274,
+            "failure_recall": 0.07698744769874477,
+            "false_positive_rate": 0.0042676346512312375,
+            "break_even_blocked_success_cost_over_failed_fee": 1.0574712643678161,
+            "hypothetical_net_units": {
+              "0": 92,
+              "1": 5,
+              "5": -343,
+              "10": -778
+            }
+          },
+          "5": {
+            "threshold": 0.8333333333333334,
+            "flagged_failures": 9,
+            "flagged_successes": 3,
+            "missed_failures": 1186,
+            "unflagged_successes": 20383,
+            "warnings": 12,
+            "precision": 0.75,
+            "failure_recall": 0.007531380753138075,
+            "false_positive_rate": 0.00014715981555969782,
+            "break_even_blocked_success_cost_over_failed_fee": 3.0,
+            "hypothetical_net_units": {
+              "0": 9,
+              "1": 6,
+              "5": -6,
+              "10": -21
+            }
+          },
+          "10": {
+            "threshold": 0.9090909090909091,
+            "flagged_failures": 9,
+            "flagged_successes": 3,
+            "missed_failures": 1186,
+            "unflagged_successes": 20383,
+            "warnings": 12,
+            "precision": 0.75,
+            "failure_recall": 0.007531380753138075,
+            "false_positive_rate": 0.00014715981555969782,
+            "break_even_blocked_success_cost_over_failed_fee": 3.0,
+            "hypothetical_net_units": {
+              "0": 9,
+              "1": 6,
+              "5": -6,
+              "10": -21
+            }
+          }
+        },
+        "context_hgb": {
+          "1": {
+            "threshold": 0.5,
+            "flagged_failures": 44,
+            "flagged_successes": 39,
+            "missed_failures": 1151,
+            "unflagged_successes": 20347,
+            "warnings": 83,
+            "precision": 0.5301204819277109,
+            "failure_recall": 0.03682008368200837,
+            "false_positive_rate": 0.001913077602276072,
+            "break_even_blocked_success_cost_over_failed_fee": 1.1282051282051282,
+            "hypothetical_net_units": {
+              "0": 44,
+              "1": 5,
+              "5": -151,
+              "10": -346
+            }
+          },
+          "5": {
+            "threshold": 0.8333333333333334,
+            "flagged_failures": 15,
+            "flagged_successes": 1,
+            "missed_failures": 1180,
+            "unflagged_successes": 20385,
+            "warnings": 16,
+            "precision": 0.9375,
+            "failure_recall": 0.012552301255230125,
+            "false_positive_rate": 4.905327185323261e-05,
+            "break_even_blocked_success_cost_over_failed_fee": 15.0,
+            "hypothetical_net_units": {
+              "0": 15,
+              "1": 14,
+              "5": 10,
+              "10": 5
+            }
+          },
+          "10": {
+            "threshold": 0.9090909090909091,
+            "flagged_failures": 0,
+            "flagged_successes": 0,
+            "missed_failures": 1195,
+            "unflagged_successes": 20386,
+            "warnings": 0,
+            "precision": null,
+            "failure_recall": 0.0,
+            "false_positive_rate": 0.0,
+            "break_even_blocked_success_cost_over_failed_fee": null,
+            "hypothetical_net_units": {
+              "0": 0,
+              "1": 0,
+              "5": 0,
+              "10": 0
+            }
+          }
+        }
+      }
+    }
+  ],
+  "pooled_cost_scenarios": {
+    "payer_readonly_hgb": {
+      "1": {
+        "flagged_failures": 1106,
+        "flagged_successes": 2564,
+        "missed_failures": 5304,
+        "precision": 0.3013623978201635,
+        "failure_recall": 0.17254290171606865,
+        "hypothetical_net_units_at_matching_cost_ratio": -1458,
+        "positive_net_periods": 2,
+        "negative_net_periods": 3
+      },
+      "5": {
+        "flagged_failures": 128,
+        "flagged_successes": 304,
+        "missed_failures": 6282,
+        "precision": 0.2962962962962963,
+        "failure_recall": 0.019968798751950078,
+        "hypothetical_net_units_at_matching_cost_ratio": -1392,
+        "positive_net_periods": 1,
+        "negative_net_periods": 3
+      },
+      "10": {
+        "flagged_failures": 123,
+        "flagged_successes": 299,
+        "missed_failures": 6287,
+        "precision": 0.2914691943127962,
+        "failure_recall": 0.019188767550702028,
+        "hypothetical_net_units_at_matching_cost_ratio": -2867,
+        "positive_net_periods": 1,
+        "negative_net_periods": 3
+      }
+    },
+    "context_hgb": {
+      "1": {
+        "flagged_failures": 1492,
+        "flagged_successes": 3719,
+        "missed_failures": 4918,
+        "precision": 0.28631740548838996,
+        "failure_recall": 0.2327613104524181,
+        "hypothetical_net_units_at_matching_cost_ratio": -2227,
+        "positive_net_periods": 2,
+        "negative_net_periods": 3
+      },
+      "5": {
+        "flagged_failures": 107,
+        "flagged_successes": 60,
+        "missed_failures": 6303,
+        "precision": 0.6407185628742516,
+        "failure_recall": 0.01669266770670827,
+        "hypothetical_net_units_at_matching_cost_ratio": -193,
+        "positive_net_periods": 2,
+        "negative_net_periods": 2
+      },
+      "10": {
+        "flagged_failures": 78,
+        "flagged_successes": 56,
+        "missed_failures": 6332,
+        "precision": 0.582089552238806,
+        "failure_recall": 0.012168486739469579,
+        "hypothetical_net_units_at_matching_cost_ratio": -482,
+        "positive_net_periods": 1,
+        "negative_net_periods": 2
+      }
+    }
+  },
+  "verdict": "Current evidence does not establish ML-driven fee savings. Do not use these models to automatically block transfers.",
+  "proof_status": {
+    "failed_execution_can_charge_fee": "Proven on isolated local validator",
+    "check_and_stop_avoids_that_local_paid_attempt": "Proven in matched local comparison",
+    "ML_improves_failure_ranking": "Supported by existing held-out AP comparisons, with stated sampling limits",
+    "ML_saves_fees_beyond_normal_preflight": "Not proven: preflight and paid fees absent from historical evaluation",
+    "ML_policy_reliably_improves_economic_utility": "Not established: false alarms and period instability"
+  },
+  "next_required_experiment": {
+    "design": "Shadow-mode prospective study on authorised transaction candidates; no ML-triggered automatic blocking",
+    "record_before_outcome": [
+      "Candidate signed-message hash",
+      "Model and history snapshot hashes",
+      "Available-history timestamp",
+      "ML probability and fixed threshold",
+      "Standard preflight result, slot and timestamp"
+    ],
+    "record_after_outcome": [
+      "Submitted signature if any",
+      "Confirmed receipt error and fee",
+      "Pre/post balances",
+      "Actual submission/confirmation times",
+      "Reason a candidate was not submitted; never label it successful or failed without observation"
+    ],
+    "primary_population": "Candidates that pass standard preflight; assess whether ML predicts subsequent paid failures",
+    "comparison": "Fixed preflight-only policy versus fixed preflight-plus-ML policy, with false-warning costs reported",
+    "limits": "Shadow-mode predictions alone cannot establish causal savings. A subsequent authorised policy comparison is required."
+  }
+}

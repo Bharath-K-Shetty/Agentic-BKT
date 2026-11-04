@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fee experiment · Solana study</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#252724;background:#f6f5f1;color-scheme:light}*{box-sizing:border-box}body{margin:0}main{max-width:1080px;margin:auto;padding:28px 28px 48px}nav{display:flex;justify-content:space-between;border-bottom:1px solid #d9d9d1;padding-bottom:18px;font-size:13px}a{color:#3c5942;text-underline-offset:4px}h1{font-size:31px;letter-spacing:-.8px;margin:38px 0 14px;font-weight:600}h2{font-size:18px;font-weight:600}p{font-size:14px;line-height:1.7;color:#696f63;max-width:850px}.sheet{overflow:auto;background:white;border:1px solid #ddded7;border-radius:4px;margin:26px 0}table{width:100%;border-collapse:collapse;font-size:14px;text-align:left}th,td{padding:20px 18px;border-bottom:1px solid #e7e8e1}th{font-size:12px;color:#73796b;font-weight:500}tbody tr:last-child td{border:0}.result{color:#345c40;font-size:22px}.note{font-size:12px}details{margin:26px 0;border-top:1px solid #d9d9d1;padding-top:18px}summary{cursor:pointer;font-size:13px}pre{font-size:11px;overflow:auto;background:white;padding:18px;max-height:450px}code{font-size:12px}footer{font-size:12px;color:#73796b;margin-top:28px}#error{color:#923d2b}
+</style></head><body><main><nav><strong>Solana transaction study</strong><a href="/check">Check a transfer →</a></nav>
+<h1>Does stopping a failed attempt avoid a fee?</h1>
+<p>We ran real transactions on a local Solana test validator. Two wallets started with equal balances and tried the same tiny transfer to separate unfunded accounts. The recipient’s minimum balance requirement made the transfer fail.</p>
+<p id="status" role="status">Loading experiment evidence…</p><p id="error" role="alert"></p>
+<div class="sheet"><table><thead><tr><th>Experiment</th><th>What happened</th><th>Fee paid</th><th>Recipient received</th></tr></thead><tbody id="cases"></tbody></table></div>
+<h2>What this proves</h2><p id="finding" class="result"></p>
+<p>The failed on-chain transaction has a confirmed receipt. Its fee matches the wallet’s balance loss; the recipient received nothing. The matching checked attempt was stopped and its balance stayed unchanged.</p>
+<h2>What it means for our project</h2><p>Checking before sending can avoid a paid failed attempt. Standard Solana preflight caught this example for free too. This experiment does not show an improvement over preflight, ML-driven fee savings, mainnet savings or time saved.</p>
+<h2>Does the ML model prove extra savings?</h2><p id="ml-status">Loading the complete historical policy audit…</p>
+<div class="sheet"><table><thead><tr><th>Held-out date</th><th>Default: failures warned</th><th>Default: successful transactions warned</th><th>Stricter: failures warned</th><th>Stricter: successful transactions warned</th></tr></thead><tbody id="ml-cases"></tbody></table></div>
+<p class="note">Our context model, all five evaluated periods. “Stricter” means probability ≥ 83.3%, the theoretical threshold if blocking a success costs five times one failed fee. This is an unverified cost assumption. These are historical outcomes, not prevented transactions. All cost scenarios and the baseline are in the <a href="/api/fee-proof/ml-policy">full ML audit</a>.</p>
+<details><summary>Inspect the receipts and balance measurements</summary><p class="note">Balances and fees below are in lamports. 1 SOL = 1,000,000,000 lamports. Local signatures cannot be looked up on a public explorer.</p><pre id="evidence"></pre><a href="/api/fee-proof" download="solana_local_fee_proof.json">Download full evidence JSON</a></details>
+<details><summary>Reproduce the experiment</summary><p>From the project root, with the Solana CLI and Python dependencies installed:</p><pre>.venv/bin/python research/solana/fee_proof/run.py</pre><p class="note">Starts its own isolated validator, creates throwaway wallets, checks and submits test transactions, verifies receipts and balances, saves fresh evidence, then stops the validator. Reload this page after completion.</p></details>
+<footer>Recorded local experiment · Test SOL only · No real money used</footer></main>
+<script>
+const $=id=>document.getElementById(id);
+const sol=n=>(n/1e9).toFixed(9).replace(/0+$/,'').replace(/\.$/,'')+' SOL';
+(async()=>{try{const response=await fetch('/api/fee-proof');const r=await response.json();if(!response.ok)throw Error(r.detail||'Evidence unavailable');if(r.verification!=='passed')throw Error('Experiment has not passed verification');
+$('status').textContent='Verified local run · '+r.run_id+' · '+r.validator_version;
+const outcomes=['Problem caught; not submitted','Rejected before broadcast','Confirmed; execution failed','Confirmed; transfer succeeded'];
+r.cases.forEach((c,i)=>{const row=document.createElement('tr');for(const value of [c.name,outcomes[i],sol(c.actual_fee_lamports),sol(c.recipient_after-c.recipient_before)]){const cell=document.createElement('td');cell.textContent=value;row.append(cell)}$('cases').append(row)});
+$('finding').textContent=sol(r.avoided_fee_lamports_in_matched_local_comparison)+' avoided versus the forced failing submission.';
+$('evidence').textContent=JSON.stringify(r,null,2);
+}catch(e){$('status').textContent='Evidence unavailable';$('error').textContent=e.message}})();
+(async()=>{try{const response=await fetch('/api/fee-proof/ml-policy');const r=await response.json();if(!response.ok)throw Error(r.detail||'ML audit unavailable');$('ml-status').textContent=r.rows.toLocaleString()+' transactions evaluated. '+r.verdict;
+for(const p of r.periods){const a=p.deployed_policy.context_hgb,b=p.cost_based_policies.context_hgb['5'];const row=document.createElement('tr');for(const value of [p.test_date,a.flagged_failures,a.flagged_successes,b.flagged_failures,b.flagged_successes]){const cell=document.createElement('td');cell.textContent=value;row.append(cell)}$('ml-cases').append(row)}}catch(e){$('ml-status').textContent=e.message}})();
+</script></body></html>

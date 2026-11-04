@@ -1,0 +1,270 @@
+{
+  "schema_version": 1,
+  "run_id": "20261016T020156551367Z",
+  "network": "local-validator",
+  "validator_version": "solana-test-validator 2.3.0 (src:a2e21dda; feat:3640012085, client:Agave)",
+  "rpc_url": "http://127.0.0.1:8897",
+  "real_funds_used": false,
+  "cases": [
+    {
+      "name": "Check and stop",
+      "payer": "7MoR5wUbWFt9v7ZpEkc5AQjFo2f5D7p7vpkEp8HwHc8z",
+      "recipient": "CwtsCB7pGBjAcaV6qsf6QrfN1WAftLCGKSEGD9sCmnqK",
+      "amount_lamports": 1,
+      "payer_before": 1000000000,
+      "recipient_before": 0,
+      "check": {
+        "status": "needs_attention",
+        "headline": "Simulation found a problem",
+        "action": "The transfer may leave an account below its required minimum balance. Review the amount and recipient account.",
+        "network": "local-validator",
+        "candidate_message_base64": "AQABA156ODqFVue390wg0eERI540gGYvlxs4FpgOKueBRvPbsYCQc55MwErHt7EjComWTblPFxcIMDLW4flpD0Nd9xYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADeIYlgeCJ/rVYJKvFsmYiot2GZUyHlJTznVH2jFX3oCAQICAAEMAgAAAAEAAAAAAAAA",
+        "candidate_message_sha256": "e5b18defb0f3602d95e828b878ffe2df2e04ef164282ac888762c2b5da0f8b51",
+        "unsigned_transaction_base64": "AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEDXno4OoVW57f3TCDR4REjnjSAZi+XGzgWmA4q54FG89uxgJBznkzASse3sSMKiZZNuU8XFwgwMtbh+WkPQ133FgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4hiWB4In+tVgkq8WyZiKi3YZlTIeUlPOdUfaMVfegIBAgIAAQwCAAAAAQAAAAAAAAA=",
+        "last_valid_block_height": 152,
+        "checked_at_utc": "2026-10-16T02:01:58.433469+00:00",
+        "transfer_sol": "0.000000001",
+        "balance_sol": "1",
+        "estimated_fee_sol": "0.000005",
+        "required_sol": "0.000005001",
+        "shortfall_sol": "0",
+        "simulation": {
+          "performed": true,
+          "error": {
+            "InsufficientFundsForRent": {
+              "account_index": 1
+            }
+          },
+          "units_consumed": 150,
+          "signature_verification": false
+        },
+        "slot": 2,
+        "checked_ms": 8,
+        "broadcast": false,
+        "actual_fee_paid_sol": "0",
+        "measured_fee_savings_sol": null,
+        "measured_time_saved_seconds": null,
+        "limits": [
+          "Fee quote covers this plain transfer message; required balance may be affected by account minimums.",
+          "Simulation does not verify signatures and cannot guarantee later execution.",
+          "The historical ML model is not used for this live check.",
+          "No fee savings or retry-time savings have been measured. A failed submission may not incur the quoted fee."
+        ]
+      },
+      "submitted": false,
+      "actual_fee_lamports": 0,
+      "payer_after": 1000000000,
+      "recipient_after": 0
+    },
+    {
+      "name": "Normal preflight rejection",
+      "payer": "DPk8Xh29GaKN51BCuZpW9Mrs5qgHxTjjLxNp8eNiUwaU",
+      "recipient": "8YkWtWH3GaZVCXDzmCZnyUzBgBf6bzxuECdBkXe1K82v",
+      "amount_lamports": 1,
+      "payer_before": 1000000000,
+      "recipient_before": 0,
+      "rpc_error": {
+        "code": -32002,
+        "message": "Transaction simulation failed: Transaction results in an account (1) with insufficient funds for rent",
+        "data": {
+          "accounts": null,
+          "err": {
+            "InsufficientFundsForRent": {
+              "account_index": 1
+            }
+          },
+          "innerInstructions": null,
+          "loadedAccountsDataSize": 142,
+          "logs": [
+            "Program 11111111111111111111111111111111 invoke [1]",
+            "Program 11111111111111111111111111111111 success"
+          ],
+          "replacementBlockhash": null,
+          "returnData": null,
+          "unitsConsumed": 150
+        }
+      },
+      "receipt": null,
+      "signature": "2hekEJZsYWiUqUHb6gQsySGgGrnMXUNU4rsiuZMN1iXWqiabceQYviDY6cJW5U4ZZnvF9TUB8krZjCpZJh62HDrH",
+      "actual_fee_lamports": 0,
+      "broadcast_accepted": false,
+      "payer_after": 1000000000,
+      "recipient_after": 0
+    },
+    {
+      "name": "Submitted execution failure",
+      "payer": "DPk8Xh29GaKN51BCuZpW9Mrs5qgHxTjjLxNp8eNiUwaU",
+      "recipient": "8YkWtWH3GaZVCXDzmCZnyUzBgBf6bzxuECdBkXe1K82v",
+      "amount_lamports": 1,
+      "payer_before": 1000000000,
+      "recipient_before": 0,
+      "signature": "2hekEJZsYWiUqUHb6gQsySGgGrnMXUNU4rsiuZMN1iXWqiabceQYviDY6cJW5U4ZZnvF9TUB8krZjCpZJh62HDrH",
+      "receipt": {
+        "blockTime": 1792116118,
+        "meta": {
+          "computeUnitsConsumed": 150,
+          "costUnits": 1481,
+          "err": {
+            "InsufficientFundsForRent": {
+              "account_index": 1
+            }
+          },
+          "fee": 5000,
+          "innerInstructions": [],
+          "loadedAddresses": {
+            "readonly": [],
+            "writable": []
+          },
+          "logMessages": [
+            "Program 11111111111111111111111111111111 invoke [1]",
+            "Program 11111111111111111111111111111111 success"
+          ],
+          "postBalances": [
+            999995000,
+            0,
+            1
+          ],
+          "postTokenBalances": [],
+          "preBalances": [
+            1000000000,
+            0,
+            1
+          ],
+          "preTokenBalances": [],
+          "rewards": [],
+          "status": {
+            "Err": {
+              "InsufficientFundsForRent": {
+                "account_index": 1
+              }
+            }
+          }
+        },
+        "slot": 5,
+        "transaction": {
+          "message": {
+            "accountKeys": [
+              "DPk8Xh29GaKN51BCuZpW9Mrs5qgHxTjjLxNp8eNiUwaU",
+              "8YkWtWH3GaZVCXDzmCZnyUzBgBf6bzxuECdBkXe1K82v",
+              "11111111111111111111111111111111"
+            ],
+            "header": {
+              "numReadonlySignedAccounts": 0,
+              "numReadonlyUnsignedAccounts": 1,
+              "numRequiredSignatures": 1
+            },
+            "instructions": [
+              {
+                "accounts": [
+                  0,
+                  1
+                ],
+                "data": "3Bxs412MvVNQj175",
+                "programIdIndex": 2,
+                "stackHeight": 1
+              }
+            ],
+            "recentBlockhash": "4jn3T1znMXXwUMuD5ir1TH9P641NArgBb8UoshkEaGqo"
+          },
+          "signatures": [
+            "2hekEJZsYWiUqUHb6gQsySGgGrnMXUNU4rsiuZMN1iXWqiabceQYviDY6cJW5U4ZZnvF9TUB8krZjCpZJh62HDrH"
+          ]
+        },
+        "version": "legacy"
+      },
+      "submitted": true,
+      "skip_preflight": true,
+      "actual_fee_lamports": 5000,
+      "payer_after": 999995000,
+      "recipient_after": 0
+    },
+    {
+      "name": "Successful transfer",
+      "payer": "DPk8Xh29GaKN51BCuZpW9Mrs5qgHxTjjLxNp8eNiUwaU",
+      "recipient": "C1fJgwi7ACLBpZ7vNDM2HZ6JKw5PyKRVmv9hS2JmK1eU",
+      "amount_lamports": 10000000,
+      "payer_before": 999995000,
+      "recipient_before": 0,
+      "signature": "2zRre9iHcTU4tHoNo7Bp8agGWAcrNpz1ERzXYDrKmtQBcJoMaesTdUHFeEzs1xwGoEe3gvKPixiNjckLk8ZLquyN",
+      "receipt": {
+        "blockTime": 1792116119,
+        "meta": {
+          "computeUnitsConsumed": 150,
+          "costUnits": 1481,
+          "err": null,
+          "fee": 5000,
+          "innerInstructions": [],
+          "loadedAddresses": {
+            "readonly": [],
+            "writable": []
+          },
+          "logMessages": [
+            "Program 11111111111111111111111111111111 invoke [1]",
+            "Program 11111111111111111111111111111111 success"
+          ],
+          "postBalances": [
+            989990000,
+            10000000,
+            1
+          ],
+          "postTokenBalances": [],
+          "preBalances": [
+            999995000,
+            0,
+            1
+          ],
+          "preTokenBalances": [],
+          "rewards": [],
+          "status": {
+            "Ok": null
+          }
+        },
+        "slot": 6,
+        "transaction": {
+          "message": {
+            "accountKeys": [
+              "DPk8Xh29GaKN51BCuZpW9Mrs5qgHxTjjLxNp8eNiUwaU",
+              "C1fJgwi7ACLBpZ7vNDM2HZ6JKw5PyKRVmv9hS2JmK1eU",
+              "11111111111111111111111111111111"
+            ],
+            "header": {
+              "numReadonlySignedAccounts": 0,
+              "numReadonlyUnsignedAccounts": 1,
+              "numRequiredSignatures": 1
+            },
+            "instructions": [
+              {
+                "accounts": [
+                  0,
+                  1
+                ],
+                "data": "3Bxs4NN8M2Yn4TLb",
+                "programIdIndex": 2,
+                "stackHeight": 1
+              }
+            ],
+            "recentBlockhash": "8FLnWi4bGhNFPUAK5f51maX7r1umVEjhoEy4WYFVQdZm"
+          },
+          "signatures": [
+            "2zRre9iHcTU4tHoNo7Bp8agGWAcrNpz1ERzXYDrKmtQBcJoMaesTdUHFeEzs1xwGoEe3gvKPixiNjckLk8ZLquyN"
+          ]
+        },
+        "version": "legacy"
+      },
+      "submitted": true,
+      "actual_fee_lamports": 5000,
+      "payer_after": 989990000,
+      "recipient_after": 10000000
+    }
+  ],
+  "verification": "passed",
+  "avoided_fee_lamports_in_matched_local_comparison": 5000,
+  "limits": [
+    "Local test SOL only; no measured mainnet savings or time savings.",
+    "Paid failure deliberately bypassed normal preflight for this experiment.",
+    "Normal preflight also rejected this problem at zero cost; no incremental saving over preflight shown.",
+    "Simulation and balance checks caused the stop; no ML contribution to savings demonstrated.",
+    "Matched independent wallets, equal starting balances, same amount and unfunded-recipient condition.",
+    "One controlled run is a functional proof, not a statistical economic evaluation."
+  ]
+}
