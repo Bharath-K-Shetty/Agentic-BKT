@@ -47,7 +47,7 @@ several minutes. Missing or stale history withholds live scores.
 Create a local, untracked `.env` containing:
 
     HOMIE_DEMO_USER=homie
-    HOMIE_DEMO_PASSWORD=<choose-a-password-at-least-16-characters>
+    HOMIE_DEMO_PASSWORD=<choose-a-password-at-least-5-characters>
 
 Run:
 

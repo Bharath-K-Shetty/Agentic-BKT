@@ -37,8 +37,8 @@ class DemoLogin:
 def create_app():
     username = os.environ.get('HOMIE_DEMO_USER', '')
     password = os.environ.get('HOMIE_DEMO_PASSWORD', '')
-    if not username or ':' in username or len(password) < 16:
-        raise RuntimeError('Set HOMIE_DEMO_USER (without a colon) and HOMIE_DEMO_PASSWORD (at least 16 characters).')
+    if not username or ':' in username or len(password) < 5:
+        raise RuntimeError('Set HOMIE_DEMO_USER (without a colon) and HOMIE_DEMO_PASSWORD (at least 5 characters).')
     # Fail startup if the deployment omitted artifacts, instead of showing a broken demo.
     artifacts()
     bundle()
