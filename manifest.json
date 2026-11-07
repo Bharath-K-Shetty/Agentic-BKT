@@ -20,7 +20,9 @@
   "data/processed/solana_ml/demo_inference_test.parquet": "4d02ded7987a715483eee732d0039234c4ad6043703001dc03309701f9de4f4f",
   "data/processed/solana_ml/replay_demo.json": "c6c454dc4ca8b6f2c7b222dd39706cbfc7a36e3fa90ab872b4d1c273bd6fcc58",
   "data/processed/solana_ml/transaction_features_fresh.parquet": "cff819309f1bc99c86a4f3d52968e635fa67b3388f6f4658d3bfa172e9aea407",
+  "data/processed/solana_ml/failure_fees.jsonl": "24d5396959b27fa02a403ebabc2b8f6e524537e4e95b5b322b4f92da29bec641",
   "docs/results/solana_local_fee_proof.json": "9950e718bc43c1b5c7aa0659ab94f4dc286c8ebf9f25b4147d82000a33442b30",
+  "docs/results/solana_failure_fee_measurement.json": "ec097921a71815ba01a158c8b50b3eb9e1fbee9f0641c833bed461eaa06fa6c4",
   "docs/results/solana_ml_fee_policy_summary.json": "78a193561a0eb01f3db7423586f201718337b039206ad8441bfcb8d51c8304af",
   "docs/results/solana_transaction_audit_prospective.json": "2b4a200a27beb3b2b42c7c92bb3e4b0985ee1cf7f1b2383e2e022164350076e4",
   "docs/results/solana_transaction_audit_fresh.json": "e895595ed48aada6daa82b88e65db25e03f2596427f2c47a2b1b46a67bd01c83"
