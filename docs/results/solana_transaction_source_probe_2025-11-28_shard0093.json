@@ -1,0 +1,87 @@
+{
+  "source": "https://huggingface.co/datasets/solarchive/solarchive/resolve/6588cad2832e62be03972ac80d69c6af11d631c8/txs/2025-11-28/000000000093.parquet",
+  "shard_index": 93,
+  "index_expected_sha256": "019ca6724011ae970b69918179acbb423c839320a81c1835602bb141762172a8",
+  "full_file_hash_verified": false,
+  "rows": 296864,
+  "row_groups": 3,
+  "schema": "block_slot: int64\nblock_hash: string\nblock_timestamp: timestamp[us]\nrecent_block_hash: string\nsignature: string\nindex: int64\nfee: decimal128(38, 9)\nstatus: string\nerr: string\ncompute_units_consumed: decimal128(38, 9)\naccounts: list<element: struct<pubkey: string, signer: bool, writable: bool>>\n  child 0, element: struct<pubkey: string, signer: bool, writable: bool>\n      child 0, pubkey: string\n      child 1, signer: bool\n      child 2, writable: bool\nlog_messages: list<element: string>\n  child 0, element: string\nbalance_changes: list<element: struct<account: string, before: decimal128(38, 9), after: decimal128(38, 9)>>\n  child 0, element: struct<account: string, before: decimal128(38, 9), after: decimal128(38, 9)>\n      child 0, account: string\n      child 1, before: decimal128(38, 9)\n      child 2, after: decimal128(38, 9)\npre_token_balances: list<element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: in (... 5 chars omitted)\n  child 0, element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: int64>\n      child 0, account_index: int64\n      child 1, mint: string\n      child 2, owner: string\n      child 3, amount: double\n      child 4, decimals: int64\npost_token_balances: list<element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: in (... 5 chars omitted)\n  child 0, element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: int64>\n      child 0, account_index: int64\n      child 1, mint: string\n      child 2, owner: string\n      child 3, amount: double\n      child 4, decimals: int64",
+  "first_group_n": 132889,
+  "preview": [
+    {
+      "block_slot": 383177589,
+      "block_timestamp": "2025-11-28 22:13:13",
+      "status": "Success",
+      "accounts": [
+        {
+          "pubkey": "HabbPsxeeP2nqu9j93gzXuMPFc2TUMewVWqKKWwDp47Z",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "pubkey": "8Re9ESfUWCTKKZ5iKQW4WB2DLsDjPyT2ifzQUopQ5BAs",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "ComputeBudget111111111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "SysvarC1ock11111111111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "9H6tua7jkLhdm3w8BvgpTn5LZNU7g4ZynDmCiNN3q6Rp",
+          "signer": false,
+          "writable": false
+        }
+      ],
+      "signature": "3yu1v4Heejd8AdjhqDgkiGB7HXgwtWYvYePxLCAWqnwAbQzeN47RByhhdQKnNGUUgBiWTpCaVa69jA7E2QDA17yw"
+    },
+    {
+      "block_slot": 383177604,
+      "block_timestamp": "2025-11-28 22:13:19",
+      "status": "Success",
+      "accounts": [
+        {
+          "pubkey": "C1PL6vpBXsqXfSPD8LkVvpyJZQCrWmnViDzQodjjso7W",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "pubkey": "iAMtZieUtpLwB3dzWw8Fo3H3FPkMFy3ej52URusseR1",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "ComputeBudget111111111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "SysvarC1ock11111111111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "9H6tua7jkLhdm3w8BvgpTn5LZNU7g4ZynDmCiNN3q6Rp",
+          "signer": false,
+          "writable": false
+        }
+      ],
+      "signature": "3yr9y86wTQQKpP3FGXokMA6bQciUpm3HBKv8S1w1hVLBAAGZ5oXkqp3BebdtaGgBkzgtTid2svfWBaefznG3aN1"
+    }
+  ],
+  "ranges_sha256": {
+    "512327701:512393237": "c3a6b25013f39674848b44a5c80616f137cab89634e2c4f68176f551379d3bcf",
+    "4:579739": "571afba0e568a445563001c00ce41823ffdc47f9d52f24ff0528dc1f7b473bc8",
+    "6708914:7535966": "37911e4a4bf7ffe44a9ec71f1baf449803aa6fbf81d55f6881114076ce2949b3",
+    "26075990:26094949": "2de2688e7345ab7c6996636b20e650e9081fb4bbc0f56ebc889fe5ff7ba1382d",
+    "26873677:84340321": "94736d845a442548d91b3a68ad4a57d33777bed7c5dbc1f42085c98b5cf54ec8",
+    "84340321:85020364": "e5f77a4fe0601750355182e481dcc04fdc106be953117f4968879b27f5b9c3aa",
+    "13587513:25576937": "3d0dd24d868b11ebe1df3f96946cb2dfc67aea13491903261a74475f418920aa"
+  }
+}

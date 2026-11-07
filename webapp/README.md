@@ -1,3 +1,10 @@
+## Cloud deployment of the current demo
+
+The current transaction workspace can be packaged with `.venv/bin/python deploy/build_package.py`.
+See [deployment instructions](../deploy/README.md). The cloud entry point is
+`webapp.backend.cloud:create_app --factory`; it requires evaluator credentials
+and supports a persistent state directory. The local entry point remains unchanged.
+
 # HOMIE demo web app
 
 The current decision simulator is at `/simulator.html`, linked from the root

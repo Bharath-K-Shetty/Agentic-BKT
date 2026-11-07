@@ -16,6 +16,7 @@ from pydantic import BaseModel, Field
 from webapp.backend.transfer_check import (TransferRequest,check_transfer,RpcUnavailable,ALPHABET,
     RPC_URLS,decode_plain_transfer,sol)
 from webapp.backend.live_history import HistoryRPC, score_live, collect_snapshot, snapshot_path
+from webapp.backend.runtime_paths import state_directory
 
 ROOT=Path(__file__).resolve().parents[2]
 router=APIRouter()
@@ -56,7 +57,7 @@ def refresh_history(network:str):
 
 class StudyStore:
     def __init__(self,path=None):
-        self.path=path or ROOT/'data/processed/solana_ml/prospective.sqlite3'
+        self.path=path or state_directory(ROOT)/'prospective.sqlite3'
         self.path.parent.mkdir(parents=True,exist_ok=True)
         with self.connect() as db:
             db.executescript('''

@@ -1,0 +1,131 @@
+{
+  "capture_date": "2026-10-29",
+  "test_date": "2025-12-05",
+  "selection": "Selected after evaluation to include correct decisions and errors; not a representative performance sample.",
+  "cases": [
+    {
+      "signature": "5BSXtVfR74tM36j9X47jkeHARzj4p2DYdVtY3ZveVCaaQbHGy4YkLcVLns1zax3ENPdVJ9X1AENu85GCy7RFV9F4",
+      "checkpoint": "2025-12-05T00:00:00+00:00",
+      "cold_history": true,
+      "context": {
+        "structure_account_count": 20.0,
+        "structure_signer_count": 1.0,
+        "structure_writable_count": 10.0,
+        "writable_seen_fraction": 0.4444444444444444,
+        "readonly_seen_fraction": 0.8333333333333334,
+        "writable_log_count_mean": 2.8589446221307346
+      },
+      "scores": {
+        "payer_readonly_hgb": {
+          "original": 0.2676671330170033,
+          "calibrated": 0.16194331983805668,
+          "alert": false,
+          "threshold": 0.18181818181818182
+        },
+        "context_hgb": {
+          "original": 0.06777038818929876,
+          "calibrated": 0.06607929515418502,
+          "alert": false,
+          "threshold": 0.18181818181818182
+        }
+      },
+      "source": "Fitted model predict_proba, executed for this request",
+      "scope": "Held-out historical transaction; not a fresh live transaction",
+      "inference_ms": 21.87,
+      "observed_outcome": "Succeeded"
+    },
+    {
+      "signature": "5BSxVn8XJbe7C3PFjkefCzBHudUjRsdefakcVAtLFSG5iE6RcgBhxAQNmv5zsJVtheETjiVQb71JKkpPQP99T4Jn",
+      "checkpoint": "2025-12-05T00:00:04+00:00",
+      "cold_history": true,
+      "context": {
+        "structure_account_count": 3.0,
+        "structure_signer_count": 1.0,
+        "structure_writable_count": 2.0,
+        "writable_seen_fraction": 1.0,
+        "readonly_seen_fraction": 0.0,
+        "writable_log_count_mean": 0.6931471805599453
+      },
+      "scores": {
+        "payer_readonly_hgb": {
+          "original": 0.04307072048537247,
+          "calibrated": 0.04606879606879607,
+          "alert": false,
+          "threshold": 0.18181818181818182
+        },
+        "context_hgb": {
+          "original": 0.05006966341720053,
+          "calibrated": 0.048500319081046586,
+          "alert": false,
+          "threshold": 0.18181818181818182
+        }
+      },
+      "source": "Fitted model predict_proba, executed for this request",
+      "scope": "Held-out historical transaction; not a fresh live transaction",
+      "inference_ms": 18.71,
+      "observed_outcome": "Failed"
+    },
+    {
+      "signature": "5C6EmvgLDmj9gc47UdTPPrDByEhPbxf8btijxoLxw49vbg6765dvmH4ZYzNxR6Lro6u1pJRCK2iVdMfcjZgpwzAt",
+      "checkpoint": "2025-12-05T00:00:22+00:00",
+      "cold_history": true,
+      "context": {
+        "structure_account_count": 21.0,
+        "structure_signer_count": 1.0,
+        "structure_writable_count": 10.0,
+        "writable_seen_fraction": 0.4444444444444444,
+        "readonly_seen_fraction": 0.875,
+        "writable_log_count_mean": 2.911469657083593
+      },
+      "scores": {
+        "payer_readonly_hgb": {
+          "original": 0.2649555037482452,
+          "calibrated": 0.16194331983805668,
+          "alert": false,
+          "threshold": 0.18181818181818182
+        },
+        "context_hgb": {
+          "original": 0.3972533684433769,
+          "calibrated": 0.4882506527415143,
+          "alert": true,
+          "threshold": 0.18181818181818182
+        }
+      },
+      "source": "Fitted model predict_proba, executed for this request",
+      "scope": "Held-out historical transaction; not a fresh live transaction",
+      "inference_ms": 19.98,
+      "observed_outcome": "Failed"
+    },
+    {
+      "signature": "5BzfdHw24j4JNHGggCtRu3iA7biuSuWeq3rkXycFZnMrseAg4UPk2o4qebwAxs2FyuHWrRjdhgmJt2y32YiPgxDw",
+      "checkpoint": "2025-12-05T00:00:41+00:00",
+      "cold_history": true,
+      "context": {
+        "structure_account_count": 25.0,
+        "structure_signer_count": 1.0,
+        "structure_writable_count": 13.0,
+        "writable_seen_fraction": 0.75,
+        "readonly_seen_fraction": 1.0,
+        "writable_log_count_mean": 2.548492534085436
+      },
+      "scores": {
+        "payer_readonly_hgb": {
+          "original": 0.43736135766592293,
+          "calibrated": 0.29411764705882354,
+          "alert": true,
+          "threshold": 0.18181818181818182
+        },
+        "context_hgb": {
+          "original": 0.4731180918480815,
+          "calibrated": 0.4882506527415143,
+          "alert": true,
+          "threshold": 0.18181818181818182
+        }
+      },
+      "source": "Fitted model predict_proba, executed for this request",
+      "scope": "Held-out historical transaction; not a fresh live transaction",
+      "inference_ms": 14.49,
+      "observed_outcome": "Succeeded"
+    }
+  ]
+}

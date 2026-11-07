@@ -15,6 +15,7 @@ import numpy as np
 import pandas as pd
 
 from webapp.backend.transfer_check import ReadOnlyRPC, SYSTEM
+from webapp.backend.runtime_paths import state_directory
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT/'research/solana/ml'))
@@ -26,7 +27,7 @@ class HistoryRPC(ReadOnlyRPC):
 
 
 def snapshot_path(network):
-    return ROOT/f'data/processed/solana_ml/live_history_{network}.json'
+    return state_directory(ROOT)/f'live_history_{network}.json'
 
 
 def block_records(block, slot):

@@ -1,0 +1,12 @@
+{
+  "status": "prepared_not_deployed",
+  "target": "Render Docker web service",
+  "tested_routes": 11,
+  "targeted_tests_passed": 40,
+  "real_inference_checked": true,
+  "heldout_rows": 132832,
+  "docker_build_tested": false,
+  "reason": "Docker is not installed on this machine",
+  "external_deployment_pending": "User Render account, repository connection, and plan acceptance",
+  "manifest_sha256": "472fb77963f9cdfb7dd1dbb2ab5ffef9cb01cca90d55ae40d5a839f2679b245c"
+}

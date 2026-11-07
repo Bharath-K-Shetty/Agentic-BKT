@@ -1,0 +1,52 @@
+{
+  "status": "Fixed before any 2025-11-28 test outcome was loaded or viewed. Feature groups and candidate chosen from validation dates of the five earlier protocols only.",
+  "fixed_at": "2026-11-06T09:03:36.050892+00:00",
+  "train_date": "2025-11-26",
+  "validation_date": "2025-11-27",
+  "test_date": "2025-11-28",
+  "source_paths": {
+    "2025-11-26": "data/raw/novelty_search/archive_preview_2025-11-26_shard0143.parquet",
+    "2025-11-27": "data/raw/novelty_search/archive_preview_2025-11-27_shard0066.parquet",
+    "2025-11-28": "data/raw/novelty_search/archive_preview_2025-11-28_shard0093.parquet"
+  },
+  "source_selection": "Dates never used in the project; archive ends 2025-12-05. Shard index = int(sha256(f'{date}|homie-activity-fresh'), 16) mod the date's file count, computed from file counts only. Row group 0.",
+  "warmup_hours": 6,
+  "outcome_delay_seconds": 3600,
+  "prior_strength": 20,
+  "hgb": {
+    "max_iter": 150,
+    "max_leaf_nodes": 15,
+    "min_samples_leaf": 40,
+    "l2_regularization": 5,
+    "early_stopping": false
+  },
+  "seeds": [
+    42,
+    73,
+    101
+  ],
+  "use_fees": true,
+  "primary": "First-appearance AP: homie_all (writable history + activity + declared-fee features) versus homie (current writable-context model), 500 paired one-hour block bootstrap draws.",
+  "pass_rule": "Positive AP gain with the 95% interval entirely above zero.",
+  "secondary": [
+    "Same comparison on cold-history transactions.",
+    "homie_activity versus homie on both groups.",
+    "homie_fee versus homie on both groups.",
+    "Concentration check: gain recomputed without the fee payer with the most failures in each group."
+  ],
+  "reporting": "Retain and report results regardless of direction. Single run; the script refuses to overwrite.",
+  "limitations": [
+    "Fresh dates fall between earlier study periods, not after them.",
+    "Activity and fee context come from the sampled archive, not the full chain.",
+    "Declared fee is recovered from the charged fee; base fee assumed 5,000 lamports per signer.",
+    "Not identity-controlled; compare with the report's identity-controlled results only qualitatively."
+  ],
+  "development_evidence": {
+    "docs/results/solana_activity_development.json": "b863e1911f4a496856658418cc00e1925b949d0c527a14ccf4e1ece0f704972d",
+    "docs/results/solana_activity_development_fees.json": "1311b4aa0098230aed672d0a46ad7a2a78fe30b9bb25f40d8df9abd4b16d8f1d"
+  },
+  "code_sha256": {
+    "research/solana/ml/activity_features.py": "7591042da1c435e4be74b9bcf48ec71c859db8b7cd66fc6b337e122e0aa03d59",
+    "research/solana/ml/transaction_risk.py": "cee2a0a326a63b3505efab46b50f78f061bc6378e6abb94c6bd865b7fbb717c1"
+  }
+}

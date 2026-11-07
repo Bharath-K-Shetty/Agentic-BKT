@@ -1,0 +1,1152 @@
+{
+  "created_at": "2026-11-06T08:42:06.016110+00:00",
+  "fees_used": true,
+  "mode": "Development on validation dates only. Test dates were not loaded.",
+  "seeds": [
+    42
+  ],
+  "windows_seconds": [
+    60,
+    600
+  ],
+  "cohorts": [
+    {
+      "protocol": "transaction_protocol.json",
+      "train_date": "2025-11-01",
+      "validation_date": "2025-11-02",
+      "train_n": 92782,
+      "validation_n": 125864,
+      "skipped": {
+        "identical_duplicate_transaction": 15
+      },
+      "results": {
+        "all": {
+          "models": {
+            "baseline": {
+              "n": 125864,
+              "failures": 21782,
+              "prevalence": 0.17305981058920739,
+              "ap": 0.8641753101430342,
+              "auroc": 0.9602241100060299
+            },
+            "homie": {
+              "n": 125864,
+              "failures": 21782,
+              "prevalence": 0.17305981058920739,
+              "ap": 0.8705668292317214,
+              "auroc": 0.9622404418931669
+            },
+            "homie_activity": {
+              "n": 125864,
+              "failures": 21782,
+              "prevalence": 0.17305981058920739,
+              "ap": 0.8738231087829725,
+              "auroc": 0.9628253107738126
+            },
+            "homie_fee": {
+              "n": 125864,
+              "failures": 21782,
+              "prevalence": 0.17305981058920739,
+              "ap": 0.8744440301790877,
+              "auroc": 0.963630071760781
+            },
+            "homie_all": {
+              "n": 125864,
+              "failures": 21782,
+              "prevalence": 0.17305981058920739,
+              "ap": 0.8789170011865743,
+              "auroc": 0.9648974839168705
+            },
+            "baseline_all": {
+              "n": 125864,
+              "failures": 21782,
+              "prevalence": 0.17305981058920739,
+              "ap": 0.8781909935615382,
+              "auroc": 0.9644885157532547
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.0032562795512511844,
+              "ci95": [
+                0.0013090568004634567,
+                0.00579936219216702
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.0038772009473663216,
+              "ci95": [
+                0.0019378787255612902,
+                0.005735626725787038
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.008350171954852992,
+              "ci95": [
+                0.005848868469371246,
+                0.010819652257873283
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        },
+        "cold_history": {
+          "models": {
+            "baseline": {
+              "n": 21983,
+              "failures": 1558,
+              "prevalence": 0.07087294727744166,
+              "ap": 0.3382712321519888,
+              "auroc": 0.8428458479392499
+            },
+            "homie": {
+              "n": 21983,
+              "failures": 1558,
+              "prevalence": 0.07087294727744166,
+              "ap": 0.4134668536997547,
+              "auroc": 0.8608416621755601
+            },
+            "homie_activity": {
+              "n": 21983,
+              "failures": 1558,
+              "prevalence": 0.07087294727744166,
+              "ap": 0.484869245998751,
+              "auroc": 0.8659821696522706
+            },
+            "homie_fee": {
+              "n": 21983,
+              "failures": 1558,
+              "prevalence": 0.07087294727744166,
+              "ap": 0.41416662737749305,
+              "auroc": 0.8646620828573809
+            },
+            "homie_all": {
+              "n": 21983,
+              "failures": 1558,
+              "prevalence": 0.07087294727744166,
+              "ap": 0.5027871061991548,
+              "auroc": 0.8742273542171097
+            },
+            "baseline_all": {
+              "n": 21983,
+              "failures": 1558,
+              "prevalence": 0.07087294727744166,
+              "ap": 0.47127597901919066,
+              "auroc": 0.8658253606371662
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.07140239229899625,
+              "ci95": [
+                0.03074767361060241,
+                0.0977945210119087
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.0006997736777383246,
+              "ci95": [
+                -0.032846328758763046,
+                0.024663119421605345
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.08932025249940007,
+              "ci95": [
+                0.052742088751901256,
+                0.11465685634376761
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        },
+        "first_appearance": {
+          "models": {
+            "baseline": {
+              "n": 19721,
+              "failures": 1150,
+              "prevalence": 0.05831347294761929,
+              "ap": 0.19951065998410314,
+              "auroc": 0.8016183717952019
+            },
+            "homie": {
+              "n": 19721,
+              "failures": 1150,
+              "prevalence": 0.05831347294761929,
+              "ap": 0.25492290846987403,
+              "auroc": 0.8212906518578522
+            },
+            "homie_activity": {
+              "n": 19721,
+              "failures": 1150,
+              "prevalence": 0.05831347294761929,
+              "ap": 0.2627819881133289,
+              "auroc": 0.8273738624737494
+            },
+            "homie_fee": {
+              "n": 19721,
+              "failures": 1150,
+              "prevalence": 0.05831347294761929,
+              "ap": 0.2610327530619493,
+              "auroc": 0.8263334839499641
+            },
+            "homie_all": {
+              "n": 19721,
+              "failures": 1150,
+              "prevalence": 0.05831347294761929,
+              "ap": 0.28424215978785095,
+              "auroc": 0.8382876059681645
+            },
+            "baseline_all": {
+              "n": 19721,
+              "failures": 1150,
+              "prevalence": 0.05831347294761929,
+              "ap": 0.25938051321457123,
+              "auroc": 0.8268257428014225
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.007859079643454892,
+              "ci95": [
+                -0.0047303153582653095,
+                0.01920931022122873
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.006109844592075253,
+              "ci95": [
+                -0.013545712523661138,
+                0.02253930243934435
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.029319251317976913,
+              "ci95": [
+                0.01457719965254209,
+                0.04122854165894874
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        }
+      },
+      "seconds": 222.2
+    },
+    {
+      "protocol": "transaction_confirmation_protocol.json",
+      "train_date": "2025-11-08",
+      "validation_date": "2025-11-09",
+      "train_n": 92135,
+      "validation_n": 126214,
+      "skipped": {},
+      "results": {
+        "all": {
+          "models": {
+            "baseline": {
+              "n": 126214,
+              "failures": 22822,
+              "prevalence": 0.18081987735116548,
+              "ap": 0.8251882239831769,
+              "auroc": 0.9446538273654917
+            },
+            "homie": {
+              "n": 126214,
+              "failures": 22822,
+              "prevalence": 0.18081987735116548,
+              "ap": 0.8311817071254852,
+              "auroc": 0.9473842272737776
+            },
+            "homie_activity": {
+              "n": 126214,
+              "failures": 22822,
+              "prevalence": 0.18081987735116548,
+              "ap": 0.8335332760753198,
+              "auroc": 0.9494476866636202
+            },
+            "homie_fee": {
+              "n": 126214,
+              "failures": 22822,
+              "prevalence": 0.18081987735116548,
+              "ap": 0.8361068774568263,
+              "auroc": 0.9511508084558897
+            },
+            "homie_all": {
+              "n": 126214,
+              "failures": 22822,
+              "prevalence": 0.18081987735116548,
+              "ap": 0.8452386345473594,
+              "auroc": 0.9542651731490606
+            },
+            "baseline_all": {
+              "n": 126214,
+              "failures": 22822,
+              "prevalence": 0.18081987735116548,
+              "ap": 0.8328369719239365,
+              "auroc": 0.9491455902035537
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.0023515689498345704,
+              "ci95": [
+                0.0005402034878214251,
+                0.004668472246490677
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.0049251703313411,
+              "ci95": [
+                0.003348942152163528,
+                0.00687666316489928
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.014056927421874144,
+              "ci95": [
+                0.010495809921276866,
+                0.018712994092337152
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        },
+        "cold_history": {
+          "models": {
+            "baseline": {
+              "n": 23817,
+              "failures": 2500,
+              "prevalence": 0.10496704034933031,
+              "ap": 0.3834843828060428,
+              "auroc": 0.8832407749683352
+            },
+            "homie": {
+              "n": 23817,
+              "failures": 2500,
+              "prevalence": 0.10496704034933031,
+              "ap": 0.3274346690140309,
+              "auroc": 0.8651509687104189
+            },
+            "homie_activity": {
+              "n": 23817,
+              "failures": 2500,
+              "prevalence": 0.10496704034933031,
+              "ap": 0.5111355316591648,
+              "auroc": 0.9080869353098466
+            },
+            "homie_fee": {
+              "n": 23817,
+              "failures": 2500,
+              "prevalence": 0.10496704034933031,
+              "ap": 0.5739121577563284,
+              "auroc": 0.9219511657362669
+            },
+            "homie_all": {
+              "n": 23817,
+              "failures": 2500,
+              "prevalence": 0.10496704034933031,
+              "ap": 0.7298149374606607,
+              "auroc": 0.929241534925177
+            },
+            "baseline_all": {
+              "n": 23817,
+              "failures": 2500,
+              "prevalence": 0.10496704034933031,
+              "ap": 0.6568918024407615,
+              "auroc": 0.9232722991040014
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.1837008626451339,
+              "ci95": [
+                0.1406451518704997,
+                0.22285326524150673
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.24647748874229752,
+              "ci95": [
+                0.1944915738917694,
+                0.2856869275527953
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.40238026844662983,
+              "ci95": [
+                0.3403416864293962,
+                0.43687788024149093
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        },
+        "first_appearance": {
+          "models": {
+            "baseline": {
+              "n": 22159,
+              "failures": 2229,
+              "prevalence": 0.10059118191254118,
+              "ap": 0.37038303867324374,
+              "auroc": 0.8829952050660939
+            },
+            "homie": {
+              "n": 22159,
+              "failures": 2229,
+              "prevalence": 0.10059118191254118,
+              "ap": 0.31646265537127394,
+              "auroc": 0.8648536814697111
+            },
+            "homie_activity": {
+              "n": 22159,
+              "failures": 2229,
+              "prevalence": 0.10059118191254118,
+              "ap": 0.4626671972408685,
+              "auroc": 0.9047829583893561
+            },
+            "homie_fee": {
+              "n": 22159,
+              "failures": 2229,
+              "prevalence": 0.10059118191254118,
+              "ap": 0.5591594082714536,
+              "auroc": 0.9212424283556827
+            },
+            "homie_all": {
+              "n": 22159,
+              "failures": 2229,
+              "prevalence": 0.10059118191254118,
+              "ap": 0.6895904587764433,
+              "auroc": 0.9282392928862504
+            },
+            "baseline_all": {
+              "n": 22159,
+              "failures": 2229,
+              "prevalence": 0.10059118191254118,
+              "ap": 0.6121721663602692,
+              "auroc": 0.9215448326657882
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.14620454186959458,
+              "ci95": [
+                0.11297015889729943,
+                0.17703868654151528
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.24269675290017967,
+              "ci95": [
+                0.18878962242969097,
+                0.2853962037514364
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.3731278034051694,
+              "ci95": [
+                0.30234764495812805,
+                0.4192530599175008
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        }
+      },
+      "seconds": 200.8
+    },
+    {
+      "protocol": "transaction_extension_protocol.json",
+      "train_date": "2025-11-22",
+      "validation_date": "2025-11-23",
+      "train_n": 93812,
+      "validation_n": 127050,
+      "skipped": {},
+      "results": {
+        "all": {
+          "models": {
+            "baseline": {
+              "n": 127050,
+              "failures": 28841,
+              "prevalence": 0.2270051160960252,
+              "ap": 0.840082834400821,
+              "auroc": 0.9373490668586919
+            },
+            "homie": {
+              "n": 127050,
+              "failures": 28841,
+              "prevalence": 0.2270051160960252,
+              "ap": 0.8431196923316514,
+              "auroc": 0.9393918983802438
+            },
+            "homie_activity": {
+              "n": 127050,
+              "failures": 28841,
+              "prevalence": 0.2270051160960252,
+              "ap": 0.842108299459622,
+              "auroc": 0.9382981589929251
+            },
+            "homie_fee": {
+              "n": 127050,
+              "failures": 28841,
+              "prevalence": 0.2270051160960252,
+              "ap": 0.841979186030948,
+              "auroc": 0.9400860237617493
+            },
+            "homie_all": {
+              "n": 127050,
+              "failures": 28841,
+              "prevalence": 0.2270051160960252,
+              "ap": 0.8499536902301598,
+              "auroc": 0.9429061358314748
+            },
+            "baseline_all": {
+              "n": 127050,
+              "failures": 28841,
+              "prevalence": 0.2270051160960252,
+              "ap": 0.8330510752027238,
+              "auroc": 0.9359980965976263
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": -0.0010113928720294485,
+              "ci95": [
+                -0.004228437312689448,
+                0.0020893687826965407
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": -0.0011405063007033922,
+              "ci95": [
+                -0.005653949200582514,
+                0.003279375798362817
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.006833997898508359,
+              "ci95": [
+                0.0032278775077660415,
+                0.010511905297763406
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        },
+        "cold_history": {
+          "models": {
+            "baseline": {
+              "n": 23504,
+              "failures": 1410,
+              "prevalence": 0.059989788972089855,
+              "ap": 0.14494823174599752,
+              "auroc": 0.7356244948244991
+            },
+            "homie": {
+              "n": 23504,
+              "failures": 1410,
+              "prevalence": 0.059989788972089855,
+              "ap": 0.15756101335623784,
+              "auroc": 0.7516507803216046
+            },
+            "homie_activity": {
+              "n": 23504,
+              "failures": 1410,
+              "prevalence": 0.059989788972089855,
+              "ap": 0.18913770246122483,
+              "auroc": 0.767907576717661
+            },
+            "homie_fee": {
+              "n": 23504,
+              "failures": 1410,
+              "prevalence": 0.059989788972089855,
+              "ap": 0.18240516426054496,
+              "auroc": 0.7622271731293822
+            },
+            "homie_all": {
+              "n": 23504,
+              "failures": 1410,
+              "prevalence": 0.059989788972089855,
+              "ap": 0.19585238080120596,
+              "auroc": 0.757462714115767
+            },
+            "baseline_all": {
+              "n": 23504,
+              "failures": 1410,
+              "prevalence": 0.059989788972089855,
+              "ap": 0.18185796605798057,
+              "auroc": 0.7593858317812929
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.03157668910498698,
+              "ci95": [
+                0.012311600561079964,
+                0.07212879939214178
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.02484415090430711,
+              "ci95": [
+                0.00816482977514962,
+                0.053994286417860506
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.03829136744496811,
+              "ci95": [
+                0.014398755097175373,
+                0.08218840380319796
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        },
+        "first_appearance": {
+          "models": {
+            "baseline": {
+              "n": 20834,
+              "failures": 1196,
+              "prevalence": 0.05740616300278391,
+              "ap": 0.11598751687464648,
+              "auroc": 0.7097624827096194
+            },
+            "homie": {
+              "n": 20834,
+              "failures": 1196,
+              "prevalence": 0.05740616300278391,
+              "ap": 0.13084004564287807,
+              "auroc": 0.7357873582069573
+            },
+            "homie_activity": {
+              "n": 20834,
+              "failures": 1196,
+              "prevalence": 0.05740616300278391,
+              "ap": 0.14672859434494565,
+              "auroc": 0.7529493915114407
+            },
+            "homie_fee": {
+              "n": 20834,
+              "failures": 1196,
+              "prevalence": 0.05740616300278391,
+              "ap": 0.149033578719635,
+              "auroc": 0.7481372499430323
+            },
+            "homie_all": {
+              "n": 20834,
+              "failures": 1196,
+              "prevalence": 0.05740616300278391,
+              "ap": 0.14921287030992242,
+              "auroc": 0.7375149486644723
+            },
+            "baseline_all": {
+              "n": 20834,
+              "failures": 1196,
+              "prevalence": 0.05740616300278391,
+              "ap": 0.13151471967572995,
+              "auroc": 0.7372325164064892
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.015888548702067573,
+              "ci95": [
+                0.00600576927147505,
+                0.025223266281662313
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.018193533076756918,
+              "ci95": [
+                0.010703269332432663,
+                0.02553606212137358
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.018372824667044346,
+              "ci95": [
+                0.007346430064786173,
+                0.03191980011911935
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        }
+      },
+      "seconds": 223.4
+    },
+    {
+      "protocol": "transaction_prospective_protocol.json",
+      "train_date": "2025-11-29",
+      "validation_date": "2025-11-30",
+      "train_n": 100517,
+      "validation_n": 126840,
+      "skipped": {},
+      "results": {
+        "all": {
+          "models": {
+            "baseline": {
+              "n": 126840,
+              "failures": 20778,
+              "prevalence": 0.16381267738883634,
+              "ap": 0.8813735856855615,
+              "auroc": 0.9634940799323506
+            },
+            "homie": {
+              "n": 126840,
+              "failures": 20778,
+              "prevalence": 0.16381267738883634,
+              "ap": 0.8866366122814471,
+              "auroc": 0.9646423192242756
+            },
+            "homie_activity": {
+              "n": 126840,
+              "failures": 20778,
+              "prevalence": 0.16381267738883634,
+              "ap": 0.8905388512024783,
+              "auroc": 0.9658377726764151
+            },
+            "homie_fee": {
+              "n": 126840,
+              "failures": 20778,
+              "prevalence": 0.16381267738883634,
+              "ap": 0.8875251372034472,
+              "auroc": 0.9654234802582766
+            },
+            "homie_all": {
+              "n": 126840,
+              "failures": 20778,
+              "prevalence": 0.16381267738883634,
+              "ap": 0.8908771215637611,
+              "auroc": 0.9660124891417438
+            },
+            "baseline_all": {
+              "n": 126840,
+              "failures": 20778,
+              "prevalence": 0.16381267738883634,
+              "ap": 0.8902785207514473,
+              "auroc": 0.9656629768012146
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.0039022389210312536,
+              "ci95": [
+                0.0027146923434422515,
+                0.005023639351169551
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.000888524922000089,
+              "ci95": [
+                -0.0002349720021304596,
+                0.002342026815611025
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.004240509282314009,
+              "ci95": [
+                0.0028935726228666884,
+                0.005644610908275094
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        },
+        "cold_history": {
+          "models": {
+            "baseline": {
+              "n": 22475,
+              "failures": 1186,
+              "prevalence": 0.052769744160177975,
+              "ap": 0.19312496207007354,
+              "auroc": 0.7559706510665833
+            },
+            "homie": {
+              "n": 22475,
+              "failures": 1186,
+              "prevalence": 0.052769744160177975,
+              "ap": 0.22272048592752616,
+              "auroc": 0.7758273338953676
+            },
+            "homie_activity": {
+              "n": 22475,
+              "failures": 1186,
+              "prevalence": 0.052769744160177975,
+              "ap": 0.2518412637819918,
+              "auroc": 0.7936145086605064
+            },
+            "homie_fee": {
+              "n": 22475,
+              "failures": 1186,
+              "prevalence": 0.052769744160177975,
+              "ap": 0.21255241770079225,
+              "auroc": 0.7900300545523951
+            },
+            "homie_all": {
+              "n": 22475,
+              "failures": 1186,
+              "prevalence": 0.052769744160177975,
+              "ap": 0.23496463124580938,
+              "auroc": 0.7866894144558579
+            },
+            "baseline_all": {
+              "n": 22475,
+              "failures": 1186,
+              "prevalence": 0.052769744160177975,
+              "ap": 0.2007162349900773,
+              "auroc": 0.7745326759490785
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.029120777854465624,
+              "ci95": [
+                0.01683845791390512,
+                0.042519746158252436
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": -0.010168068226733912,
+              "ci95": [
+                -0.018782362607253005,
+                -0.0011755402626909385
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.012244145318283217,
+              "ci95": [
+                0.0005749619135528058,
+                0.0228059102356222
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        },
+        "first_appearance": {
+          "models": {
+            "baseline": {
+              "n": 20173,
+              "failures": 1061,
+              "prevalence": 0.05259505279333763,
+              "ap": 0.17222205091974502,
+              "auroc": 0.7428305698557913
+            },
+            "homie": {
+              "n": 20173,
+              "failures": 1061,
+              "prevalence": 0.05259505279333763,
+              "ap": 0.1976432023392638,
+              "auroc": 0.7683585454303004
+            },
+            "homie_activity": {
+              "n": 20173,
+              "failures": 1061,
+              "prevalence": 0.05259505279333763,
+              "ap": 0.21697072924736407,
+              "auroc": 0.7852605002349364
+            },
+            "homie_fee": {
+              "n": 20173,
+              "failures": 1061,
+              "prevalence": 0.05259505279333763,
+              "ap": 0.1939055547760951,
+              "auroc": 0.7825040665096742
+            },
+            "homie_all": {
+              "n": 20173,
+              "failures": 1061,
+              "prevalence": 0.05259505279333763,
+              "ap": 0.20457217995170696,
+              "auroc": 0.7787035369461588
+            },
+            "baseline_all": {
+              "n": 20173,
+              "failures": 1061,
+              "prevalence": 0.05259505279333763,
+              "ap": 0.1746855366427051,
+              "auroc": 0.7629981104488883
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.019327526908100273,
+              "ci95": [
+                0.00963472622831417,
+                0.03012901641881431
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": -0.003737647563168689,
+              "ci95": [
+                -0.00899738271468822,
+                0.0026103171958116256
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.006928977612443155,
+              "ci95": [
+                -0.0003517432522314782,
+                0.013682886544111312
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        }
+      },
+      "seconds": 311.8
+    },
+    {
+      "protocol": "transaction_fresh_protocol.json",
+      "train_date": "2025-12-03",
+      "validation_date": "2025-12-04",
+      "train_n": 95481,
+      "validation_n": 127016,
+      "skipped": {},
+      "results": {
+        "all": {
+          "models": {
+            "baseline": {
+              "n": 127016,
+              "failures": 22225,
+              "prevalence": 0.17497795553316117,
+              "ap": 0.8355824025257719,
+              "auroc": 0.9485397320773442
+            },
+            "homie": {
+              "n": 127016,
+              "failures": 22225,
+              "prevalence": 0.17497795553316117,
+              "ap": 0.8453388066046006,
+              "auroc": 0.9518051105183933
+            },
+            "homie_activity": {
+              "n": 127016,
+              "failures": 22225,
+              "prevalence": 0.17497795553316117,
+              "ap": 0.8538795723849638,
+              "auroc": 0.9533920509556979
+            },
+            "homie_fee": {
+              "n": 127016,
+              "failures": 22225,
+              "prevalence": 0.17497795553316117,
+              "ap": 0.850573706576743,
+              "auroc": 0.9529307646795031
+            },
+            "homie_all": {
+              "n": 127016,
+              "failures": 22225,
+              "prevalence": 0.17497795553316117,
+              "ap": 0.8560299814621977,
+              "auroc": 0.9539540439801335
+            },
+            "baseline_all": {
+              "n": 127016,
+              "failures": 22225,
+              "prevalence": 0.17497795553316117,
+              "ap": 0.8512197356844429,
+              "auroc": 0.9517511046869349
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.008540765780363224,
+              "ci95": [
+                0.006110966775670754,
+                0.01080713334547819
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.005234899972142437,
+              "ci95": [
+                0.003125156443208174,
+                0.007445948394787871
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.010691174857597074,
+              "ci95": [
+                0.00781807785599181,
+                0.013040644754791286
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        },
+        "cold_history": {
+          "models": {
+            "baseline": {
+              "n": 26560,
+              "failures": 3223,
+              "prevalence": 0.12134789156626506,
+              "ap": 0.7325995328276368,
+              "auroc": 0.8922081337043383
+            },
+            "homie": {
+              "n": 26560,
+              "failures": 3223,
+              "prevalence": 0.12134789156626506,
+              "ap": 0.7658241550600264,
+              "auroc": 0.9095404860651014
+            },
+            "homie_activity": {
+              "n": 26560,
+              "failures": 3223,
+              "prevalence": 0.12134789156626506,
+              "ap": 0.7748823551083298,
+              "auroc": 0.9125566802358742
+            },
+            "homie_fee": {
+              "n": 26560,
+              "failures": 3223,
+              "prevalence": 0.12134789156626506,
+              "ap": 0.7737182176864909,
+              "auroc": 0.9151185111627311
+            },
+            "homie_all": {
+              "n": 26560,
+              "failures": 3223,
+              "prevalence": 0.12134789156626506,
+              "ap": 0.7890779171856156,
+              "auroc": 0.9180815577967796
+            },
+            "baseline_all": {
+              "n": 26560,
+              "failures": 3223,
+              "prevalence": 0.12134789156626506,
+              "ap": 0.7616644192085013,
+              "auroc": 0.9083563961734252
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.009058200048303378,
+              "ci95": [
+                -0.004508008164784382,
+                0.03402534996076817
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.007894062626464415,
+              "ci95": [
+                -0.004090368748457454,
+                0.022482258062185193
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.02325376212558916,
+              "ci95": [
+                0.007592456203473089,
+                0.05787538231716522
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        },
+        "first_appearance": {
+          "models": {
+            "baseline": {
+              "n": 23362,
+              "failures": 2319,
+              "prevalence": 0.09926376166424107,
+              "ap": 0.6471884587948287,
+              "auroc": 0.8633091726571418
+            },
+            "homie": {
+              "n": 23362,
+              "failures": 2319,
+              "prevalence": 0.09926376166424107,
+              "ap": 0.677282355156869,
+              "auroc": 0.8830751226512779
+            },
+            "homie_activity": {
+              "n": 23362,
+              "failures": 2319,
+              "prevalence": 0.09926376166424107,
+              "ap": 0.6862372813971289,
+              "auroc": 0.8882768577706665
+            },
+            "homie_fee": {
+              "n": 23362,
+              "failures": 2319,
+              "prevalence": 0.09926376166424107,
+              "ap": 0.6907734710528567,
+              "auroc": 0.8914838375771232
+            },
+            "homie_all": {
+              "n": 23362,
+              "failures": 2319,
+              "prevalence": 0.09926376166424107,
+              "ap": 0.7076283588410931,
+              "auroc": 0.8951147219710714
+            },
+            "baseline_all": {
+              "n": 23362,
+              "failures": 2319,
+              "prevalence": 0.09926376166424107,
+              "ap": 0.6777975485614458,
+              "auroc": 0.8852554771060887
+            }
+          },
+          "vs_homie": {
+            "homie_activity": {
+              "weighted_delta": 0.008954926240259953,
+              "ci95": [
+                0.002856402834708377,
+                0.015058153087094902
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_fee": {
+              "weighted_delta": 0.013491115895987726,
+              "ci95": [
+                -0.0021223810275268875,
+                0.03555175597447541
+              ],
+              "valid_bootstrap_draws": 500
+            },
+            "homie_all": {
+              "weighted_delta": 0.030346003684224132,
+              "ci95": [
+                0.0167491393843696,
+                0.05102951542829764
+              ],
+              "valid_bootstrap_draws": 500
+            }
+          }
+        }
+      },
+      "seconds": 288.9
+    }
+  ],
+  "code_sha256": "736bd907315dfb03b92387cf54f1ff4242428d4436d7dccd114577f6ad4aa729"
+}

@@ -44,3 +44,25 @@ def test_replay_outcome_is_separate_and_unknown_ids_fail(monkeypatch):
     assert replay.summary()=={'status':'test'}
     with pytest.raises(HTTPException) as error:replay.case('missing')
     assert error.value.status_code==404
+
+
+def test_research_evidence_uses_identity_first_appearance_audit(tmp_path, monkeypatch):
+    import json
+    from webapp.backend import replay
+    from fastapi import HTTPException
+    folder=tmp_path/'docs/results'
+    folder.mkdir(parents=True)
+    report={'first_appearance_n':123,'first_appearance_prevalence':.1,
+            'first_appearance_identity_results':{'readonly_identity_hgb':{'ap_positive':.2}},
+            'first_appearance_identity_hour_bootstrap':{'weighted_delta':.03,'ci95':[.01,.05]},
+            'first_appearance_results':{'wrong_comparison':True}}
+    for cohort in ['prospective','fresh']:
+        (folder/f'solana_transaction_audit_{cohort}.json').write_text(json.dumps(report))
+    monkeypatch.setattr(replay,'ROOT',tmp_path)
+    rows=replay.research_evidence()['reports']
+    assert [r['date'] for r in rows]==['2025-12-01','2025-12-05']
+    assert rows[0]['models']==report['first_appearance_identity_results']
+    assert rows[0]['rows']==123
+    (folder/'solana_transaction_audit_fresh.json').unlink()
+    with pytest.raises(HTTPException) as error:replay.research_evidence()
+    assert error.value.status_code==503

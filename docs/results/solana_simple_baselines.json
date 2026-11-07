@@ -1,0 +1,360 @@
+{
+  "created_at": "2026-11-07T02:51:09.357837+00:00",
+  "settings": "Simple and linear baselines for the three identity-controlled test windows.",
+  "cohorts": {
+    "prospective": {
+      "label": "Dec. 1",
+      "test_date": "2025-12-01",
+      "groups": {
+        "first_appearance": {
+          "n": 17904,
+          "failures": 1053,
+          "prevalence": 0.05881367292225201,
+          "models": {
+            "rule_template": {
+              "ap": 0.09605464398143693,
+              "auroc": 0.6343867311861298
+            },
+            "rule_writable": {
+              "ap": 0.13686484022763404,
+              "auroc": 0.6679653516438672
+            },
+            "logistic_baseline": {
+              "ap": 0.1066067316302813,
+              "auroc": 0.6389270846770896
+            },
+            "logistic_context": {
+              "ap": 0.17318406546087228,
+              "auroc": 0.7104408151823736
+            },
+            "payer_readonly_hgb": {
+              "ap": 0.14504113392922424,
+              "auroc": 0.7096039737821631
+            },
+            "context_hgb": {
+              "ap": 0.18735679223176588,
+              "auroc": 0.7532984338515167
+            }
+          },
+          "logistic_context_vs_baseline": {
+            "weighted_delta": 0.06657733383059099,
+            "ci95": [
+              0.05371425799025131,
+              0.07946172097689441
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_logistic_context": {
+            "weighted_delta": 0.014172726770893596,
+            "ci95": [
+              -0.0025023634158226177,
+              0.03037887689079185
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_rule_writable": {
+            "weighted_delta": 0.05049195200413184,
+            "ci95": [
+              0.02766643544188018,
+              0.07321682169079638
+            ],
+            "valid_bootstrap_draws": 500
+          }
+        },
+        "cold_history": {
+          "n": 19577,
+          "failures": 1183,
+          "prevalence": 0.06042805332788476,
+          "models": {
+            "rule_template": {
+              "ap": 0.09924883017108779,
+              "auroc": 0.6430600141488307
+            },
+            "rule_writable": {
+              "ap": 0.15901358043296146,
+              "auroc": 0.6669237120303939
+            },
+            "logistic_baseline": {
+              "ap": 0.1335674817704113,
+              "auroc": 0.6637993470802663
+            },
+            "logistic_context": {
+              "ap": 0.2068896651388185,
+              "auroc": 0.7193876205175878
+            },
+            "payer_readonly_hgb": {
+              "ap": 0.17344570999951658,
+              "auroc": 0.722663340456768
+            },
+            "context_hgb": {
+              "ap": 0.21851541901320776,
+              "auroc": 0.754699518412184
+            }
+          },
+          "logistic_context_vs_baseline": {
+            "weighted_delta": 0.0733221833684072,
+            "ci95": [
+              0.052735429116476315,
+              0.09094773796464152
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_logistic_context": {
+            "weighted_delta": 0.011625753874389244,
+            "ci95": [
+              -0.004039054487359389,
+              0.0288042275648131
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_rule_writable": {
+            "weighted_delta": 0.0595018385802463,
+            "ci95": [
+              0.032291797312991276,
+              0.08707597681714048
+            ],
+            "valid_bootstrap_draws": 500
+          }
+        }
+      }
+    },
+    "fresh": {
+      "label": "Dec. 5",
+      "test_date": "2025-12-05",
+      "groups": {
+        "first_appearance": {
+          "n": 19515,
+          "failures": 1086,
+          "prevalence": 0.055649500384319754,
+          "models": {
+            "rule_template": {
+              "ap": 0.08668861489940288,
+              "auroc": 0.6263984659856797
+            },
+            "rule_writable": {
+              "ap": 0.11266982813606218,
+              "auroc": 0.6604522588158006
+            },
+            "logistic_baseline": {
+              "ap": 0.09775593241832028,
+              "auroc": 0.6002872554436434
+            },
+            "logistic_context": {
+              "ap": 0.13757369327920024,
+              "auroc": 0.6630160277655113
+            },
+            "payer_readonly_hgb": {
+              "ap": 0.19492661245016413,
+              "auroc": 0.7471427849073249
+            },
+            "context_hgb": {
+              "ap": 0.23243344382376713,
+              "auroc": 0.7851020895783699
+            }
+          },
+          "logistic_context_vs_baseline": {
+            "weighted_delta": 0.03981776086087996,
+            "ci95": [
+              0.029217272508713813,
+              0.049450017208900736
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_logistic_context": {
+            "weighted_delta": 0.09485975054456688,
+            "ci95": [
+              0.0649356224964528,
+              0.12022959064385338
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_rule_writable": {
+            "weighted_delta": 0.11976361568770495,
+            "ci95": [
+              0.09110007585985641,
+              0.14852627416016007
+            ],
+            "valid_bootstrap_draws": 500
+          }
+        },
+        "cold_history": {
+          "n": 21581,
+          "failures": 1195,
+          "prevalence": 0.05537278161345628,
+          "models": {
+            "rule_template": {
+              "ap": 0.09342504665111336,
+              "auroc": 0.6465516986593884
+            },
+            "rule_writable": {
+              "ap": 0.14403795835184385,
+              "auroc": 0.6778173510658516
+            },
+            "logistic_baseline": {
+              "ap": 0.11925460099793832,
+              "auroc": 0.6271165460585593
+            },
+            "logistic_context": {
+              "ap": 0.1722669767064163,
+              "auroc": 0.6796953319757139
+            },
+            "payer_readonly_hgb": {
+              "ap": 0.22464293851903816,
+              "auroc": 0.7634979005610134
+            },
+            "context_hgb": {
+              "ap": 0.2639841055584415,
+              "auroc": 0.7971896990592034
+            }
+          },
+          "logistic_context_vs_baseline": {
+            "weighted_delta": 0.053012375708477985,
+            "ci95": [
+              0.04025927068351575,
+              0.06352563516745845
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_logistic_context": {
+            "weighted_delta": 0.09171712885202518,
+            "ci95": [
+              0.06445229615273823,
+              0.11244396785386068
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_rule_writable": {
+            "weighted_delta": 0.11994614720659763,
+            "ci95": [
+              0.09138743163429458,
+              0.1473334045724175
+            ],
+            "valid_bootstrap_draws": 500
+          }
+        }
+      }
+    },
+    "third": {
+      "label": "Nov. 28",
+      "test_date": "2025-11-28",
+      "groups": {
+        "first_appearance": {
+          "n": 19746,
+          "failures": 1075,
+          "prevalence": 0.05444140585435025,
+          "models": {
+            "rule_template": {
+              "ap": 0.08268476867792421,
+              "auroc": 0.6028948761479375
+            },
+            "rule_writable": {
+              "ap": 0.0955532881013424,
+              "auroc": 0.6193274235756733
+            },
+            "logistic_baseline": {
+              "ap": 0.08560016854846245,
+              "auroc": 0.5903450320295247
+            },
+            "logistic_context": {
+              "ap": 0.12447577724583893,
+              "auroc": 0.6658554430263074
+            },
+            "payer_readonly_hgb": {
+              "ap": 0.16059507653419314,
+              "auroc": 0.703199165974344
+            },
+            "context_hgb": {
+              "ap": 0.20484767069636553,
+              "auroc": 0.7809027804591875
+            }
+          },
+          "logistic_context_vs_baseline": {
+            "weighted_delta": 0.03887560869737648,
+            "ci95": [
+              0.028941683518832254,
+              0.05151110323885435
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_logistic_context": {
+            "weighted_delta": 0.0803718934505266,
+            "ci95": [
+              0.06202180870388821,
+              0.099275081024674
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_rule_writable": {
+            "weighted_delta": 0.10929438259502312,
+            "ci95": [
+              0.08203665224157443,
+              0.13263957837033663
+            ],
+            "valid_bootstrap_draws": 500
+          }
+        },
+        "cold_history": {
+          "n": 21859,
+          "failures": 1197,
+          "prevalence": 0.05476005306738643,
+          "models": {
+            "rule_template": {
+              "ap": 0.08513005510668505,
+              "auroc": 0.6037904751230512
+            },
+            "rule_writable": {
+              "ap": 0.10740347756239782,
+              "auroc": 0.6301951964737449
+            },
+            "logistic_baseline": {
+              "ap": 0.09232967923292011,
+              "auroc": 0.5987903162222661
+            },
+            "logistic_context": {
+              "ap": 0.13508415511977445,
+              "auroc": 0.6675452505364013
+            },
+            "payer_readonly_hgb": {
+              "ap": 0.16922094619216788,
+              "auroc": 0.7107481703969536
+            },
+            "context_hgb": {
+              "ap": 0.21738601564274704,
+              "auroc": 0.7867465343253595
+            }
+          },
+          "logistic_context_vs_baseline": {
+            "weighted_delta": 0.04275447588685434,
+            "ci95": [
+              0.032109000845604974,
+              0.055910988442814384
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_logistic_context": {
+            "weighted_delta": 0.08230186052297259,
+            "ci95": [
+              0.05801156757588699,
+              0.10667932502367442
+            ],
+            "valid_bootstrap_draws": 500
+          },
+          "hgb_context_vs_rule_writable": {
+            "weighted_delta": 0.10998253808034922,
+            "ci95": [
+              0.07775955000543157,
+              0.13690700718957557
+            ],
+            "valid_bootstrap_draws": 500
+          }
+        }
+      }
+    }
+  },
+  "input_sha256": {
+    "data/processed/solana_ml/transaction_features_prospective.parquet": "0bf613184579dce9087cec3ea2f4a951ddffbc312e75616d2aa673331617603b",
+    "data/processed/solana_ml/transaction_features_fresh.parquet": "cff819309f1bc99c86a4f3d52968e635fa67b3388f6f4658d3bfa172e9aea407",
+    "data/processed/solana_ml/transaction_features_third.parquet": "1fc86d279af166b25e8acdaa164adaf60b224b006d336158e084ea0d63ff30ac"
+  },
+  "code_sha256": "644973cceba4dc6c2eb92199a4493f5607b1c8686ae1b46456e7558485d15161"
+}

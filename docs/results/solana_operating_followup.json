@@ -1,0 +1,319 @@
+{
+  "status": "Post-result descriptive analysis of existing test sets",
+  "budgets": [
+    0.01,
+    0.05,
+    0.1
+  ],
+  "ranking": "Descending score; ties by ascending signature",
+  "coverage_bins": [
+    "No eligible accounts",
+    "Eligible but unseen (0%)",
+    "Limited (0%, 50%]",
+    "Higher (50%, 100%]"
+  ],
+  "files": {
+    "docs/results/solana_transaction_risk_prospective.json": "1c1f65f262ff7f7919dbc954c9f26003be27bbd7f66fca3dcc2c36ea74440d07",
+    "docs/results/solana_transaction_audit_prospective.json": "2b4a200a27beb3b2b42c7c92bb3e4b0985ee1cf7f1b2383e2e022164350076e4",
+    "data/processed/solana_ml/transaction_features_prospective.parquet": "0bf613184579dce9087cec3ea2f4a951ddffbc312e75616d2aa673331617603b",
+    "data/raw/novelty_search/archive_preview_2025-11-29_shard0091.parquet": "506098f2cc260660aa45f700bb28c56e604b54cfcafea0177b86402e2b093a14",
+    "data/raw/novelty_search/archive_preview_2025-11-30_shard0132.parquet": "83b55a16cc821436c51c0a8c2f0d2704ae9e57ebaba362a117ed8777c3f3ce22",
+    "data/raw/novelty_search/archive_preview_2025-12-01_shard0024.parquet": "dc6c0e2a05c60ed9686aa115f2b83f6e4b3984cceb03a216534d9d2c09e025cf",
+    "data/processed/solana_ml/transaction_identity_predictions_prospective.parquet": "ef36344c0c3aba9ce54e3356345fbb9e71621a804917a0339a9b0701c301c4f2",
+    "docs/results/solana_transaction_risk_fresh.json": "59dfb52dbe4a741d47218e717457d54c9d527ee92c362a26c0ba3d9832661dc3",
+    "docs/results/solana_transaction_audit_fresh.json": "e895595ed48aada6daa82b88e65db25e03f2596427f2c47a2b1b46a67bd01c83",
+    "data/processed/solana_ml/transaction_features_fresh.parquet": "cff819309f1bc99c86a4f3d52968e635fa67b3388f6f4658d3bfa172e9aea407",
+    "data/raw/novelty_search/archive_preview_2025-12-03_shard0069.parquet": "7b7042c87d42f2575c19c023163519fb1bac484277ab68736c639d2a3fb1d00b",
+    "data/raw/novelty_search/archive_preview_2025-12-04_shard0135.parquet": "901ca3107d99de5dc16bf46e3bae1d22db421e08c6ae07c817aa596be26c5807",
+    "data/raw/novelty_search/archive_preview_2025-12-05_shard0185.parquet": "d6db8646a9058fc440ab731e5ab24c2d77f4714665513dd89ea6c981d9cc6f43",
+    "data/processed/solana_ml/transaction_identity_predictions_fresh.parquet": "b4dfaf622eb435e08d7d22a77f524eff4fd06f23962059f00f210b40cea20dde"
+  },
+  "cohorts": {
+    "prospective": {
+      "date": "2025-12-01",
+      "n": 17904,
+      "failures": 1053,
+      "budgets": [
+        {
+          "fraction": 0.01,
+          "k": 179,
+          "models": {
+            "readonly_identity_hgb": {
+              "tp": 52,
+              "fp": 127,
+              "precision": 0.2905027932960894,
+              "recall": 0.04938271604938271,
+              "tp_range_over_boundary_ties": [
+                52,
+                52
+              ],
+              "boundary_score": 0.7596661134859353,
+              "boundary_tie_size": 1
+            },
+            "context_identity_hgb": {
+              "tp": 75,
+              "fp": 104,
+              "precision": 0.41899441340782123,
+              "recall": 0.07122507122507123,
+              "tp_range_over_boundary_ties": [
+                75,
+                75
+              ],
+              "boundary_score": 0.7930299562196529,
+              "boundary_tie_size": 1
+            }
+          }
+        },
+        {
+          "fraction": 0.05,
+          "k": 895,
+          "models": {
+            "readonly_identity_hgb": {
+              "tp": 234,
+              "fp": 661,
+              "precision": 0.26145251396648045,
+              "recall": 0.2222222222222222,
+              "tp_range_over_boundary_ties": [
+                234,
+                234
+              ],
+              "boundary_score": 0.6474268802574076,
+              "boundary_tie_size": 1
+            },
+            "context_identity_hgb": {
+              "tp": 243,
+              "fp": 652,
+              "precision": 0.27150837988826815,
+              "recall": 0.23076923076923078,
+              "tp_range_over_boundary_ties": [
+                243,
+                243
+              ],
+              "boundary_score": 0.6887073278121705,
+              "boundary_tie_size": 1
+            }
+          }
+        },
+        {
+          "fraction": 0.1,
+          "k": 1790,
+          "models": {
+            "readonly_identity_hgb": {
+              "tp": 352,
+              "fp": 1438,
+              "precision": 0.19664804469273742,
+              "recall": 0.3342830009496676,
+              "tp_range_over_boundary_ties": [
+                352,
+                352
+              ],
+              "boundary_score": 0.5127911976264985,
+              "boundary_tie_size": 1
+            },
+            "context_identity_hgb": {
+              "tp": 357,
+              "fp": 1433,
+              "precision": 0.19944134078212292,
+              "recall": 0.33903133903133903,
+              "tp_range_over_boundary_ties": [
+                357,
+                357
+              ],
+              "boundary_score": 0.5798675417950805,
+              "boundary_tie_size": 1
+            }
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "group": "No eligible accounts",
+          "n": 267,
+          "failures": 20,
+          "prevalence": 0.0749063670411985,
+          "ap": {
+            "readonly_identity_hgb": 0.18752867928830083,
+            "context_identity_hgb": 0.15165593259728288
+          },
+          "delta_ap": -0.03587274669101795
+        },
+        {
+          "group": "Eligible but unseen (0%)",
+          "n": 6004,
+          "failures": 346,
+          "prevalence": 0.05762824783477682,
+          "ap": {
+            "readonly_identity_hgb": 0.08203339633897261,
+            "context_identity_hgb": 0.08666992091186229
+          },
+          "delta_ap": 0.004636524572889683
+        },
+        {
+          "group": "Limited (0%, 50%]",
+          "n": 4520,
+          "failures": 376,
+          "prevalence": 0.0831858407079646,
+          "ap": {
+            "readonly_identity_hgb": 0.30001242911579395,
+            "context_identity_hgb": 0.3286621354218035
+          },
+          "delta_ap": 0.028649706306009548
+        },
+        {
+          "group": "Higher (50%, 100%]",
+          "n": 7113,
+          "failures": 311,
+          "prevalence": 0.04372276114157177,
+          "ap": {
+            "readonly_identity_hgb": 0.15978987739288808,
+            "context_identity_hgb": 0.20762696478391765
+          },
+          "delta_ap": 0.04783708739102957
+        }
+      ]
+    },
+    "fresh": {
+      "date": "2025-12-05",
+      "n": 19515,
+      "failures": 1086,
+      "budgets": [
+        {
+          "fraction": 0.01,
+          "k": 195,
+          "models": {
+            "readonly_identity_hgb": {
+              "tp": 91,
+              "fp": 104,
+              "precision": 0.4666666666666667,
+              "recall": 0.08379373848987108,
+              "tp_range_over_boundary_ties": [
+                91,
+                91
+              ],
+              "boundary_score": 0.489592935871152,
+              "boundary_tie_size": 5
+            },
+            "context_identity_hgb": {
+              "tp": 84,
+              "fp": 111,
+              "precision": 0.4307692307692308,
+              "recall": 0.07734806629834254,
+              "tp_range_over_boundary_ties": [
+                84,
+                84
+              ],
+              "boundary_score": 0.5083627527091735,
+              "boundary_tie_size": 1
+            }
+          }
+        },
+        {
+          "fraction": 0.05,
+          "k": 975,
+          "models": {
+            "readonly_identity_hgb": {
+              "tp": 319,
+              "fp": 656,
+              "precision": 0.3271794871794872,
+              "recall": 0.2937384898710866,
+              "tp_range_over_boundary_ties": [
+                319,
+                319
+              ],
+              "boundary_score": 0.2276026855195778,
+              "boundary_tie_size": 1
+            },
+            "context_identity_hgb": {
+              "tp": 322,
+              "fp": 653,
+              "precision": 0.3302564102564103,
+              "recall": 0.2965009208103131,
+              "tp_range_over_boundary_ties": [
+                322,
+                322
+              ],
+              "boundary_score": 0.2274601239017262,
+              "boundary_tie_size": 1
+            }
+          }
+        },
+        {
+          "fraction": 0.1,
+          "k": 1951,
+          "models": {
+            "readonly_identity_hgb": {
+              "tp": 412,
+              "fp": 1539,
+              "precision": 0.21117375704766786,
+              "recall": 0.37937384898710863,
+              "tp_range_over_boundary_ties": [
+                409,
+                413
+              ],
+              "boundary_score": 0.14142218404465573,
+              "boundary_tie_size": 24
+            },
+            "context_identity_hgb": {
+              "tp": 447,
+              "fp": 1504,
+              "precision": 0.2291132752434649,
+              "recall": 0.4116022099447514,
+              "tp_range_over_boundary_ties": [
+                447,
+                447
+              ],
+              "boundary_score": 0.15102672610029846,
+              "boundary_tie_size": 1
+            }
+          }
+        }
+      ],
+      "coverage": [
+        {
+          "group": "No eligible accounts",
+          "n": 319,
+          "failures": 3,
+          "prevalence": 0.009404388714733543,
+          "ap": {
+            "readonly_identity_hgb": 0.13043478260869565,
+            "context_identity_hgb": 0.15
+          },
+          "delta_ap": 0.019565217391304346
+        },
+        {
+          "group": "Eligible but unseen (0%)",
+          "n": 6365,
+          "failures": 427,
+          "prevalence": 0.06708562450903378,
+          "ap": {
+            "readonly_identity_hgb": 0.20542606259425153,
+            "context_identity_hgb": 0.22407409930577174
+          },
+          "delta_ap": 0.01864803671152021
+        },
+        {
+          "group": "Limited (0%, 50%]",
+          "n": 5115,
+          "failures": 361,
+          "prevalence": 0.07057673509286412,
+          "ap": {
+            "readonly_identity_hgb": 0.2792734496795994,
+            "context_identity_hgb": 0.2986496044395467
+          },
+          "delta_ap": 0.019376154759947306
+        },
+        {
+          "group": "Higher (50%, 100%]",
+          "n": 7716,
+          "failures": 295,
+          "prevalence": 0.03823224468636599,
+          "ap": {
+            "readonly_identity_hgb": 0.20586085464941906,
+            "context_identity_hgb": 0.2268127591051262
+          },
+          "delta_ap": 0.020951904455707132
+        }
+      ]
+    }
+  }
+}

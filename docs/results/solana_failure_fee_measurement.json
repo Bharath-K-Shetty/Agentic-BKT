@@ -1,0 +1,104 @@
+{
+  "status": "Measured on-chain fees. Money at stake, not money saved: no warning reached these senders.",
+  "test_date": "2025-12-05",
+  "model": "context_hgb",
+  "sample_size": 21581,
+  "requested": {
+    "all_targets": 1905,
+    "all_failures": 1195,
+    "top_5": 1079
+  },
+  "retrieved": 1905,
+  "label_mismatches": 0,
+  "all_failures": {
+    "transactions": 1195,
+    "total_lamports": 325788326,
+    "total_sol": 0.325788326,
+    "mean_lamports": 272626.2142259414,
+    "median_lamports": 7000,
+    "max_lamports": 15005000,
+    "above_base_fee_lamports": 318503326,
+    "unique_payers": 1117,
+    "largest_payer_share_of_transactions": 0.008368200836820083,
+    "largest_payer_share_of_fees": 0.046057512815852096,
+    "top_failing_programs": [
+      [
+        "11111111111111111111111111111111",
+        205
+      ],
+      [
+        "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA",
+        202
+      ],
+      [
+        "term9YPb9mzAsABaqN71A4xdbxHmpBNZavpBiQKZzN3",
+        133
+      ],
+      [
+        "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P",
+        80
+      ],
+      [
+        "CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK",
+        64
+      ]
+    ]
+  },
+  "top_5_failures": {
+    "transactions": 369,
+    "total_lamports": 174345267,
+    "total_sol": 0.174345267,
+    "mean_lamports": 472480.39837398374,
+    "median_lamports": 20000,
+    "max_lamports": 10005000,
+    "above_base_fee_lamports": 172320267,
+    "unique_payers": 338,
+    "largest_payer_share_of_transactions": 0.02710027100271003,
+    "largest_payer_share_of_fees": 0.06891497662508957,
+    "top_failing_programs": [
+      [
+        "term9YPb9mzAsABaqN71A4xdbxHmpBNZavpBiQKZzN3",
+        130
+      ],
+      [
+        "11111111111111111111111111111111",
+        82
+      ],
+      [
+        "pAMMBay6oceH9fJKBRHGP5D4bD4sWpmSwMn52FMfXEA",
+        46
+      ],
+      [
+        "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P",
+        29
+      ],
+      [
+        "JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4",
+        21
+      ]
+    ]
+  },
+  "top_5_successes": {
+    "transactions": 710,
+    "total_lamports": 405335165,
+    "total_sol": 0.405335165,
+    "mean_lamports": 570894.5985915493,
+    "median_lamports": 15000.0,
+    "max_lamports": 111105000,
+    "above_base_fee_lamports": 401465165,
+    "unique_payers": 705,
+    "largest_payer_share_of_transactions": 0.0028169014084507044,
+    "largest_payer_share_of_fees": 0.2741064915993657,
+    "top_failing_programs": []
+  },
+  "top_5_share_of_failed_fees": 0.5351489083129394,
+  "random_5_percent_share_for_comparison": 0.05,
+  "largest_program_by_failed_fees": "term9YPb9mzAsABaqN71A4xdbxHmpBNZavpBiQKZzN3",
+  "top_5_share_excluding_largest_program": 0.25327979368821346,
+  "limitations": [
+    "Fees only: separately paid validator tips and lost trade value are not included.",
+    "One test date from one sampled archive.",
+    "Standard preflight may have caught some failures, so this is not an incremental saving.",
+    "Warnings on the successful transactions in this group have a cost that is not priced here."
+  ]
+}

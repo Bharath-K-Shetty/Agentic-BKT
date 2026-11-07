@@ -1,0 +1,245 @@
+{
+  "status": "source_updated_final_generation_on_hold",
+  "literature_survey_source": "/Users/biks/Library/Containers/net.whatsapp.WhatsApp/Data/tmp/documents/B23E5F2E-2D35-4E54-8D66-4A8F9CA4F0D5/final homieee.pdf",
+  "source_pages": [
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "survey_rows": [
+    [
+      "zheng",
+      "Zheng et al. (2025)",
+      "Solana execution failures",
+      "Empirical measurements of transaction initiators, programs and errors.",
+      "Characterises recorded failure patterns.",
+      "HOMIE evaluates prediction from delayed account histories."
+    ],
+    [
+      "alizadeh",
+      "Alizadeh and Khabbazian (2025)",
+      "Solana transaction networks",
+      "Graph analysis of SOL transfers with an Ethereum comparison.",
+      "Describes network structure and activity patterns.",
+      "Network structure is not an execution-failure classifier."
+    ],
+    [
+      "shuklatrx",
+      "Shukla et al. (2023)",
+      "TRX profit and transaction success",
+      "Whale-optimised ensemble learning with prediction and classification stages.",
+      "Investigates cryptocurrency forecasting and transaction success.",
+      "TRX data and targets differ from the Solana first-appearance task."
+    ],
+    [
+      "pawarminer",
+      "Pawar et al. (2025)",
+      "Ethereum transaction time and miner selection",
+      "Compares ElasticNet, Lasso and MLP regression.",
+      "Uses predicted transaction time to guide miner selection.",
+      "Time prediction differs from execution-failure ranking."
+    ],
+    [
+      "tedeschi",
+      "Tedeschi et al. (2019)",
+      "Proof-of-work transaction latency",
+      "Deep learning applied to Bitcoin transaction observations.",
+      "Investigates predictive information about confirmation latency.",
+      "Latency is a different target from Solana execution outcomes."
+    ],
+    [
+      "huangtmas",
+      "Huang et al. (2024)",
+      "Transaction misbehaviour",
+      "TMAS uses transaction-graph indicators, heuristic laundering models and account linkage.",
+      "Studies suspicious behaviour in 100 million Bitcoin transactions.",
+      "Suspicious behaviour and execution failure have different labels."
+    ],
+    [
+      "pocher",
+      "Pocher et al. (2023)",
+      "Cryptocurrency AML/CFT forensics",
+      "Machine-learning analysis of anomalous cryptocurrency transactions.",
+      "Examines transaction forensics for illicit-activity detection.",
+      "HOMIE does not infer criminal intent from execution failures."
+    ],
+    [
+      "ashfaqfraud",
+      "Ashfaq et al. (2022)",
+      "Fraud detection with blockchain",
+      "XGBoost and random forest classify transaction patterns.",
+      "Integrates fraud classification with blockchain-based security.",
+      "Its fraud target is not the recorded execution outcome used here."
+    ],
+    [
+      "ibraheembtc",
+      "Ibraheem et al. (2026; online 2025)",
+      "Bitcoin price and illicit activity",
+      "Deep learning with preprocessing and dimensionality reduction.",
+      "Combines market forecasting and illegitimate-activity classification.",
+      "Neither target directly matches Solana execution failure."
+    ],
+    [
+      "ikedadao",
+      "Ikeda et al. (2025)",
+      "Secure crypto-asset transactions in DAOs",
+      "Anomaly detection and AI-assisted facilitation in a decision framework.",
+      "Discusses AI support for safer crypto-asset activity.",
+      "It does not evaluate HOMIE's missing-signer-history endpoint."
+    ],
+    [
+      "louatinas",
+      "Louati et al. (2025)",
+      "Smart-contract anomaly detection",
+      "CNN architecture search, transfer learning and model compression.",
+      "Studies anomaly detection and computation on Ethereum data.",
+      "Contract anomalies differ from sampled Solana execution outcomes."
+    ],
+    [
+      "darwishgru",
+      "Darwish and El-Shoafy (2026)",
+      "FinTech fraud detection",
+      "Compact GRU classification with a permissioned Hyperledger Fabric ledger.",
+      "Reports 94.1% accuracy and 89.6% F1 on its fraud task.",
+      "Its reported metrics are not comparable to HOMIE's AP benchmark."
+    ],
+    [
+      "elnaggarfintech",
+      "Darwish, EL-Naggar and Elkaffas (2026)",
+      "Resource-efficient FinTech fraud detection",
+      "Lightweight deep learning with blockchain-based recording.",
+      "Examines efficiency, detection and monitoring in financial systems.",
+      "It does not establish a Solana execution-failure result."
+    ],
+    [
+      "linwavelet",
+      "Lin et al. (2026)",
+      "Illicit Bitcoin transactions",
+      "Wavelet-temporal graph transformer.",
+      "Combines graph and temporal representations for AML classification.",
+      "Illicit-activity labels differ from execution-failure labels."
+    ],
+    [
+      "xiaobfhgn",
+      "Xiao and Yin (2026)",
+      "Bitcoin transaction anomalies",
+      "Semi-supervised bidirectional fusion of transaction and address graphs.",
+      "Reports transaction/address F1 of 0.6301/0.5784 on Elliptic++.",
+      "A different graph dataset and target prevent direct score comparison."
+    ]
+  ],
+  "new_references": [
+    {
+      "key": "shuklatrx",
+      "authors": "A. Shukla, T. K. Das and S. S. Roy",
+      "title": "TRX Cryptocurrency Profit and Transaction Success Rate Prediction Using Whale Optimization-Based Ensemble Learning Framework",
+      "publication": "Mathematics, vol. 11, no. 11, article 2415, 2023",
+      "doi": "10.3390/math11112415"
+    },
+    {
+      "key": "pawarminer",
+      "authors": "M. K. Pawar, P. Patil, D. G. Narayan, V. Pandey, S. Jain and P. Kumar",
+      "title": "Efficient Miner Selection in Blockchain Based on Predicted Transaction Time",
+      "publication": "Procedia Computer Science, vol. 252, pp. 202--211, 2025",
+      "doi": "10.1016/j.procs.2024.12.022"
+    },
+    {
+      "key": "huangtmas",
+      "authors": "S. Huang et al.",
+      "title": "TMAS: A transaction misbehavior analysis scheme for blockchain",
+      "publication": "Blockchain: Research and Applications, vol. 5, no. 3, article 100197, 2024",
+      "doi": "10.1016/j.bcra.2024.100197"
+    },
+    {
+      "key": "ashfaqfraud",
+      "authors": "T. Ashfaq et al.",
+      "title": "A Machine Learning and Blockchain Based Efficient Fraud Detection Mechanism",
+      "publication": "Sensors, vol. 22, no. 19, article 7162, 2022",
+      "doi": "10.3390/s22197162"
+    },
+    {
+      "key": "ibraheembtc",
+      "authors": "M. R. Ibraheem, E. Hassan, S. A. Abed, I. S. Kamil and F. M. Talaat",
+      "title": "Deep Learning Predictions for Bitcoin Market Price and Illegitimate Activity Classification",
+      "publication": "Computational Economics, vol. 68, pp. 1815--1843, 2026; first published online September 25, 2025",
+      "doi": "10.1007/s10614-025-11093-x"
+    },
+    {
+      "key": "ikedadao",
+      "authors": "Y. Ikeda, R. Hadfi, T. Ito and A. Fujihara",
+      "title": "Anomaly detection and facilitation AI to empower decentralized autonomous organizations for secure crypto-asset transactions",
+      "publication": "AI \\& SOCIETY, vol. 40, pp. 3999--4010, 2025",
+      "doi": "10.1007/s00146-024-02166-w"
+    },
+    {
+      "key": "louatinas",
+      "authors": "H. Louati, A. Louati, E. Kariri and A. Almekhlafi",
+      "title": "AI-Based Anomaly Detection and Optimization Framework for Blockchain Smart Contracts",
+      "publication": "Administrative Sciences, vol. 15, no. 5, article 163, 2025",
+      "doi": "10.3390/admsci15050163"
+    },
+    {
+      "key": "darwishgru",
+      "authors": "S. M. Darwish and N. A. El-Shoafy",
+      "title": "A hybrid deep learning--blockchain framework for reliable fraud detection: a big data--driven approach for real-time FinTech systems",
+      "publication": "Journal of Big Data, vol. 13, article 129, 2026",
+      "doi": "10.1186/s40537-026-01506-5"
+    },
+    {
+      "key": "elnaggarfintech",
+      "authors": "S. M. Darwish, S. EL-Naggar and S. M. Elkaffas",
+      "title": "Securing financial transactions: exploring the role of lightweight blockchain-enabled deep learning for fraud detection in FinTech systems",
+      "publication": "Cybersecurity, vol. 9, article 8, 2026",
+      "doi": "10.1186/s42400-025-00436-8"
+    },
+    {
+      "key": "xiaobfhgn",
+      "authors": "B. Xiao and W. Yin",
+      "title": "Bidirectional fusion heterogeneous graph networks for semi-supervised Bitcoin transaction anomaly detection in dynamic transaction graphs",
+      "publication": "PLOS ONE, vol. 21, no. 6, e0351051, 2026",
+      "doi": "10.1371/journal.pone.0351051"
+    }
+  ],
+  "problem_statement": "Replace question with declarative wording as applied in main.tex; apply to DOCX/PPT at next generation.",
+  "certificate_source": "/Users/biks/Downloads/Revised Certificate.docx",
+  "certificate_status": "Revised certificate LaTeX source prepared; Word page replacement deferred until next generation. HOD and Principal names now supplied and added to the source. Includes inline four-student list, three aligned guide/HOD/principal signature columns, internal and external examiner name/signature fields, no page border (latest user instruction). Optional NBA line omitted until applicability is confirmed.",
+  "word_ppt_pdf_regenerated": false,
+  "certificate_fields": {
+    "course_code": "23AISE409",
+    "guide": "Mr. Manjunath Prasad",
+    "hod": "Dr. Sunil Kumar S",
+    "principal": "Dr. Prashanth C M",
+    "academic_year": "2026-27",
+    "hod_role": "Head of Dept. AIML"
+  },
+  "table_of_contents": {
+    "levels": [
+      "chapter",
+      "section",
+      "subsection"
+    ],
+    "latex_tocdepth": 2,
+    "word_action": "Replace chapter-only contents table with a hierarchical contents list covering every numbered chapter, section and subsection in Part B. Indent levels; refresh all page numbers after final layout. Preserve institutional formatting.",
+    "status": "Source depth updated; Word contents and pagination pending final generation."
+  },
+  "part_a_format": {
+    "reference": "/Users/biks/Downloads/PART A_27AI12.docx",
+    "scope": "Cover and preliminary pages; preserve HOMIE title, team 27AI15, four author details, guide, HOD/Principal names and course code. Use revised certificate wording. Do not copy MAWOS project text or the other team names.",
+    "page_borders": false,
+    "word_action": "Use the supplied native DOCX layout. Remove w:pgBorders and page-frame shapes or outer page-frame tables from our previous Part A. Keep real contents/declaration tables and signature lines. Expand contents through subsections and refresh page numbers at generation.",
+    "optional_lists": "Include only lists supported by actual HOMIE report contents; do not add empty algorithm/listing lists just because the template includes them.",
+    "status": "Queued for next Word generation; LaTeX page-border source disabled."
+  },
+  "review_preview": {
+    "generated": "2026-11-04",
+    "part_a_pages": 11,
+    "part_b_pages": 67,
+    "toc_entries": 108,
+    "new_literature_rows": 15,
+    "references": 53,
+    "location": "output/previews/",
+    "status": "Review previews generated; submission copies not replaced."
+  }
+}

@@ -3,7 +3,7 @@ import json
 from functools import lru_cache
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from webapp.backend.transfer_check import router as transfer_router
 from webapp.backend.model_inference import router as inference_router
 from webapp.backend.prospective import router as prospective_router
@@ -15,7 +15,7 @@ app.include_router(inference_router)
 app.include_router(prospective_router)
 
 @app.get('/live')
-def live_home():return FileResponse(ROOT/'webapp/frontend/live.html')
+def live_home():return RedirectResponse('/#try-live')
 
 @app.get('/fee-proof')
 def fee_proof_home():return FileResponse(ROOT/'webapp/frontend/fee_proof.html')
@@ -32,6 +32,9 @@ def ml_fee_policy():
     if not path.exists():raise HTTPException(503,'Run the ML fee-policy evaluation first.')
     return json.loads(path.read_text())
 
+@app.get('/research')
+def research_home():return FileResponse(ROOT/'webapp/frontend/research.html')
+
 @app.get('/predict')
 def prediction_home():return FileResponse(ROOT/'webapp/frontend/model_predict.html')
 
@@ -45,7 +48,10 @@ def bundle():
     return json.loads(path.read_text())
 
 @app.get('/')
-def home():return FileResponse(ROOT/'webapp/frontend/replay.html')
+def home():return FileResponse(ROOT/'webapp/frontend/story.html')
+
+@app.get('/workspace')
+def workspace():return RedirectResponse('/#try')
 
 @app.get('/api/summary')
 def summary():return bundle()['summary']
@@ -65,3 +71,18 @@ def case(case_id:str):return {k:v for k,v in lookup(case_id).items() if k!='outc
 
 @app.get('/api/cases/{case_id}/outcome')
 def outcome(case_id:str):return {'outcome':lookup(case_id)['outcome']}
+
+@app.get('/api/research-evidence')
+def research_evidence():
+    """Serve the saved first-appearance audit, separate from calibrated replay."""
+    reports=[]
+    for cohort,date in [('prospective','2025-12-01'),('fresh','2025-12-05')]:
+        path=ROOT/f'docs/results/solana_transaction_audit_{cohort}.json'
+        if not path.exists():raise HTTPException(503,'First-appearance audit is unavailable.')
+        report=json.loads(path.read_text())
+        reports.append({'date':date,'rows':report['first_appearance_n'],
+            'prevalence':report['first_appearance_prevalence'],
+            'models':report['first_appearance_identity_results'],
+            'comparison':report['first_appearance_identity_hour_bootstrap'],
+            'source':path.name})
+    return {'reports':reports}

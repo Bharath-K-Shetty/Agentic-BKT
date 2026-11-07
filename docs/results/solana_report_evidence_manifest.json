@@ -1,0 +1,78 @@
+{
+  "purpose": "Regenerated reporting from existing artifacts; no refitting or threshold tuning",
+  "files": {
+    "output/latex/homie_report/sections/case_evidence.tex": "d6048b9662429e47c17b508eeb0be355d47cf7ed428cfd5088feac68af0b2ee2",
+    "output/latex/homie_report/sections/application_evidence.tex": "12d0e6e00f1a6294a552a866d14c8414c587b1fd3e9dcb6662b1f5327feadf8b",
+    "output/latex/homie_report/sections/calibration_evidence.tex": "2c666665226e813a851b51c003260ca5438985c415e56725c052eefa8a39ceef",
+    "output/latex/homie_report/sections/dataset_evidence.tex": "3ea608cd4faf306fcb025c12d023756c18d878e7bdd43b7dbb0f1fde7ac08cfb",
+    "output/latex/homie_report/sections/ranking_evidence.tex": "933e9cb831bb9435018e624d1b3f4b07176b0e362907fb624759a77a44e5b125",
+    "output/latex/homie_report/assets/first_appearance_pr.pdf": "bacf45a71d2c65801ff1267c832ab87a82f93955b11c09984496f3d9b7daceaf",
+    "output/latex/homie_report/assets/calibration_reliability.pdf": "d82d9d9823aa0fa48bcd32f3dc75f824d4de5346adfa25330d37eab4d794ed4c",
+    "output/latex/homie_report/assets/ap_gain_intervals.pdf": "20db9810eb12e72e3b16d07280d96a09622b7e1a3802b9e2f2e3730f5d575cea",
+    "output/latex/homie_report/main.tex": "5caac9e5d23330eed04f1c8036c820f994efa48d9d94e1f585c6f43d7176d7fb",
+    "output/latex/homie_report/sections/literature_comparison.tex": "1ee79201a1526a0536dc8393f1d2a0e1ad0bb57c8da44fb1a74c52ea14c95acc",
+    "output/latex/homie_report/sections/model_detail.tex": "d02d46b9b1adf7e81e6017aab6424d80ba20b98bdd4ea3edd305d40cb7679dcd",
+    "output/latex/homie_report/sections/system_architecture.tex": "5376e9decc0f67a7b16619cccd6a8ab299062503bb46d346a24b91a794b1fd10",
+    "output/latex/homie_report/assets/architecture.png": "9610d07c9984ecdc5d50a603fb9b37c9ebdecf6bbf46e02e8bd3cc9ad2a1f019",
+    "output/latex/homie_report/assets/demo_case.png": "182c3c8b60503b99f5d3a4c6f046e7002250a2222b2323dcdb7a3e4964c955c9",
+    "output/latex/homie_report/assets/demo_fee_receipts.png": "3dd3092147c1d52aed284993be4c4456ca692a9477037cb68f98d815cc800241",
+    "output/latex/homie_report/assets/demo_inference.png": "fc7a8f0a154cf1c9eb00da4f028676506cac86b358b64c57188a5817ce53ee5a",
+    "output/latex/homie_report/assets/demo_live_form.png": "50f85b2e0a4d69c1df5b0ce3b058dade1cb0a174e9d56e0c73e92dc0989549b7",
+    "output/latex/homie_report/assets/demo_results.png": "b4bdcdcde1f2ed99c288ae1ad8205611b93dca02ed737660cf0b3b52d96b8a3c",
+    "output/latex/homie_report/assets/mite.png": "435c9b80912be87af93fdea37ce55b6cc661bde23a5b5667339dc55792955f1e",
+    "output/latex/homie_report/assets/mite_autonomous.jpeg": "00d609a258262e69ffcd00a78b036e1872b5e0090a919f5207b47891f305d2b9",
+    "output/latex/homie_report/assets/vtu.png": "f7b3de56d8f55198fe0751fd042f66c0dca8cade4cb0e28f3bb70701a06689bd",
+    "output/pdf/homie_final_year_report.pdf": "22be6080cd6d26ddd36d8fa824281840a1dabadb32b3f07381a87d81d99b4086",
+    "output/latex/homie_report_overleaf.zip": "02c029b471edfcf5d5552c4e4b0e680fb2c4f7ac03e3954b2a20b6ec3fb53c3d"
+  },
+  "checks": {
+    "pilot": {
+      "raw": 396402,
+      "processed": 396387,
+      "skipped": {
+        "identical_duplicate_transaction": 15
+      },
+      "train": 92782,
+      "validation": 125864,
+      "test": 131759
+    },
+    "confirmation": {
+      "raw": 398263,
+      "processed": 398263,
+      "skipped": {},
+      "train": 92135,
+      "validation": 126214,
+      "test": 133071
+    },
+    "extension": {
+      "raw": 395695,
+      "processed": 395695,
+      "skipped": {},
+      "train": 93812,
+      "validation": 127050,
+      "test": 131638
+    },
+    "prospective": {
+      "raw": 398048,
+      "processed": 398048,
+      "skipped": {},
+      "train": 100517,
+      "validation": 126840,
+      "test": 131907
+    },
+    "fresh": {
+      "raw": 396786,
+      "processed": 396786,
+      "skipped": {},
+      "train": 95481,
+      "validation": 127016,
+      "test": 132832
+    }
+  },
+  "final_report": {
+    "pages": 57,
+    "targeted_tests_passed": 52,
+    "overfull_warnings": 0,
+    "undefined_references": false
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "created_at": "2026-11-06T09:06:17.541912+00:00",
+  "protocol": {
+    "status": "Fixed before any 2025-11-28 test outcome was loaded or viewed. Feature groups and candidate chosen from validation dates of the five earlier protocols only.",
+    "fixed_at": "2026-11-06T09:03:36.050892+00:00",
+    "train_date": "2025-11-26",
+    "validation_date": "2025-11-27",
+    "test_date": "2025-11-28",
+    "source_paths": {
+      "2025-11-26": "data/raw/novelty_search/archive_preview_2025-11-26_shard0143.parquet",
+      "2025-11-27": "data/raw/novelty_search/archive_preview_2025-11-27_shard0066.parquet",
+      "2025-11-28": "data/raw/novelty_search/archive_preview_2025-11-28_shard0093.parquet"
+    },
+    "source_selection": "Dates never used in the project; archive ends 2025-12-05. Shard index = int(sha256(f'{date}|homie-activity-fresh'), 16) mod the date's file count, computed from file counts only. Row group 0.",
+    "warmup_hours": 6,
+    "outcome_delay_seconds": 3600,
+    "prior_strength": 20,
+    "hgb": {
+      "max_iter": 150,
+      "max_leaf_nodes": 15,
+      "min_samples_leaf": 40,
+      "l2_regularization": 5,
+      "early_stopping": false
+    },
+    "seeds": [
+      42,
+      73,
+      101
+    ],
+    "use_fees": true,
+    "primary": "First-appearance AP: homie_all (writable history + activity + declared-fee features) versus homie (current writable-context model), 500 paired one-hour block bootstrap draws.",
+    "pass_rule": "Positive AP gain with the 95% interval entirely above zero.",
+    "secondary": [
+      "Same comparison on cold-history transactions.",
+      "homie_activity versus homie on both groups.",
+      "homie_fee versus homie on both groups.",
+      "Concentration check: gain recomputed without the fee payer with the most failures in each group."
+    ],
+    "reporting": "Retain and report results regardless of direction. Single run; the script refuses to overwrite.",
+    "limitations": [
+      "Fresh dates fall between earlier study periods, not after them.",
+      "Activity and fee context come from the sampled archive, not the full chain.",
+      "Declared fee is recovered from the charged fee; base fee assumed 5,000 lamports per signer.",
+      "Not identity-controlled; compare with the report's identity-controlled results only qualitatively."
+    ],
+    "development_evidence": {
+      "docs/results/solana_activity_development.json": "b863e1911f4a496856658418cc00e1925b949d0c527a14ccf4e1ece0f704972d",
+      "docs/results/solana_activity_development_fees.json": "1311b4aa0098230aed672d0a46ad7a2a78fe30b9bb25f40d8df9abd4b16d8f1d"
+    },
+    "code_sha256": {
+      "research/solana/ml/activity_features.py": "7591042da1c435e4be74b9bcf48ec71c859db8b7cd66fc6b337e122e0aa03d59",
+      "research/solana/ml/transaction_risk.py": "cee2a0a326a63b3505efab46b50f78f061bc6378e6abb94c6bd865b7fbb717c1"
+    }
+  },
+  "protocol_sha256": "a490e41d29cc40d87231f4e0c1841d30a196aa135cc93efb37c0d0b8ec0f5dbd",
+  "sources": [
+    {
+      "path": "data/raw/novelty_search/archive_preview_2025-11-26_shard0143.parquet",
+      "sha256": "f2355a10b6f860baa48c6066bcdd90b4056ef216c2b89f608d78a4bf5a40a622",
+      "n": 132335
+    },
+    {
+      "path": "data/raw/novelty_search/archive_preview_2025-11-27_shard0066.parquet",
+      "sha256": "7473a8b9a89b579666927b08619bf39b17100a7b50266eba307a21f67d48b2e0",
+      "n": 131897
+    },
+    {
+      "path": "data/raw/novelty_search/archive_preview_2025-11-28_shard0093.parquet",
+      "sha256": "267dcc0b289e6e0b9ff7a1f208ffd8b861479a9f66c4b91705f6135bfdea7663",
+      "n": 132889
+    }
+  ],
+  "skipped": {},
+  "train_n": 95283,
+  "test_n": 132889,
+  "results": {
+    "all": {
+      "models": {
+        "baseline": {
+          "n": 132889,
+          "failures": 23665,
+          "prevalence": 0.17808095478181038,
+          "ap": 0.8465939293659638,
+          "auroc": 0.9505650717400213
+        },
+        "homie": {
+          "n": 132889,
+          "failures": 23665,
+          "prevalence": 0.17808095478181038,
+          "ap": 0.8573564032516661,
+          "auroc": 0.9542460244948097
+        },
+        "homie_activity": {
+          "n": 132889,
+          "failures": 23665,
+          "prevalence": 0.17808095478181038,
+          "ap": 0.859150683300643,
+          "auroc": 0.9543060002538857
+        },
+        "homie_fee": {
+          "n": 132889,
+          "failures": 23665,
+          "prevalence": 0.17808095478181038,
+          "ap": 0.8635054011760346,
+          "auroc": 0.9560083419827923
+        },
+        "homie_all": {
+          "n": 132889,
+          "failures": 23665,
+          "prevalence": 0.17808095478181038,
+          "ap": 0.8636378233494316,
+          "auroc": 0.9561951547431029
+        },
+        "baseline_all": {
+          "n": 132889,
+          "failures": 23665,
+          "prevalence": 0.17808095478181038,
+          "ap": 0.8620071513063348,
+          "auroc": 0.9559804075614833
+        }
+      },
+      "vs_homie": {
+        "homie_activity": {
+          "weighted_delta": 0.0017942800489769706,
+          "ci95": [
+            8.53860602872875e-05,
+            0.0037435827716517005
+          ],
+          "valid_bootstrap_draws": 500
+        },
+        "homie_fee": {
+          "weighted_delta": 0.0061489979243685156,
+          "ci95": [
+            0.004494737900258505,
+            0.008061069943405387
+          ],
+          "valid_bootstrap_draws": 500
+        },
+        "homie_all": {
+          "weighted_delta": 0.006281420097765555,
+          "ci95": [
+            0.004381048650994484,
+            0.008873785065372833
+          ],
+          "valid_bootstrap_draws": 500
+        }
+      },
+      "concentration": {
+        "top_failing_payer_share_of_failures": 0.08430171138812592,
+        "without_top_payer": {
+          "homie_activity": 0.0018618756948763915,
+          "homie_fee": 0.007013746704028434,
+          "homie_all": 0.007137945151740599
+        }
+      }
+    },
+    "cold_history": {
+      "models": {
+        "baseline": {
+          "n": 21859,
+          "failures": 1197,
+          "prevalence": 0.05476005306738643,
+          "ap": 0.16923670984720623,
+          "auroc": 0.7107600171984829
+        },
+        "homie": {
+          "n": 21859,
+          "failures": 1197,
+          "prevalence": 0.05476005306738643,
+          "ap": 0.21738513863783976,
+          "auroc": 0.7867402268132824
+        },
+        "homie_activity": {
+          "n": 21859,
+          "failures": 1197,
+          "prevalence": 0.05476005306738643,
+          "ap": 0.23140895605910738,
+          "auroc": 0.7854431233441265
+        },
+        "homie_fee": {
+          "n": 21859,
+          "failures": 1197,
+          "prevalence": 0.05476005306738643,
+          "ap": 0.21831296692972257,
+          "auroc": 0.795783460522697
+        },
+        "homie_all": {
+          "n": 21859,
+          "failures": 1197,
+          "prevalence": 0.05476005306738643,
+          "ap": 0.23135493193355477,
+          "auroc": 0.7951833573544419
+        },
+        "baseline_all": {
+          "n": 21859,
+          "failures": 1197,
+          "prevalence": 0.05476005306738643,
+          "ap": 0.19247374992444752,
+          "auroc": 0.7629868439045213
+        }
+      },
+      "vs_homie": {
+        "homie_activity": {
+          "weighted_delta": 0.014023817421267626,
+          "ci95": [
+            -0.0026254430361543086,
+            0.03492620889302323
+          ],
+          "valid_bootstrap_draws": 500
+        },
+        "homie_fee": {
+          "weighted_delta": 0.0009278282918828151,
+          "ci95": [
+            -0.00481843359687557,
+            0.007259871103977776
+          ],
+          "valid_bootstrap_draws": 500
+        },
+        "homie_all": {
+          "weighted_delta": 0.013969793295715016,
+          "ci95": [
+            0.0019669915350881673,
+            0.03078746991614173
+          ],
+          "valid_bootstrap_draws": 500
+        }
+      },
+      "concentration": {
+        "top_failing_payer_share_of_failures": 0.012531328320802004,
+        "without_top_payer": {
+          "homie_activity": 0.014237316486943846,
+          "homie_fee": 0.00013579079245074066,
+          "homie_all": 0.013809181977594065
+        }
+      }
+    },
+    "first_appearance": {
+      "models": {
+        "baseline": {
+          "n": 19765,
+          "failures": 1075,
+          "prevalence": 0.05438907159119656,
+          "ap": 0.16056977727842167,
+          "auroc": 0.7033417198601415
+        },
+        "homie": {
+          "n": 19765,
+          "failures": 1075,
+          "prevalence": 0.05438907159119656,
+          "ap": 0.20479257470234688,
+          "auroc": 0.7809102990033223
+        },
+        "homie_activity": {
+          "n": 19765,
+          "failures": 1075,
+          "prevalence": 0.05438907159119656,
+          "ap": 0.21294606716559375,
+          "auroc": 0.7803292893849466
+        },
+        "homie_fee": {
+          "n": 19765,
+          "failures": 1075,
+          "prevalence": 0.05438907159119656,
+          "ap": 0.20482511449983154,
+          "auroc": 0.7891855612378216
+        },
+        "homie_all": {
+          "n": 19765,
+          "failures": 1075,
+          "prevalence": 0.05438907159119656,
+          "ap": 0.21438177491885854,
+          "auroc": 0.7917036345763808
+        },
+        "baseline_all": {
+          "n": 19765,
+          "failures": 1075,
+          "prevalence": 0.05438907159119656,
+          "ap": 0.17787480444162973,
+          "auroc": 0.7624945562233255
+        }
+      },
+      "vs_homie": {
+        "homie_activity": {
+          "weighted_delta": 0.00815349246324687,
+          "ci95": [
+            0.00023427744509950878,
+            0.017362725544989983
+          ],
+          "valid_bootstrap_draws": 500
+        },
+        "homie_fee": {
+          "weighted_delta": 3.253979748465974e-05,
+          "ci95": [
+            -0.006289236807659774,
+            0.005882587876171179
+          ],
+          "valid_bootstrap_draws": 500
+        },
+        "homie_all": {
+          "weighted_delta": 0.009589200216511662,
+          "ci95": [
+            0.0014882014654382222,
+            0.020540125851300738
+          ],
+          "valid_bootstrap_draws": 500
+        }
+      },
+      "concentration": {
+        "top_failing_payer_share_of_failures": 0.0009302325581395349,
+        "without_top_payer": {
+          "homie_activity": 0.008154529317011577,
+          "homie_fee": 2.258579684363826e-05,
+          "homie_all": 0.009492790926949352
+        }
+      }
+    }
+  },
+  "code_sha256": "7591042da1c435e4be74b9bcf48ec71c859db8b7cd66fc6b337e122e0aa03d59"
+}
