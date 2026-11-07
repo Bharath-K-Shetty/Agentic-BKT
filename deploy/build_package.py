@@ -11,8 +11,8 @@ FILES = [
     *['webapp/backend/'+n+'.py' for n in ('cloud','runtime_paths','replay','model_inference','transfer_check','live_history','prospective')],
     *['webapp/frontend/'+n+'.html' for n in ('story','replay','research','live','fee_proof','model_predict','transfer_check')],
     *['research/solana/ml/'+n+'.py' for n in ('transaction_risk','prefix_baseline','robustness')],
-    *['data/processed/solana_ml/'+n for n in ('demo_models.joblib','demo_inference_test.parquet','replay_demo.json','transaction_features_fresh.parquet')],
-    *['docs/results/'+n+'.json' for n in ('solana_local_fee_proof','solana_ml_fee_policy_summary','solana_transaction_audit_prospective','solana_transaction_audit_fresh')],
+    *['data/processed/solana_ml/'+n for n in ('demo_models.joblib','demo_inference_test.parquet','replay_demo.json','transaction_features_fresh.parquet','failure_fees.jsonl')],
+    *['docs/results/'+n+'.json' for n in ('solana_local_fee_proof','solana_failure_fee_measurement','solana_ml_fee_policy_summary','solana_transaction_audit_prospective','solana_transaction_audit_fresh')],
 ]
 
 def build():
