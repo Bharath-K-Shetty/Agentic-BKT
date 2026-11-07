@@ -1,0 +1,63 @@
+{
+  "q": 0.1,
+  "window": 500,
+  "n": 17986,
+  "failures": 998,
+  "models": {
+    "baseline": {
+      "flag_rate": 0.10936283776270432,
+      "tp": 346,
+      "fp": 1621,
+      "recall": 0.3466933867735471,
+      "fpr": 0.09542029668000941,
+      "precision": 0.1759023894255211,
+      "accuracy": 0.873623929723118,
+      "balanced_accuracy": 0.6256365450467688
+    },
+    "homie": {
+      "flag_rate": 0.11575669965528744,
+      "tp": 407,
+      "fp": 1675,
+      "recall": 0.40781563126252507,
+      "fpr": 0.09859901106663527,
+      "precision": 0.19548511047070125,
+      "accuracy": 0.8740131213165796,
+      "balanced_accuracy": 0.654608310097945
+    }
+  },
+  "recall_gap_homie_minus_baseline": {
+    "weighted_delta": 0.06112224448897796,
+    "ci95": [
+      0.034342577973248,
+      0.09367814811514123
+    ],
+    "valid_bootstrap_draws": 500
+  },
+  "protocol": {
+    "status": "Fixed before downloading or inspecting any 2025-11-16..18 data.",
+    "fixed_at": "2026-11-07T04:34:45.013666+00:00",
+    "cohort": "fifth",
+    "rule": "Flag a first-appearance transaction when its score is at or above the (1-q) quantile of the scores of the previous W first-appearance transactions with strictly earlier timestamps. Scores only; no outcomes.",
+    "q": 0.1,
+    "window": 500,
+    "selection": "Chosen in development on four already-inspected test days (docs/results/solana_adaptive_alert_development.json): the setting whose HOMIE-minus-baseline recall gap had a 95% interval above zero on the most days (3 of 4). q=0.05, W=500 is reported as secondary.",
+    "models": "Identity-controlled baseline and HOMIE, settings unchanged.",
+    "primary_endpoints": [
+      "E1 stability: flag rate on test first appearances within 0.08-0.12 for both models.",
+      "E2 benefit: HOMIE recall minus baseline recall > 0 with 95% paired one-hour block bootstrap interval (500 draws, seed 42) entirely above zero."
+    ],
+    "fresh_window": {
+      "train_date": "2025-11-16",
+      "validation_date": "2025-11-17",
+      "test_date": "2025-11-18",
+      "selection": "Three consecutive dates never used in the project. Shard index = int(sha256(f'{date}|homie-adaptive-fresh'),16) mod file count; row group 0."
+    },
+    "also_reported": "The identity-controlled first-appearance AP comparison on this window (main research endpoint).",
+    "reporting": "Results retained regardless of direction; fresh evaluation runs once.",
+    "development_sha256": "a87b39cb4ed0ff3043809bea5d903b1a1d4330f0d6c57a4a0f86c81e3f6be9fc",
+    "code_sha256": "dfc9223a4e9b9d1d436b4eb22e8331be8f9c70184e84bf59531d32146f6b7c5a"
+  },
+  "protocol_sha256": "f43d854f99622797b944f36f77a33c084cbf0b5e1360da50cc12ce523a38dba3",
+  "code_sha256": "dfc9223a4e9b9d1d436b4eb22e8331be8f9c70184e84bf59531d32146f6b7c5a",
+  "created_at": "2026-11-07T04:38:30.389530+00:00"
+}

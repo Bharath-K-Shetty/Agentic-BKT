@@ -1,0 +1,87 @@
+{
+  "source": "https://huggingface.co/datasets/solarchive/solarchive/resolve/6588cad2832e62be03972ac80d69c6af11d631c8/txs/2025-11-17/000000000221.parquet",
+  "shard_index": 221,
+  "index_expected_sha256": "b3b3eb3d3aba88ad53dec151e0e2a9b1abb50f28e95c9baab071baf585bf8832",
+  "full_file_hash_verified": false,
+  "rows": 310884,
+  "row_groups": 3,
+  "schema": "block_slot: int64\nblock_hash: string\nblock_timestamp: timestamp[us]\nrecent_block_hash: string\nsignature: string\nindex: int64\nfee: decimal128(38, 9)\nstatus: string\nerr: string\ncompute_units_consumed: decimal128(38, 9)\naccounts: list<element: struct<pubkey: string, signer: bool, writable: bool>>\n  child 0, element: struct<pubkey: string, signer: bool, writable: bool>\n      child 0, pubkey: string\n      child 1, signer: bool\n      child 2, writable: bool\nlog_messages: list<element: string>\n  child 0, element: string\nbalance_changes: list<element: struct<account: string, before: decimal128(38, 9), after: decimal128(38, 9)>>\n  child 0, element: struct<account: string, before: decimal128(38, 9), after: decimal128(38, 9)>\n      child 0, account: string\n      child 1, before: decimal128(38, 9)\n      child 2, after: decimal128(38, 9)\npre_token_balances: list<element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: in (... 5 chars omitted)\n  child 0, element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: int64>\n      child 0, account_index: int64\n      child 1, mint: string\n      child 2, owner: string\n      child 3, amount: double\n      child 4, decimals: int64\npost_token_balances: list<element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: in (... 5 chars omitted)\n  child 0, element: struct<account_index: int64, mint: string, owner: string, amount: double, decimals: int64>\n      child 0, account_index: int64\n      child 1, mint: string\n      child 2, owner: string\n      child 3, amount: double\n      child 4, decimals: int64",
+  "first_group_n": 132236,
+  "preview": [
+    {
+      "block_slot": 380675596,
+      "block_timestamp": "2025-11-17 12:35:51",
+      "status": "Success",
+      "accounts": [
+        {
+          "pubkey": "EqCVLAVvjszgyKahrDqU8zLgcgEBdjYkTEPB63jKMA9k",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "pubkey": "AYFobnJt39WELmCgThRw3cL5XmcZQFc179DoKRTAzyDP",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "EwmRE32HLZPN73wukgFRHhVtqeb9LctMNaPniwyfjBHt",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "ComputeBudget111111111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "11111111111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "signer": false,
+          "writable": false
+        }
+      ],
+      "signature": "weVxdEn8EdWGkd7ZaqfGkWDzQmj72fq4ohQneeyNGZEuNgxVSc42km3J5gUqxv9dQuJJk5HejmcJKj6LVmzR69n"
+    },
+    {
+      "block_slot": 380621321,
+      "block_timestamp": "2025-11-17 06:36:30",
+      "status": "Success",
+      "accounts": [
+        {
+          "pubkey": "FVnv5qH7dsrBzEDwJ8dN2m9PFtKTBAQFtqWF3M9LpwMg",
+          "signer": true,
+          "writable": true
+        },
+        {
+          "pubkey": "FLckHLGMJy5gEoXWwcE68Nprde1D4araK4TGLw4pQq2n",
+          "signer": false,
+          "writable": true
+        },
+        {
+          "pubkey": "ComputeBudget111111111111111111111111111111",
+          "signer": false,
+          "writable": false
+        },
+        {
+          "pubkey": "TessVdML9pBGgG9yGks7o4HewRaXVAMuoVj4x83GLQH",
+          "signer": false,
+          "writable": false
+        }
+      ],
+      "signature": "wWTNg6pb8J3mM9GZpw6FypGSvQE4qtsy36JnyR7qHBtMs1zdTGqErAmP1Nzz1Hcmne7Kcyo2ytGpzKcM5EgmVjg"
+    }
+  ],
+  "ranges_sha256": {
+    "445268684:445334220": "f7a11af7d3256b27de725121014554a391d9d1febd234c5e58fa502af268b099",
+    "4:619259": "37c8c0d29b54f317b5555651a2965e565c2ecb7d88b81d055097da8ce52351f3",
+    "6785037:7651045": "f0e4d9d6b94a35e75c594dd31e39f1fcca4d30dda3c9e7b3c822af938f2e3020",
+    "26183100:26201867": "fa34619949b72b13b87498eb980cbb04e0a217a5eea800d36ff50839227ab62e",
+    "26954332:88043996": "e802a5b11d910cdf48dabd04b9237d761ea4c5f6016a9d184a7bd309886d2c32",
+    "88043996:88727215": "67faedd90a768d41ae6ac093cef4c01ef307ea8391894d167c31ea159ba8101b",
+    "13698299:25636820": "c39c98d71874c0a4db0325f807000534cb664244e1af26c3187e219edebe861f"
+  }
+}

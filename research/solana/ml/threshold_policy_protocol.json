@@ -1,0 +1,24 @@
+{
+  "status": "Fixed before downloading or inspecting any 2025-11-19..21 data. Rules and pass criteria below were written before any result of this follow-up was computed.",
+  "fixed_at": "2026-11-07T04:26:26.229427+00:00",
+  "diagnosis": "The inherited alarm level is chosen at 5% FPR on all purged validation rows (prevalence about 20%, mostly repeat signers) but applied to first-appearance test rows (prevalence about 5.5%). The population mismatch makes test FPR erratic (28.7% on Dec 1, 0.6% on Dec 5).",
+  "rules": {
+    "inherited": "threshold_at_fpr on all purged validation rows, budget 0.05 (current method).",
+    "matched (primary)": "threshold_at_fpr on purged validation rows that are first appearances of their primary signer in the sampled window, budget 0.05.",
+    "f1_matched (secondary)": "Threshold maximising F1 on the same validation first-appearance rows; ties resolved to the higher threshold."
+  },
+  "models": "Identity-controlled boosting models (readonly_identity_hgb baseline, context_identity_hgb HOMIE), settings unchanged; scores reproduced deterministically and checked against saved test predictions where they exist.",
+  "evaluation_group": "Test-day first appearances.",
+  "primary_endpoints": [
+    "E1 (stability): under the matched rule, |test FPR - 5%| is smaller than under the inherited rule, for both models.",
+    "E2 (benefit): at each model's matched threshold, HOMIE recall minus baseline recall on test first appearances is positive with a 95% paired one-hour block bootstrap interval (500 draws, seed 42) entirely above zero."
+  ],
+  "fresh_window": {
+    "train_date": "2025-11-19",
+    "validation_date": "2025-11-20",
+    "test_date": "2025-11-21",
+    "selection": "Latest three consecutive dates never used in the project before 2025-11-22. Shard index = int(sha256(f'{date}|homie-threshold-fresh'),16) mod the date's file count; row group 0."
+  },
+  "retrospective": "The rule is also applied to the Dec 1, Dec 5 and Nov 28 windows. Those test days were already inspected, so those results are secondary and descriptive; the primary confirmation is the fresh Nov 21 test.",
+  "reporting": "All results retained and reported regardless of direction. Fresh evaluation runs once."
+}

@@ -1,0 +1,96 @@
+{
+  "cohort": "fifth",
+  "status": "First-appearance identity comparison specified in protocol before this cohort outcomes",
+  "test_n": 131775,
+  "cold_n": 20231,
+  "cold_unique_signers": 17996,
+  "cold_max_rows_one_signer": 125,
+  "first_appearance_n": 17986,
+  "first_appearance_prevalence": 0.0554876014678083,
+  "cold_signer_bootstrap": {
+    "delta": 0.025470102085012214,
+    "ci95": [
+      -0.002641714234715288,
+      0.05574647323137812
+    ],
+    "draws": 500,
+    "signer_clusters": 17996
+  },
+  "first_appearance_hour_bootstrap": {
+    "weighted_delta": 0.033842931240135876,
+    "ci95": [
+      0.01541141848548813,
+      0.05169792977354025
+    ],
+    "valid_bootstrap_draws": 500
+  },
+  "first_appearance_results": {
+    "payer_history": {
+      "auroc": 0.5329085885451147,
+      "ap_positive": 0.0620468211008362,
+      "ap_negative": 0.9476563146708263,
+      "brier": 0.07124291613122281,
+      "recall": 0.0,
+      "fpr": 0.0,
+      "precision": null,
+      "alert_fraction": 0.0
+    },
+    "payer_readonly_hgb": {
+      "auroc": 0.7073241727155748,
+      "ap_positive": 0.15052160495143088,
+      "ap_negative": 0.9747365591658108,
+      "brier": 0.06329336410503607,
+      "recall": 0.23046092184368738,
+      "fpr": 0.04420767600659289,
+      "precision": 0.2344546381243629,
+      "alert_fraction": 0.05454242188368731
+    },
+    "context_hgb": {
+      "auroc": 0.7659934892153036,
+      "ap_positive": 0.18436453619156676,
+      "ap_negative": 0.981812248622765,
+      "brier": 0.06422652205929863,
+      "recall": 0.3286573146292585,
+      "fpr": 0.08358841535201318,
+      "precision": 0.18764302059496568,
+      "alert_fraction": 0.09718670076726342
+    }
+  },
+  "limits": [
+    "First appearance is in these sampled days, not the first transaction of an operator or on the whole chain.",
+    "Signer clusters are declared addresses, not independently identified humans/operators.",
+    "Refined endpoint specified before this cohort; previous first-appearance diagnostics are exploratory."
+  ],
+  "first_appearance_identity_hour_bootstrap": {
+    "weighted_delta": 0.01125980371142124,
+    "ci95": [
+      -0.004607358310092517,
+      0.02501796095081107
+    ],
+    "valid_bootstrap_draws": 500
+  },
+  "first_appearance_identity_results": {
+    "readonly_identity_hgb": {
+      "auroc": 0.7333874542114602,
+      "ap_positive": 0.1610434142176922,
+      "ap_negative": 0.9778417134925177,
+      "brier": 0.06343868341421596,
+      "recall": 0.22044088176352705,
+      "fpr": 0.05021191429244173,
+      "precision": 0.20503261882572227,
+      "alert_fraction": 0.059657511397753805
+    },
+    "context_identity_hgb": {
+      "auroc": 0.781470640834294,
+      "ap_positive": 0.17230321792911343,
+      "ap_negative": 0.9835452239759435,
+      "brier": 0.056749738636868184,
+      "recall": 0.18336673346693386,
+      "fpr": 0.04173534259477278,
+      "precision": 0.20515695067264575,
+      "alert_fraction": 0.04959412876681864
+    }
+  },
+  "refined_primary": "First declared signer appearance in the sampled replay, context_identity_hgb versus readonly_identity_hgb AP with paired hour bootstrap. Primary-context comparison and cold-history results also retained. Success requires positive AP gain and interval entirely above zero; does not establish a new algorithm.",
+  "refined_success": false
+}

@@ -57,7 +57,7 @@ def prequential_scores(x, y, times, settings):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--cohort', choices=['pilot', 'confirmation', 'extension', 'prospective', 'fresh', 'third'], required=True)
+    parser.add_argument('--cohort', choices=['pilot', 'confirmation', 'extension', 'prospective', 'fresh', 'third', 'fourth', 'fifth'], required=True)
     args = parser.parse_args()
     control_path = HERE / 'transaction_identity_protocol.json'
     settings = json.loads(control_path.read_text())
