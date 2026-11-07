@@ -3,7 +3,7 @@ import json
 from functools import lru_cache
 from pathlib import Path
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 from webapp.backend.transfer_check import router as transfer_router
 from webapp.backend.model_inference import router as inference_router
 from webapp.backend.prospective import router as prospective_router
@@ -15,7 +15,7 @@ app.include_router(inference_router)
 app.include_router(prospective_router)
 
 @app.get('/live')
-def live_home():return FileResponse(ROOT/'webapp/frontend/live.html')
+def live_home():return RedirectResponse('/#try-live')
 
 @app.get('/fee-proof')
 def fee_proof_home():return FileResponse(ROOT/'webapp/frontend/fee_proof.html')
@@ -48,7 +48,10 @@ def bundle():
     return json.loads(path.read_text())
 
 @app.get('/')
-def home():return FileResponse(ROOT/'webapp/frontend/replay.html')
+def home():return FileResponse(ROOT/'webapp/frontend/story.html')
+
+@app.get('/workspace')
+def workspace():return RedirectResponse('/#try')
 
 @app.get('/api/summary')
 def summary():return bundle()['summary']
